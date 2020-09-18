@@ -6,11 +6,14 @@ import splash from './assets/splash.png';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Predestination:</Text>
-      <Text>Your journey begins here.</Text>
+      <Text>PREDESTINATION: </Text>
+      <Text>Where you control other's destiny.</Text>
+
       <View style={styles.button}>
         <Button title="Admin" />
       </View>
+
+      <Text>Or where your journey begins.</Text>
       <View style={styles.button}>
         <Button title="Seeker" />
       </View>
