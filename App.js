@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    padding: 10
+    padding: 10,
+    width: 200
   }
 
 });
