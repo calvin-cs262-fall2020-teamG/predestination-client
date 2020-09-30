@@ -9,7 +9,7 @@ import {NavigationContainer } from '@react-navigation/native';
 import StartScreen from './screens/StartScreen';
 import WaitingScreen from './screens/WaitingScreen';
 import EditorListScreen from './screens/EditorListScreen';
-// import SeekerGameScreen from './screens/SeekerGameScreen';
+import SeekerRaceScreen from './screens/SeekerRaceScreen';
 // import EditorScreen from './screens/EditorScreen';
 // import KeeperGameScreen from './screens/KeeperGameScreen';
 
@@ -18,14 +18,13 @@ const Stack = createStackNavigator();
 export default function App() {
     return (
 	<NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="startscreen" component={StartScreen} options={{ title: 'Predestination' }}/>
-            <Stack.Screen name="waitingscreen" component={WaitingScreen} options={{ title: 'Waiting Room' }}/>
-            <Stack.Screen name="editorlistscreen" component={EditorListScreen} options={{ title: 'Your Routes' }}/>
-            
-          </Stack.Navigator>
+            <Stack.Navigator>
+              <Stack.Screen name="startscreen" component={StartScreen} options={{ title: 'Predestination' }}/>
+              <Stack.Screen name="waitingscreen" component={WaitingScreen} options={{ title: 'Waiting Room' }}/>
+              <Stack.Screen name="editorlistscreen" component={EditorListScreen} options={{ title: 'Your Routes' }}/>
+              <Stack.Screen name="seekerracescreen" component={SeekerRaceScreen} options={{ title: 'Seeker Race' }}/>
+            </Stack.Navigator>
         </NavigationContainer>
-	
   );
 }
 

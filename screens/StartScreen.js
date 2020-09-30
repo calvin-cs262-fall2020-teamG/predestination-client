@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, KeyboardAvoidingView, TextInput, View, Text, Button, StatusBar, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Alert, KeyboardAvoidingView, TextInput, View, Text, Button, StatusBar, TouchableOpacity, FlatList } from 'react-native';
 
 import GameCodeEntry from '../components/GameCode';
 
 export default function StartScreen({ navigation }) {
-
     
     const [code, setCode] = useState('');
 
     const handleError = () => {
-	Alert.alert('Oops!', 'Code must be 6 digits', [ { text: 'Understood', onPress: () => console.log('alert closed')}]);
+	Alert.alert('Oops!', 'Code must be 6 digits', [ { text: 'Understood' }]);
     };
     
     const handleJoinPress = () => {
