@@ -1,24 +1,31 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Image, StyleSheet, Text, View, Button } from 'react-native';
 import splash from './assets/splash.png';
 
+import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer } from '@react-navigation/native';
+import StartScreen from './screens/StartScreen';
+import WaitingScreen from './screens/WaitingScreen';
+import EditorListScreen from './screens/EditorListScreen';
+// import SeekerGameScreen from './screens/SeekerGameScreen';
+// import EditorScreen from './screens/EditorScreen';
+// import KeeperGameScreen from './screens/KeeperGameScreen';
+
+const Stack = createStackNavigator();
+
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>PREDESTINATION: </Text>
-      <Text>Where you control other's destiny.</Text>
-
-      <View style={styles.button}>
-        <Button title="Admin" />
-      </View>
-
-      <Text>Or where your journey begins.</Text>
-      <View style={styles.button}>
-        <Button title="Seeker" />
-      </View>
-      <StatusBar style="auto" />
-    </View>
+    return (
+	<NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="startscreen" component={StartScreen} options={{ title: 'Predestination' }}/>
+            <Stack.Screen name="waitingscreen" component={WaitingScreen} options={{ title: 'Waiting Room' }}/>
+            <Stack.Screen name="editorlistscreen" component={EditorListScreen} options={{ title: 'Your Routes' }}/>
+            
+          </Stack.Navigator>
+        </NavigationContainer>
+	
   );
 }
 
