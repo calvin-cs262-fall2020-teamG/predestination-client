@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, KeyboardAvoidingView, TextInput, View, Text, Button, StatusBar, TouchableOpacity, FlatList } from 'react-native';
-
-import GameCodeEntry from '../components/GameCode';
+import { StyleSheet, Alert, TextInput, View, Text, Button, StatusBar, } from 'react-native';
 
 export default function StartScreen({ navigation }) {
-
     
     const [code, setCode] = useState('');
 
+    // inform user via alert an invalid code was entered
     const handleError = () => {
-	Alert.alert('Oops!', 'Code must be 6 digits', [ { text: 'Understood', onPress: () => console.log('alert closed')}]);
+	Alert.alert('Oops!', 'Code must be 6 digits', [ { text: 'Understood' }]);
     };
-    
+
+    // ensure given code is valid
     const handleJoinPress = () => {
-	(code.length === 6) ? navigation.navigate('waitingscreen', { code, role: 'seeker'}) : handleError();
+	(code.length === 6) ? navigation.navigate('SeekerWaitingScreen', { code }) : handleError();
     };
     
     return (
@@ -40,7 +39,7 @@ export default function StartScreen({ navigation }) {
 	      </View>
               
               <View style={styles.createButton}>
-                <Button title="Create" onPress={() => navigation.navigate('editorlistscreen')}/> 
+                <Button title="Create" onPress={() => navigation.navigate('KeeperListScreen')}/> 
               </View>
 	                
           </View>
