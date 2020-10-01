@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, } from 'react-native';
 
+/**
+ * NoteWidget shows the clue along with the location hinted at by the clue
+ * TODO: styling, add location indicator (maybe a link to a map?)
+ */
+
 export default function NoteWidget({ content, focused }) {
-    
-    return (
-        <View style={focused ? styles.focusedSection : styles.flexSection}>
+  
+  return (
+    <View style={focused ? styles.focusedSection : styles.flexSection}>
 
-          <View style={styles.headerSection}>
-            <Text numberOfLines={focused ? 2 : 1} style={styles.headerText}>{content.title}</Text>
-            <Text style={styles.timeText}>{content.timeFound}</Text>
-	  </View>
+      <View style={styles.headerSection}>
+        <Text numberOfLines={focused ? 2 : 1} style={styles.headerText}>{content.title}</Text>
+        <Text style={styles.timeText}>{content.timeFound}</Text>
+      </View>
 
-          <View style={styles.bodySection}>
-            <Text numberOfLines={focused ? 99 : 1}>{content.clue}</Text>
-          </View>
-        </View>
-    );
+      <View style={styles.bodySection}>
+        <Text numberOfLines={focused ? 99 : 1}>{content.clue}</Text>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -5,39 +5,37 @@ import { Image, StyleSheet, Text, View, Button } from 'react-native';
 import splash from './assets/splash.png';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import {NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+
+// import seeker screens
 import StartScreen from './screens/StartScreen';
-import WaitingScreen from './screens/WaitingScreen';
-import EditorListScreen from './screens/EditorListScreen';
-import SeekerRaceScreen from './screens/SeekerRaceScreen';
-// import EditorScreen from './screens/EditorScreen';
-// import KeeperGameScreen from './screens/KeeperGameScreen';
+import SeekerWaitingScreen from './screens/seeker/SeekerWaitingScreen';
+import SeekerGameScreen from './screens/seeker/SeekerGameScreen';
+
+// import keeper screens
+import KeeperListScreen from './screens/keeper/KeeperListScreen';
+import KeeperGameScreen from './screens/keeper/KeeperGameScreen';
+import KeeperEditorScreen from './screens/keeper/KeeperEditorScreen';
+import KeeperWaitingScreen from './screens/keeper/KeeperWaitingScreen';
 
 const Stack = createStackNavigator();
 
+// for now, we are going to title each navigation screen with the function name for easier debugging
+// simple navigation setup
 export default function App() {
     return (
 	<NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen name="startscreen" component={StartScreen} options={{ title: 'Predestination' }}/>
-              <Stack.Screen name="waitingscreen" component={WaitingScreen} options={{ title: 'Waiting Room' }}/>
-              <Stack.Screen name="editorlistscreen" component={EditorListScreen} options={{ title: 'Your Routes' }}/>
-              <Stack.Screen name="seekerracescreen" component={SeekerRaceScreen} options={{ title: 'Seeker Race' }}/>
-            </Stack.Navigator>
+          <Stack.Navigator>            
+            <Stack.Screen name="StartScreen" component={StartScreen} options={{ title: 'StartScreen' }}/>
+            
+	    <Stack.Screen name="SeekerWaitingScreen" component={SeekerWaitingScreen} options={{ title: 'SeekerWaitingScreen' }}/>
+	    <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen' }}/>
+	    
+            <Stack.Screen name="KeeperListScreen" component={KeeperListScreen} options={{ title: 'KeeperListScreen' }}/>
+            <Stack.Screen name="KeeperEditorScreen" component={KeeperEditorScreen} options={{ title: 'KeeperEditorScreen' }}/>
+            <Stack.Screen name="KeeperWaitingScreen" component={KeeperWaitingScreen} options={{ title: 'KeeperWaitingScreen' }}/>
+            <Stack.Screen name="KeeperGameScreen" component={KeeperGameScreen} options={{ title: 'KeeperGameScreen' }}/>
+          </Stack.Navigator>
         </NavigationContainer>
-  );
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    padding: 10,
-    width: 200
-  }
-
-});

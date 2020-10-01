@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
-import NoteWidget from '../components/NoteWidget';
+import NoteWidget from '../../components/NoteWidget';
 
+/**
+ * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
+ * TODO: styling, connecting to server
+ */
 export default function SeekerRaceScreen({ route, navigation }) {
 
     const total_players = 20;
@@ -67,11 +71,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-        flex: 3,
+        flex: 5,
         backgroundColor: 'skyblue',
     },
     scrollable: {
-        flex: 9,
+        flex: 15,
     },
     scrollableNotes: {
         
