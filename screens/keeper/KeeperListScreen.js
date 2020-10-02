@@ -57,7 +57,9 @@ export default function KeeperListScreen({ navigation }) {
       </View>
       
       <View>
-        <Button title='New' onPress={() => {}}/>
+        <Button title='New' onPress={() => {
+            navigation.navigate(('KeeperNewHuntScreen'))
+        }}/>
         
       </View>
     </View>
