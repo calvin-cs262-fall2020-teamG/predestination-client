@@ -7,8 +7,11 @@ import splash from './assets/splash.png';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-// import seeker screens
+// import login screens
 import StartScreen from './screens/StartScreen';
+import LoginScreen from './screens/LoginScreen';
+
+// import seeker screens
 import SeekerWaitingScreen from './screens/seeker/SeekerWaitingScreen';
 import SeekerGameScreen from './screens/seeker/SeekerGameScreen';
 
@@ -25,7 +28,8 @@ const Stack = createStackNavigator();
 export default function App() {
     return (
 	<NavigationContainer>
-          <Stack.Navigator>            
+          <Stack.Navigator>
+            <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'LoginScreen' }}/>
             <Stack.Screen name="StartScreen" component={StartScreen} options={{ title: 'StartScreen' }}/>
             
 	    <Stack.Screen name="SeekerWaitingScreen" component={SeekerWaitingScreen} options={{ title: 'SeekerWaitingScreen' }}/>

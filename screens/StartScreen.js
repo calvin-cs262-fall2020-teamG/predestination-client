@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, Alert, TextInput, View, Text, Button, StatusBar, } from 'react-native';
 
 export default function StartScreen({ navigation }) {
-    
-    const [code, setCode] = useState('');
+  
+  const [code, setCode] = useState('');
 
     // inform user via alert an invalid code was entered
     const handleError = () => {
