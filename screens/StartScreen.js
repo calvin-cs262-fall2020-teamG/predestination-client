@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Alert, TextInput, View, Text, Button, StatusBar, } from 'react-native';
 
-export default function StartScreen({ navigation }) {
+export default function StartScreen({ navigation, route }) {
   
   const [code, setCode] = useState('');
 
@@ -18,7 +18,7 @@ export default function StartScreen({ navigation }) {
     return (
 	<View style={styles.container}>
 	  <View style={styles.titleSection}>
-	    <Text>PreDestination</Text>
+	    <Text>PreDestination {route.params.fullName}</Text>
 	    <Text>Insert Cool Logo</Text> 
           </View>
 
