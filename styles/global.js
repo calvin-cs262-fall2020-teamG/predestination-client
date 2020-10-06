@@ -1,59 +1,65 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from "react-native";
 
 export const globalStyles = StyleSheet.create({
-
   // start styles from StartScreen.js
   container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: "column",
+    alignItems: "center",
   },
   titleSection: {
     flex: 1,
-    width: '100%'
+    width: "100%",
   },
   entrySection: {
     flex: 2,
-    width: '100%',
-    flexDirection: 'column',
-    alignItems: 'center',
+    width: "100%",
+    flexDirection: "column",
+    alignItems: "center",
   },
   input: {
     fontSize: 70,
-    textAlign: 'center',
+    textAlign: "center",
   },
   joinButton: {
     paddingTop: 20,
-    width: '50%',
+    width: "50%",
   },
   createButton: {
     paddingTop: 15,
-    width: '30%',
-    textAlign: 'center',
+    width: "30%",
+    textAlign: "center",
   },
   // end styles from StartScreen.js
 
   // start styles from SeekerGameScreen.js
   flexContainer: {
-    flexDirection: 'column',
+    flexDirection: "column",
     flex: 1,
   },
   header: {
     flex: 5,
-    backgroundColor: 'skyblue',
+    backgroundColor: "skyblue",
   },
   scrollable: {
     flex: 15,
   },
-  scrollableNotes: {
-
-  },
+  scrollableNotes: {},
   progressSection: {
     flex: 1,
     borderTopWidth: 1,
-    borderColor: 'lightgray',
+    borderColor: "lightgray",
   },
   // end styles from SeekerGameScreen.js
 
-
+  //added by Nathan Wang on Oct 5 11:50PM
+  // start styles from KeeperGameScreen.js
+  nextButton: {
+    padding: 20,
+    margin: 100,
+    borderStyle: "dotted",
+    borderWidth: 2,
+    borderRadius: 10,
+  },
+  // end styles from KeeperGameScreen.
 });
