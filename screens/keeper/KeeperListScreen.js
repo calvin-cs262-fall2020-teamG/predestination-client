@@ -55,7 +55,9 @@ export default function KeeperListScreen({ navigation }) {
           )}
         />
       </View>
-      
+
+      {/* This will bring Keepers to the NewHuntScreen where they can enter a title for the hunt, add minimum number
+        of players, and set a time limit - Added by Ethan*/}
       <View>
         <Button title='New' onPress={() => {
             navigation.navigate(('KeeperNewHuntScreen'))
