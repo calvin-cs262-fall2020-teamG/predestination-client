@@ -61,5 +61,12 @@ export const globalStyles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
   },
+  headerText: {
+    textAlign: "center",
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "maroon",
+    backgroundColor: "gold",
+  },
   // end styles from KeeperGameScreen.
 });
