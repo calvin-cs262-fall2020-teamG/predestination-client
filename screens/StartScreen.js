@@ -12,14 +12,14 @@ export default function StartScreen({ navigation, route }) {
 
     // ensure given code is valid
     const handleJoinPress = () => {
-	(code.length === 6) ? navigation.navigate('SeekerWaitingScreen', { code }) : handleError();
+	(code.length === 6) ? navigation.navigate('SeekerWaitingScreen', { code }) : handleError();//
     };
     
     return (
 	<View style={styles.container}>
 	  <View style={styles.titleSection}>
 	    <Text>PreDestination {route.params.fullName}</Text>
-	    <Text>Insert Cool Logo</Text> 
+	    <Text>Welcome {route.params.name}</Text> 
           </View>
 
           <View style={styles.entrySection}>
