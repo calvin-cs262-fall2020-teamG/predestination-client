@@ -7,7 +7,7 @@ export default function KeeperNewHuntScreen({ navigation }) {
 
     return (
         <View>
-            <Text styles={styles.header}>Enter a scavenger hunt name:</Text>
+            <Text styles={styles.huntnameHeader}>Enter a scavenger hunt name:</Text>
             <TextInput
                 style={styles.input}
                 placeholder='Enter name'
@@ -25,9 +25,11 @@ const styles = StyleSheet.create({
             flexDirection: 'column',
             alignItems: 'center',
         },
-        header: {
+        huntnameHeader: {
             flex: 1,
+            flexDirection: 'column',
             paddingTop: 20,
+            marginTop: 20,
+            alignItems: 'center',
         },
-    }
-)
+});
