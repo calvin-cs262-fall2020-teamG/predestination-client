@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Alert, TextInput, View, Text, Button, StatusBar, } from 'react-native';
 
-import * as Google from 'expo-google-app-auth';
+import GoogleSignIn from '../components/GoogleSignIn';
+import FacebookSignIn from '../components/FacebookSignIn';
 
-const CLIENT_API_KEY='AIzaSyBAaFc8y9xxx8xc8jimfCRPeu5H6ucP-0w';
+import AsyncStorage from '@react-native-community/async-storage';
+import AppLoading from 'expo';
 
 const settings = {
   method: 'POST',
@@ -14,59 +16,70 @@ const settings = {
 };
 
 export default function LoginScreen({ navigation }) {
-
-  const validateToken = async (token) => {
+  
+  // store authentication stuff like access tokens and refresh tokens so we can remember user's logging in
+  const storeAuthenticationTokens = async (service, accessToken, refreshToken) => {
     try {
-      const fetchResponse = await fetch(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${token}`, settings);
-      const data = await fetchResponse.json();
-      return data;
+      const jsonValue = JSON.stringify({ service, accessToken, refreshToken });
+      await AsyncStorage.setItem('@authentication', jsonValue);
     } catch (e) {
-      return e;
-    }    
-  }
-
-  const getUserData = async (token) => {
-    try {
-      const userDataFetch = await fetch(`https://people.googleapis.com/v1/people/me?requestMask.includeField=person.names%2Cperson.photos&key=${CLIENT_API_KEY}`, {
-	headers: {
-	  Accept: 'application/json',
-	  Authorization: `Bearer ${token}`,
-	}
-      });
-      const userData = await userDataFetch.json();
-      return {
-	fullName: userData.names[0].displayName,
-	photoUrl: userData.photos[0].url,
-      };
-    } catch (e) {
-      return e;
+      // saving error
     }
   }
 
-  const signInWithGoogleAsync = async () => {
+  // https://react-native-community.github.io/async-storage/docs/usage
+  // check if authentication stuff exists; if it does, log in user silently
+  const checkAuthenticationTokens = async () => {
     try {
-      const result = await Google.logInAsync({
-	androidClientId: "825050207640-q3qlm3h4i43vbcikfc3avv6av5g0us05.apps.googleusercontent.com",
-	iosClientId: "825050207640-eabv7h5qctuv9csnhaio7s8pfnncg0ff.apps.googleusercontent.com",
-	scopes: ['profile', 'email'],
-      });
-
-      if (result.type === 'success') {
-	const validToken = await validateToken(result.accessToken);
-	const userData = await getUserData(result.accessToken);
-	navigation.navigate('StartScreen', userData);
+      const jsonValue = await AsyncStorage.getItem('@authentication')
+      if (jsonValue != null) {
+        const authData = JSON.parse(jsonValue);
+        
+        //setLoginStatus(LOGIN_STATUS.RETURNING_USER);
       } else {
-	return { cancelled: true };
+        setLoginStatus(LOGIN_STATUS.NEW_USER);
       }
-    } catch (e) {
-      return { error: true };
+    } catch(e) {
+      setLoginStatus(LOGIN_STATUS.NEW_USER);
     }
   }
 
-  return (
-    <View>
-      <Button onPress={() => signInWithGoogleAsync()} title="Sign in with Google" />
-    </View>
-  )
+  const handleGoogleLogin = (name, photoUrl, accessToken, refreshToken) => {
+    Alert.alert("Google Login Data", `Name: ${name} \n Photo: ${photoUrl} \n Access Token: ${accessToken}`);
+    storeAuthenticationTokens("google", accessToken, refreshToken);
+  };
+
+  const handleFacebookLogin = (data) => {
+    Alert.alert('bruh', 'asdf', [ {text: 'face'}]);
+  }
+
+  const LOGIN_STATUS = {
+    LOADING: 'loading',
+    NEW_USER: 'new_user',
+    RETURNING_USER: 'returning_user',
+  }
+
+  checkAuthenticationTokens();
+  
+  const [loginStatus, setLoginStatus] = useState(LOGIN_STATUS.LOADING);
+  const [name, setName] = useState(null);
+
+  if (loginStatus == LOGIN_STATUS.NEW_USER) {
+    return (
+      <View>
+        <GoogleSignIn handleSignIn={handleGoogleLogin}/>
+        <FacebookSignIn handleSignIn={handleFacebookLogin}/>
+      </View>
+    );
+  } else if (loginStatus == LOGIN_STATUS.LOADING) {
+    return (
+      <View><Text>Loading credentials.</Text></View>
+    )
+  } else if (loginStatus == LOGIN_STATUS.RETURNING_USER) {
+    return (
+      <View><Text>You are returning to the app I see!</Text></View>
+    )
+  }
+  
 }
 
