@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, Button, } from 'react-native';
 
 /**
@@ -9,17 +9,19 @@ import { StyleSheet, View, Text, Button, } from 'react-native';
 export default function RouteCard({ data, pressPublish, pressEdit }) {
   
   return (
+    // styles.box is for the box around the route name and buttons
     <View style={styles.box}>
+      {/* Route name */}
       <View style={styles.textView}>
-	<Text>{data.title}</Text>
+	    <Text>{data.title}</Text>
       </View>
-      
+      {/* Publish button */}
       <View style={styles.buttonView}>
-	<Button title="Publish" onPress={() => { pressPublish(data) }}/>
+	    <Button title="Publish" onPress={() => { pressPublish(data) }}/>
       </View>
-
+      {/* Edit button */}
       <View style={styles.buttonView}>
-	<Button title="Edit" onPress={() => { pressEdit(data) }}/>
+	    <Button title="Edit" onPress={() => { pressEdit(data) }}/>
       </View>
     </View>
   );
