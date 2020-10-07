@@ -17,7 +17,7 @@ import KeeperListScreen from './screens/keeper/KeeperListScreen';
 import KeeperGameScreen from './screens/keeper/KeeperGameScreen';
 import KeeperEditorScreen from './screens/keeper/KeeperEditorScreen';
 import KeeperWaitingScreen from './screens/keeper/KeeperWaitingScreen';
-import KeeperNewHuntScreen from "./screens/keeper/KeeperNewHuntScreen";
+import KeeperNewHuntScreen from "./components/AddNewRoute";
 
 const Stack = createStackNavigator();
 
