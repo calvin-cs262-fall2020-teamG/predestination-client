@@ -4,32 +4,50 @@ import { StyleSheet, Alert, TextInput, View, Text, Button, StatusBar, } from 're
 export default function KeeperNewHuntScreen({ navigation }) {
 
     const [name, setName] = useState('');
+    const [numPlayers, setNumPlayers] = useState(0);
+
+    const nameHandler = (val) => {
+        setName(val);
+    }
 
     return (
+
         <View>
-            <Text styles={styles.huntnameHeader}>Enter a scavenger hunt name:</Text>
-            <TextInput
-                style={styles.input}
-                placeholder='Enter name'
-                value={name}
-                onChangeText={val => setName(val)}
-            />
+            <View>
+                {/* New scavenger hunt label and text input field */}
+                <Text styles={styles.huntNameHeader}>Enter a scavenger hunt name:</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Enter name'
+                    value={name}
+                    onChangeText={nameHandler}
+                />
+            </View>
+            <View>
+                {/* Min players label and numerical input */}
+                <Text>Enter a minimum number of players:</Text>
+                <TextInput
+                    placeholder='number of players'
+                    keyboardType='numeric'
+                    value={numPlayers}
+                    onChangeText={val => setNumPlayers(val)}
+                />
+            </View>
+            <View>
+                {/* TODO: Add timer input */}
+            </View>
+            <View>
+                <Button title="OK" onPress={() => navigation.navigate('KeeperListScreen')}/>
+            </View>
+
         </View>
     );
 
 }
 
 const styles = StyleSheet.create({
-        container: {
+        huntNameHeader: {
             flex: 1,
-            flexDirection: 'column',
-            alignItems: 'center',
-        },
-        huntnameHeader: {
-            flex: 1,
-            flexDirection: 'column',
-            paddingTop: 20,
-            marginTop: 20,
-            alignItems: 'center',
+            fontSize: 24
         },
 });
