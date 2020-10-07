@@ -17,7 +17,6 @@ import KeeperListScreen from './screens/keeper/KeeperListScreen';
 import KeeperGameScreen from './screens/keeper/KeeperGameScreen';
 import KeeperEditorScreen from './screens/keeper/KeeperEditorScreen';
 import KeeperWaitingScreen from './screens/keeper/KeeperWaitingScreen';
-import KeeperNewHuntScreen from "./components/AddNewRoute";
 
 const Stack = createStackNavigator();
 
@@ -36,7 +35,6 @@ export default function App() {
             <Stack.Screen name="KeeperEditorScreen" component={KeeperEditorScreen} options={{ title: 'KeeperEditorScreen' }}/>
             <Stack.Screen name="KeeperWaitingScreen" component={KeeperWaitingScreen} options={{ title: 'KeeperWaitingScreen' }}/>
             <Stack.Screen name="KeeperGameScreen" component={KeeperGameScreen} options={{ title: 'KeeperGameScreen' }}/>
-            <Stack.Screen name={"KeeperNewHuntScreen"} component={KeeperNewHuntScreen} options={{ title: 'KeeperNewHuntScreen'}}/>
           </Stack.Navigator>
         </NavigationContainer>
     );
