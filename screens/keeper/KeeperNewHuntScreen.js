@@ -5,11 +5,7 @@ export default function KeeperNewHuntScreen({ navigation }) {
 
     const [name, setName] = useState('');
     const [numPlayers, setNumPlayers] = useState(0);
-
-    const nameHandler = (val) => {
-        setName(val);
-    }
-
+    
     return (
 
         <View>
@@ -20,7 +16,7 @@ export default function KeeperNewHuntScreen({ navigation }) {
                     style={styles.input}
                     placeholder='Enter name'
                     value={name}
-                    onChangeText={nameHandler}
+                    onChangeTex={val => setName(val)}
                 />
             </View>
             <View>
