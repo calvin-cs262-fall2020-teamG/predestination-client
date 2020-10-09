@@ -2,6 +2,9 @@
 
 CS 262 Client Repo - the master branch contains a working version of the app
 
+To find out more about our project, please check our [project repo](https://github.com/calvin-cs262-fall2020-teamG/predestination-client)
+
+
 ## Some instructions to keep in mind...
 
 1. Run `npm install`
