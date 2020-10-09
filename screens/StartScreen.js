@@ -21,46 +21,34 @@ export default function StartScreen({ navigation, route }) {
   };
 
   return (
+    // <View style={globalStyles.container}>
     <View style={globalStyles.container}>
       <View style={globalStyles.titleSection}>
-        <Text>PreDestination</Text>
-        <Text>Insert Cool Logo</Text>
+        <Text>PreDestination {route.params.fullName}</Text>
+        <Text>Welcome {route.params.name}</Text>
       </View>
-      return (
-      <View style={globalStyles.container}>
-        <View style={globalStyles.titleSection}>
-          <Text>PreDestination {route.params.fullName}</Text>
-          <Text>Welcome {route.params.name}</Text>
-        </View>
 
-        <View style={globalStyles.inputContainer}>
-          <TextInput
-            style={globalStyles.input}
-            placeholder="Enter Code"
-            keyboardType="numeric"
-            value={code}
-            onChangeText={(val) => setCode(val)}
-          />
-        </View>
+      <View style={globalStyles.inputContainer}>
+        <TextInput
+          style={globalStyles.input}
+          placeholder="Enter Code"
+          keyboardType="numeric"
+          value={code}
+          onChangeText={(val) => setCode(val)}
+        />
+      </View>
 
-        <View style={globalStyles.joinButton}>
-          <Button title="Join" onPress={handleJoinPress} />
-        </View>
+      <View style={globalStyles.joinButton}>
+        <Button title="Join" onPress={handleJoinPress} />
+      </View>
 
-        <View style={globalStyles.createButton}>
-          <Button
-            title="Create"
-            onPress={() => navigation.navigate("KeeperListScreen")}
-          />
-        </View>
-
-        <View style={globalStyles.createButton}>
-          <Button
-            title="Create"
-            onPress={() => navigation.navigate("KeeperListScreen")}
-          />
-        </View>
+      <View style={globalStyles.createButton}>
+        <Button
+          title="Create"
+          onPress={() => navigation.navigate("KeeperListScreen")}
+        />
       </View>
     </View>
+    // </View>
   );
 }

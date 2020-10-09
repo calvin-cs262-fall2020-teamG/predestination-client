@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, FlatList } from "react-native";
 import RouteCard from "../../components/RouteCard";
 import AddNewRoute from "../../components/AddNewRoute";
-import RouteCard from "../../components/RouteCard";
 import { globalStyles } from "../../styles/global";
 /**
  * KeeperListScreen shows list of all routes saved by a keeper. A keeper can publish and edit routes. Once published, the keeper will be given the KeeperGameScreen.
