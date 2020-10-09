@@ -10,13 +10,8 @@ import {
 } from "react-native";
 import { globalStyles } from "../styles/global";
 
-export default function StartScreen({ navigation }) {
+export default function StartScreen({ navigation, route }) {
   const [code, setCode] = useState("");
-
-  // inform user via alert an invalid code was entered
-  const handleError = () => {
-    Alert.alert("Oops!", "Code must be 6 digits", [{ text: "Understood" }]);
-  };
 
   // ensure given code is valid
   const handleJoinPress = () => {
@@ -31,8 +26,13 @@ export default function StartScreen({ navigation }) {
         <Text>PreDestination</Text>
         <Text>Insert Cool Logo</Text>
       </View>
+      return (
+      <View style={globalStyles.container}>
+        <View style={globalStyles.titleSection}>
+          <Text>PreDestination {route.params.fullName}</Text>
+          <Text>Welcome {route.params.name}</Text>
+        </View>
 
-      <View style={globalStyles.entrySection}>
         <View style={globalStyles.inputContainer}>
           <TextInput
             style={globalStyles.input}
@@ -53,42 +53,14 @@ export default function StartScreen({ navigation }) {
             onPress={() => navigation.navigate("KeeperListScreen")}
           />
         </View>
+
+        <View style={globalStyles.createButton}>
+          <Button
+            title="Create"
+            onPress={() => navigation.navigate("KeeperListScreen")}
+          />
+        </View>
       </View>
     </View>
   );
 }
-
-// const styles = StyleSheet.create({
-//     container: {
-// 	flex: 1,
-// 	flexDirection: 'column',
-//         alignItems: 'center',
-//     },
-//     titleSection: {
-//         flex: 1,
-//         width: '100%'
-//     },
-//     entrySection: {
-//         flex: 2,
-//         width: '100%',
-//         flexDirection: 'column',
-//         alignItems: 'center',
-//     },
-//     inputContainer: {
-
-//     },
-//     input: {
-//         fontSize: 70,
-//         textAlign: 'center',
-//     },
-//     joinButton: {
-//         paddingTop: 20,
-//         width: '50%',
-//     },
-//     createButton: {
-//         paddingTop: 15,
-//         width: '30%',
-//         textAlign: 'center',
-//     },
-
-// });

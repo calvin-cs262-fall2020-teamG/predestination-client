@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Button, FlatList } from "react-native";
-
+import { View, FlatList } from "react-native";
+import RouteCard from "../../components/RouteCard";
+import AddNewRoute from "../../components/AddNewRoute";
 import RouteCard from "../../components/RouteCard";
 import { globalStyles } from "../../styles/global";
 /**
@@ -9,7 +10,7 @@ import { globalStyles } from "../../styles/global";
  */
 
 export default function KeeperListScreen({ navigation }) {
-  const [routeList, setRoutes] = useState([
+  const [routes, setRoutes] = useState([
     {
       key: "1",
       title: "Quest Group Hunt",
@@ -65,6 +66,17 @@ export default function KeeperListScreen({ navigation }) {
     { key: "3", title: "Cross Country Fun Run", notes: [] },
   ]);
 
+  /*
+   * submitHandler adds a new route to the FlatList
+   * based on what the user specified in the required fields
+   * (name, players, etc.)
+   */
+  const submitHandler = (title) => {
+    setRoutes((prevRoutes) => {
+      return [{ title: title, key: Math.random().toString() }, ...prevRoutes];
+    });
+  };
+
   const pressPublish = (hunt) => {
     navigation.navigate("KeeperWaitingScreen", { hunt });
   };
@@ -76,8 +88,11 @@ export default function KeeperListScreen({ navigation }) {
   return (
     <View>
       <View>
+        {/* Pass the submitHandler as prop to the addNewRouteComponent */}
+        <AddNewRoute submitHandler={submitHandler} />
+        {/* This FlatList contains the list of routes created by the keeper */}
         <FlatList
-          data={routeList}
+          data={routes}
           renderItem={({ item }) => (
             <RouteCard
               data={item}
@@ -85,17 +100,6 @@ export default function KeeperListScreen({ navigation }) {
               pressEdit={pressEdit}
             />
           )}
-        />
-      </View>
-
-      <View>
-        <Button title="New" onPress={() => {}} />
-      </View>
-      {/* added Finish button, by Nathan on Oct 05 11:50PM */}
-      <View style={globalStyles.nextButton}>
-        <Button
-          title="Next"
-          onPress={() => navigation.navigate("KeeperWaitingScreen")}
         />
       </View>
     </View>
