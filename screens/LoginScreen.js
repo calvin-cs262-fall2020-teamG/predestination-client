@@ -158,7 +158,14 @@ export default function LoginScreen({ navigation }) {
   }
 
   const sendLoginInformation = (name, photo) => {
-    navigation.navigate('StartScreen', {name, photo});
+
+    navigation.navigate('Drawer', {
+      screen: 'Home',
+      params: {
+        screen: 'StartScreen',
+        params: { name, photo },
+      },
+    });
   }
 
   // initialize checks if user is already logged in or not
