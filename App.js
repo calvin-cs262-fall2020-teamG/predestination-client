@@ -1,12 +1,9 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Image, StyleSheet, Text, View, Button } from 'react-native';
-import splash from './assets/splash.png';
 
-import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
+<<<<<<< HEAD
 // import seeker screens
 
 import StartScreen from './screens/StartScreen';
@@ -41,4 +38,14 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
+=======
+import MainStack from './routes/mainStack';
+
+export default function App() {
+    return (
+	      <NavigationContainer>
+          <MainStack/>
+        </NavigationContainer>
+    );
+>>>>>>> 1592dbeea1a6cb10d53471b1a5a231f314fb9a2b
 }
