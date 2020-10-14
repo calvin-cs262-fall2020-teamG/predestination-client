@@ -26,7 +26,7 @@ export default function HomeStack({ navigation }) {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerLeft: () => <Header navigation={navigation} />,
+                headerRight: () => <Header navigation={navigation} />,
                 headerTitleStyle: globalStyles.titleText,
             }}
         >
