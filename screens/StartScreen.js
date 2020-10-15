@@ -48,7 +48,14 @@ export default function StartScreen({ navigation, route }) {
           onPress={() => navigation.navigate("KeeperListScreen")}
         />
       </View>
+      
+      <View style={globalStyles.createButton}>
+        <Button
+          title="TestGPS"
+          onPress={() => navigation.navigate("TestScreen")}
+        />
+      </View>
+      
     </View>
-    // </View>
   );
 }

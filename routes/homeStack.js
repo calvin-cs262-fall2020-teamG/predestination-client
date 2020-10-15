@@ -4,6 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Header from '../shared/header';
 import { globalStyles } from '../styles/global';
 
+// import gps test screen
+import TestScreen from '../screens/TestScreen';
+
 // import login screens
 import StartScreen from '../screens/StartScreen';
 
@@ -39,6 +42,7 @@ export default function HomeStack({ navigation }) {
             <Stack.Screen name="KeeperEditorScreen" component={KeeperEditorScreen} options={{ title: 'KeeperEditorScreen' }} />
             <Stack.Screen name="KeeperWaitingScreen" component={KeeperWaitingScreen} options={{ title: 'KeeperWaitingScreen' }} />
             <Stack.Screen name="KeeperGameScreen" component={KeeperGameScreen} options={{ title: 'KeeperGameScreen' }} />
+            <Stack.Screen name="TestScreen" component={TestScreen} />
         </Stack.Navigator>
     );
 };
