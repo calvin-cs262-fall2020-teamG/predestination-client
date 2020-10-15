@@ -13,7 +13,7 @@ export default class App extends Component {
   }
 
   getLocation = () => {
-    this.watchId = navigator.geolocation.watchPosition(
+    this.watchId = navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           latitude: position.coords.latitude,
@@ -26,6 +26,19 @@ export default class App extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     )
 
+  };
+
+  findCurrentLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'permission denied'
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
   };
 
   render() {
