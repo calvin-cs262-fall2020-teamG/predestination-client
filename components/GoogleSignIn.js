@@ -8,7 +8,7 @@ export default function GoogleLoginButton({ onPress }) {
     <View>
       <SocialIcon
         title='Sign In With Google'
-        light
+        dark
         raised
         button
         type='google'

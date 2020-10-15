@@ -1,9 +1,17 @@
-// for getting the access token
+import React from 'react';
+
 import * as Google from 'expo-google-app-auth';
 
 const { NativeModules } = require("react-native");
 
 const CLIENT_API_KEY = 'AIzaSyBAaFc8y9xxx8xc8jimfCRPeu5H6ucP-0w';
+
+const config = {
+    iosClientId: `825050207640-eabv7h5qctuv9csnhaio7s8pfnncg0ff.apps.googleusercontent.com`,
+    androidClientId: `825050207640-q3qlm3h4i43vbcikfc3avv6av5g0us05.apps.googleusercontent.com`,
+    iosStandaloneAppClientId: `825050207640-eabv7h5qctuv9csnhaio7s8pfnncg0ff.apps.googleusercontent.com`,
+    androidStandaloneAppClientId: `825050207640-q3qlm3h4i43vbcikfc3avv6av5g0us05.apps.googleusercontent.com`,
+  };
 
 // AsyncStorage to store access tokens and refresh tokens (which are basically how we remember what user was logged in to this app)
 import AsyncStorage from '@react-native-community/async-storage';
@@ -61,7 +69,7 @@ const requestData = async (accessToken) => {
     } else {
         return {
             name: jsonResponse.names[0].displayName,
-            photoUrl: jsonResponse.photos[0].url,
+            photo: jsonResponse.photos[0].url,
         };
     }
 
@@ -116,9 +124,10 @@ export async function getUserData() {
 /**
  * signOut signs user out of session by revoking accessToken
  */
-export async function signOut() {
+export async function signOutOfGoogle() {
     const { accessToken } = await getAuthenticationTokens();
-    await Google.logOutAsync({ accessToken });
+    await Google.logOutAsync({ accessToken, ...config });
+    await storeAuthenticationTokens('', ''); //for some reason just logging out with Google.logOutAsync does not terminate the access token
 }
 
 /**
@@ -147,3 +156,8 @@ export const LOGIN_STATUS = {
     NEW_USER: 'new_user',
     GOOGLE_USER: 'google_user',
   };
+
+export const AuthenticationContext = React.createContext({ 
+    loginStatus: LOGIN_STATUS.LOADING, 
+    setLoginStatus: null,
+});

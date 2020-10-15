@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, View, Text, Image, } from 'react-native';
-
-
+import React, { useEffect, useState, useContext } from 'react';
+import { ActivityIndicator, Alert, View, Text, Image, Button, } from 'react-native';
 import { SocialIcon } from 'react-native-elements';
-import { getUserData, signOut } from '../src/GoogleAuthentication';
-import { setStatusBarBackgroundColor, setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import { LOGIN_STATUS } from '../src/GoogleAuthentication';
+
+import { getUserData, signOutOfGoogle } from '../src/GoogleAuthentication';
+import { LOGIN_STATUS, AuthenticationContext } from '../src/GoogleAuthentication';
 
 /**
  * AccountScreen lets a user logout of Google.
@@ -23,44 +21,58 @@ export default function AccountScreen({ navigation }) {
   const [photo, setPhoto] = useState(null);
   const [status, setStatus] = useState(STATUS.LOADING);
 
-  const loadData = async () => {
+  const loadData = () => {
     getUserData().then(({ name, photo }) => {
       setName(name);
       setPhoto(photo);
-      console.log(name);
     })
-    .then(() => {
-      setStatus(STATUS.LOADED);
-    })
-    .catch(e => {
-      console.error(e);
-      setStatus(STATUS.ERROR);
-    });
+      .then(() => {
+        setStatus(STATUS.LOADED);
+      })
+      .catch(e => {
+        setStatus(STATUS.ERROR);
+      });
   }
 
   useEffect(() => {
     loadData();
   }, []);
 
+  const { loginStatus, setLoginStatus } = useContext(AuthenticationContext);
+
+  const handleSignOut = async () => {
+    await signOutOfGoogle();
+    setLoginStatus(LOGIN_STATUS.NEW_USER);
+  }
+
   // https://stackoverflow.com/questions/46592833/how-to-use-switch-statement-inside-a-react-component
   return (
     <View>
       {
-        (status === STATUS.LOADING || status === STATUS.ERROR) ? <ActivityIndicator/> :
-        <View>
+        (status === STATUS.LOADING || status === STATUS.ERROR) ? <ActivityIndicator /> :
           <View>
-            <Text>{name}</Text>
-            <Image
-              source={{
-                uri: photo,
-              }}
-            />
-          </View>
+            <View>
+              <Text>{name}</Text>
+              <Image
+                style={{ width: 100, height: 100 }}
+                source={{
+                  uri: photo,
+                }}
+              />
+              <SocialIcon
+                title='Sign Out of Google'
+                light
+                raised
+                button
+                type='google'
+                onPress={handleSignOut}
+              />
+            </View>
 
-          <View>
+            <View>
 
+            </View>
           </View>
-        </View>
       }
     </View>
   );

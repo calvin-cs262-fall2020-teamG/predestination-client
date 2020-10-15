@@ -13,7 +13,7 @@ export default function DrawerScreen({ setLoginStatus, route }) {
     return (
         <Drawer.Navigator initialRouteName="Home" drawerPosition="right" drawerType="front">
             <Drawer.Screen name="Home" component={HomeStack} />
-            <Drawer.Screen name="Account" component={AccountStack} initialParams={{ setLoginStatus: route.params.setLoginStatus }} />
+            <Drawer.Screen name="Account" component={AccountStack} />
         </Drawer.Navigator>
     );
 };

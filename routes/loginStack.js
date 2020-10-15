@@ -9,14 +9,13 @@ const Stack = createStackNavigator();
 /**
  * LoginStack simply displays LoginScreen
  */
-export default function LoginStack({ navigation, route }) {
+export default function LoginStack({ }) {
     return (
            <Stack.Navigator>
              <Stack.Screen 
                 name="LoginScreen"
                 component={ LoginScreen }
                 options={{ title: 'LoginScreen' }}
-                initialParams={{ setLoginStatus: route.params.setLoginStatus }}
                 />
             </Stack.Navigator>
     );
