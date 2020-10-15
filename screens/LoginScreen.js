@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Alert, View, Text, } from 'react-native';
+import { StyleSheet, Alert, View, Text, Image } from 'react-native';
 
 // allows us to run the "is this person already logged in" check, every time this screen is focused by react navigation
 import { useFocusEffect } from '@react-navigation/native';
@@ -32,7 +32,7 @@ export default function LoginScreen() {
       //throw null;
       await getUserData();
       setLoginStatus(LOGIN_STATUS.GOOGLE_USER);
-    } catch (e) { 
+    } catch (e) {
       // if not logged in, reveals google login button
       setLoginStatus(LOGIN_STATUS.NEW_USER);
     }
@@ -42,19 +42,79 @@ export default function LoginScreen() {
     try {
       await signInWithGoogle();
       setLoginStatus(LOGIN_STATUS.GOOGLE_USER);
-    } catch (e)
-    {
+    } catch (e) {
       handleError(e);
       setLoginStatus(LOGIN_STATUS.NEW_USER);
     }
   }
 
-  useFocusEffect(() => {initialize();}, []);
+  useFocusEffect(() => { initialize(); }, []);
 
-    return (
-      <View>
-        <GoogleSignIn onPress={loginPress}/>
+  return (
+    <View style={styles.container}>
+
+      <View style={styles.backgroundContainer}>
+        <Image style={styles.backgroundImage} source={require('../assets/calvin_login_screen.jpg')}></Image>
       </View>
-    );
+
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>PREDESTINATION</Text>
+      </View>
+
+      <View style={styles.loginContainer}>
+        <View style={styles.buttonContainer}>
+          <GoogleSignIn onPress={loginPress} />
+        </View>
+        <Text style={styles.loginText}>Click above to start your adventure!</Text>
+      </View>
+
+
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  titleContainer: {
+    flex: 3,
+    justifyContent: 'space-around',
+  },
+  titleText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    letterSpacing: 10,
+    color: 'white',
+    alignSelf: 'center',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignContent: 'center',
+    justifyContent: 'space-around',
+  },
+  backgroundContainer: {
+    flex: 1,
+    top: 0,
+    left: 0,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
+  backgroundImage: {
+    flex: 1,
+    height: null,
+    width: null,
+  },
+  loginContainer: {
+    flex: 2,
+  },
+  loginText: {
+    fontSize: 14,
+    color: 'white',
+    alignSelf: 'center',
+  },
+  buttonContainer: {
+    marginLeft: 20,
+    marginRight: 20,
+  },
+});
 
