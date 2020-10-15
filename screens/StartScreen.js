@@ -25,9 +25,11 @@ export default function StartScreen({ navigation, route }) {
     <View style={globalStyles.container}>
       <View style={globalStyles.titleSection}>
         <Text>PreDestination {route.params.fullName}</Text>
-        <Text>Welcome {route.params.name}</Text>
+        <Text style={globalStyles.welcomeText}>Welcome, {route.params.name}.
+        {"\n"}Will you...</Text>
       </View>
-
+      {/* Options for seekers */}
+      <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY</Text>
       <View style={globalStyles.inputContainer}>
         <TextInput
           style={globalStyles.input}
@@ -37,11 +39,12 @@ export default function StartScreen({ navigation, route }) {
           onChangeText={(val) => setCode(val)}
         />
       </View>
-
       <View style={globalStyles.joinButton}>
         <Button title="Join" onPress={handleJoinPress} />
       </View>
-
+      <Text style={globalStyles.orWillYouText}>-or will you-</Text>
+    {/* Options for seekers */}
+    <Text style={globalStyles.keeperText}>CREATE THE DESTINIES FOR SEEKERS</Text>
       <View style={globalStyles.createButton}>
         <Button
           title="Create"
