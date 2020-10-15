@@ -8,6 +8,7 @@ import Drawer from '../routes/drawer';
 import { ActivityIndicator } from 'react-native';
 import { LOGIN_STATUS } from '../src/GoogleAuthentication';
 import { NavigationContainer } from '@react-navigation/native';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 
 
 const Stack = createStackNavigator();
@@ -17,10 +18,18 @@ const Stack = createStackNavigator();
  */
 export default function MainStack() {
 
-    const [loginStatus, setLoginStatus] = useState(LOGIN_STATUS.LOADING);
+    const [loginStatus, setStatus] = useState(LOGIN_STATUS.LOADING);
+
+    const setLoginStatus = (newState) => {
+        setStatus(newState);
+    }
 
     return (  
-        <Stack.Navigator>
+        <Stack.Navigator
+        screenOptions={{
+            headerShown: false
+        }}
+        >
             {
              ((loginStatus === LOGIN_STATUS.NEW_USER || loginStatus === LOGIN_STATUS.LOADING) && <Stack.Screen initialParams={{ setLoginStatus }} name="Login" component={ LoginStack } options={{ title: 'Login' }} />) ||
              (loginStatus === LOGIN_STATUS.GOOGLE_USER && <Stack.Screen initialParams={{ setLoginStatus }} name="Drawer" component={ Drawer } options={{ title: 'Drawer' }}/>)

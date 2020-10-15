@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, View, Text, } from 'react-native';
-// for getting the access token
-import * as Google from 'expo-google-app-auth';
+import { ActivityIndicator, Alert, View, Text, Image, } from 'react-native';
 
-// AsyncStorage to store access tokens and refresh tokens (which are basically how we remember what user was logged in to this app)
-import AsyncStorage from '@react-native-community/async-storage';
 
 import { SocialIcon } from 'react-native-elements';
 import { getUserData, signOut } from '../src/GoogleAuthentication';
 import { setStatusBarBackgroundColor, setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+import { LOGIN_STATUS } from '../src/GoogleAuthentication';
 
 /**
  * AccountScreen lets a user logout of Google.
@@ -26,26 +23,46 @@ export default function AccountScreen({ navigation }) {
   const [photo, setPhoto] = useState(null);
   const [status, setStatus] = useState(STATUS.LOADING);
 
-  useEffect(async () => {
+  const loadData = async () => {
     getUserData().then(({ name, photo }) => {
       setName(name);
       setPhoto(photo);
+      console.log(name);
     })
-      .then(() => {
-        setStatus(STATUS.LOADED);
-      })
-      .catch(e => console.error(e))
-      .finally(() => setStatus(STATUS.ERROR));
+    .then(() => {
+      setStatus(STATUS.LOADED);
+    })
+    .catch(e => {
+      console.error(e);
+      setStatus(STATUS.ERROR);
+    });
   }
-    , []);
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   // https://stackoverflow.com/questions/46592833/how-to-use-switch-statement-inside-a-react-component
+  return (
+    <View>
+      {
+        (status === STATUS.LOADING || status === STATUS.ERROR) ? <ActivityIndicator/> :
+        <View>
+          <View>
+            <Text>{name}</Text>
+            <Image
+              source={{
+                uri: photo,
+              }}
+            />
+          </View>
 
-  {
-    (status === STATUS.LOADING && <ActivityIndicator/>) ||
-    (status === STATUS.LOADED && <View><Text>Loaded</Text></View>) ||
-    (status === STATUS.ERROR && <View><Text>Error</Text></View>)
-  }
+          <View>
 
+          </View>
+        </View>
+      }
+    </View>
+  );
 }
 
