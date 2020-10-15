@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, Text, Button, } from 'react-native';
+import { StyleSheet, TextInput, View, Text, Button, Alert} from 'react-native';
 
 /*
 The AddNewRoute component takes input from the user
@@ -12,7 +12,12 @@ export default function AddNewRoute({ submitHandler }) {
     const [name, setName] = useState('');
 
     const changeNameHandler = (val) => {
-        setName(val);
+        if (val.trim() === "") {
+            Alert.alert('Name cannot be empty');
+        }
+        else {
+            setName(val)
+        }
     }
 
     return (
