@@ -49,7 +49,7 @@ export default function LoginScreen() {
     }
   }
 
-  useFocusEffect(() => {initialize();});
+  useFocusEffect(() => {initialize();}, []);
 
     return (
       <View>
