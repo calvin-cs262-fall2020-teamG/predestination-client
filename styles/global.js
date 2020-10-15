@@ -110,5 +110,29 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "gold",
   },
   // end styles from KeeperGameScreen.
+
+  // added by Advait Scaria on Oct 9
+  // start styles from KeeperEditorScreen.js
+  list: {
+    flex: 1,
+    marginTop: 20
+  },
+  clueInput: {
+    marginBottom: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+  },
+  item: {
+    padding: 16,
+    marginTop: 16,
+    borderColor: '#bbb',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 10,
+    flexDirection: 'row',
+  }
+  // end styles from KeeperEditorScreen.js
 });
 

@@ -24,8 +24,8 @@ export default function StartScreen({ navigation, route }) {
     // <View style={globalStyles.container}>
     <View style={globalStyles.container}>
       <View style={globalStyles.titleSection}>
-        <Text>PreDestination {route.params.fullName}</Text>
-        <Text style={globalStyles.welcomeText}>Welcome, {route.params.name}.
+      <Text>PreDestination {route.params.fullName}</Text>
+  <Text style={globalStyles.welcomeText}>Welcome, PLACEHOLDER_NAME.
         {"\n"}Will you...</Text>
       </View>
       {/* Options for seekers */}
@@ -51,7 +51,14 @@ export default function StartScreen({ navigation, route }) {
           onPress={() => navigation.navigate("KeeperListScreen")}
         />
       </View>
+
+      <View style={globalStyles.createButton}>
+        <Button
+          title="TestGPS"
+          onPress={() => navigation.navigate("TestScreen")}
+        />
+      </View>
+
     </View>
-    // </View>
   );
 }
