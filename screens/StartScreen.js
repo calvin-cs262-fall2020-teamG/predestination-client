@@ -24,7 +24,7 @@ export default function StartScreen({ navigation, route }) {
     // <View style={globalStyles.container}>
     <View style={globalStyles.container}>
       <View style={globalStyles.titleSection}>
-      <Text>PreDestination {route.params.fullName}</Text>
+      <Text>PreDestination</Text>
   <Text style={globalStyles.welcomeText}>Welcome, PLACEHOLDER_NAME.
         {"\n"}Will you...</Text>
       </View>

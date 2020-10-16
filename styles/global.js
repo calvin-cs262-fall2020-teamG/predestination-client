@@ -7,7 +7,7 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "gold",
+    backgroundColor: "white",
   },
   titleSection: {
     // flex: 1,
@@ -49,7 +49,7 @@ export const globalStyles = StyleSheet.create({
     // flex: 1,
     padding: 20,
     margin: 25,
-    marginBottom: 150,
+    marginBottom: 50,
     borderStyle: "solid",
     borderWidth: 2,
     borderRadius: 10,
@@ -132,7 +132,16 @@ export const globalStyles = StyleSheet.create({
     borderStyle: 'solid',
     borderRadius: 10,
     flexDirection: 'row',
-  }
+  },
   // end styles from KeeperEditorScreen.js
+  //shared:header.js
+
+topRightMenuIcon:{
+  // justifyContent: "space-around",
+  // flexDirection: "column",
+  // alignItems: "center",
+  // flex: 1,
+  margin: 15, //shifts the icon to the left
+}
 });
 
