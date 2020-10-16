@@ -21,7 +21,7 @@ export default function StartScreen({ navigation, route }) {
   // ensure given code is valid
   const handleJoinPress = () => {
     code.length === 6
-      ? navigation.navigate("SeekerWaitingScreen", { code })
+      ? navigation.navigate("SeekerStack", { screen: "SeekerWaitingScreen", params: { code }  })
       : handleError();
   };
 
