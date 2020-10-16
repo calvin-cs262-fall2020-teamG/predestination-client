@@ -1,7 +1,42 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
-  // start styles from StartScreen.js
+  
+  // ========================= navigation styles ==========================
+  // start screen
+  startNavigationTitle: {
+    color: 'white',
+  },
+  startNavigationHeader: {
+    backgroundColor: '#A2D683',
+    opacity: 0.7,
+  },
+  startNavigationDrawer: {
+    color: 'white',
+  },  
+
+  // seeker screen navigation styles
+  seekerNavigationTitle: {
+    color: 'black',
+  },
+  seekerNavigationHeader: {
+    backgroundColor: '#F3CD00',
+  },
+  startNavigationDrawer: {
+    color: 'black',
+  },  
+
+  // keeper screen navigation styles
+  keeperNavigationTitle: {
+    color: 'white',
+  },
+  keeperNavigationHeader: {
+    backgroundColor: '#8C2131',
+  },
+  keeperNavigationDrawer: {
+    color: 'white',
+  },  
+
   container: {
     flex: 1,
     justifyContent: "space-around",
