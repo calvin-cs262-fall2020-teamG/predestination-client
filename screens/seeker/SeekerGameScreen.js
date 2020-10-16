@@ -1,7 +1,10 @@
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
 import NoteWidget from '../../components/NoteWidget';
 import { globalStyles } from '../../styles/global';
+
+import { NOTE_TYPE } from '../../components/NoteWidget';
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
@@ -11,80 +14,95 @@ export default function SeekerRaceScreen({ route, navigation }) {
 
     const total_players = 20;
 
-    const notes = {
+    const [notes, setNotes] = useState({
         list: [
-            { title: 'Performing Arts Center Main Entrance', clue: 'Insert a witty clue here.', visited: 5, key: '13', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '12', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '11', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '10', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '9', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '8', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '7', timeFound: '13:01' },
-            { title: 'Performing Arts Center Main Entrance', clue: 'Insert a witty clue here.', visited: 5, key: '6', timeFound: '13:01' },
-            { title: 'Performing Arts Center Main Entrance', clue: 'Insert a witty clue here.', visited: 5, key: '5', timeFound: '13:01' },
-            { title: 'Performing Arts Center Main Entrance', clue: 'Insert a witty clue here.', visited: 5, key: '4', timeFound: '13:01' },
-            { title: 'Science Building', clue: 'Insert a witty clue here.', visited: 5, key: '3', timeFound: '13:01' },
-            { title: 'Science Building', clue: 'Insert a witty clue here.', visited: 5, key: '2', timeFound: '13:01' },
-            { title: 'Big Cheese', clue: 'Insert a witty clue here.', visited: 10, key: '1', timeFound: '13:00' },
-            { title: 'Start', clue: 'What is holey, made out of metal, and yellow at Calvin?', visited: 20, key: '0', timeFound: '12:00' },
+            { clue: 'What is holey, made out of metal, and yellow at Calvin?', archived: true, points: 5, key: '0' },
+            { clue: 'The better dining hall\'s entrance', archived: true, points: 2, key: '1' },
+            { clue: 'Not starbucks', archived: false, points: 2, key: '2' },
+            { clue: 'Only arcade on campus', archived: true, points: 10, key: '3' },
+            { clue: 'What is holey, made out of metal, and yellow at Calvin?', archived: true, points: 5, key: '4' },
+            { clue: 'The better dining hall\'s entrance', archived: true, points: 2, key: '5' },
+            { clue: 'Not starbucks', archived: false, points: 2, key: '6' },
+            { clue: 'Only arcade on campus', archived: true, points: 10, key: '7' },
+            { clue: 'What is holey, made out of metal, and yellow at Calvin?', archived: true, points: 5, key: '8' },
+            { clue: 'The worst dining hall\'s entrance', archived: false, points: 5, key: '9' },
+            { clue: 'Not starbucks', archived: false, points: 2, key: '10' },
+            { clue: 'Only arcade on campus', archived: true, points: 10, key: '11' },
         ],
-        focused: 1,
-    };
+        focused: '0',
+    });
 
-    const handleScroll = (e) => {
-        console.log(e.nativeEvent.contentOffset.y);
-    };
+    const [cluesLeft, setCluesLeft] = useState(notes.list.filter((note) => { return !note.archived; }).length);
+
+
+    const changeFocused = (newClueKey) => {
+        setNotes({ ...notes, focused: newClueKey });
+    }
 
     return (
-        <View style={globalStyles.flexContainer}>
+        <View style={styles.flexContainer}>
 
-            <View style={globalStyles.header}>
-                <Text>Currently in 19th place!</Text>
-            </View>
+            <View style={styles.header}>
+                
 
-            <View style={globalStyles.scrollable}>
-                <View style={globalStyles.historyBar}>
-
+                <View style={styles.selectedClueContainer}>
+                    <Text style={styles.selectedClueText}>{notes.list.filter(item => item.key === notes.focused)[0].clue}</Text>
                 </View>
 
-                <View style={globalStyles.scrollableNotes}>
-                    <FlatList
-                        onScroll={handleScroll}
-                        data={notes.list}
-                        renderItem={({ item }) => (
-                            <NoteWidget content={item} focused={false} />
-                        )}
-                    />
+                <View style={styles.statisticsContainer}>
+                    <Text>Currently in 3rd place.</Text>
                 </View>
+
             </View>
 
-            <View style={globalStyles.progressSection}>
-
+            <View style={styles.todoList}>
+                <FlatList
+                    data={notes.list.sort((a, b) => {
+                        if (a.archived === b.archived) {
+                            return b.points - a.points;
+                        } else {
+                            return a.archived ? 1 : -1;
+                        }
+                    })}
+                    renderItem={({ item, index }) => (
+                        <NoteWidget
+                            content={item.clue}
+                            archived={item.archived}
+                            first={item.archived ? (index === cluesLeft) : (index === 0)}
+                            last={item.archived ? (index === (notes.list.length-1)) : (index === (cluesLeft - 1))}
+                            points={item.points}
+                            focused={item.key === notes.focused}
+                            id={item.key}
+                            onPress={changeFocused}
+                        />
+                    )}
+                />
             </View>
 
         </View>
     );
 }
 
-// const styles = StyleSheet.create({
-//     flexContainer: {
-//         flexDirection: 'column',
-//         flex: 1,
-//     },
-//     header: {
-//         flex: 5,
-//         backgroundColor: 'skyblue',
-//     },
-//     scrollable: {
-//         flex: 15,
-//     },
-//     scrollableNotes: {
+const styles = StyleSheet.create({
+    selectedClueText: {
+        fontSize: 16,
+    },
+    flexContainer: {
+        flexDirection: 'column',
+        flex: 1,
+    },
+    header: {
+        flex: 1,
+        backgroundColor: 'gold',
+    },
+    scrollable: {
+        flex: 15,
+    },
+    scrollableNotes: {
 
-//     },
-//     progressSection: {
-//         flex: 1,
-//         borderTopWidth: 1,
-//         borderColor: 'lightgray',
-//     },
-// });
+    },
+    todoList: {
+        flex: 4,
+    }
+});
 
