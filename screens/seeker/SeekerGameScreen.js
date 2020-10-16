@@ -36,10 +36,10 @@ export default function SeekerRaceScreen({ route, navigation }) {
     };
 
     return (
-        <View style={globalStyles.flexContainer}>
+        <View style={globalStyles.container}>
 
-            <View style={globalStyles.header}>
-                <Text>Currently in 19th place!</Text>
+            <View style={globalStyles.seekerCurrentStatus}>
+                <Text style={globalStyles.welcomeText}>Currently in 19th place!</Text>
             </View>
 
             <View style={globalStyles.scrollable}>

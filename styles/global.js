@@ -15,8 +15,17 @@ export const globalStyles = StyleSheet.create({
   },
   keeperTitleText:{
     color: "white",
+    fontFamily: "raleway",
   },
-    //shared:header.js
+  seekerNavHeader:{
+    backgroundColor: "gold",
+  },
+  seekerTitleText:{
+    fontFamily: "raleway",
+    color: "black",
+  },
+
+  //shared:header.js
   topRightMenuIcon:{
   margin: 15, //shifts the icon to the left
   color: "white",
@@ -72,7 +81,7 @@ export const globalStyles = StyleSheet.create({
   createButton: {
     // flex: 1,
     padding: 20,
-    margin: 25,
+    margin: 20,
     marginBottom: 25,
 
     borderStyle: "solid",
@@ -91,22 +100,53 @@ export const globalStyles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "constan",
     color: "grey",
+    textAlign: "center",
   },
   keeperText: {
+    margin: 5,
+    marginBottom: 10,
     fontSize: 20,
     fontFamily: "constan",
     color: "grey",
+    textAlign: "center",
   },
   // end styles from StartScreen.js
 
-  // start styles from SeekerGameScreen.js
-  flexContainer: {
-    flexDirection: "column",
-    flex: 1,
+  //SEEKER SCREENS
+  //seeker general design
+  seekerBodyText:{
+    textAlign: "center",
+    fontFamily: "constan",
+    fontSize: 20,
+
   },
-  header: {
-    flex: 5,
-    backgroundColor: "skyblue",
+  seekerStartButton: {
+    // flex: 1,
+    padding: 20,
+    margin: 25,
+
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: "maroon",
+
+    width: "75%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "gold",
+  },
+
+  // start styles from SeekerGameScreen.js
+  // flexContainer: {
+  //   flexDirection: "column",
+  //   flex: 1,
+  // },
+  // header: {
+  //   flex: 5,
+  //   backgroundColor: "skyblue",
+  // },
+  seekerCurrentStatus:{
+    fontSize: 40,
   },
   scrollable: {
     flex: 15,
@@ -119,15 +159,10 @@ export const globalStyles = StyleSheet.create({
   },
   // end styles from SeekerGameScreen.js
 
+  //KEEPER SCREENS
+
   //added by Nathan Wang on Oct 5 11:50PM
   // start styles from KeeperGameScreen.js
-  nextButton: {
-    padding: 20,
-    margin: 100,
-    borderStyle: "dotted",
-    borderWidth: 2,
-    borderRadius: 10,
-  },
   headerText: {
     textAlign: "center",
     fontSize: 25,
@@ -161,13 +196,13 @@ export const globalStyles = StyleSheet.create({
   },
   // end styles from KeeperEditorScreen.js
   buttonText: {
-    color: "white",
+    color: "gold",
     fontFamily: "constan",
     fontSize: 20,
     letterSpacing: 2,
   },
   buttonTextSeeker: {
-    color: "black",
+    color: "maroon",
     fontFamily: "constan",
     fontSize: 20,
     letterSpacing: 2,

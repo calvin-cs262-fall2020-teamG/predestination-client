@@ -35,16 +35,32 @@ export default function HomeStack({ navigation }) {
             }}>
             <Stack.Screen name="StartScreen" component={StartScreen} options={{ title: 'StartScreen' }} />
             {/* seeker screens */}
-            <Stack.Screen name="SeekerWaitingScreen" component={SeekerWaitingScreen} options={{ title: 'SeekerWaitingScreen' }} />
-            <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen' }} />
+            <Stack.Screen name="SeekerWaitingScreen" component={SeekerWaitingScreen} options={{ title: 'SeekerWaitingScreen' }}
+                options={{  headerStyle: globalStyles.seekerNavHeader,
+                            headerTitleStyle: globalStyles.seekerTitleText,
+                            title: "SeekerWaitingScreen"}}/>
+
+            <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen' }}
+                options={{  headerStyle: globalStyles.seekerNavHeader,
+                            headerTitleStyle: globalStyles.seekerTitleText,
+                            title: "SeekerGameScreen"}}/>
             {/* keeper screens */}
             <Stack.Screen name="KeeperListScreen" component={KeeperListScreen}
                 options={{  headerStyle: globalStyles.keeperNavHeader,
                             headerTitleStyle: globalStyles.keeperTitleText,
                             title: 'KeeperListScreen' }} />
-            <Stack.Screen name="KeeperEditorScreen" component={KeeperEditorScreen} options={{ title: 'KeeperEditorScreen' }} />
-            <Stack.Screen name="KeeperWaitingScreen" component={KeeperWaitingScreen} options={{ title: 'KeeperWaitingScreen' }} />
-            <Stack.Screen name="KeeperGameScreen" component={KeeperGameScreen} options={{ title: 'KeeperGameScreen' }} />
+            <Stack.Screen name="KeeperEditorScreen" component={KeeperEditorScreen} options={{ title: 'KeeperEditorScreen' }}
+                options={{  headerStyle: globalStyles.keeperNavHeader,
+                            headerTitleStyle: globalStyles.keeperTitleText,
+                            title: 'KeeperEditorScreen' }} />
+            <Stack.Screen name="KeeperWaitingScreen" component={KeeperWaitingScreen} options={{ title: 'KeeperWaitingScreen' }}
+                options={{  headerStyle: globalStyles.keeperNavHeader,
+                            headerTitleStyle: globalStyles.keeperTitleText,
+                            title: 'KeeperWaitingScreen' }} />
+            <Stack.Screen name="KeeperGameScreen" component={KeeperGameScreen} options={{ title: 'KeeperGameScreen' }}
+                options={{  headerStyle: globalStyles.keeperNavHeader,
+                            headerTitleStyle: globalStyles.keeperTitleText,
+                            title: 'KeeperGameScreen' }} />
             <Stack.Screen name="TestScreen" component={TestScreen} />
         </Stack.Navigator>
     );

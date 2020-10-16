@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, StyleSheet, Text, View, TouchableOpacity, Button, geoLocation } from 'react-native';
-
+import { globalStyles } from "../styles/global";
 
 export default class App extends Component {
   constructor(props) {
@@ -44,7 +44,12 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title="location" onPress={this.getLocation}></Button>
+        {/* <Button title="location" onPress={this.getLocation}></Button> */}
+        <TouchableOpacity onPress={this.getLocation}>
+          <View style={globalStyles.createButton}>
+            <Text style={globalStyles.buttonText}>FindMeNow!</Text>
+          </View>
+        </TouchableOpacity>
         <Text>Location: {this.state.latitude}, {this.state.longitude}</Text>
       </View>
     );

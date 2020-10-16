@@ -33,7 +33,8 @@ export default function StartScreen({ navigation, route }) {
       <Text style={globalStyles.welcomeText}>Welcome, Young Calvinist. </Text>
       </View>
       {/* Options for seekers */}
-      <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY</Text>
+      <Text>----------------------------------------------------------------------------------</Text>
+  <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY{"\n"}AS A SEEKER</Text>
       <View style={globalStyles.inputContainer}>
         <TextInput
           style={globalStyles.input}
@@ -44,6 +45,7 @@ export default function StartScreen({ navigation, route }) {
           onChangeText={(val) => setCode(val)}
         />
       </View>
+
     {/* Options for seekers */}
     <View style={globalStyles.joinButton}>
         <TouchableOpacity onPress={handleJoinPress} >
@@ -52,8 +54,9 @@ export default function StartScreen({ navigation, route }) {
           </View>
         </TouchableOpacity>
      </View>
+     <Text>----------------------------------------------------------------------------------</Text>
       {/* Options for Keepers */}
-    <Text style={globalStyles.keeperText}>CREATE DESTINIES</Text>
+  <Text style={globalStyles.keeperText}>CREATE DESTINIES{"\n"}AS A KEEPER</Text>
     <View style={globalStyles.createButton}>
       <TouchableOpacity onPress={() => navigation.navigate("KeeperListScreen")} >
         <View>
