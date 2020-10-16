@@ -1,34 +1,110 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
-  // start styles from StartScreen.js
+  
+  // ========================= navigation styles ==========================
+  // start screen
+  startNavigationTitle: {
+    color: 'white',
+  },
+  startNavigationHeader: {
+    backgroundColor: '#A2D683',
+    opacity: 0.7,
+  },
+  startNavigationDrawer: {
+    color: 'white',
+  },  
+
+  // seeker screen navigation styles
+  seekerNavigationTitle: {
+    color: 'black',
+  },
+  seekerNavigationHeader: {
+    backgroundColor: '#F3CD00',
+  },
+  startNavigationDrawer: {
+    color: 'black',
+  },  
+
+  // keeper screen navigation styles
+  keeperNavigationTitle: {
+    color: 'white',
+  },
+  keeperNavigationHeader: {
+    backgroundColor: '#8C2131',
+  },
+  keeperNavigationDrawer: {
+    color: 'white',
+  },  
+
   container: {
     flex: 1,
+    justifyContent: "space-around",
     flexDirection: "column",
     alignItems: "center",
+    backgroundColor: "white",
   },
   titleSection: {
-    flex: 1,
+    // flex: 1,
     width: "100%",
+    padding: 20,
+    alignItems: "center"
+  },
+  welcomeText:
+  {
+    // flex: 2,
+    fontSize: 30,
+    textAlign: "center",
+    color: "maroon",
+
   },
   entrySection: {
-    flex: 2,
+    // flex: 2,
     width: "100%",
     flexDirection: "column",
     alignItems: "center",
   },
   input: {
-    fontSize: 70,
+    // flex: 2,
+    fontSize: 40,
     textAlign: "center",
   },
   joinButton: {
-    paddingTop: 20,
+    // flex: 1,
+    padding: 20,
+    margin: 25,
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderRadius: 10,
     width: "50%",
+    backgroundColor: "gold",
+    borderColor: "maroon",
   },
   createButton: {
-    paddingTop: 15,
-    width: "30%",
+    // flex: 1,
+    padding: 20,
+    margin: 25,
+    marginBottom: 50,
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderRadius: 10,
+    width: "50%",
     textAlign: "center",
+    backgroundColor: "maroon",
+    borderColor: "gold",
+  },
+
+  seekerText: {
+    // flex: 1,
+    margin: 5,
+    marginBottom: 10,
+    fontSize: 15,
+  },
+  orWillYouText: {
+    // flex: 1,
+    padding: 10,
+    margin: 10,
+    marginBottom: 25,
   },
   // end styles from StartScreen.js
 
@@ -91,6 +167,16 @@ export const globalStyles = StyleSheet.create({
     borderStyle: 'solid',
     borderRadius: 10,
     flexDirection: 'row',
-  }
+  },
   // end styles from KeeperEditorScreen.js
+  //shared:header.js
+
+topRightMenuIcon:{
+  // justifyContent: "space-around",
+  // flexDirection: "column",
+  // alignItems: "center",
+  // flex: 1,
+  margin: 15, //shifts the icon to the left
+}
 });
+
