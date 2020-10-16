@@ -67,8 +67,6 @@ export default function LoginScreen() {
         </View>
         <Text style={styles.loginText}>Click above to start your adventure!</Text>
       </View>
-
-
     </View>
   );
 }
@@ -80,8 +78,8 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 24,
-    fontWeight: 'bold',
-    letterSpacing: 10,
+    fontFamily: "constan",
+    letterSpacing: 7,
     color: 'white',
     alignSelf: 'center',
   },

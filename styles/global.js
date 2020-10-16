@@ -1,6 +1,26 @@
 import { StyleSheet, View } from "react-native";
 
 export const globalStyles = StyleSheet.create({
+  //navigation bars
+  navigationHeader:{
+    // color: "white",
+    backgroundColor: "#A2D683",
+  },
+  titleText:{
+    fontFamily: "raleway",
+    color: "black",
+  },
+  keeperNavHeader:{
+    backgroundColor: "maroon",
+  },
+  keeperTitleText:{
+    color: "white",
+  },
+    //shared:header.js
+  topRightMenuIcon:{
+  margin: 15, //shifts the icon to the left
+  color: "white",
+  },
   // start styles from StartScreen.js
   container: {
     flex: 1,
@@ -18,10 +38,10 @@ export const globalStyles = StyleSheet.create({
   welcomeText:
   {
     // flex: 2,
+    fontFamily: "constan",
     fontSize: 30,
     textAlign: "center",
-    color: "maroon",
-
+    color: "#71B1C8",
   },
   entrySection: {
     // flex: 2,
@@ -32,44 +52,50 @@ export const globalStyles = StyleSheet.create({
   input: {
     // flex: 2,
     fontSize: 40,
+    fontFamily: "constan",
     textAlign: "center",
   },
   joinButton: {
     // flex: 1,
     padding: 20,
     margin: 25,
+
     borderStyle: "solid",
     borderWidth: 2,
     borderRadius: 10,
-    width: "50%",
-    backgroundColor: "gold",
     borderColor: "maroon",
+
+    width: "50%",
+    alignItems: "center",
+    backgroundColor: "gold",
   },
   createButton: {
     // flex: 1,
     padding: 20,
     margin: 25,
-    marginBottom: 50,
+    marginBottom: 25,
+
     borderStyle: "solid",
     borderWidth: 2,
     borderRadius: 10,
-    width: "50%",
-    textAlign: "center",
-    backgroundColor: "maroon",
     borderColor: "gold",
+
+    width: "50%",
+    alignItems: "center",
+    backgroundColor: "maroon",
   },
 
   seekerText: {
-    // flex: 1,
     margin: 5,
     marginBottom: 10,
-    fontSize: 15,
+    fontSize: 20,
+    fontFamily: "constan",
+    color: "grey",
   },
-  orWillYouText: {
-    // flex: 1,
-    padding: 10,
-    margin: 10,
-    marginBottom: 25,
+  keeperText: {
+    fontSize: 20,
+    fontFamily: "constan",
+    color: "grey",
   },
   // end styles from StartScreen.js
 
@@ -134,14 +160,17 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row',
   },
   // end styles from KeeperEditorScreen.js
-  //shared:header.js
-
-topRightMenuIcon:{
-  // justifyContent: "space-around",
-  // flexDirection: "column",
-  // alignItems: "center",
-  // flex: 1,
-  margin: 15, //shifts the icon to the left
-}
+  buttonText: {
+    color: "white",
+    fontFamily: "constan",
+    fontSize: 20,
+    letterSpacing: 2,
+  },
+  buttonTextSeeker: {
+    color: "black",
+    fontFamily: "constan",
+    fontSize: 20,
+    letterSpacing: 2,
+  }
 });
 

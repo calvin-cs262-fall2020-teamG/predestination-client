@@ -30,15 +30,18 @@ export default function HomeStack({ navigation }) {
         <Stack.Navigator
             screenOptions={{
                 headerRight: () => <Header navigation={navigation} />,
+                headerStyle: globalStyles.navigationHeader,
                 headerTitleStyle: globalStyles.titleText,
-            }}
-        >
+            }}>
             <Stack.Screen name="StartScreen" component={StartScreen} options={{ title: 'StartScreen' }} />
-
+            {/* seeker screens */}
             <Stack.Screen name="SeekerWaitingScreen" component={SeekerWaitingScreen} options={{ title: 'SeekerWaitingScreen' }} />
             <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen' }} />
-
-            <Stack.Screen name="KeeperListScreen" component={KeeperListScreen} options={{ title: 'KeeperListScreen' }} />
+            {/* keeper screens */}
+            <Stack.Screen name="KeeperListScreen" component={KeeperListScreen}
+                options={{  headerStyle: globalStyles.keeperNavHeader,
+                            headerTitleStyle: globalStyles.keeperTitleText,
+                            title: 'KeeperListScreen' }} />
             <Stack.Screen name="KeeperEditorScreen" component={KeeperEditorScreen} options={{ title: 'KeeperEditorScreen' }} />
             <Stack.Screen name="KeeperWaitingScreen" component={KeeperWaitingScreen} options={{ title: 'KeeperWaitingScreen' }} />
             <Stack.Screen name="KeeperGameScreen" component={KeeperGameScreen} options={{ title: 'KeeperGameScreen' }} />
