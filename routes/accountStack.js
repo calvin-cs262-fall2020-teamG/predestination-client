@@ -17,7 +17,7 @@ export default function AccountStack( {navigation} ) {
             }}
         >
             <Stack.Screen
-                name="AccountScreen"
+                name="Your Account"
                 component={AccountScreen}
             />
         </Stack.Navigator>
