@@ -7,8 +7,8 @@ import MainStack from './routes/mainStack';
 
 export default function App() {
     return (
-	      <NavigationContainer>
-          <MainStack/>
+        <NavigationContainer>
+            <MainStack />
         </NavigationContainer>
     );
 }

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableWithoutFeedback, Keyboard, Alert, KeyboardAvoidingView, TextInput, View, Text, Button, StatusBar, TouchableOpacity, FlatList } from 'react-native';
+import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
+import { Callout } from 'react-native-maps';
 import { globalStyles } from '../../styles/global';
 
 /**
@@ -39,44 +42,69 @@ export default function KeeperEditorScreen({ navigation }) {
         }
     }
 
-    return (
-        <TouchableWithoutFeedback onPress={() => {
-            Keyboard.dismiss();
-            console.log('dismissed keyboard');
-        }}>
-            <View style={globalStyles.container}>
-                <TextInput
-                    style={globalStyles.clueInput}
-                    placeholder='new clue...'
-                    onChangeText={changeHandler}
-                    value={text}
-                />
-                <Button onPress={() => submitHandler(text)} title='add clue' />
-                <View style={globalStyles.content}>
-                    {/* <AddTodo submitHandler={submitHandler} /> */}
-                    <View style={globalStyles.list}>
-                        <FlatList
-                            data={clues}
-                            renderItem={({ item }) => (
-                                <View style={globalStyles.item}><Text>{item.text}</Text></View>
-                            )}
-                        />
-                    </View>
-                </View>
-            </View>
-        </TouchableWithoutFeedback >
-    );
+    // return (
+    //     <TouchableWithoutFeedback onPress={() => {
+    //         Keyboard.dismiss();
+    //         console.log('dismissed keyboard');
+    //     }}>
+    //         <View style={globalStyles.container}>
+    //             <TextInput
+    //                 style={globalStyles.clueInput}
+    //                 placeholder='new clue...'
+    //                 onChangeText={changeHandler}
+    //                 value={text}
+    //             />
+    //             <Button onPress={() => submitHandler(text)} title='add clue' />
+    //             <View style={globalStyles.content}>
+    //                 {/* <AddTodo submitHandler={submitHandler} /> */}
+    //                 <View style={globalStyles.list}>
+    //                     <FlatList
+    //                         data={clues}
+    //                         renderItem={({ item }) => (
+    //                             <View style={globalStyles.item}><Text>{item.text}</Text></View>
+    //                         )}
+    //                     />
+    //                 </View>
+    //             </View>
+    //             <MapView
+    //                 initialRegion={{
+    //                     latitude: 37.78825,
+    //                     longitude: -122.4324,
+    //                     latitudeDelta: 0.0922,
+    //                     longitudeDelta: 0.0421,
+    //                 }}
+    //             />
+    //         </View>
+    //     </TouchableWithoutFeedback >
+    // );
+
+    // return (
+    //     <View>
+    //         <TextInput
+    //             style={styles.input}
+    //             placeholder='new todo...'
+    //             onChangeText={changeHandler}
+    //             value={text}
+    //         />
+    //         <Button onPress={() => submitHandler(text)} title='add todo' color='coral' />
+    //     </View>
+    // );
+
+    const [region, setRegion] = useState({
+        latitude: 42.9295,
+        longitude: -85.5862,
+        latitudeDelta: 0.009,
+        longitudeDelta: 0.009
+    });
 
     return (
-        <View>
-            <TextInput
-                style={styles.input}
-                placeholder='new todo...'
-                onChangeText={changeHandler}
-                value={text}
-            />
-            <Button onPress={() => submitHandler(text)} title='add todo' color='coral' />
-        </View>
+        <MapView
+            style={{ flex: 1 }}
+            region={region}
+            onRegionChangeComplete={region => setRegion(region)}
+        >
+            <Marker coordinate={{ latitude: 42.9295, longitude: -85.5862 }} />
+        </MapView>
     );
 }
 
