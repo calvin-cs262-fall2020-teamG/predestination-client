@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
 
 /**
  * NoteWidget shows the clue along with the location hinted at by the clue
@@ -12,25 +12,40 @@ export const NOTE_TYPE = {
   MIDDLE: 'middle',
 }
 
+const profilePictureListExample = [
+  'https://lh3.googleusercontent.com/-C1t5NSkvNfE/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclIEh48lSLxJGxP02RUHwmiMBJ1GA/photo.jpg',
+  'https://secure.gravatar.com/avatar/0b1c2362e0657d5fdbed5aaea05c0a2a?d=https://content.invisioncic.com/s281895/monthly_2017_11/G_member_26973.png',
+  'https://lh3.googleusercontent.com/-Nj31lomoF8c/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucknJjEhOP4abqDxBYePvQ5GpkDbQw/photo.jpg',
+];
+
 export default function NoteWidget({ content, focused, archived, points, first, last, onPress, id }) {
 
   return (
 
-    <View style={{
-      ...styles.mainContainer,
-      ...(first ? styles.topNote : null),
-      ...(last ? styles.bottomNote : null),
-      ...(archived ? styles.archived : styles.normal),
-      ...((last && archived) ? styles.lastArchivedNote : null),
-    }}>
-      <TouchableOpacity onPress={() => { onPress(id); }}>
+    <View style={styles.mainContainer}>
+      <TouchableOpacity activeOpacity={1} onPress={() => { onPress(id); }}>
         <View style={styles.contentContainer}>
           <View style={styles.contentSection}>
-            <Text numberOfLines={1} style={styles.contentText}>{content}</Text>
+            <Text style={styles.contentText}>{content}</Text>
           </View>
 
-          <View style={styles.pointSection}>
-            <Text style={styles.pointText}>{points}</Text>
+          <View style={styles.bannerSection}>
+            <View style={styles.bannerSubSection}><Text>Checkmark here</Text></View>
+            <View style={styles.bannerSubSection}>
+            <FlatList
+                    horizontal={true}
+                    data={profilePictureListExample}
+                    renderItem={({ item, index }) => (
+                      <Image
+                      style={{ width: 20, height: 20, marginLeft: 5 }}
+                      source={{
+                        uri: item,
+                      }}
+                    />
+                    )}
+                />
+            </View>
+            <View style={styles.bannerSubSection}><Text style={styles.pointText}>{points}</Text></View>
           </View>
         </View>
 
@@ -48,50 +63,52 @@ const styles = StyleSheet.create({
   archived: {
     backgroundColor: '#E8E8E8',
   },
-  lastArchivedNote: {
-    marginBottom: 20,
-  },
-  topNote: {
-    borderTopLeftRadius: radius,
-    borderTopRightRadius: radius,
-    marginTop: 20,
-  },
-  bottomNote: {
-    borderBottomRightRadius: radius,
-    borderBottomLeftRadius: radius,
-    borderBottomWidth: 1,
+  bannerSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderTopWidth: 1,
+    borderTopColor: 'lightgray',
   },
   contentContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    height: 50,
-    paddingLeft: 15,
+    flexDirection: 'column',
+
   },
   mainContainer: {
     borderColor: 'lightgray',
-    borderWidth: 1,
-    borderBottomWidth: 0,
-    marginLeft: 20,
-    marginRight: 20,
+    borderBottomWidth: 1,
+    marginTop: 10,
+    backgroundColor: 'white',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.00,
+
+    elevation: 1,
+
+    elevation: 2,
   },
   contentSection: {
     flex: 2,
-    paddingRight: 10,
     justifyContent: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
-  contentText: {
-
-  },
-  pointSection: {
+  bannerSubSection: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 50,
+    paddingRight: 10,
+    paddingLeft: 10,
   },
   pointText: {
     fontSize: 24,
-    paddingRight: 2,
+    paddingRight: 5,
   },
 
 });
