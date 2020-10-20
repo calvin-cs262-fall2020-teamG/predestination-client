@@ -12,12 +12,7 @@ export default function AddNewRoute({ submitHandler }) {
     const [name, setName] = useState('');
 
     const changeNameHandler = (val) => {
-        if (val.trim() === "") {
-            Alert.alert('Name cannot be empty');
-        }
-        else {
-            setName(val)
-        }
+        setName(val);
     }
 
     return (
