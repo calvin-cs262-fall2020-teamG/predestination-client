@@ -339,13 +339,12 @@ export default function KeeperEditorScreen({ navigation }) {
     });
 
     const [markers, setMarkers] = useState([{
-        // marker: [{
         latlng: {
             latitude: 42.9331,
             longitude: -85.5877,
         }
-        // }]
-    }]);
+    }
+    ]);
 
     return (
         <React.Fragment>
@@ -353,16 +352,20 @@ export default function KeeperEditorScreen({ navigation }) {
                 style={{ flex: 1 }}
                 customMapStyle={mapStyle}
                 region={region}
+                mapType={'satellite'}
+                pitchEnabled={false}
+                rotateEnabled={false}
                 onRegionChangeComplete={region => setRegion(region)}
                 minZoomLevel={15.5}
                 onPress={(e) => {
-                    console.log(e.nativeEvent.coordinate)
-                    // setMarkers({ ...markers, latlng: e.nativeEvent.coordinate })
+                    // console.log(e.nativeEvent.coordinate)
+                    setMarkers([...markers, { latlng: e.nativeEvent.coordinate }])
                     // console.log(markers)
                 }
                 }
             >
                 {
+
                     markers.map((first, index) => (
                         <MapView.Marker key={index} coordinate={first.latlng} />
                     ))
@@ -448,7 +451,7 @@ const styles = StyleSheet.create({
         // elevation: 2,
         // flexDirection: 'row',
         backgroundColor: '#fff',
-        borderRadius: 5,
+        borderRadius: 7,
         padding: 8,
         marginHorizontal: 10,
         width: 200,
