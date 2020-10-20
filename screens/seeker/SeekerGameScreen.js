@@ -1,10 +1,7 @@
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
-import NoteWidget from '../../components/NoteWidget';
-import { globalStyles } from '../../styles/global';
-
-import { NOTE_TYPE } from '../../components/NoteWidget';
+import CustomButton from '../../components/CustomButton';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
@@ -17,7 +14,7 @@ export default function SeekerGameScreen({ route, navigation }) {
     const [notes, setNotes] = useState({
         list: [
             { clue: 'What is holey, made out of metal, and yellow at Calvin?', archived: true, points: 5, key: '0' },
-            { clue: 'The better dining hall\'s entrance. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.', archived: true, points: 2, key: '1' },
+            { clue: 'The better dining hall\'s entrance. At verffffffffffffffffffffffffffffffffffffffffffffffffffffffptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.', archived: true, points: 2, key: '1' },
             { clue: 'Not starbucks At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.', archived: false, points: 2, key: '2' },
             { clue: 'Only arcade on campus', archived: true, points: 10, key: '3' },
             { clue: 'What is holey, made out of metal, and yellow at Calvin?', archived: true, points: 5, key: '4' },
@@ -29,54 +26,47 @@ export default function SeekerGameScreen({ route, navigation }) {
             { clue: 'Not starbucks', archived: false, points: 2, key: '10' },
             { clue: 'Only arcade on campus', archived: true, points: 10, key: '11' },
         ],
-        focused: '0',
+        focused: null,
     });
 
     const [cluesLeft, setCluesLeft] = useState(notes.list.filter((note) => { return !note.archived; }).length);
 
-
-    const changeFocused = (newClueKey) => {
-        setNotes({ ...notes, focused: newClueKey });
+    // When seekers click the "hunt" button, they will be redirected to the last clue selected if they selected a clue, else they will go to a clue list screen
+    const pressHunt = () => {
+        if (notes.focused === null) {
+            navigation.navigate('SeekerClueListScreen', { notes: notes });
+        } else {
+            navigation.navigate('SeekerFocusedScreen', { notes: notes });
+        }
     }
+
+
+    const fill = (20 / 100) * 100;
 
     return (
         <View style={styles.flexContainer}>
 
             <View style={styles.header}>
-                
-
-                <View style={styles.selectedClueContainer}>
-                    <Text style={styles.selectedClueText}>{notes.list.filter(item => item.key === notes.focused)[0].clue}</Text>
+                <View style={styles.pointsSection}>
+                    <Text style={styles.pointText}>33</Text>
                 </View>
-
-                <View style={styles.statisticsContainer}>
-                    <Text>Currently in 3rd place.</Text>
+                <View style={styles.statusSection}>
+                    <View style={styles.timeSection}>
+                        <Text style={styles.timeText}>11:05</Text>
+                    </View>
+                    <View style={styles.rankSection}>
+                        <Text style={styles.rankText}>4th Place</Text>
+                    </View>
                 </View>
-
             </View>
 
-            <View style={styles.todoList}>
-                <FlatList
-                    data={notes.list.sort((a, b) => {
-                        if (a.archived === b.archived) {
-                            return b.points - a.points;
-                        } else {
-                            return a.archived ? 1 : -1;
-                        }
-                    })}
-                    renderItem={({ item, index }) => (
-                        <NoteWidget
-                            content={item.clue}
-                            archived={item.archived}
-                            first={item.archived ? (index === cluesLeft) : (index === 0)}
-                            last={item.archived ? (index === (notes.list.length-1)) : (index === (cluesLeft - 1))}
-                            points={item.points}
-                            focused={item.key === notes.focused}
-                            id={item.key}
-                            onPress={changeFocused}
-                        />
-                    )}
-                />
+            <View style={styles.bottomSection}>
+                <View style={styles.miniLeaderboardContainer}>
+                    <Text>Leaderboard goes here</Text>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <CustomButton title={'Hunt'} onPress={pressHunt} />
+                </View>
             </View>
 
         </View>
@@ -84,25 +74,59 @@ export default function SeekerGameScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-    selectedClueText: {
-        fontSize: 16,
+    pointText: {
+        textAlign: 'center',
+        fontSize: 64,
+    },
+    timeText: {
+        textAlign: 'center',
+        fontSize: 24,
+    },
+    rankText: {
+        textAlign: 'center',
+        fontSize: 24,
     },
     flexContainer: {
-        flexDirection: 'column',
         flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'white',
     },
     header: {
         flex: 1,
-        backgroundColor: 'gold',
+        flexDirection: 'column',
+        paddingBottom: 5,
     },
-    scrollable: {
-        flex: 15,
+    pointsSection: {
+        flex: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    scrollableNotes: {
-
+    timeSection: {
+        flex: 1,
+        justifyContent: 'center',
     },
-    todoList: {
-        flex: 4,
+    rankSection: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    statusSection: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    bottomSection: {
+        flex: 2,
+        flexDirection: 'column',
+        justifyContent: 'center',
+    },
+    miniLeaderboardContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    buttonContainer: {
+        marginBottom: 40,
+        marginTop: 20,
     }
 });
 

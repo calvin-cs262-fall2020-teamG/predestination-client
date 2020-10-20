@@ -7,6 +7,9 @@ import { globalStyles } from '../styles/global';
 // import seeker screens
 import SeekerWaitingScreen from '../screens/seeker/SeekerWaitingScreen';
 import SeekerGameScreen from '../screens/seeker/SeekerGameScreen';
+import SeekerClueListScreen from '../screens/seeker/SeekerClueList';
+import SeekerFocusedScreen from '../screens/seeker/SeekerFocusedScreen';
+
 
 const Stack = createStackNavigator();
 
@@ -22,8 +25,11 @@ export default function SeekerStack({ navigation }) {
                 headerStyle: globalStyles.seekerNavigationHeader,
             }}
         >
+            
             <Stack.Screen name="SeekerWaitingScreen" component={SeekerWaitingScreen} options={{ title: 'SeekerWaitingScreen' }} />
             <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen' }} />
+            <Stack.Screen name="SeekerClueListScreen" component={SeekerClueListScreen} options={{ title: 'SeekerClueListSCreen'}} />
+            <Stack.Screen name="SeekerFocusedScreen" component={SeekerFocusedScreen} options={{ title: 'SeekerFocusedScreen '}}/>
         </Stack.Navigator>
     );
 };

@@ -8,6 +8,7 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image } from 'react
 export default function ProfileListView({ totalWidth, height, list, profileSize }) {
 
   const maxNumber = Math.floor(width / profileSize);
+  
 
   return (
 

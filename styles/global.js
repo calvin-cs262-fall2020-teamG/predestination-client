@@ -20,10 +20,10 @@ export const globalStyles = StyleSheet.create({
     color: 'black',
   },
   seekerNavigationHeader: {
-    backgroundColor: '#F3CD00',
+    backgroundColor: '#71B1C8',
   },
   startNavigationDrawer: {
-    color: 'black',
+    color: 'white',
   },  
 
   // keeper screen navigation styles

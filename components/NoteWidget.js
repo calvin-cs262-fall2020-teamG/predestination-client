@@ -18,14 +18,18 @@ const profilePictureListExample = [
   'https://lh3.googleusercontent.com/-Nj31lomoF8c/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucknJjEhOP4abqDxBYePvQ5GpkDbQw/photo.jpg',
 ];
 
-export default function NoteWidget({ content, focused, archived, points, first, last, onPress, id }) {
+export default function NoteWidget({ content, points, onPress, id }) {
 
   return (
 
-    <View style={styles.mainContainer}>
+    <View style={{
+      ...styles.mainContainer, 
+    }}>
       <TouchableOpacity activeOpacity={1} onPress={() => { onPress(id); }}>
         <View style={styles.contentContainer}>
-          <View style={styles.contentSection}>
+          <View style={{
+            ...styles.contentSection,
+            }}>
             <Text style={styles.contentText}>{content}</Text>
           </View>
 
@@ -60,6 +64,9 @@ export default function NoteWidget({ content, focused, archived, points, first, 
 const radius = 7;
 
 const styles = StyleSheet.create({
+  contentText: {
+    fontSize: 15,
+  },  
   archived: {
     backgroundColor: '#E8E8E8',
   },
@@ -78,6 +85,7 @@ const styles = StyleSheet.create({
     borderColor: 'lightgray',
     borderBottomWidth: 1,
     marginTop: 10,
+    margin: 10,
     backgroundColor: 'white',
     shadowColor: "#000",
     shadowOffset: {
@@ -88,8 +96,8 @@ const styles = StyleSheet.create({
     shadowRadius: 1.00,
 
     elevation: 1,
-
-    elevation: 2,
+    flex: 1,
+    borderRadius: 7,
   },
   contentSection: {
     flex: 2,
