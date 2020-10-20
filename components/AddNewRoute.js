@@ -29,6 +29,9 @@ export default function AddNewRoute({ submitHandler }) {
                     onChangeText={changeNameHandler}
                 />
             </View>
+            <View style={styles.clearText}>
+                <Button title="Clear Text" onPress={() => setName('')}/>
+            </View>
             <View>
                 {/* TODO: Add min players input */}
             </View>
@@ -38,6 +41,7 @@ export default function AddNewRoute({ submitHandler }) {
             <View>
                 <Button title="OK" onPress={() => submitHandler(name)}/>
             </View>
+            
         </View>
     );
 }
@@ -49,9 +53,15 @@ const styles = StyleSheet.create({
         },
     nameInput: {
         marginBottom: 10,
+        marginRight: 200,
+        marginLeft: 5,
         paddingHorizontal: 10,
         paddingVertical: 6,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ddd'
+        borderColor: 'black',
+        borderWidth: 1,
     },
+    clearText: {
+        // flexDirection: "row",
+        // justifyContent: "flex-end",
+    }
 });
