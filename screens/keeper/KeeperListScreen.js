@@ -71,10 +71,16 @@ export default function KeeperListScreen({ navigation }) {
    * (name, players, etc.)
    */
   const submitHandler = (title) => {
-    setRoutes((prevRoutes) => {
-      return [{ title: title, key: Math.random().toString() }, ...prevRoutes];
-    });
-  };
+    if (!title.trim()) {
+      Alert.alert("Name cannot be empty");
+    }
+    else {
+      setRoutes((prevRoutes) => {
+        return [{ title: title, key: Math.random().toString() }, ...prevRoutes];
+      });
+    };
+    }
+    
 
   const pressPublish = (hunt) => {
     navigation.navigate("KeeperWaitingScreen", { hunt });
