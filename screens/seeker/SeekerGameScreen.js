@@ -46,7 +46,7 @@ export default function SeekerGameScreen({ route, navigation }) {
                     <Text>Leaderboard goes here</Text>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <CustomButton title={'Hunt'} onPress={pressHunt} />
+                    <CustomButton title={notePack.getFocused() === null ? 'Hunt' : 'Check'} onPress={pressHunt} />
                 </View>
             </View>
 
