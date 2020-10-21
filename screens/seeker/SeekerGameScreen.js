@@ -23,7 +23,6 @@ export default function SeekerGameScreen({ route, navigation }) {
     }
 
     return (
-
         
         <View style={styles.flexContainer}>
 
