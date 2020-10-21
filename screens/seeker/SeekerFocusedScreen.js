@@ -1,5 +1,5 @@
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
 import { globalStyles } from '../../styles/global';
 
@@ -7,13 +7,16 @@ import Card from '../../components/Card';
 import CustomButton from '../../components/CustomButton';
 import ProximityView from '../../components/ProximityView';
 
+
+import { NotesContext, NotePack } from '../../src/Notes';
+
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
  * TODO: styling, connecting to gps
  */
 export default function SeekerFocusedScreen({ route, navigation }) {
 
-    const [note, setNote] = useState(route.params.selectedNote);
+    const { notePack } = useContext(NotesContext);
 
     return (
         <View style={styles.flexContainer}>
@@ -34,7 +37,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
             <View style={styles.noteContainer}>
                 <Card
-                    content={note.clue}
+                    content={notePack.getFocused().clue}
                     onPress={() => { }}
                     id={1}
                 />
