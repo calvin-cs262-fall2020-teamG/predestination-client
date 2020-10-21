@@ -1,16 +1,20 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, } from 'react-native';
+import { color } from 'react-native-reanimated';
 
 /**
  * CustomButton uses touchable opacity and styling to provide a better looking button than the provided Button class in react native
  */
-export default function CustomButton({ title, onPress }) {
+export default function CustomButton({ title, onPress, color }) {
 
   return (
 
     <TouchableOpacity onPress={onPress}>
       <View style={styles.buttonView}>
-        <Text style={styles.buttonText}>{title.toUpperCase()}</Text>
+        <Text style={{
+          ...styles.buttonText,
+          color: color === undefined ? 'red' : color,
+          }}>{title.toUpperCase()}</Text>
       </View>
     </TouchableOpacity>
     
@@ -27,7 +31,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     backgroundColor: 'white',
     alignSelf: 'center',
-    padding: 20,
+    padding: 30,
     paddingTop: 10,
     paddingBottom: 12,
     shadowColor: "#000",
@@ -41,8 +45,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    color: 'red',
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 16,
+    fontWeight: 'bold',
+    letterSpacing: 7,
   }
 });
