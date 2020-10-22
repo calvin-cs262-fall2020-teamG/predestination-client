@@ -12,6 +12,9 @@ import { NotesContext, NotePack } from '../../src/Notes';
 export default function SeekerGameScreen({ route, navigation }) {
 
     const { notePack } = useContext(NotesContext);
+    const [points, setPoints] = useState(0);
+    const [rank, setRank] = useState(1);
+    const [time, setTime] = useState(3600);
 
     // When seekers click the "hunt" button, they will be redirected to the last clue selected if they selected a clue, else they will go to a clue list screen
     const pressHunt = () => {
@@ -28,14 +31,17 @@ export default function SeekerGameScreen({ route, navigation }) {
 
             <View style={styles.header}>
                 <View style={styles.pointsSection}>
-                    <Text style={styles.pointText}>33</Text>
+                    <Text style={styles.pointText}>{points}</Text>
+                    <Text>Points</Text>
                 </View>
                 <View style={styles.statusSection}>
                     <View style={styles.timeSection}>
-                        <Text style={styles.timeText}>11:05</Text>
+                        <Text style={styles.timeText}>{time}</Text>
+                        <Text>Time Left</Text>
                     </View>
                     <View style={styles.rankSection}>
-                        <Text style={styles.rankText}>4th Place</Text>
+                        <Text style={styles.rankText}>{rank}</Text>
+                        <Text>Rank</Text>
                     </View>
                 </View>
             </View>
@@ -45,7 +51,7 @@ export default function SeekerGameScreen({ route, navigation }) {
                     <Text>Leaderboard goes here</Text>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <CustomButton title={notePack.getFocused() === null ? 'Hunt' : 'Check'} onPress={pressHunt} />
+                    <CustomButton title={'Hunt'} onPress={pressHunt} />
                 </View>
             </View>
 
@@ -84,10 +90,12 @@ const styles = StyleSheet.create({
     timeSection: {
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center'
     },
     rankSection: {
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
     },
     statusSection: {
         flex: 1,
