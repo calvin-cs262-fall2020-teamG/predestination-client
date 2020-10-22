@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
-  
+
   // ========================= navigation styles ==========================
   // start screen
   startNavigationTitle: {
@@ -13,7 +13,7 @@ export const globalStyles = StyleSheet.create({
   },
   startNavigationDrawer: {
     color: 'white',
-  },  
+  },
 
   // seeker screen navigation styles
   seekerNavigationTitle: {
@@ -24,7 +24,7 @@ export const globalStyles = StyleSheet.create({
   },
   startNavigationDrawer: {
     color: 'black',
-  },  
+  },
 
   // keeper screen navigation styles
   keeperNavigationTitle: {
@@ -35,7 +35,7 @@ export const globalStyles = StyleSheet.create({
   },
   keeperNavigationDrawer: {
     color: 'white',
-  },  
+  },
 
   container: {
     flex: 1,
@@ -171,12 +171,12 @@ export const globalStyles = StyleSheet.create({
   // end styles from KeeperEditorScreen.js
   //shared:header.js
 
-topRightMenuIcon:{
-  // justifyContent: "space-around",
-  // flexDirection: "column",
-  // alignItems: "center",
-  // flex: 1,
-  margin: 15, //shifts the icon to the left
-}
+  topRightMenuIcon: {
+    justifyContent: "space-around",
+    flexDirection: "column",
+    alignItems: "center",
+    flex: 1,
+    margin: 15, //shifts the icon to the left
+  }
 });
 
