@@ -37,7 +37,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [animation, setAnimation] = useState(new Animated.Value(0))
     const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1));
     const [textColorAnimated, setTextColorAnimated] = useState(new Animated.Value('rgb(0, 0, 0)'));
-
+    const [isBeginning, setIsBeginning] = useState(true);
 
     const { notePack } = useContext(NotesContext);
     const [proximity, setProximity] = useState(PROXIMITY.FAR);
@@ -52,7 +52,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             // after decay, in parallel:
             Animated.timing(opacityAnimation, {
                 toValue: 0,
-                duration: 1000,
+                duration: 200,
                 useNativeDriver: false,
             }),
             Animated.delay(300),
@@ -69,7 +69,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             Animated.sequence([
                 Animated.timing(animation, {
                     toValue: outputColor[proximity],
-                    duration: 1200,
+                    duration: 500,
                     useNativeDriver: false,
                 }),
                 Animated.timing(opacityAnimation, {
@@ -83,9 +83,14 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     }
 
     useEffect(() => {
-        // Once the text disapears (opacityAnimation) and the color goes to red (animation), change message now, then show message by increasing opacity
-        startAnimation();
-    }, [proximity])
+        // Only after the first change can animation begin
+        if (!isBeginning) {
+            startAnimation();
+        } else {
+            // when proximity is initialized, set don't run an animation
+            setIsBeginning(false);
+        }
+    }, [proximity]);
 
     // todo: for debugging purposes only to show all the levels of proximity to given location
     const nextProximity = () => {
