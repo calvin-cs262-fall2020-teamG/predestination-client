@@ -58,8 +58,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             Animated.delay(300),
         ]).start(() => {
             if (proximity !== PROXIMITY.FAR) {
-                
-            setTextColorAnimated('rgb(255, 255, 255)');
+
+                setTextColorAnimated('rgb(255, 255, 255)');
             } else {
                 setTextColorAnimated('rgb(0, 0, 0)');
             }
@@ -78,7 +78,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                     useNativeDriver: false,
                 })
             ]).start();
-            
+
         });
     }
 
@@ -106,15 +106,18 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             ...styles.flexContainer,
             backgroundColor: animation.interpolate({
                 inputRange: [0, 1, 2],
-                outputRange: ['rgba(255, 255, 255, 1)', ' rgba(135, 206, 235, 1)', 'rgba(193, 239, 137, 1)'],
+                outputRange: ['rgba(255,255,255,1)', ' rgba(135, 206, 235, 1)', 'rgba(193, 239, 137, 1)'],
             })
         }}>
 
-            <View style={styles.statusContainer}>
+            <Animated.View style={{
+                ...styles.statusContainer,
+                
+            }}>
                 <Animated.View style={{
                     ...styles.officialMessageContainer,
                     opacity: opacityAnimation,
-                    }}>
+                }}>
                     <Animated.Text style={{
                         ...styles.officialText,
                         color: textColorAnimated,
@@ -125,7 +128,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                     ...styles.sillyMessageContainer,
                     opacity: opacityAnimation,
                     color: textColorAnimated,
-                    }}>
+                }}>
                     <Animated.Text style={{
                         ...styles.sillyText,
                         color: textColorAnimated,
@@ -133,29 +136,33 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 </Animated.View>
 
                 <Button title="Change location" onPress={() => { nextProximity(); }} ></Button>
-            </View>
+            </Animated.View>
 
-            <View style={styles.stuckContainer}>
-                <View style={styles.stuckButton}>
-                    <CustomButton color='orange' title="Stuck" onPress={() => { navigation.navigate("SeekerClueListScreen") }} />
+
+            <View style={styles.bottomContainer}>
+                <View style={styles.stuckContainer}>
+                    <View style={styles.stuckButton}>
+                        <CustomButton color='orange' title="Stuck" onPress={() => { navigation.navigate("SeekerClueListScreen") }} />
+                    </View>
+
+                    <View style={styles.stuckText}>
+                        <Text>Stuck and want to try another one?</Text>
+                    </View>
                 </View>
 
-                <View style={styles.stuckText}>
-                    <Text>Stuck and want to try another one?</Text>
+                <View style={styles.noteContainer}>
+                    <Card
+                        content={notePack.getFocused().clue}
+                        onPress={() => { }}
+                        id={1}
+                    />
+                </View>
+
+                <View style={styles.gameButton}>
+                    <CustomButton color='pink' title='stats' onPress={() => { navigation.navigate("SeekerGameScreen") }} />
                 </View>
             </View>
 
-            <View style={styles.noteContainer}>
-                <Card
-                    content={notePack.getFocused().clue}
-                    onPress={() => { }}
-                    id={1}
-                />
-            </View>
-
-            <View style={styles.gameButton}>
-                <CustomButton color='pink' title='stats' onPress={() => { navigation.navigate("SeekerGameScreen") }} />
-            </View>
         </Animated.View>
     );
 }
@@ -190,6 +197,18 @@ const styles = StyleSheet.create({
         flex: 2,
         flexDirection: 'column',
         justifyContent: 'space-around',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        backgroundColor: 'white',
+        shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 2,
+},
+shadowOpacity: 0.25,
+shadowRadius: 3.84,
+
+elevation: 5,
     },
     statusContainer: {
         flex: 3,
