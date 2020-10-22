@@ -1,27 +1,28 @@
 import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
-  //navigation bars
+  //==================navigation top bars========================
   navigationHeader:{
-    // color: "white",
     backgroundColor: "#A2D683",
   },
   titleText:{
-    fontFamily: "raleway",
+    fontFamily: "constan",
     color: "black",
   },
   keeperNavHeader:{
+    fontFamily: "constan",
     backgroundColor: "maroon",
   },
   keeperTitleText:{
     color: "white",
-    fontFamily: "raleway",
+    fontFamily: "constan",
   },
   seekerNavHeader:{
+    fontFamily: "constan",
     backgroundColor: "gold",
   },
   seekerTitleText:{
-    fontFamily: "raleway",
+    fontFamily: "constan",
     color: "black",
   },
 
@@ -35,13 +36,16 @@ export const globalStyles = StyleSheet.create({
   // ========================= navigation styles ==========================
   // start screen
   startNavigationTitle: {
+    fontFamily: "constan",
     color: 'white',
   },
   startNavigationHeader: {
+    fontFamily: "constan",
     backgroundColor: '#A2D683',
     opacity: 0.7,
   },
   startNavigationDrawer: {
+    constan: "constan",
     color: 'white',
   },
 
@@ -66,7 +70,7 @@ export const globalStyles = StyleSheet.create({
   keeperNavigationDrawer: {
     color: 'white',
   },
-
+  // ========================= Welcome Screen Styles ==========================
   container: {
     flex: 1,
     justifyContent: "space-around",
@@ -88,6 +92,11 @@ export const globalStyles = StyleSheet.create({
     textAlign: "center",
     color: "#71B1C8",
   },
+  horizontalBar: {
+    padding: 0.5,
+    borderEndWidth: 350,
+    borderBottomColor: "gray",
+  },
   entrySection: {
     // flex: 2,
     width: "100%",
@@ -102,12 +111,12 @@ export const globalStyles = StyleSheet.create({
   },
   joinButton: {
     // flex: 1,
-    padding: 20,
+    padding: 15,
     margin: 25,
 
     borderStyle: "solid",
     borderWidth: 2,
-    borderRadius: 10,
+    borderRadius: 50,
     borderColor: "maroon",
 
     width: "50%",
@@ -116,16 +125,17 @@ export const globalStyles = StyleSheet.create({
   },
   createButton: {
     // flex: 1,
-    padding: 20,
+    padding: 15,
     margin: 20,
     marginBottom: 25,
 
     borderStyle: "solid",
     borderWidth: 2,
-    borderRadius: 10,
+    borderRadius: 50,
     borderColor: "gold",
 
-    width: "50%",
+    height: 50,
+    width: 150,
     alignItems: "center",
     backgroundColor: "maroon",
   },
@@ -172,7 +182,9 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "gold",
   },
 
-  // start styles from SeekerGameScreen.js
+  //=================start styles from SeekerGameScreen.js================
+
+
   // flexContainer: {
   //   flexDirection: "column",
   //   flex: 1,
@@ -239,7 +251,7 @@ export const globalStyles = StyleSheet.create({
   },
   buttonTextSeeker: {
     color: "maroon",
-    fontFamily: "constan",
+    fontFamily: "constan", //
     fontSize: 20,
     letterSpacing: 2,
   }

@@ -6,9 +6,11 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Keyboard,
   Button,
   StatusBar,
 } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 
 const handleError = () => {
@@ -31,10 +33,12 @@ export default function StartScreen({ navigation, route }) {
       <View style={globalStyles.titleSection}>
         {/* <Text>PreDestination</Text> */}
       <Text style={globalStyles.welcomeText}>Welcome, Young Calvinist. </Text>
-      </View>
-      {/* Options for seekers */}
-      <Text>----------------------------------------------------------------------------------</Text>
-  <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY{"\n"}AS A SEEKER</Text>
+    </View>
+
+    {/*=======================Options for seekers==============================*/}
+    <View style={globalStyles.horizontalBar}></View>
+    <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY{"\n"}AS A SEEKER</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={globalStyles.inputContainer}>
         <TextInput
           style={globalStyles.input}
@@ -45,8 +49,7 @@ export default function StartScreen({ navigation, route }) {
           onChangeText={(val) => setCode(val)}
         />
       </View>
-
-    {/* Options for seekers */}
+    </TouchableWithoutFeedback>
     <View style={globalStyles.joinButton}>
         <TouchableOpacity onPress={handleJoinPress} >
           <View>
@@ -54,18 +57,18 @@ export default function StartScreen({ navigation, route }) {
           </View>
         </TouchableOpacity>
      </View>
-     <Text>----------------------------------------------------------------------------------</Text>
-      {/* Options for Keepers */}
+     <View style={globalStyles.horizontalBar}></View>
+    {/*========================Options for Keepers================================*/}
   <Text style={globalStyles.keeperText}>CREATE DESTINIES{"\n"}AS A KEEPER</Text>
     <View style={globalStyles.createButton}>
-      <TouchableOpacity onPress={() => navigation.navigate("KeeperListScreen")} >
+      <TouchableOpacity onPress={() => navigation.navigate("KeeperStack", {screen: "keeperListScreen"})} >
         <View>
           <Text style={globalStyles.buttonText}>CREATE</Text>
         </View>
       </TouchableOpacity>
     </View>
     <View style={globalStyles.createButton}>
-      <TouchableOpacity onPress={() => navigation.navigate("TestScreen")}>
+      <TouchableOpacity onPress={() => navigation.navigate("KeeperStack",{screen: "TestScreen"})}>
         <View>
           <Text style={globalStyles.buttonText}>TestGPS</Text>
         </View>

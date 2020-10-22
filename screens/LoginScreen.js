@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'white',
     alignSelf: 'center',
+    fontFamily: 'raleway',
   },
   buttonContainer: {
     marginLeft: 20,
