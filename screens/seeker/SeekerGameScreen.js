@@ -1,90 +1,120 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
-import NoteWidget from '../../components/NoteWidget';
-import { globalStyles } from '../../styles/global';
+import CustomButton from '../../components/CustomButton';
+
+
+import { NotesContext, NotePack } from '../../src/Notes';
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
  * TODO: styling, connecting to server
  */
-export default function SeekerRaceScreen({ route, navigation }) {
+export default function SeekerGameScreen({ route, navigation }) {
 
-    const total_players = 20;
+    const { notePack } = useContext(NotesContext);
+    const [points, setPoints] = useState(0);
+    const [rank, setRank] = useState(1);
+    const [time, setTime] = useState(3600);
 
-    const notes = {
-        list: [
-            { title: 'Performing Arts Center Main Entrance', clue: 'Insert a witty clue here.', visited: 5, key: '13', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '12', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '11', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '10', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '9', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '8', timeFound: '13:01' },
-            { title: 'Devos Center', clue: 'Insert a witty clue here.', visited: 5, key: '7', timeFound: '13:01' },
-            { title: 'Performing Arts Center Main Entrance', clue: 'Insert a witty clue here.', visited: 5, key: '6', timeFound: '13:01' },
-            { title: 'Performing Arts Center Main Entrance', clue: 'Insert a witty clue here.', visited: 5, key: '5', timeFound: '13:01' },
-            { title: 'Performing Arts Center Main Entrance', clue: 'Insert a witty clue here.', visited: 5, key: '4', timeFound: '13:01' },
-            { title: 'Science Building', clue: 'Insert a witty clue here.', visited: 5, key: '3', timeFound: '13:01' },
-            { title: 'Science Building', clue: 'Insert a witty clue here.', visited: 5, key: '2', timeFound: '13:01' },
-            { title: 'Big Cheese', clue: 'Insert a witty clue here.', visited: 10, key: '1', timeFound: '13:00' },
-            { title: 'Start', clue: 'What is holey, made out of metal, and yellow at Calvin?', visited: 20, key: '0', timeFound: '12:00' },
-        ],
-        focused: 1,
-    };
-
-    const handleScroll = (e) => {
-        console.log(e.nativeEvent.contentOffset.y);
-    };
+    // When seekers click the "hunt" button, they will be redirected to the last clue selected if they selected a clue, else they will go to a clue list screen
+    const pressHunt = () => {
+        if (notePack.getFocused() === null) {
+            navigation.navigate('SeekerClueListScreen');
+        } else {
+            navigation.navigate('SeekerFocusedScreen');
+        }
+    }
 
     return (
-        <View style={globalStyles.flexContainer}>
+        
+        <View style={styles.flexContainer}>
 
-            <View style={globalStyles.header}>
-                <Text>Currently in 19th place!</Text>
-            </View>
-
-            <View style={globalStyles.scrollable}>
-                <View style={globalStyles.historyBar}>
-
+            <View style={styles.header}>
+                <View style={styles.pointsSection}>
+                    <Text style={styles.pointText}>{points}</Text>
+                    <Text>Points</Text>
                 </View>
-
-                <View style={globalStyles.scrollableNotes}>
-                    <FlatList
-                        onScroll={handleScroll}
-                        data={notes.list}
-                        renderItem={({ item }) => (
-                            <NoteWidget content={item} focused={false} />
-                        )}
-                    />
+                <View style={styles.statusSection}>
+                    <View style={styles.timeSection}>
+                        <Text style={styles.timeText}>{time}</Text>
+                        <Text>Time Left</Text>
+                    </View>
+                    <View style={styles.rankSection}>
+                        <Text style={styles.rankText}>{rank}</Text>
+                        <Text>Rank</Text>
+                    </View>
                 </View>
             </View>
 
-            <View style={globalStyles.progressSection}>
-
+            <View style={styles.bottomSection}>
+                <View style={styles.miniLeaderboardContainer}>
+                    <Text>Leaderboard goes here</Text>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <CustomButton title={'Hunt'} onPress={pressHunt} />
+                </View>
             </View>
 
         </View>
     );
 }
 
-// const styles = StyleSheet.create({
-//     flexContainer: {
-//         flexDirection: 'column',
-//         flex: 1,
-//     },
-//     header: {
-//         flex: 5,
-//         backgroundColor: 'skyblue',
-//     },
-//     scrollable: {
-//         flex: 15,
-//     },
-//     scrollableNotes: {
-
-//     },
-//     progressSection: {
-//         flex: 1,
-//         borderTopWidth: 1,
-//         borderColor: 'lightgray',
-//     },
-// });
+const styles = StyleSheet.create({
+    pointText: {
+        textAlign: 'center',
+        fontSize: 64,
+    },
+    timeText: {
+        textAlign: 'center',
+        fontSize: 24,
+    },
+    rankText: {
+        textAlign: 'center',
+        fontSize: 24,
+    },
+    flexContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'white',
+    },
+    header: {
+        flex: 1,
+        flexDirection: 'column',
+        paddingBottom: 5,
+    },
+    pointsSection: {
+        flex: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    timeSection: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    rankSection: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    statusSection: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    bottomSection: {
+        flex: 2,
+        flexDirection: 'column',
+        justifyContent: 'center',
+    },
+    miniLeaderboardContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    buttonContainer: {
+        marginBottom: 40,
+        marginTop: 20,
+    }
+});
 
