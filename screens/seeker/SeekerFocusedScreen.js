@@ -1,6 +1,6 @@
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, Button, Animated } from 'react-native';
+import { StyleSheet, View, Text, Button, Animated, ScrollView } from 'react-native';
 
 import Card from '../../components/Card';
 import CustomButton from '../../components/CustomButton';
@@ -103,15 +103,15 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
     return (
         <Animated.View style={{
-            ...styles.flexContainer,
-            backgroundColor: animation.interpolate({
-                inputRange: [0, 1, 2],
-                outputRange: ['rgba(255,255,255,1)', ' rgba(135, 206, 235, 1)', 'rgba(193, 239, 137, 1)'],
-            })
+            ...styles.flexContainer
         }}>
 
             <Animated.View style={{
                 ...styles.statusContainer,
+                backgroundColor: animation.interpolate({
+                    inputRange: [0, 1, 2],
+                    outputRange: ['rgb(250, 250, 250)', ' rgba(135, 206, 235, 1)', 'rgba(161, 214, 131, 1)'],
+                })
                 
             }}>
                 <Animated.View style={{
@@ -150,13 +150,11 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                     </View>
                 </View>
 
-                <View style={styles.noteContainer}>
-                    <Card
-                        content={notePack.getFocused().clue}
-                        onPress={() => { }}
-                        id={1}
-                    />
-                </View>
+                <ScrollView style={styles.noteContainer}>
+                    <Text>
+                        {notePack.getFocused().clue}
+                    </Text>
+                </ScrollView>
 
                 <View style={styles.gameButton}>
                     <CustomButton color='pink' title='stats' onPress={() => { navigation.navigate("SeekerGameScreen") }} />
@@ -182,6 +180,8 @@ const styles = StyleSheet.create({
     sillyMessageContainer: {
         flex: 1,
         justifyContent: 'center',
+        paddingLeft: 20,
+        paddingRight: 20,
     },
     stuckButton: {
         marginBottom: 10,
@@ -189,16 +189,25 @@ const styles = StyleSheet.create({
     flexContainer: {
         flex: 1,
         flexDirection: 'column',
+        backgroundColor: 'white',
     },
     noteContainer: {
         alignSelf: 'center',
+        minHeight: 50,
     },
     bottomContainer: {
         flex: 2,
         flexDirection: 'column',
         justifyContent: 'space-around',
-        borderTopLeftRadius: 40,
-        borderTopRightRadius: 40,
+        
+    },
+    statusContainer: {
+        flex: 3,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
         backgroundColor: 'white',
         shadowColor: "#000",
 shadowOffset: {
@@ -210,17 +219,14 @@ shadowRadius: 3.84,
 
 elevation: 5,
     },
-    statusContainer: {
-        flex: 3,
-        justifyContent: 'space-around',
-        alignItems: 'center',
-    },
     stuckContainer: {
         flex: 1,
         justifyContent: 'flex-end',
+        minHeight: 70,
         marginBottom: 20,
         marginTop: 20,
         alignItems: 'center',
+        /*backgroundColor: 'black'*/
     },
     gameButton: {
         marginBottom: 20,
