@@ -20,6 +20,10 @@ const handleError = () => {
 export default function StartScreen({ navigation, route }) {
   const [code, setCode] = useState("");
 
+  const handleError = () => {
+    Alert.alert("Please enter 6 numerical digits for the game code.");
+  };
+
   // ensure given code is valid
   const handleJoinPress = () => {
     code.length === 6

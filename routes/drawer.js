@@ -11,7 +11,7 @@ const Drawer = createDrawerNavigator();
  */
 export default function DrawerScreen({ setLoginStatus, route }) {
     return (
-        <Drawer.Navigator initialRouteName="Home" drawerPosition="right" drawerType="front">
+        <Drawer.Navigator initialRouteName="Home" drawerPosition="right" drawerType="front" screenOptions={{ headerShown: false }}>
             <Drawer.Screen name="Home" component={HomeStack} />
             <Drawer.Screen name="Account" component={AccountStack} />
         </Drawer.Navigator>
