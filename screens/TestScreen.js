@@ -28,7 +28,7 @@ export default class App extends Component {
 
   };
 
-  findCurrentLocationAsync = async () => {
+  componentDidMountAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status !== 'granted') {
