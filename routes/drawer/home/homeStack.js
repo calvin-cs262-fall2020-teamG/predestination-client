@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import StartStack from './start/StartStack';
 import SeekerStack from './seeker/seekerStack';
-import KeeperStack from './keeper/keedrawerperStack';
+import KeeperStack from './keeper/keeperStack';
 
 const Stack = createStackNavigator();
 

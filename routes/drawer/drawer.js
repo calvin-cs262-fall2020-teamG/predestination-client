@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import HomeStack from '../routes/homeStack';
-import AccountStack from '../routes/accountStack';
+import HomeStack from '../drawer/home/homeStack';
+import AccountStack from '../drawer/account/accountStack';
 
 const Drawer = createDrawerNavigator();
 
