@@ -9,13 +9,9 @@ const Tab = createBottomTabNavigator();
 
 export default function SeekerGameTabStack() {
   return (
-    <NavigationContainer
-
-    >
       <Tab.Navigator>
         <Tab.Screen name="Stats" component={SeekerGameScreen} />
         <Tab.Screen name="Tracker" component={SeekerTrackerStack} />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }
