@@ -19,7 +19,7 @@ export default function SeekerClueList({ route, navigation }) {
 
     const onPress = (key) => {
         notePack.setFocused(key);
-        navigation.navigate("SeekerFocusedScreen");
+        navigation.navigate("TrackerScreen");
     }
 
     return (

@@ -50,9 +50,6 @@ export default function SeekerGameScreen({ route, navigation }) {
                 <View style={styles.miniLeaderboardContainer}>
                     <Text>Leaderboard goes here</Text>
                 </View>
-                <View style={styles.buttonContainer}>
-                    <CustomButton title={'Hunt'} onPress={pressHunt} />
-                </View>
             </View>
 
         </View>
