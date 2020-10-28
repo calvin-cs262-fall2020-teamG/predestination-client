@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import StartStack from '../routes/StartStack';
-import SeekerStack from '../routes/seeker/seekerStack';
-import KeeperStack from '../routes/keeper/keeperStack';
+import StartStack from './start/StartStack';
+import SeekerStack from './seeker/seekerStack';
+import KeeperStack from './keeper/keedrawerperStack';
 
 const Stack = createStackNavigator();
 

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Header from '../../shared/header';
-import { globalStyles } from '../../styles/global';
+import Header from '../../../../shared/header';
+import { globalStyles } from '../../../../styles/global';
 
 // import seeker screens
-import SeekerWaitingScreen from '../../screens/seeker/SeekerWaitingScreen';
+import SeekerWaitingScreen from '../../../../screens/seeker/SeekerWaitingScreen';
 import SeekerGameTabStack from './SeekerGameTabStack';
 
-import { NotesContext, NotePack } from '../../src/Notes';
+import { NotesContext, NotePack } from '../../../../src/Notes';
 
 
 const Stack = createStackNavigator();

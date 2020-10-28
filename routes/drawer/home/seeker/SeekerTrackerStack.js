@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import TrackerScreen from '../../screens/seeker/Tracker';
-import TrackerListScreen from '../../screens/seeker/TrackerList';
+import TrackerScreen from '../../../../screens/seeker/Tracker';
+import TrackerListScreen from '../../../../screens/seeker/TrackerList';
 
-import { LOGIN_STATUS, AuthenticationContext } from '../../src/GoogleAuthentication';
+import { LOGIN_STATUS, AuthenticationContext } from '../../../../src/GoogleAuthentication';
 
 const Stack = createStackNavigator();
 
