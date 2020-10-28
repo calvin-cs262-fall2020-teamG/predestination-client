@@ -10,7 +10,7 @@ export default function SeekerWaitingScreen({ route, navigation }) {
   return (
     <View>
       <Text>Waiting for game to start... The more the merrier! Share the code { route.params.code }!</Text>
-      <Button title='Start' onPress={ () => { navigation.navigate('SeekerGameScreen'); } }/>
+      <Button title='Start' onPress={ () => { navigation.navigate('SeekerGameTabStack', { screen: 'Stats' }); } }/>
     </View>
   );
   
