@@ -12,8 +12,8 @@ export default class App extends Component {
     }
   }
 
-  getLocation = () => {
-    this.watchId = navigator.geolocation.getCurrentPosition(
+  componentDidMount() {
+    this.watchId = navigator.geolocation.watchPosition(
       (position) => {
         this.setState({
           latitude: position.coords.latitude,
@@ -37,16 +37,18 @@ export default class App extends Component {
       });
     }
 
-    let location = await Location.getCurrentPositionAsync({});
+    let location = await Location.watchPositionAsync({});
     this.setState({ location });
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <Button title="location" onPress={this.getLocation}></Button>
+
+      < View style={styles.container} >
+
         <Text>Location: {this.state.latitude}, {this.state.longitude}</Text>
-      </View>
+
+      </View >
     );
   }
 }
