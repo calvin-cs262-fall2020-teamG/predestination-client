@@ -4,8 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Header from '../shared/header';
 import { globalStyles } from '../styles/global';
 
-import LoginStack from '../routes/loginStack';
-import Drawer from '../routes/drawer';
+import LoginStack from '../routes/login/loginStack';
+import Drawer from '../routes/drawer/drawer';
 
 import { LOGIN_STATUS, AuthenticationContext } from '../src/GoogleAuthentication';
 
