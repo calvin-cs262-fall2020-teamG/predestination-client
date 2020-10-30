@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Button, Animated, ScrollView } from 'react-nati
 
 import Card from '../../components/Card';
 import CustomButton from '../../components/CustomButton';
+import { globalStyles } from '../../styles/global';
 
 import { NotesContext } from '../../src/Notes';
 import { PROXIMITY_MESSAGES, PROXIMITY } from '../../src/Proximity';
@@ -59,9 +60,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         ]).start(() => {
             if (proximity !== PROXIMITY.FAR) {
 
-                setTextColorAnimated('rgb(255, 255, 255)');
+                setTextColorAnimated('rgb(250, 250, 250)');
             } else {
-                setTextColorAnimated('rgb(0, 0, 0)');
+                setTextColorAnimated('rgb(250, 250, 250)');
             }
             setProximityOfficialMessage(getOfficialMessage(proximity));
             setProximitySillyMessage(getSillyMessage(proximity));
@@ -110,9 +111,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 ...styles.statusContainer,
                 backgroundColor: animation.interpolate({
                     inputRange: [0, 1, 2],
-                    outputRange: ['rgb(250, 250, 250)', ' rgba(135, 206, 235, 1)', 'rgba(161, 214, 131, 1)'],
+                    outputRange: ['rgb(140, 34, 50)', ' rgba(135, 206, 235, 1)', 'rgba(161, 214, 131, 1)'],
                 })
-                
+
             }}>
                 <Animated.View style={{
                     ...styles.officialMessageContainer,
@@ -135,7 +136,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                     }}>{proximitySillyMessage}</Animated.Text>
                 </Animated.View>
 
-                <Button title="Change location" onPress={() => { nextProximity(); }} ></Button>
+                <CustomButton title="Change location" onPress={() => { nextProximity(); }} color='orange' />
             </Animated.View>
 
 
@@ -145,7 +146,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                         <CustomButton color='orange' title={(notePack.getFocused() === null) ? "Select Clue" : "Stuck"} onPress={() => { navigation.navigate("TrackerListScreen") }} />
                     </View>
 
-                    <View style={styles.stuckText}>
+                    <View style={globalStyles.stuckText}>
                         <Text>Stuck and want to try another one?</Text>
                     </View>
                 </View>
@@ -195,13 +196,13 @@ const styles = StyleSheet.create({
         flex: 2,
         flexDirection: 'column',
         justifyContent: 'space-around',
-        
+
     },
     statusContainer: {
         flex: 3,
         justifyContent: 'space-around',
         alignItems: 'center',
-        
+
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         backgroundColor: 'white',

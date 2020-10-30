@@ -56,7 +56,7 @@ export default function StartScreen({ navigation, route }) {
         </View>
       </TouchableWithoutFeedback>
       <View>
-        <CustomButton title="join" onPress={handleJoinPress} color="skyblue" />
+        <CustomButton title="join" onPress={handleJoinPress} color="gold" />
       </View>
       <View style={globalStyles.horizontalBar}></View>
       {/*========================Options for Keepers================================*/}

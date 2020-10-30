@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
 import CustomButton from '../../components/CustomButton';
-
+import Leaderboard from "react-native-leaderboard";
 
 import { NotesContext, NotePack } from '../../src/Notes';
+import { globalStyles } from '../../styles/global';
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
@@ -15,6 +16,18 @@ export default function SeekerGameScreen({ route, navigation }) {
     const [points, setPoints] = useState(0);
     const [rank, setRank] = useState(1);
     const [time, setTime] = useState(3600);
+
+    //leaderboard added by NW on Oct 30 at 2AM. Will need to match with KeeperGameScreen.js in the future (connect to database)
+    const [keeperLeaderboard, setKeeperLeaderboard] = useState(
+        //   data for the leaderboard
+        [
+          { userName: "JBrink", clueStatus: 2 },
+          { userName: "NWang", clueStatus: 2 },
+          { userName: "AScaria", clueStatus: 3 },
+          { userName: "EWalters", clueStatus: 3 },
+          { userName: "HAnderson", clueStatus: 2 },
+        ]
+      );
 
     // When seekers click the "hunt" button, they will be redirected to the last clue selected if they selected a clue, else they will go to a clue list screen
     const pressHunt = () => {
@@ -47,8 +60,13 @@ export default function SeekerGameScreen({ route, navigation }) {
             </View>
 
             <View style={styles.bottomSection}>
-                <View style={styles.miniLeaderboardContainer}>
-                    <Text>Leaderboard goes here</Text>
+                <View>
+                    <Text style={globalStyles.headerText}>Leaderboard goes here</Text>
+                    <Leaderboard
+                        data={keeperLeaderboard}
+                        sortBy="clueStatus" //sorts the leaderboard by clueStatus
+                        labelBy="userName" //displays the userName for the rank
+                    />
                 </View>
             </View>
 
@@ -104,13 +122,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
     },
-    miniLeaderboardContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     buttonContainer: {
-        marginBottom: 40,
+        flex: 1,
+        marginBottom: 50,
         marginTop: 20,
     }
 });

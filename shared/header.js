@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { globalStyles } from '../styles/global';
 
 export default function Header({ navigation, customStyle }) {
 
@@ -10,7 +11,7 @@ export default function Header({ navigation, customStyle }) {
 
     return (
         <View>
-            <MaterialIcons style={customStyle} name='menu' size={28} onPress={openMenu} />
+            <MaterialIcons style={globalStyles.topRightMenuIcon} name='menu' size={28} onPress={openMenu} />
         </View>
     );
 };

@@ -80,7 +80,7 @@ export default function KeeperListScreen({ navigation }) {
       });
     };
     }
-    
+
 
   const pressPublish = (hunt) => {
     navigation.navigate("KeeperWaitingScreen", { hunt });
@@ -96,16 +96,18 @@ export default function KeeperListScreen({ navigation }) {
         {/* Pass the submitHandler as prop to the addNewRouteComponent */}
         <AddNewRoute submitHandler={submitHandler} />
         {/* This FlatList contains the list of routes created by the keeper */}
-        <FlatList
-          data={routes}
-          renderItem={({ item }) => (
-            <RouteCard
-              data={item}
-              pressPublish={pressPublish}
-              pressEdit={pressEdit}
-            />
-          )}
-        />
+        <View>
+          <FlatList
+            data={routes}
+            renderItem={({ item }) => (
+              <RouteCard
+                data={item}
+                pressPublish={pressPublish}
+                pressEdit={pressEdit}
+              />
+            )}
+          />
+        </View>
       </View>
     </View>
   );

@@ -11,6 +11,7 @@ export default function App() {
     const getFonts = () =>
     Font.loadAsync({
         "constan": require("./assets/fonts/constantia/constan.ttf"),
+        "constan-bold": require("./assets/fonts/constantia/constan-bold.ttf"),
         "raleway": require("./assets/fonts/Raleway/Raleway_Var_wght.ttf"),
         "raleway-light": require("./assets/fonts/Raleway/Raleway-Light.ttf"),
     });
