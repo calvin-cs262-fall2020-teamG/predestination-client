@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Header from '../shared/header';
-import { globalStyles } from '../styles/global';
+import Header from '../../../../shared/header';
+import { globalStyles } from '../../../../styles/global';
 
-import StartScreen from '../screens/StartScreen';
+import StartScreen from '../../../../screens/StartScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +20,7 @@ export default function StartStack({ navigation }) {
                 headerStyle: globalStyles.startNavigationHeader,
             }}
         >
+
             <Stack.Screen name="StartScreen" component={StartScreen} options={{ title: 'Welcome' }} />
         </Stack.Navigator>
     );
