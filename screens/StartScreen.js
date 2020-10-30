@@ -56,17 +56,17 @@ export default function StartScreen({ navigation, route }) {
       </View>
     </TouchableWithoutFeedback>
     <View>
-        <CustomButton title="join" onPress={handleJoinPress} color="skyblue" />
+        <CustomButton title="join" onPress={handleJoinPress} color="gold"/>
      </View>
      <View style={globalStyles.horizontalBar}></View>
     {/*========================Options for Keepers================================*/}
   <Text style={globalStyles.keeperText}>CREATE DESTINIES{"\n"}AS A KEEPER</Text>
-    
+
     <View>
       <CustomButton title="CREATE" onPress={() => navigation.navigate("KeeperStack", {screen: "keeperListScreen"})} />
     </View>
     <View>
-      <CustomButton title="Test GPS" onPress={() => navigation.navigate("KeeperStack",{screen: "TestScreen"})} />
+      <CustomButton title="Test GPS" onPress={() => navigation.navigate("KeeperStack", {screen: "TestScreen"})} />
     </View>
     </View>
   );

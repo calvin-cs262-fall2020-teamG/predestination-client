@@ -17,14 +17,14 @@ export const globalStyles = StyleSheet.create({
     color: "white",
     fontFamily: "constan",
   },
-  seekerNavHeader:{
-    fontFamily: "constan",
-    backgroundColor: "gold",
-  },
-  seekerTitleText:{
-    fontFamily: "constan",
-    color: "black",
-  },
+  // seekerNavHeader:{
+  //   fontFamily: "constan",
+  //   backgroundColor: "gold",
+  // },
+  // seekerTitleText:{
+  //   fontFamily: "constan",
+  //   color: "black",
+  // },
 
   //shared:header.js
   topRightMenuIcon:{
@@ -36,7 +36,7 @@ export const globalStyles = StyleSheet.create({
   // ========================= navigation styles ==========================
   // start screen
   startNavigationTitle: {
-    fontFamily: "constan",
+    fontFamily: 'constan-bold',
     color: 'white',
   },
   startNavigationHeader: {
@@ -45,16 +45,18 @@ export const globalStyles = StyleSheet.create({
     opacity: 0.7,
   },
   startNavigationDrawer: {
-    constan: "constan",
+    constan: 'constan',
     color: 'white',
   },
 
   // seeker screen navigation styles
   seekerNavigationTitle: {
-    color: 'black',
+    fontFamily: 'constan-bold',
+    color: 'maroon',
   },
   seekerNavigationHeader: {
-    backgroundColor: '#71B1C8',
+    // backgroundColor: '#71B1C8',
+    backgroundColor: 'gold',
   },
   startNavigationDrawer: {
     color: 'white',
@@ -62,6 +64,7 @@ export const globalStyles = StyleSheet.create({
 
   // keeper screen navigation styles
   keeperNavigationTitle: {
+    fontFamily: 'constan-bold',
     color: 'white',
   },
   keeperNavigationHeader: {
@@ -70,13 +73,40 @@ export const globalStyles = StyleSheet.create({
   keeperNavigationDrawer: {
     color: 'white',
   },
+  // =========================Button Styles====================================
+  buttonView: {
+    justifyContent: 'center',
+    borderRadius: 30,
+    borderWidth: 0,
+    backgroundColor: 'white',
+    alignSelf: 'center',
+    padding: 30,
+    paddingTop: 10,
+    paddingBottom: 12,
+    shadowColor: "#000",
+    shadowOffset: {
+	    width: 0,
+	    height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  buttonText: {
+    fontFamily: 'constan-bold',
+    textAlign: 'center',
+    fontSize: 16,
+    // fontWeight: 'bold',
+    letterSpacing: 7,
+  },
   // ========================= Welcome Screen Styles ==========================
   container: {
     flex: 1,
     justifyContent: "space-around",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#fefef5",
   },
   titleSection: {
     // flex: 1,
@@ -109,41 +139,42 @@ export const globalStyles = StyleSheet.create({
     fontFamily: "constan",
     textAlign: "center",
   },
-  joinButton: {
-    // flex: 1,
-    padding: 15,
-    margin: 25,
+  // joinButton: {
+  //   // flex: 1,
+  //   padding: 15,
+  //   margin: 25,
 
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderRadius: 50,
-    borderColor: "maroon",
+  //   borderStyle: "solid",
+  //   borderWidth: 2,
+  //   borderRadius: 50,
+  //   borderColor: "maroon",
 
-    width: "50%",
-    alignItems: "center",
-    backgroundColor: "gold",
-  },
-  createButton: {
-    // flex: 1,
-    padding: 15,
-    margin: 20,
-    marginBottom: 25,
+  //   width: "50%",
+  //   alignItems: "center",
+  //   backgroundColor: "gold",
+  // },
+  // createButton: {
+  //   // flex: 1,
+  //   padding: 15,
+  //   margin: 20,
+  //   marginBottom: 25,
 
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderRadius: 50,
-    borderColor: "gold",
+  //   borderStyle: "solid",
+  //   borderWidth: 2,
+  //   borderRadius: 50,
+  //   borderColor: "gold",
 
-    height: 50,
-    width: 150,
-    alignItems: "center",
-    backgroundColor: "maroon",
-  },
+  //   height: 50,
+  //   width: 150,
+  //   alignItems: "center",
+  //   backgroundColor: "maroon",
+  // },
 
   seekerText: {
     margin: 5,
     marginBottom: 10,
     fontSize: 20,
+    letterSpacing: 2,
     fontFamily: "constan",
     color: "grey",
     textAlign: "center",
@@ -152,6 +183,7 @@ export const globalStyles = StyleSheet.create({
     margin: 5,
     marginBottom: 10,
     fontSize: 20,
+    letterSpacing: 2,
     fontFamily: "constan",
     color: "grey",
     textAlign: "center",
@@ -207,9 +239,9 @@ export const globalStyles = StyleSheet.create({
   },
   // end styles from SeekerGameScreen.js
 
-  //KEEPER SCREENS
+  //========================KEEPER SCREENS================================
 
-  //added by Nathan Wang on Oct 5 11:50PM
+  //added by Nathan Wang on Oct 30
   // start styles from KeeperGameScreen.js
   headerText: {
     textAlign: "center",
@@ -220,6 +252,50 @@ export const globalStyles = StyleSheet.create({
   },
   // end styles from KeeperGameScreen.
 
+
+  // start styles from AddNewRoute.js for KeeperListScreen
+  clearButton:{
+    margin: 10,
+  },
+  huntBox: {
+    flex: 1,
+    flexDirection: 'column',
+    margin: 20,
+    borderWidth: 1,
+    padding: 10,
+    borderColor: 'lightgray',
+
+    justifyContent: 'center',
+    borderRadius: 30,
+    borderWidth: 0,
+    backgroundColor: 'maroon',
+    padding: 30,
+    paddingTop: 10,
+    paddingBottom: 12,
+    shadowColor: "#000",
+    shadowOffset: {
+	    width: 0,
+	    height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  publishEditButton: {
+    margin: 5,
+  },
+  keeperHuntName: {
+    margin: 5,
+    marginBottom: 10,
+    fontSize: 20,
+    letterSpacing: 2,
+    fontFamily: "constan-bold",
+    color: "white",
+    textAlign: "center",
+    textTransform: "uppercase",
+  },
+  // end styles from AddNewRoute.js for KeeperListSCreen
   // added by Advait Scaria on Oct 9
   // start styles from KeeperEditorScreen.js
   list: {
@@ -242,18 +318,8 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
   },
+
   // end styles from KeeperEditorScreen.js
-  buttonText: {
-    color: "gold",
-    fontFamily: "constan",
-    fontSize: 20,
-    letterSpacing: 2,
-  },
-  buttonTextSeeker: {
-    color: "maroon",
-    fontFamily: "constan", //
-    fontSize: 20,
-    letterSpacing: 2,
-  }
+
 });
 
