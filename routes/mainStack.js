@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
  * MainStack is the entire application, including both screens before and after a user logs in
  */
 export default function MainStack({ navigation }) {
-    
+
     const [loginStatus, setStatus] = useState(LOGIN_STATUS.LOADING);
 
     return (
