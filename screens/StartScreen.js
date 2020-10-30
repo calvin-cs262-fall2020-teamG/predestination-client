@@ -5,12 +5,17 @@ import {
   TextInput,
   View,
   Text,
+  TouchableOpacity,
+  Keyboard,
   Button,
   StatusBar,
-  Keyboard,
 } from "react-native";
-import { globalStyles } from "../styles/global";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { globalStyles } from "../styles/global";
+
+const handleError = () => {
+  Alert.alert("Oops!", "Code must be 6 digits", [{ text: "Understood" }]);
+};
 
 export default function StartScreen({ navigation, route }) {
   const [code, setCode] = useState("");
@@ -34,41 +39,49 @@ export default function StartScreen({ navigation, route }) {
     // }}>
     <View style={globalStyles.container}>
       <View style={globalStyles.titleSection}>
-        <Text>PreDestination</Text>
-        <Text style={globalStyles.welcomeText}>Welcome, PLACEHOLDER_NAME.
-        {"\n"}Will you...</Text>
+        {/* <Text>PreDestination</Text> */}
+        <Text style={globalStyles.welcomeText}>Welcome, Young Calvinist. </Text>
       </View>
-      {/* Options for seekers */}
-      <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY</Text>
-      <View style={globalStyles.inputContainer}>
-        <TextInput
-          style={globalStyles.input}
-          placeholder="Enter Code"
-          keyboardType="numeric"
-          value={code}
-          onChangeText={(val) => setCode(val)}
-        />
-      </View>
+
+      {/*=======================Options for seekers==============================*/}
+      <View style={globalStyles.horizontalBar}></View>
+      <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY{"\n"}AS A SEEKER</Text>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={globalStyles.inputContainer}>
+          <TextInput
+            style={globalStyles.input}
+            placeholder="Enter Code"
+            keyboardType="number-pad"
+            onChangeText={(text) => this.onChanged(text)} //ensures that the user only inputs numeric values
+            value={code}
+            onChangeText={(val) => setCode(val)}
+          />
+        </View>
+      </TouchableWithoutFeedback>
       <View style={globalStyles.joinButton}>
-        <Button title="Join" onPress={handleJoinPress} />
+        <TouchableOpacity onPress={handleJoinPress} >
+          <View>
+            <Text style={globalStyles.buttonTextSeeker}>JOIN</Text>
+          </View>
+        </TouchableOpacity>
       </View>
-      <Text style={globalStyles.orWillYouText}>-or will you-</Text>
-
-      <Text style={globalStyles.keeperText}>CREATE THE DESTINIES FOR SEEKERS</Text>
+      <View style={globalStyles.horizontalBar}></View>
+      {/*========================Options for Keepers================================*/}
+      <Text style={globalStyles.keeperText}>CREATE DESTINIES{"\n"}AS A KEEPER</Text>
       <View style={globalStyles.createButton}>
-        <Button
-          title="Create"
-          onPress={() => navigation.navigate('KeeperStack', { screen: 'KeeperListScreen' })}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate("KeeperStack", { screen: "keeperListScreen" })} >
+          <View>
+            <Text style={globalStyles.buttonText}>CREATE</Text>
+          </View>
+        </TouchableOpacity>
       </View>
-
       <View style={globalStyles.createButton}>
-        <Button
-          title="TestGPS"
-          onPress={() => navigation.navigate('KeeperStack', { screen: 'TestScreen' })}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate("KeeperStack", { screen: "TestScreen" })}>
+          <View>
+            <Text style={globalStyles.buttonText}>TestGPS</Text>
+          </View>
+        </TouchableOpacity>
       </View>
-
     </View>
   );
 }

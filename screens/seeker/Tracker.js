@@ -142,7 +142,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             <View style={styles.bottomContainer}>
                 <View style={styles.stuckContainer}>
                     <View style={styles.stuckButton}>
-                        <CustomButton color='orange' title="Stuck" onPress={() => { navigation.navigate("SeekerClueListScreen") }} />
+                        <CustomButton color='orange' title={(notePack.getFocused() === null) ? "Select Clue" : "Stuck"} onPress={() => { navigation.navigate("TrackerListScreen") }} />
                     </View>
 
                     <View style={styles.stuckText}>
@@ -152,13 +152,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
                 <ScrollView style={styles.noteContainer}>
                     <Text>
-                        {notePack.getFocused().clue}
+                        {(notePack.getFocused() === null) ? "No clue selected" : notePack.getFocused().clue}
                     </Text>
                 </ScrollView>
-
-                <View style={styles.gameButton}>
-                    <CustomButton color='pink' title='stats' onPress={() => { navigation.navigate("SeekerGameScreen") }} />
-                </View>
             </View>
 
         </Animated.View>
