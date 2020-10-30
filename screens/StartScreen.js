@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
+import CustomButton from '../components/CustomButton';
 
 const handleError = () => {
   Alert.alert("Oops!", "Code must be 6 digits", [{ text: "Understood" }]);
@@ -33,10 +34,6 @@ export default function StartScreen({ navigation, route }) {
 
   return (
     // <View style={globalStyles.container}>
-    // <TouchableWithoutFeedback onPress={() => {
-    //   Keyboard.dismiss();
-    //   console.log('dismissed keyboard');
-    // }}>
     <View style={globalStyles.container}>
       <View style={globalStyles.titleSection}>
         {/* <Text>PreDestination</Text> */}
@@ -58,29 +55,18 @@ export default function StartScreen({ navigation, route }) {
           />
         </View>
       </TouchableWithoutFeedback>
-      <View style={globalStyles.joinButton}>
-        <TouchableOpacity onPress={handleJoinPress} >
-          <View>
-            <Text style={globalStyles.buttonTextSeeker}>JOIN</Text>
-          </View>
-        </TouchableOpacity>
+      <View>
+        <CustomButton title="join" onPress={handleJoinPress} color="skyblue" />
       </View>
       <View style={globalStyles.horizontalBar}></View>
       {/*========================Options for Keepers================================*/}
       <Text style={globalStyles.keeperText}>CREATE DESTINIES{"\n"}AS A KEEPER</Text>
-      <View style={globalStyles.createButton}>
-        <TouchableOpacity onPress={() => navigation.navigate("KeeperStack", { screen: "keeperListScreen" })} >
-          <View>
-            <Text style={globalStyles.buttonText}>CREATE</Text>
-          </View>
-        </TouchableOpacity>
+
+      <View>
+        <CustomButton title="CREATE" onPress={() => navigation.navigate("KeeperStack", { screen: "keeperListScreen" })} />
       </View>
-      <View style={globalStyles.createButton}>
-        <TouchableOpacity onPress={() => navigation.navigate("KeeperStack", { screen: "TestScreen" })}>
-          <View>
-            <Text style={globalStyles.buttonText}>TestGPS</Text>
-          </View>
-        </TouchableOpacity>
+      <View>
+        <CustomButton title="Test GPS" onPress={() => navigation.navigate("KeeperStack", { screen: "TestScreen" })} />
       </View>
     </View>
   );
