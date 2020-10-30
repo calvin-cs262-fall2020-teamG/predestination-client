@@ -1,19 +1,53 @@
 import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
-  
+  //==================navigation top bars========================
+  navigationHeader:{
+    backgroundColor: "#A2D683",
+  },
+  titleText:{
+    fontFamily: "constan",
+    color: "black",
+  },
+  keeperNavHeader:{
+    fontFamily: "constan",
+    backgroundColor: "maroon",
+  },
+  keeperTitleText:{
+    color: "white",
+    fontFamily: "constan",
+  },
+  seekerNavHeader:{
+    fontFamily: "constan",
+    backgroundColor: "gold",
+  },
+  seekerTitleText:{
+    fontFamily: "constan",
+    color: "black",
+  },
+
+  //shared:header.js
+  topRightMenuIcon:{
+  margin: 15, //shifts the icon to the left
+  color: "white",
+  },
+  // start styles from StartScreen.js
+
   // ========================= navigation styles ==========================
   // start screen
   startNavigationTitle: {
+    fontFamily: "constan",
     color: 'white',
   },
   startNavigationHeader: {
+    fontFamily: "constan",
     backgroundColor: '#A2D683',
     opacity: 0.7,
   },
   startNavigationDrawer: {
+    constan: "constan",
     color: 'white',
-  },  
+  },
 
   // seeker screen navigation styles
   seekerNavigationTitle: {
@@ -24,7 +58,7 @@ export const globalStyles = StyleSheet.create({
   },
   startNavigationDrawer: {
     color: 'white',
-  },  
+  },
 
   // keeper screen navigation styles
   keeperNavigationTitle: {
@@ -35,8 +69,8 @@ export const globalStyles = StyleSheet.create({
   },
   keeperNavigationDrawer: {
     color: 'white',
-  },  
-
+  },
+  // ========================= Welcome Screen Styles ==========================
   container: {
     flex: 1,
     justifyContent: "space-around",
@@ -53,10 +87,15 @@ export const globalStyles = StyleSheet.create({
   welcomeText:
   {
     // flex: 2,
+    fontFamily: "constan",
     fontSize: 30,
     textAlign: "center",
-    color: "maroon",
-
+    color: "#71B1C8",
+  },
+  horizontalBar: {
+    padding: 0.5,
+    borderEndWidth: 350,
+    borderBottomColor: "gray",
   },
   entrySection: {
     // flex: 2,
@@ -67,55 +106,95 @@ export const globalStyles = StyleSheet.create({
   input: {
     // flex: 2,
     fontSize: 40,
+    fontFamily: "constan",
     textAlign: "center",
   },
   joinButton: {
     // flex: 1,
-    padding: 20,
+    padding: 15,
     margin: 25,
+
     borderStyle: "solid",
     borderWidth: 2,
-    borderRadius: 10,
-    width: "50%",
-    backgroundColor: "gold",
+    borderRadius: 50,
     borderColor: "maroon",
+
+    width: "50%",
+    alignItems: "center",
+    backgroundColor: "gold",
   },
   createButton: {
     // flex: 1,
-    padding: 20,
-    margin: 25,
-    marginBottom: 50,
+    padding: 15,
+    margin: 20,
+    marginBottom: 25,
+
     borderStyle: "solid",
     borderWidth: 2,
-    borderRadius: 10,
-    width: "50%",
-    textAlign: "center",
-    backgroundColor: "maroon",
+    borderRadius: 50,
     borderColor: "gold",
+
+    height: 50,
+    width: 150,
+    alignItems: "center",
+    backgroundColor: "maroon",
   },
 
   seekerText: {
-    // flex: 1,
     margin: 5,
     marginBottom: 10,
-    fontSize: 15,
+    fontSize: 20,
+    fontFamily: "constan",
+    color: "grey",
+    textAlign: "center",
   },
-  orWillYouText: {
-    // flex: 1,
-    padding: 10,
-    margin: 10,
-    marginBottom: 25,
+  keeperText: {
+    margin: 5,
+    marginBottom: 10,
+    fontSize: 20,
+    fontFamily: "constan",
+    color: "grey",
+    textAlign: "center",
   },
   // end styles from StartScreen.js
 
-  // start styles from SeekerGameScreen.js
-  flexContainer: {
-    flexDirection: "column",
-    flex: 1,
+  //SEEKER SCREENS
+  //seeker general design
+  seekerBodyText:{
+    textAlign: "center",
+    fontFamily: "constan",
+    fontSize: 20,
+
   },
-  header: {
-    flex: 5,
-    backgroundColor: "skyblue",
+  seekerStartButton: {
+    // flex: 1,
+    padding: 20,
+    margin: 25,
+
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: "maroon",
+
+    width: "75%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "gold",
+  },
+
+  //=================start styles from SeekerGameScreen.js================
+
+
+  // flexContainer: {
+  //   flexDirection: "column",
+  //   flex: 1,
+  // },
+  // header: {
+  //   flex: 5,
+  //   backgroundColor: "skyblue",
+  // },
+  seekerCurrentStatus:{
+    fontSize: 40,
   },
   scrollable: {
     flex: 15,
@@ -128,15 +207,10 @@ export const globalStyles = StyleSheet.create({
   },
   // end styles from SeekerGameScreen.js
 
+  //KEEPER SCREENS
+
   //added by Nathan Wang on Oct 5 11:50PM
   // start styles from KeeperGameScreen.js
-  nextButton: {
-    padding: 20,
-    margin: 100,
-    borderStyle: "dotted",
-    borderWidth: 2,
-    borderRadius: 10,
-  },
   headerText: {
     textAlign: "center",
     fontSize: 25,
@@ -169,14 +243,17 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row',
   },
   // end styles from KeeperEditorScreen.js
-  //shared:header.js
-
-topRightMenuIcon:{
-  // justifyContent: "space-around",
-  // flexDirection: "column",
-  // alignItems: "center",
-  // flex: 1,
-  margin: 15, //shifts the icon to the left
-}
+  buttonText: {
+    color: "gold",
+    fontFamily: "constan",
+    fontSize: 20,
+    letterSpacing: 2,
+  },
+  buttonTextSeeker: {
+    color: "maroon",
+    fontFamily: "constan", //
+    fontSize: 20,
+    letterSpacing: 2,
+  }
 });
 
