@@ -13,7 +13,7 @@ export default function SeekerWaitingScreen({ route, navigation }) {
       <Text style={globalStyles.seekerBodyText}>Waiting for game to start... {"\n"}The more the merrier!{"\n"}
       Share the code:</Text>
       <Text style={{textAlign: "center", fontFamily: "constan", fontSize: 40,}}>{ route.params.code }!</Text>
-      <TouchableOpacity style={globalStyles.seekerStartButton} onPress={ () => { navigation.navigate('SeekerGameScreen'); } }>
+      <TouchableOpacity style={globalStyles.seekerStartButton} onPress={ () => { navigation.navigate('SeekerGameTabStack', {screen: 'SeekerGameScreen'}); } }>
         <View>
           <Text style={globalStyles.seekerText}>
             Start
