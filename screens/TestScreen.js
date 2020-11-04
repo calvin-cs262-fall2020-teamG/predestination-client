@@ -1,7 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { render } from 'react-dom';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { Component, useState, useEffect } from 'react';
+import { Alert, StyleSheet, Text, View, TouchableOpacity, Button, geoLocation } from 'react-native';
 import { globalStyles } from "../styles/global";
+import Geolocation from '@react-native-community/geolocation';
+
+
+const Tracking = props => {
+    const [currentLatitude, setCurrentLatitude] = useState(0);
+    const [currentLongitude, setCurrentLongitude] = useState(0);
+    const [currentTimestamp, setCurrentTimestamp] = useState(0);
+    
+    const [isTracking, setIsTracking] = useState(false);
+    
+    useEffect(() => {
+        if (!isTracking) return;
+        function getLocation() {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+            setCurrentLongitude(position.coords.longitude);
+            setCurrentLatitude(position.coords.latitude);
+            setCurrentTimestamp(position.timestamp);
+            console.log(
+                position.coords.longitude,
+                position.coords.latitude,
+                position.timestamp
+            );
+            },
+            error => alert(error.message),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
+        }
+        let getLocationInterval = setInterval(getLocation, 500);
+        return () => clearInterval(getLocationInterval);
+    }, [isTracking]);
+    
+    return (
+        <View style={{ width: '100%', height: '100%' }}>
+        <MapView showsUserLocation style={{ flex: 1 }} />
+        <MenuButton
+            title={isTracking ? 'Stop' : 'Start'}
+            onPress={() => {
+            setIsTracking(!isTracking);
+            }}
+        />
+        </View>
+    );
+    };
+    
+
 
 export default function getLocation () {
     const [latitude, setLatitude] = useState(0);
