@@ -1,9 +1,38 @@
-import React, { Component } from 'react';
-import { Alert, StyleSheet, Text, View, TouchableOpacity, Button, geoLocation } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { render } from 'react-dom';
+import { Text, View, StyleSheet } from 'react-native';
 import { globalStyles } from "../styles/global";
 
+export default function getLocation () {
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
+    const [location, setLocation] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
+    useEffect (() => {
+        watchId = navigator.geolocation.watchPosition(
+            (position) => {
+                setLatitude = position.coords.latitude;
+                setLongitude = position.coords.longitude;
 
+            }
+        )
+    })
+    
+    findCurrentLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+
+        if (status !== 'granted') {
+            setErrorMessage('Permission Denied')
+        }
+    };
+
+    return(
+        <View style={styles.container}>
+            <Text>Location: {latitude}, {longitude}</Text>
+        </View>
+    )
+}
 // export default class App extends Component {
 //   constructor(props) {
 //     super(props);
@@ -63,16 +92,11 @@ import { globalStyles } from "../styles/global";
 //   };
 // };
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   }
-// });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  }
+});
