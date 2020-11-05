@@ -1,13 +1,13 @@
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, Button, Animated, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Animated, ScrollView, Dimensions } from 'react-native';
 
-import Card from '../../components/Card';
 import CustomButton from '../../components/CustomButton';
 import { globalStyles } from '../../styles/global';
 
 import { NotesContext } from '../../src/Notes';
 import { PROXIMITY_MESSAGES, PROXIMITY } from '../../src/Proximity';
+import Circle from '../../components/Circle';
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
@@ -35,7 +35,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         return PROXIMITY_MESSAGES[proximity].silly[Math.floor(Math.random() * PROXIMITY_MESSAGES[proximity].silly.length)];
     }
 
-    const [animation, setAnimation] = useState(new Animated.Value(0))
+
+    const [animation, setAnimation] = useState(new Animated.Value(0));
     const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1));
     const [textColorAnimated, setTextColorAnimated] = useState(new Animated.Value('rgb(0, 0, 0)'));
     const [isBeginning, setIsBeginning] = useState(true);
@@ -45,6 +46,10 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [proximityOfficialMessage, setProximityOfficialMessage] = useState(getOfficialMessage(proximity));
     const [proximitySillyMessage, setProximitySillyMessage] = useState(getSillyMessage(proximity));
     const [tempCount, setTempCount] = useState(0); // todo: for debugging purposes only
+
+    const [innerTargetRadius, setInnerTargetRadius] = useState(new Animated.Value(0));
+    const [middleTargetRadius, setMiddleTargetRadius] = useState(new Animated.Value(1));
+    const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
     let first = true;
 
@@ -59,7 +64,6 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             Animated.delay(300),
         ]).start(() => {
             if (proximity !== PROXIMITY.FAR) {
-
                 setTextColorAnimated('rgb(250, 250, 250)');
             } else {
                 setTextColorAnimated('rgb(250, 250, 250)');
@@ -67,17 +71,33 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             setProximityOfficialMessage(getOfficialMessage(proximity));
             setProximitySillyMessage(getSillyMessage(proximity));
 
-            Animated.sequence([
-                Animated.timing(animation, {
-                    toValue: outputColor[proximity],
-                    duration: 500,
-                    useNativeDriver: false,
-                }),
-                Animated.timing(opacityAnimation, {
-                    toValue: 1,
-                    duration: 200,
-                    useNativeDriver: false,
-                })
+            Animated.parallel([
+                Animated.sequence([
+                    Animated.timing(innerTargetRadius, {
+                        toValue: tempCount,
+                        duration: 1000,
+                        useNativeDriver: false,
+                    }),
+                ]),
+                Animated.sequence([
+                    Animated.delay(200),
+                    Animated.timing(middleTargetRadius, {
+                        toValue: tempCount+1,
+                        duration: 800,
+                        useNativeDriver: false,
+                    }),
+                ]),
+                Animated.sequence([
+                    Animated.delay(300),
+                    Animated.timing(outerTargetRadius, {
+                        toValue: tempCount+2,
+                        duration: 500,
+                        useNativeDriver: false,
+                    }),
+                ])
+                
+                
+
             ]).start();
 
         });
@@ -95,50 +115,37 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
     // todo: for debugging purposes only to show all the levels of proximity to given location
     const nextProximity = () => {
-        setTempCount((tempCount + 1) % 3);
+        setTempCount((tempCount + 1) % 4);
     }
 
     useEffect(() => {
         setProximity(PROXIMITY[Object.entries(PROXIMITY)[tempCount][0]]);
     }, [tempCount]);
 
+    const screenWidth = Dimensions.get('window').width;
+    const screenHeight = Dimensions.get('window').height;
+
+
+    const targetInterpolation = {
+        inputRange: [0, 1, 2, 3],
+        outputRange: [0.2, 0.3, 0.4, 10].map(i => i*screenWidth)
+    }
+
     return (
         <Animated.View style={{
             ...styles.flexContainer
         }}>
 
-            <Animated.View style={{
-                ...styles.statusContainer,
-                backgroundColor: animation.interpolate({
-                    inputRange: [0, 1, 2],
-                    outputRange: ['rgb(140, 34, 50)', ' rgba(135, 206, 235, 1)', 'rgba(161, 214, 131, 1)'],
-                })
+        <TouchableOpacity activeOpacity={1} style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center'}} onPress={nextProximity}>
+            <Circle color='#05386B' diameter={Animated.add(outerTargetRadius.interpolate(targetInterpolation), 50)}>
+                <Circle color='#379683' diameter={Animated.add(middleTargetRadius.interpolate(targetInterpolation), 20)}>
+                    <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)}>
 
-            }}>
-                <Animated.View style={{
-                    ...styles.officialMessageContainer,
-                    opacity: opacityAnimation,
-                }}>
-                    <Animated.Text style={{
-                        ...styles.officialText,
-                        color: textColorAnimated,
-                    }}>{proximityOfficialMessage}</Animated.Text>
-                </Animated.View>
-
-                <Animated.View style={{
-                    ...styles.sillyMessageContainer,
-                    opacity: opacityAnimation,
-                    color: textColorAnimated,
-                }}>
-                    <Animated.Text style={{
-                        ...styles.sillyText,
-                        color: textColorAnimated,
-                    }}>{proximitySillyMessage}</Animated.Text>
-                </Animated.View>
-
-                <CustomButton title="Change location" onPress={() => { nextProximity(); }} color='orange' />
-            </Animated.View>
-
+                    </Circle>
+                </Circle>
+            </Circle>
+        </TouchableOpacity>
+            
 
             <View style={styles.bottomContainer}>
                 <View style={styles.stuckContainer}>
@@ -163,6 +170,19 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+    farCircle: {
+        backgroundColor: 'skyblue',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    closeCircle: {
+        backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    atCircle: {
+        backgroundColor: 'yellow',
+    },
     sillyText: {
         fontSize: 20,
     },
@@ -187,6 +207,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     noteContainer: {
         alignSelf: 'center',
@@ -197,24 +219,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-around',
 
-    },
-    statusContainer: {
-        flex: 3,
-        justifyContent: 'space-around',
-        alignItems: 'center',
-
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
-        backgroundColor: 'white',
-        shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 2,
-},
-shadowOpacity: 0.25,
-shadowRadius: 3.84,
-
-elevation: 5,
     },
     stuckContainer: {
         flex: 1,
