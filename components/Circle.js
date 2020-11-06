@@ -1,37 +1,54 @@
-import React, { Children } from 'react';
-import { Animated } from 'react-native';
+import React, { Children, useEffect, useState } from 'react';
+import { Animated, StyleSheet } from 'react-native';
 /**
  * Circle is a custom component that makes animation of circles as easy as passing an animated radius as a prop
  */
 export default function Circle(props) {
 
-  const thickness = 30;
+    const [waveOffset, setWaveOffset] = useState(new Animated.Value(0));
 
-  return (
+    const wave = () => {
+        Animated.sequence([
+            Animated.timing(waveOffset, {
+                toValue: 0.03,
+                duration: 800,
+                useNativeDriver: true,
+            }),
+            Animated.timing(waveOffset, {
+                toValue: -0.03,
+                duration: 800,
+                useNativeDriver: true,
+            })
+        ]).start(() => {
+            wave();
+        });
+    }
 
-      <Animated.View style={{
-          backgroundColor: props.color,
-          width: props.diameter,
-          height: props.diameter,
-          opacity: props.opacity,
-          borderRadius: 200,
-          justifyContent: 'center',
-          alignItems: 'center',
-      }}>
-{/* 
-          <Animated.View style={{
-              backgroundColor: 'white',
-              width: Animated.subtract(props.diameter, thickness),
-              height: Animated.subtract(props.diameter, thickness),
-              borderRadius: Animated.subtract(props.diameter, thickness),
-              alignItems: 'center',
-              justifyContent: 'center'
-          }}> */}
-                {props.children}
-          {/* </Animated.View> */}
-          
-      </Animated.View>
+    useEffect(() => {
+        wave();
+    }, []);
 
-  );
+    const styles = {
+        backgroundColor: props.color,
+        borderRadius: 200,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: props.screenWidth,
+        height: props.screenWidth,
+        position: 'absolute'
+    };
+
+    console.log(console.log(props.diameter));
+
+    return (
+
+        <Animated.View style={[styles,
+            {
+                transform: [{ scaleY: Animated.add(props.diameter, waveOffset), scaleX: Animated.add(props.diameter, waveOffset) }]
+            }]}>
+            { props.children }
+        </Animated.View >
+
+    );
 
 }
