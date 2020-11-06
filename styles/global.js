@@ -51,12 +51,12 @@ export const globalStyles = StyleSheet.create({
 
   // seeker screen navigation styles
   seekerNavigationTitle: {
-    fontFamily: 'constan-bold',
-    color: 'maroon',
+    //fontFamily: 'constan-bold',
+    //color: 'maroon',
   },
   seekerNavigationHeader: {
     // backgroundColor: '#71B1C8',
-    backgroundColor: 'gold',
+    //backgroundColor: 'gold',
   },
   startNavigationDrawer: {
     color: 'white',
