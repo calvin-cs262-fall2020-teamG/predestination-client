@@ -54,8 +54,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [successMessage, setSuccessMessage] = useState('');
 
     const partyTime = () => {
-        setSuccessMessage(`+${0}`);
-
+        Animated.delay(100).start(() => {
+            setSuccessMessage(`+${0}`);
+        });
     };
 
     const animateSize = () => {
@@ -228,7 +229,18 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-around',
         width: '100%',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        shadowColor: "#000",
+    shadowOffset: {
+	    width: 0,
+	    height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
     },
     stuckContainer: {
         flex: 1,
