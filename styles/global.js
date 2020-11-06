@@ -2,18 +2,18 @@ import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
   //==================navigation top bars========================
-  navigationHeader:{
+  navigationHeader: {
     backgroundColor: "#A2D683",
   },
-  titleText:{
+  titleText: {
     fontFamily: "constan",
     color: "black",
   },
-  keeperNavHeader:{
+  keeperNavHeader: {
     fontFamily: "constan",
     backgroundColor: "maroon",
   },
-  keeperTitleText:{
+  keeperTitleText: {
     color: "white",
     fontFamily: "constan",
   },
@@ -27,9 +27,9 @@ export const globalStyles = StyleSheet.create({
   // },
 
   //shared:header.js
-  topRightMenuIcon:{
-  margin: 15, //shifts the icon to the left
-  color: "white",
+  topRightMenuIcon: {
+    margin: 15, //shifts the icon to the left
+    color: "white",
   },
   // start styles from StartScreen.js
 
@@ -85,8 +85,8 @@ export const globalStyles = StyleSheet.create({
     paddingBottom: 12,
     shadowColor: "#000",
     shadowOffset: {
-	    width: 0,
-	    height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
@@ -192,7 +192,7 @@ export const globalStyles = StyleSheet.create({
 
   //SEEKER SCREENS
   //seeker general design
-  seekerBodyText:{
+  seekerBodyText: {
     textAlign: "center",
     fontFamily: "constan",
     fontSize: 20,
@@ -225,7 +225,7 @@ export const globalStyles = StyleSheet.create({
   //   flex: 5,
   //   backgroundColor: "skyblue",
   // },
-  seekerCurrentStatus:{
+  seekerCurrentStatus: {
     fontSize: 40,
   },
   scrollable: {
@@ -254,7 +254,7 @@ export const globalStyles = StyleSheet.create({
 
 
   // start styles from AddNewRoute.js for KeeperListScreen
-  clearButton:{
+  clearButton: {
     margin: 10,
   },
   huntBox: {
@@ -274,8 +274,8 @@ export const globalStyles = StyleSheet.create({
     paddingBottom: 12,
     shadowColor: "#000",
     shadowOffset: {
-	    width: 0,
-	    height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
@@ -320,6 +320,5 @@ export const globalStyles = StyleSheet.create({
   },
 
   // end styles from KeeperEditorScreen.js
-
 });
 

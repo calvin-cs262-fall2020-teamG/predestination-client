@@ -3,6 +3,7 @@ import { StyleSheet, Animated, TouchableWithoutFeedback, Keyboard, Alert, Keyboa
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { globalStyles } from '../../styles/global';
 import { ScrollView } from 'react-native-gesture-handler';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 /**
  * KeeperEditorScreen will show running list of clues, give the ability to set down a new clue,
@@ -339,13 +340,12 @@ export default function KeeperEditorScreen({ navigation }) {
     });
 
     const [markers, setMarkers] = useState([{
-        // marker: [{
         latlng: {
             latitude: 42.9331,
             longitude: -85.5877,
         }
-        // }]
-    }]);
+    }
+    ]);
 
     return (
         <React.Fragment>
@@ -353,17 +353,22 @@ export default function KeeperEditorScreen({ navigation }) {
                 style={{ flex: 1 }}
                 customMapStyle={mapStyle}
                 region={region}
+                mapType={'satellite'}
+                pitchEnabled={false}
+                rotateEnabled={false}
                 onRegionChangeComplete={region => setRegion(region)}
                 minZoomLevel={15.5}
                 onPress={(e) => {
-                    console.log(e.nativeEvent.coordinate)
-                    // setMarkers({ ...markers, latlng: e.nativeEvent.coordinate })
+                    // console.log(e.nativeEvent.coordinate)
+
+                    setMarkers([...markers, { latlng: e.nativeEvent.coordinate }])
                     // console.log(markers)
                 }
                 }
             >
                 {
                     markers.map((first, index) => (
+                        // <FontAwesome5 name="map-marker-alt" size={24} color="red" />
                         <MapView.Marker key={index} coordinate={first.latlng} />
                     ))
                 }
@@ -372,11 +377,11 @@ export default function KeeperEditorScreen({ navigation }) {
                     title="Test Title"
                     description="Test description"
                 >
-                    <Callout tooltip>
+                    <Callout tooltip onPress={submitHandler}>
                         <View>
                             <View style={styles.bubble}>
-                                <Text style={styles.name}>First Location</Text>
-                                {/* <TextInput placeholder="Enter a location" style={styles.name} /> */}
+                                {/* <Text style={styles.name}>First Location</Text> */}
+                                <TextInput placeholder="Enter a location" style={styles.name} />
                                 {/* <TextInput placeholder="Enter a clue" style={styles.name}></TextInput> */}
                             </View>
                             <View style={styles.arrowBorder} />
@@ -418,7 +423,7 @@ const styles = StyleSheet.create({
         padding: 15,
         width: 150,
     },
-    // Arrow below callout bubble
+    // Triangle shape below callout bubble
     arrow: {
         backgroundColor: 'transparent',
         borderColor: 'transparent',
@@ -448,7 +453,7 @@ const styles = StyleSheet.create({
         // elevation: 2,
         // flexDirection: 'row',
         backgroundColor: '#fff',
-        borderRadius: 5,
+        borderRadius: 7,
         padding: 8,
         marginHorizontal: 10,
         width: 200,

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
+import { ImageBackground, StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import Leaderboard from "react-native-leaderboard";
 
@@ -21,13 +21,13 @@ export default function SeekerGameScreen({ route, navigation }) {
     const [keeperLeaderboard, setKeeperLeaderboard] = useState(
         //   data for the leaderboard
         [
-          { userName: "JBrink", clueStatus: 2 },
-          { userName: "NWang", clueStatus: 2 },
-          { userName: "AScaria", clueStatus: 3 },
-          { userName: "EWalters", clueStatus: 3 },
-          { userName: "HAnderson", clueStatus: 2 },
+            { userName: "JBrink", clueStatus: 2 },
+            { userName: "NWang", clueStatus: 2 },
+            { userName: "AScaria", clueStatus: 3 },
+            { userName: "EWalters", clueStatus: 3 },
+            { userName: "HAnderson", clueStatus: 2 },
         ]
-      );
+    );
 
     // When seekers click the "hunt" button, they will be redirected to the last clue selected if they selected a clue, else they will go to a clue list screen
     const pressHunt = () => {
@@ -38,26 +38,30 @@ export default function SeekerGameScreen({ route, navigation }) {
         }
     }
 
+    // let imagePath = require("../../assets/list.png");
+
     return (
 
         <View style={styles.flexContainer}>
+            <ImageBackground source={require('../../assets/background_uno.png')} style={styles.image}>
 
-            <View style={styles.header}>
-                <View style={styles.pointsSection}>
-                    <Text style={styles.pointText}>{points}</Text>
-                    <Text>Points</Text>
-                </View>
-                <View style={styles.statusSection}>
-                    <View style={styles.timeSection}>
-                        <Text style={styles.timeText}>{time}</Text>
-                        <Text>Time Left</Text>
+                <View style={styles.header}>
+                    <View style={styles.pointsSection}>
+                        <Text style={styles.pointText}>{points}</Text>
+                        <Text>Points</Text>
                     </View>
-                    <View style={styles.rankSection}>
-                        <Text style={styles.rankText}>{rank}</Text>
-                        <Text>Rank</Text>
+                    <View style={styles.statusSection}>
+                        <View style={styles.timeSection}>
+                            <Text style={styles.timeText}>{time}</Text>
+                            <Text>Time Left</Text>
+                        </View>
+                        <View style={styles.rankSection}>
+                            <Text style={styles.rankText}>{rank}</Text>
+                            <Text>Rank</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
+            </ImageBackground>
 
             <View style={styles.bottomSection}>
                 <View>
@@ -70,7 +74,7 @@ export default function SeekerGameScreen({ route, navigation }) {
                 </View>
             </View>
 
-        </View>
+        </View >
     );
 }
 
@@ -126,6 +130,11 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 50,
         marginTop: 20,
-    }
+    },
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+    },
 });
 
