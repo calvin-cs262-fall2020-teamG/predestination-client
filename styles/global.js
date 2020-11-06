@@ -2,20 +2,20 @@ import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
   //==================navigation top bars========================
-  navigationHeader:{
+  navigationHeader: {
     backgroundColor: "#A2D683",
   },
-  titleText:{
-    fontFamily: "constan",
+  titleText: {
+    // fontFamily: "constan",
     color: "black",
   },
-  keeperNavHeader:{
-    fontFamily: "constan",
+  keeperNavHeader: {
+    // fontFamily: "constan",
     backgroundColor: "maroon",
   },
-  keeperTitleText:{
+  keeperTitleText: {
     color: "white",
-    fontFamily: "constan",
+    // fontFamily: "constan",
   },
   // seekerNavHeader:{
   //   fontFamily: "constan",
@@ -27,20 +27,20 @@ export const globalStyles = StyleSheet.create({
   // },
 
   //shared:header.js
-  topRightMenuIcon:{
-  margin: 15, //shifts the icon to the left
-  color: "white",
+  topRightMenuIcon: {
+    margin: 15, //shifts the icon to the left
+    color: "white",
   },
   // start styles from StartScreen.js
 
   // ========================= navigation styles ==========================
   // start screen
   startNavigationTitle: {
-    fontFamily: 'constan-bold',
+    // fontFamily: 'constan-bold',
     color: 'white',
   },
   startNavigationHeader: {
-    fontFamily: "constan",
+    // fontFamily: "constan",
     backgroundColor: '#A2D683',
     opacity: 0.7,
   },
@@ -64,7 +64,7 @@ export const globalStyles = StyleSheet.create({
 
   // keeper screen navigation styles
   keeperNavigationTitle: {
-    fontFamily: 'constan-bold',
+    // fontFamily: 'constan-bold',
     color: 'white',
   },
   keeperNavigationHeader: {
@@ -85,8 +85,8 @@ export const globalStyles = StyleSheet.create({
     paddingBottom: 12,
     shadowColor: "#000",
     shadowOffset: {
-	    width: 0,
-	    height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
@@ -94,7 +94,7 @@ export const globalStyles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    fontFamily: 'constan-bold',
+    // fontFamily: 'constan-bold',
     textAlign: 'center',
     fontSize: 16,
     // fontWeight: 'bold',
@@ -117,7 +117,7 @@ export const globalStyles = StyleSheet.create({
   welcomeText:
   {
     // flex: 2,
-    fontFamily: "constan",
+    // fontFamily: "constan",
     fontSize: 30,
     textAlign: "center",
     color: "#71B1C8",
@@ -136,7 +136,7 @@ export const globalStyles = StyleSheet.create({
   input: {
     // flex: 2,
     fontSize: 40,
-    fontFamily: "constan",
+    // fontFamily: "constan",
     textAlign: "center",
   },
   // joinButton: {
@@ -175,7 +175,7 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     letterSpacing: 2,
-    fontFamily: "constan",
+    // fontFamily: "constan",
     color: "grey",
     textAlign: "center",
   },
@@ -184,7 +184,7 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     letterSpacing: 2,
-    fontFamily: "constan",
+    fontFamily: "Roboto",
     color: "grey",
     textAlign: "center",
   },
@@ -192,9 +192,9 @@ export const globalStyles = StyleSheet.create({
 
   //SEEKER SCREENS
   //seeker general design
-  seekerBodyText:{
+  seekerBodyText: {
     textAlign: "center",
-    fontFamily: "constan",
+    // fontFamily: "constan",
     fontSize: 20,
 
   },
@@ -225,7 +225,7 @@ export const globalStyles = StyleSheet.create({
   //   flex: 5,
   //   backgroundColor: "skyblue",
   // },
-  seekerCurrentStatus:{
+  seekerCurrentStatus: {
     fontSize: 40,
   },
   scrollable: {
@@ -254,7 +254,7 @@ export const globalStyles = StyleSheet.create({
 
 
   // start styles from AddNewRoute.js for KeeperListScreen
-  clearButton:{
+  clearButton: {
     margin: 10,
   },
   huntBox: {
@@ -274,8 +274,8 @@ export const globalStyles = StyleSheet.create({
     paddingBottom: 12,
     shadowColor: "#000",
     shadowOffset: {
-	    width: 0,
-	    height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
@@ -290,7 +290,7 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     letterSpacing: 2,
-    fontFamily: "constan-bold",
+    // fontFamily: "constan-bold",
     color: "white",
     textAlign: "center",
     textTransform: "uppercase",
@@ -320,6 +320,5 @@ export const globalStyles = StyleSheet.create({
   },
 
   // end styles from KeeperEditorScreen.js
-
 });
 
