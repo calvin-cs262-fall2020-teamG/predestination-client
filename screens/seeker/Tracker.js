@@ -52,29 +52,46 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
     const animateSize = () => {
-        setProximitySillyMessage(getSillyMessage(proximity));
-        Animated.parallel([
-            Animated.timing(innerTargetRadius, {
-                toValue: tempCount,
-                duration: 200,
+        Animated.sequence([
+            Animated.timing(opacityAnimation, {
+                toValue: (proximity === 'SUCCESS') ? 1.0 : 0.0,
+                duration: 500,
                 useNativeDriver: true,
             }),
-            Animated.timing(middleTargetRadius, {
-                toValue: tempCount + 1,
-                duration: 200,
-                useNativeDriver: true,
-            }),
-            Animated.timing(outerTargetRadius, {
-                toValue: tempCount + 2,
-                duration: 200,
-                useNativeDriver: true,
-            })
+            Animated.parallel([
+                Animated.timing(innerTargetRadius, {
+                    toValue: tempCount,
+                    duration: 500,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(middleTargetRadius, {
+                    toValue: tempCount + 1,
+                    duration: 500,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(outerTargetRadius, {
+                    toValue: tempCount + 2,
+                    duration: 500,
+                    useNativeDriver: true,
+                })
+            ]),
+            
         ]).start(() => {
-            if (tempCount === 2) {
-                Animated.delay(200).start(() => {
-                    nextProximity();
-                });
+            if (proximity !== 'SUCCESS') {
+                setProximitySillyMessage(getSillyMessage(proximity));
             }
+            
+            Animated.timing(opacityAnimation, {
+                toValue: 1.0,
+                duration: 500,
+                useNativeDriver: true,
+            }).start(() => {
+                if (tempCount === 2) {
+                    Animated.delay(200).start(() => {
+                        nextProximity();
+                    });
+                }
+            });            
         });
     }
 
@@ -113,16 +130,14 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         }}>
 
 
-            <TouchableOpacity activeOpacity={1} style={{ flex: 2, height: '100%', width: '100%', maxWidth: '100%', justifyContent: 'center', alignItems: 'center' }} onPress={nextProximity}>
+            <TouchableOpacity activeOpacity={1} style={{ flex: 3, height: '100%', width: '100%', maxWidth: '100%', justifyContent: 'center', alignItems: 'center' }} onPress={nextProximity}>
                 <Circle color='#05386B' diameter={outerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#379683' diameter={middleTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
             </TouchableOpacity>
 
+            <Animated.Text style={{ position: 'absolute', top: 30, opacity: opacityAnimation }}>{proximitySillyMessage}</Animated.Text>
 
-            <Animated.View style={{ flex: 2, position: 'absolute' }}>
-                <Text style={{ position: 'absolute', top: 30 }}>{proximitySillyMessage}</Text>
-            </Animated.View>
 
             <View style={styles.bottomContainer}>
                 <View style={styles.stuckContainer}>
@@ -192,7 +207,7 @@ const styles = StyleSheet.create({
         minHeight: 50,
     },
     bottomContainer: {
-        flex: 3,
+        flex: 2,
         flexDirection: 'column',
         justifyContent: 'space-around',
         width: '100%',
