@@ -15,18 +15,6 @@ import Circle from '../../components/Circle';
  */
 export default function SeekerFocusedScreen({ route, navigation }) {
 
-    const inputColors = {
-        FAR: 200,
-        CLOSE: 2,
-        AT: 1,
-    };
-
-    const outputColor = {
-        FAR: 0,
-        CLOSE: 1,
-        AT: 2,
-    }
-
     const getOfficialMessage = (proximity) => {
         return PROXIMITY_MESSAGES[proximity].official;
     }
@@ -52,11 +40,17 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
     const [successMessage, setSuccessMessage] = useState('');
+    const [points, setPoints] = useState(new Animated.Value(0.0));
+
 
     const partyTime = () => {
-        Animated.delay(100).start(() => {
-            setSuccessMessage(`+${0}`);
-        });
+        Animated.sequence([
+            Animated.timing(points, {
+                toValue: 10,//(notePack.getFocused() === null) ? 0 : notePack.getFocused().points,
+                duration: 500,
+                useNativeDriver: true,
+            }),
+        ]).start();
     };
 
     const animateSize = () => {
@@ -84,6 +78,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 })
             ]),           
         ]).start(() => {
+            setProximityOfficialMessage(getOfficialMessage(proximity));
+
             if (proximity !== 'SUCCESS') {
                 setProximitySillyMessage(getSillyMessage(proximity));
             } else {
@@ -135,7 +131,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
     const targetInterpolation = {
         inputRange: [0, 1, 2, 3],
-        outputRange: [0.1, 0.2, 0.3, 10]
+        outputRange: [0.1, 0.2, 0.3, 5]
     };
 
 
@@ -150,8 +146,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 <Circle color='#379683' diameter={middleTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
 
-                <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>{proximitySillyMessage}</Animated.Text>
-                <Animated.Text style={{ textAlign: 'center', position: 'absolute', marginBottom: '50%', opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated, padding: 20 }}>{successMessage}</Animated.Text>
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>"{proximitySillyMessage}"</Animated.Text>
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: 30, opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated, padding: 20 }}>{proximityOfficialMessage}</Animated.Text>
 
             </TouchableOpacity>
 
