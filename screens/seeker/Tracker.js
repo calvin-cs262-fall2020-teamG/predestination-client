@@ -23,19 +23,24 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         return (proximity === null) ? '' : '"' + PROXIMITY_MESSAGES[proximity].silly[Math.floor(Math.random() * PROXIMITY_MESSAGES[proximity].silly.length)] + '\"';
     }
 
-    const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(0));
+    const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1));
     const [successOpacityAnimation, setSuccessOpacityAnimation] = useState(new Animated.Value(0.0));
     
     const [textColorAnimated, setTextColorAnimated] = useState('rgb(0, 0, 0)');
     const [isBeginning, setIsBeginning] = useState(true);
 
     const { notePack } = useContext(NotesContext);
-    const [proximity, setProximity] = useState(PROXIMITY.NULL);
+    const [proximity, setProximity] = useState(null);
     const [proximityOfficialMessage, setProximityOfficialMessage] = useState(getOfficialMessage(proximity));
     const [proximitySillyMessage, setProximitySillyMessage] = useState(getSillyMessage(proximity));
-    const [tempCount, setTempCount] = useState(0.0); // todo: for debugging purposes only
+    const [tempCount, setTempCount] = useState(0); // todo: for debugging purposes only
+
 
     const [radius, setRadius] = useState(new Animated.Value(0));
+
+    // const [innerTargetRadius, setInnerTargetRadius] = useState(new Animated.Value(0));
+    // const [middleTargetRadius, setMiddleTargetRadius] = useState(new Animated.Value(1));
+    // const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
     const partyTime = () => {
         Animated.sequence([
@@ -53,7 +58,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             Animated.parallel([
                 Animated.timing(opacityAnimation, {
                     toValue: 0,
-                    duration: (PROXIMITY[proximity] === PROXIMITY.SUCCESS) ? 0 : 500,
+                    duration: (proximity === 'SUCCESS') ? 0 : 500,
                     useNativeDriver: true,
                 }),
                 Animated.timing(successOpacityAnimation, {
@@ -64,19 +69,19 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             ]),
             Animated.timing(radius, {
                 toValue: tempCount,
-                duration: (roximity === PROXIMITY.SUCCESS) ? 300 : 500,
+                duration: (proximity === 'SUCCESS') ? 300 : 500,
                 useNativeDriver: true,
             }),          
         ]).start(() => {
             setProximityOfficialMessage(getOfficialMessage(proximity));
 
-            if (proximity !== PROXIMITY.SUCCESS) {
+            if (proximity !== 'SUCCESS') {
                 setProximitySillyMessage(getSillyMessage(proximity));
             } else {
                 partyTime();
             }
 
-            if (proximity !== PROXIMITY.FAR) {
+            if (proximity !== 'FAR') {
                 setTextColorAnimated('rgb(255,255,255)');
             } else {
                 setTextColorAnimated('rgb(0,0,0)');
@@ -109,9 +114,13 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     // todo: for debugging purposes only to show all the levels of proximity to given location
     const nextProximity = () => {
         if (notePack.getFocused() !== null) {
-            setProximity((PROXIMITY + 1) % 5);
+            setTempCount((tempCount + 1) % 4);
         }        
     }
+
+    useEffect(() => {
+        setProximity(PROXIMITY[Object.entries(PROXIMITY)[tempCount][0]]);
+    }, [tempCount]);
 
     const screenWidth = Dimensions.get('window').width;
     const screenHeight = Dimensions.get('window').height;
@@ -126,7 +135,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         <Animated.View style={{
             ...styles.flexContainer
         }}>
-            
+
+
             <TouchableOpacity activeOpacity={1} style={{ flex: 3, height: '100%', width: '100%', maxWidth: '100%', justifyContent: 'center', alignItems: 'center' }} onPress={nextProximity}>
                 <Circle color='#05386B' diameter={Animated.add(radius, 2).interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#379683' diameter={Animated.add(radius, 1).interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
@@ -136,6 +146,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: 30, opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated, padding: 20 }}>{proximityOfficialMessage}</Animated.Text>
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', alignSelf: 'center', opacity: successOpacityAnimation, fontWeight: 'bold', fontSize: 128, color: textColorAnimated, padding: 20 }}>+{(notePack.getFocused() === null) ? 0 : notePack.getFocused().points}</Animated.Text>
             </TouchableOpacity>
+
+            
 
             <View style={styles.bottomContainer}>
                 <View style={styles.stuckContainer}>
@@ -213,14 +225,14 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+    shadowOffset: {
+	    width: 0,
+	    height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 
-        elevation: 5,
+    elevation: 5,
     },
     stuckContainer: {
         flex: 1,

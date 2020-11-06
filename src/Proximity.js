@@ -1,20 +1,14 @@
-export const PROXIMITY = [
-    'NULL',
-    'FAR',
-    'CLOSE',
-    'AT',
-    'SUCCESS,'
-]
+export const PROXIMITY = {
+    FAR: 'FAR',
+    CLOSE: 'CLOSE',
+    AT: 'AT',
+    SUCCESS: 'SUCCESS'
+}
 
 /**
  * PROXIMITY_MESSAGES are messages sent to the seeker based on their proximity to a clue's location
  */
 export const PROXIMITY_MESSAGES = {
-    NULL: {
-        official: 'An error occurred. No clue was selected.',
-        silly: [
-        ],
-    },
     FAR: {
         official: 'Keep looking!',
         silly: [
