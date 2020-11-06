@@ -6,16 +6,16 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "#A2D683",
   },
   titleText: {
-    fontFamily: "constan",
+    // fontFamily: "constan",
     color: "black",
   },
   keeperNavHeader: {
-    fontFamily: "constan",
+    // fontFamily: "constan",
     backgroundColor: "maroon",
   },
   keeperTitleText: {
     color: "white",
-    fontFamily: "constan",
+    // fontFamily: "constan",
   },
   // seekerNavHeader:{
   //   fontFamily: "constan",
@@ -36,11 +36,11 @@ export const globalStyles = StyleSheet.create({
   // ========================= navigation styles ==========================
   // start screen
   startNavigationTitle: {
-    fontFamily: 'constan-bold',
+    // fontFamily: 'constan-bold',
     color: 'white',
   },
   startNavigationHeader: {
-    fontFamily: "constan",
+    // fontFamily: "constan",
     backgroundColor: '#A2D683',
     opacity: 0.7,
   },
@@ -64,7 +64,7 @@ export const globalStyles = StyleSheet.create({
 
   // keeper screen navigation styles
   keeperNavigationTitle: {
-    fontFamily: 'constan-bold',
+    // fontFamily: 'constan-bold',
     color: 'white',
   },
   keeperNavigationHeader: {
@@ -94,7 +94,7 @@ export const globalStyles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    fontFamily: 'constan-bold',
+    // fontFamily: 'constan-bold',
     textAlign: 'center',
     fontSize: 16,
     // fontWeight: 'bold',
@@ -117,7 +117,7 @@ export const globalStyles = StyleSheet.create({
   welcomeText:
   {
     // flex: 2,
-    fontFamily: "constan",
+    // fontFamily: "constan",
     fontSize: 30,
     textAlign: "center",
     color: "#71B1C8",
@@ -136,7 +136,7 @@ export const globalStyles = StyleSheet.create({
   input: {
     // flex: 2,
     fontSize: 40,
-    fontFamily: "constan",
+    // fontFamily: "constan",
     textAlign: "center",
   },
   // joinButton: {
@@ -175,7 +175,7 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     letterSpacing: 2,
-    fontFamily: "constan",
+    // fontFamily: "constan",
     color: "grey",
     textAlign: "center",
   },
@@ -184,7 +184,7 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     letterSpacing: 2,
-    fontFamily: "constan",
+    fontFamily: "Roboto",
     color: "grey",
     textAlign: "center",
   },
@@ -194,7 +194,7 @@ export const globalStyles = StyleSheet.create({
   //seeker general design
   seekerBodyText: {
     textAlign: "center",
-    fontFamily: "constan",
+    // fontFamily: "constan",
     fontSize: 20,
 
   },
@@ -290,7 +290,7 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     letterSpacing: 2,
-    fontFamily: "constan-bold",
+    // fontFamily: "constan-bold",
     color: "white",
     textAlign: "center",
     textTransform: "uppercase",
