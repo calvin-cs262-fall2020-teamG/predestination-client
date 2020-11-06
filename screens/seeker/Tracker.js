@@ -11,11 +11,11 @@ import Circle from '../../components/Circle';
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
- * TODO: styling, connecting to gps
+ * TODO: connecting tempCount and proximity to gps
  */
 export default function SeekerFocusedScreen({ route, navigation }) {
 
-    const getOfficialMessage = (proximity) => {
+    const getOfficialMessage = () => {
         return PROXIMITY_MESSAGES[proximity].official;
     }
 
@@ -26,6 +26,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
     const [animation, setAnimation] = useState(new Animated.Value(0));
     const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1));
+    const [successOpacityAnimation, setSuccessOpacityAnimation] = useState(new Animated.Value(0.0));
+    
     const [textColorAnimated, setTextColorAnimated] = useState('rgb(0, 0, 0)');
     const [isBeginning, setIsBeginning] = useState(true);
 
@@ -39,15 +41,15 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [middleTargetRadius, setMiddleTargetRadius] = useState(new Animated.Value(1));
     const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
-    const [successMessage, setSuccessMessage] = useState('');
-    const [points, setPoints] = useState(new Animated.Value(0.0));
+
 
 
     const partyTime = () => {
         Animated.sequence([
-            Animated.timing(points, {
-                toValue: 10,//(notePack.getFocused() === null) ? 0 : notePack.getFocused().points,
-                duration: 500,
+            Animated.delay(800),
+            Animated.timing(successOpacityAnimation, {
+                toValue: 1,
+                duration: 400,
                 useNativeDriver: true,
             }),
         ]).start();
@@ -55,11 +57,18 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
     const animateSize = () => {
         Animated.sequence([
-            Animated.timing(opacityAnimation, {
-                toValue: 0,
-                duration: (proximity === 'SUCCESS') ? 0 : 500,
-                useNativeDriver: true,
-            }),
+            Animated.parallel([
+                Animated.timing(opacityAnimation, {
+                    toValue: 0,
+                    duration: (proximity === 'SUCCESS') ? 0 : 500,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(successOpacityAnimation, {
+                    toValue: 0.0,
+                    duration: 10,
+                    useNativeDriver: true,
+                })
+            ]),            
             Animated.parallel([
                 Animated.timing(innerTargetRadius, {
                     toValue: tempCount,
@@ -119,7 +128,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
     // todo: for debugging purposes only to show all the levels of proximity to given location
     const nextProximity = () => {
-        setTempCount((tempCount + 1) % 4);
+        if (notePack.getFocused() !== null) {
+            setTempCount((tempCount + 1) % 4);
+        }        
     }
 
     useEffect(() => {
@@ -148,7 +159,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>"{proximitySillyMessage}"</Animated.Text>
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: 30, opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated, padding: 20 }}>{proximityOfficialMessage}</Animated.Text>
-
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', alignSelf: 'center', opacity: successOpacityAnimation, fontWeight: 'bold', fontSize: 128, color: textColorAnimated, padding: 20 }}>+{(notePack.getFocused() === null) ? 0 : notePack.getFocused().points}</Animated.Text>
             </TouchableOpacity>
 
             
