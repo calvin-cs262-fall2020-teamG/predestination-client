@@ -142,7 +142,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
             </TouchableOpacity>
 
-            <Animated.Text style={{ position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated }}>{proximitySillyMessage}</Animated.Text>
+            <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>{proximitySillyMessage}</Animated.Text>
 
 
             <View style={styles.bottomContainer}>
