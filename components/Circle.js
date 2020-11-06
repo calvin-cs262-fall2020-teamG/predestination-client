@@ -38,8 +38,6 @@ export default function Circle(props) {
         position: 'absolute'
     };
 
-    console.log(console.log(props.diameter));
-
     return (
 
         <Animated.View style={[styles,

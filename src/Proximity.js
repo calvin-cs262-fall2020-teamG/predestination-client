@@ -36,7 +36,7 @@ export const PROXIMITY_MESSAGES = {
         ],
     },
     SUCCESS: {
-        official: 'You found it!',
+        official: 'Congratulations!',
         silly: [
             'Finally',
             'If you would\'ve listened to me, we would have gotten here a loooong time ago',

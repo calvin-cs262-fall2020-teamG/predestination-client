@@ -16,15 +16,13 @@ import Circle from '../../components/Circle';
 export default function SeekerFocusedScreen({ route, navigation }) {
 
     const getOfficialMessage = () => {
-        return PROXIMITY_MESSAGES[proximity].official;
+        return (proximity === null) ? '' : PROXIMITY_MESSAGES[proximity].official;
     }
 
-    const getSillyMessage = (proximity) => {
-        return PROXIMITY_MESSAGES[proximity].silly[Math.floor(Math.random() * PROXIMITY_MESSAGES[proximity].silly.length)];
+    const getSillyMessage = () => {
+        return (proximity === null) ? '' : '"' + PROXIMITY_MESSAGES[proximity].silly[Math.floor(Math.random() * PROXIMITY_MESSAGES[proximity].silly.length)] + '\"';
     }
 
-
-    const [animation, setAnimation] = useState(new Animated.Value(0));
     const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1));
     const [successOpacityAnimation, setSuccessOpacityAnimation] = useState(new Animated.Value(0.0));
     
@@ -32,17 +30,17 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [isBeginning, setIsBeginning] = useState(true);
 
     const { notePack } = useContext(NotesContext);
-    const [proximity, setProximity] = useState(PROXIMITY.FAR);
+    const [proximity, setProximity] = useState(null);
     const [proximityOfficialMessage, setProximityOfficialMessage] = useState(getOfficialMessage(proximity));
     const [proximitySillyMessage, setProximitySillyMessage] = useState(getSillyMessage(proximity));
     const [tempCount, setTempCount] = useState(0); // todo: for debugging purposes only
 
-    const [innerTargetRadius, setInnerTargetRadius] = useState(new Animated.Value(0));
-    const [middleTargetRadius, setMiddleTargetRadius] = useState(new Animated.Value(1));
-    const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
+    const [radius, setRadius] = useState(new Animated.Value(0));
 
-
+    // const [innerTargetRadius, setInnerTargetRadius] = useState(new Animated.Value(0));
+    // const [middleTargetRadius, setMiddleTargetRadius] = useState(new Animated.Value(1));
+    // const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
     const partyTime = () => {
         Animated.sequence([
@@ -68,24 +66,12 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                     duration: 10,
                     useNativeDriver: true,
                 })
-            ]),            
-            Animated.parallel([
-                Animated.timing(innerTargetRadius, {
-                    toValue: tempCount,
-                    duration: (proximity === 'SUCCESS') ? 300 : 500,
-                    useNativeDriver: true,
-                }),
-                Animated.timing(middleTargetRadius, {
-                    toValue: tempCount + 1,
-                    duration: (proximity === 'SUCCESS') ? 200 : 500,
-                    useNativeDriver: true,
-                }),
-                Animated.timing(outerTargetRadius, {
-                    toValue: tempCount + 2,
-                    duration: (proximity === 'SUCCESS') ? 200 : 500,
-                    useNativeDriver: true,
-                })
-            ]),           
+            ]),
+            Animated.timing(radius, {
+                toValue: tempCount,
+                duration: (proximity === 'SUCCESS') ? 300 : 500,
+                useNativeDriver: true,
+            }),          
         ]).start(() => {
             setProximityOfficialMessage(getOfficialMessage(proximity));
 
@@ -122,7 +108,6 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         } else {
             // when proximity is initialized, set don't run an animation
             setIsBeginning(false);
-
         }
     }, [proximity]);
 
@@ -153,11 +138,11 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
 
             <TouchableOpacity activeOpacity={1} style={{ flex: 3, height: '100%', width: '100%', maxWidth: '100%', justifyContent: 'center', alignItems: 'center' }} onPress={nextProximity}>
-                <Circle color='#05386B' diameter={outerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
-                <Circle color='#379683' diameter={middleTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
-                <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
+                <Circle color='#05386B' diameter={Animated.add(radius, 2).interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
+                <Circle color='#379683' diameter={Animated.add(radius, 1).interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
+                <Circle color='#5CDB95' diameter={radius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
 
-                <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>"{proximitySillyMessage}"</Animated.Text>
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>{proximitySillyMessage}</Animated.Text>
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: 30, opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated, padding: 20 }}>{proximityOfficialMessage}</Animated.Text>
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', alignSelf: 'center', opacity: successOpacityAnimation, fontWeight: 'bold', fontSize: 128, color: textColorAnimated, padding: 20 }}>+{(notePack.getFocused() === null) ? 0 : notePack.getFocused().points}</Animated.Text>
             </TouchableOpacity>
@@ -167,7 +152,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             <View style={styles.bottomContainer}>
                 <View style={styles.stuckContainer}>
                     <View style={styles.stuckButton}>
-                        <CustomButton color='orange' title={(notePack.getFocused() === null) ? "Select Clue" : "Stuck"} onPress={() => { navigation.navigate("TrackerListScreen") }} />
+                        <CustomButton color='orange' title={(notePack.getFocused() === null) ? "Select Clue" : (proximity === 'SUCCESS') ? "New Clue" : "Stuck"} onPress={() => { navigation.navigate("TrackerListScreen") }} />
                     </View>
 
                     <View style={globalStyles.stuckText}>

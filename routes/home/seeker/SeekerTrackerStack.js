@@ -21,7 +21,7 @@ export default function TrackerStack({ navigation }) {
                     headerShown: false,
                 }}>
 
-                <Stack.Screen name="Tracker" component={TrackerScreen} options={{ title: "Tracker"}}/>
+                <Stack.Screen name="Tracker" component={TrackerScreen} options={{ title: "Tracker" }}/>
                 <Stack.Screen name="TrackerList" component={TrackerListScreen} options={{ title: 'TrackerList' }} />
 
             </Stack.Navigator>
