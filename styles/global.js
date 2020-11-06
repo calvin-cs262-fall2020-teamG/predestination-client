@@ -320,6 +320,5 @@ export const globalStyles = StyleSheet.create({
   },
 
   // end styles from KeeperEditorScreen.js
-
 });
 
