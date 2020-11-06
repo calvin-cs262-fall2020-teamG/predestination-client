@@ -38,7 +38,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
     const [animation, setAnimation] = useState(new Animated.Value(0));
     const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1));
-    const [textColorAnimated, setTextColorAnimated] = useState(new Animated.Value('rgb(0, 0, 0)'));
+    const [textColorAnimated, setTextColorAnimated] = useState('rgb(0, 0, 0)');
     const [isBeginning, setIsBeginning] = useState(true);
 
     const { notePack } = useContext(NotesContext);
@@ -79,6 +79,12 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         ]).start(() => {
             if (proximity !== 'SUCCESS') {
                 setProximitySillyMessage(getSillyMessage(proximity));
+            }
+
+            if (proximity !== 'FAR') {
+                setTextColorAnimated('rgb(255,255,255)');
+            } else {
+                setTextColorAnimated('rgb(0,0,0)');
             }
             
             Animated.timing(opacityAnimation, {
@@ -136,7 +142,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
             </TouchableOpacity>
 
-            <Animated.Text style={{ position: 'absolute', top: 30, opacity: opacityAnimation }}>{proximitySillyMessage}</Animated.Text>
+            <Animated.Text style={{ position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated }}>{proximitySillyMessage}</Animated.Text>
 
 
             <View style={styles.bottomContainer}>
