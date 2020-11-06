@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
         padding: 15,
         width: 150,
     },
-    // Arrow below callout bubble
+    // Triangle shape below callout bubble
     arrow: {
         backgroundColor: 'transparent',
         borderColor: 'transparent',
