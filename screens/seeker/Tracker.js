@@ -15,6 +15,17 @@ import Circle from '../../components/Circle';
  */
 export default function SeekerFocusedScreen({ route, navigation }) {
 
+    // each circle's radius will be defined as the sum of the wave animated value and the main animated value
+    const circleAnimation = (new Array(3)).fill().map((item, index) => {
+        const wave = new Animated.Value(0);
+        const main = new Animated.Value(index);
+        return {
+            wave,
+            main,
+            total: Animated.add(wave, main),
+        };
+    });
+
     const inputColors = {
         FAR: 200,
         CLOSE: 2,
@@ -51,11 +62,15 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [middleTargetRadius, setMiddleTargetRadius] = useState(new Animated.Value(1));
     const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
+
     let first = true;
+
+    const resizeTarget = (radius) => {
+
+    }
 
     const startAnimation = () => {
         Animated.sequence([
-            // after decay, in parallel:
             Animated.timing(opacityAnimation, {
                 toValue: 0,
                 duration: 200,
@@ -82,7 +97,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 Animated.sequence([
                     Animated.delay(200),
                     Animated.timing(middleTargetRadius, {
-                        toValue: tempCount+1,
+                        toValue: tempCount + 1,
                         duration: 800,
                         useNativeDriver: false,
                     }),
@@ -90,26 +105,48 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 Animated.sequence([
                     Animated.delay(300),
                     Animated.timing(outerTargetRadius, {
-                        toValue: tempCount+2,
+                        toValue: tempCount + 2,
                         duration: 500,
                         useNativeDriver: false,
                     }),
                 ])
-                
-                
-
             ]).start();
 
         });
+
+    }
+
+    const animateWave = (waveOffset) => {
+        const delta = 0.1;
+        console.log("animating wave");
+        Animated.loop(
+            Animated.sequence([
+                Animated.delay(Math.random() * 200 + 100),
+                Animated.timing(waveOffset, {
+                    toValue: 0.0 - delta,
+                    duration: Math.random() * 400 + 100,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(waveOffset, {
+                    toValue: delta,
+                    duration: Math.random() * 400 + 100,
+                    useNativeDriver: true,
+                }),
+            ])
+        );
     }
 
     useEffect(() => {
         // Only after the first change can animation begin
         if (!isBeginning) {
             startAnimation();
+            circleAnimation.forEach(i => {
+                animateWave(i.wave);
+            });
         } else {
             // when proximity is initialized, set don't run an animation
             setIsBeginning(false);
+
         }
     }, [proximity]);
 
@@ -125,27 +162,26 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const screenWidth = Dimensions.get('window').width;
     const screenHeight = Dimensions.get('window').height;
 
-
     const targetInterpolation = {
         inputRange: [0, 1, 2, 3],
-        outputRange: [0.2, 0.3, 0.4, 10].map(i => i*screenWidth)
-    }
+        outputRange: [0.2, 0.3, 0.4, 0.5].map(i => i * screenWidth)
+    };
+    
 
     return (
         <Animated.View style={{
             ...styles.flexContainer
         }}>
 
-        <TouchableOpacity activeOpacity={1} style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center'}} onPress={nextProximity}>
-            <Circle color='#05386B' diameter={Animated.add(outerTargetRadius.interpolate(targetInterpolation), 50)}>
-                <Circle color='#379683' diameter={Animated.add(middleTargetRadius.interpolate(targetInterpolation), 20)}>
-                    <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)}>
-
+            <TouchableOpacity activeOpacity={1} style={{ flex: 2, height: '100%', width: '100%', maxWidth: '100%', justifyContent: 'center', alignItems: 'center' }} onPress={nextProximity}>
+                <Circle color='#05386B' diameter={circleAnimation[2].total.interpolate(targetInterpolation)}>
+                    <Circle color='#379683' diameter={circleAnimation[1].total.interpolate(targetInterpolation)}>
+                        <Circle color='#5CDB95' diameter={circleAnimation[0].total.interpolate(targetInterpolation)}>
+                        </Circle>
                     </Circle>
                 </Circle>
-            </Circle>
-        </TouchableOpacity>
-            
+            </TouchableOpacity>
+
 
             <View style={styles.bottomContainer}>
                 <View style={styles.stuckContainer}>
@@ -215,14 +251,14 @@ const styles = StyleSheet.create({
         minHeight: 50,
     },
     bottomContainer: {
-        flex: 2,
+        flex: 3,
         flexDirection: 'column',
         justifyContent: 'space-around',
-
+        width: '100%',
+        backgroundColor: 'white'
     },
     stuckContainer: {
         flex: 1,
-        justifyContent: 'flex-end',
         minHeight: 70,
         marginBottom: 20,
         marginTop: 20,
