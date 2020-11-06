@@ -51,9 +51,12 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [middleTargetRadius, setMiddleTargetRadius] = useState(new Animated.Value(1));
     const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
-    const [successMessage, setSuccessMessage] = useState('Congratulations!');
+    const [successMessage, setSuccessMessage] = useState('');
 
+    const partyTime = () => {
+        setSuccessMessage(`+${0}`);
 
+    };
 
     const animateSize = () => {
         Animated.sequence([
@@ -82,6 +85,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         ]).start(() => {
             if (proximity !== 'SUCCESS') {
                 setProximitySillyMessage(getSillyMessage(proximity));
+            } else {
+                partyTime();
             }
 
             if (proximity !== 'FAR') {
@@ -143,11 +148,13 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 <Circle color='#05386B' diameter={outerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#379683' diameter={middleTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
+
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>{proximitySillyMessage}</Animated.Text>
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', marginBottom: '50%', opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated, padding: 20 }}>{successMessage}</Animated.Text>
+
             </TouchableOpacity>
 
-            <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>{proximitySillyMessage}</Animated.Text>
-
-            <Animated.Text style={{ textAlign: 'center', position: 'absolute', marginTop: '50%', opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>{successMessage}</Animated.Text>
+            
 
             <View style={styles.bottomContainer}>
                 <View style={styles.stuckContainer}>
