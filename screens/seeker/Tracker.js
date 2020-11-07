@@ -25,7 +25,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
 
     const [animation, setAnimation] = useState(new Animated.Value(0));
-    const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1));
+    const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1.0));
     const [successOpacityAnimation, setSuccessOpacityAnimation] = useState(new Animated.Value(0.0));
     
     const [textColorAnimated, setTextColorAnimated] = useState('rgb(0, 0, 0)');
@@ -122,7 +122,6 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         } else {
             // when proximity is initialized, set don't run an animation
             setIsBeginning(false);
-
         }
     }, [proximity]);
 
@@ -156,7 +155,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 <Circle color='#379683' diameter={middleTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
 
-                <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>"{proximitySillyMessage}"</Animated.Text>
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20, }}>"{proximitySillyMessage}"</Animated.Text>
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated, padding: 20 }}>{proximityOfficialMessage}</Animated.Text>
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', alignSelf: 'center', opacity: successOpacityAnimation, fontWeight: 'bold', fontSize: 128, color: textColorAnimated, padding: 20 }}>+{(notePack.getFocused() === null) ? 0 : notePack.getFocused().points}</Animated.Text>
             </TouchableOpacity>
@@ -179,9 +178,22 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
                 </View>
 
-                <ScrollView style={styles.noteContainer}>
+                <View
+                    style={{
+                        borderBottomColor: 'lightgray',
+                        borderBottomWidth: 1,
+                        width: '90%',
+                        alignSelf: 'center',
+                        display: (notePack.getFocused() === null) ? 'none' : 'flex',   
+                    }}
+                />
+
+                <ScrollView style={{
+                    ...styles.noteContainer,
+                    display: (notePack.getFocused() === null) ? 'none' : 'flex',                    
+                }}>
                     <Text>
-                        {(notePack.getFocused() === null) ? "No clue selected" : notePack.getFocused().clue}
+                        {(notePack.getFocused() === null) ? "This should not be shown" : notePack.getFocused().clue}  
                     </Text>
                 </ScrollView>
             </View>
@@ -234,12 +246,15 @@ const styles = StyleSheet.create({
     },
     noteContainer: {
         alignSelf: 'flex-start',
-        padding: 20
+        minHeight: 100,
+        padding: 20,
     },
     bottomContainer: {
+        paddingTop: 20,
         flexDirection: 'column',
         justifyContent: 'space-around',
         width: '100%',
+        minHeight: '30%',
         backgroundColor: 'white',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
@@ -250,8 +265,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
-        minHeight: 200,
 
         elevation: 5,
     },
