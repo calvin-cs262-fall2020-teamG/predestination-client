@@ -13,7 +13,7 @@ export default function CustomButton({ title, onPress, color }) {
       <View style={globalStyles.buttonView}>
         <Text style={{
           ...globalStyles.buttonText,
-          color: color === undefined ? 'maroon' : color,
+          color: 'white'//color === undefined ? 'maroon' : color,
           }}>{title.toUpperCase()}</Text>
       </View>
     </TouchableOpacity>

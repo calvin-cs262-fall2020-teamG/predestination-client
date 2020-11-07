@@ -65,7 +65,7 @@ export default function SeekerGameScreen({ route, navigation }) {
 
             <View style={styles.bottomSection}>
                 <View>
-                    <Text style={globalStyles.headerText}>Leaderboard goes here</Text>
+                    <Text style={globalStyles.headerText}>Leaderboard</Text>
                     <Leaderboard
                         data={keeperLeaderboard}
                         sortBy="clueStatus" //sorts the leaderboard by clueStatus
