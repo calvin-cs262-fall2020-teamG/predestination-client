@@ -155,8 +155,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 <Circle color='#379683' diameter={middleTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
 
-                <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20, }}>"{proximitySillyMessage}"</Animated.Text>
-                <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated, padding: 20 }}>{proximityOfficialMessage}</Animated.Text>
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: '3%', opacity: opacityAnimation, color: textColorAnimated,  }}>"{proximitySillyMessage}"</Animated.Text>
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: '3%', opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated }}>{proximityOfficialMessage}</Animated.Text>
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', alignSelf: 'center', opacity: successOpacityAnimation, fontWeight: 'bold', fontSize: 128, color: textColorAnimated, padding: 20 }}>+{(notePack.getFocused() === null) ? 0 : notePack.getFocused().points}</Animated.Text>
             </TouchableOpacity>
 
@@ -250,11 +250,10 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     bottomContainer: {
-        paddingTop: 20,
         flexDirection: 'column',
         justifyContent: 'space-around',
         width: '100%',
-        minHeight: '30%',
+        height: '30%',
         backgroundColor: 'white',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
@@ -274,8 +273,8 @@ const styles = StyleSheet.create({
         paddingBottom: 6, //for some reason this is needed to force the text to look centered with the stuck button
     },  
     bottomContainerHeader: {
-        marginBottom: 20,
-        marginTop: 20,
+        marginBottom: 5,
+        marginTop: 15,
         flexDirection: 'row',
         alignContent: 'center',
         justifyContent: 'space-around',
