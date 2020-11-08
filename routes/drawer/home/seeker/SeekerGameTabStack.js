@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 import SeekerGameScreen from '../../../../screens/seeker/SeekerGameScreen';
 import SeekerTrackerStack from './SeekerTrackerStack';
@@ -15,7 +15,7 @@ export default function SeekerGameTabStack() {
   return (
       <Tab.Navigator
         tabBarOptions={{
-          showLabel: false,
+          showLabel: false,          
         }}
         screenOptions={({ route }) => ({
           
@@ -24,7 +24,20 @@ export default function SeekerGameTabStack() {
             let fontColor = focused ? '#5CDB95' : 'gray';
             
             return (
-              <Icon name={icon} size={30} color={fontColor}/>
+              <View style={{ 
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderColor: focused ? '#5CDB95' : 'lightgray',
+                borderWidth: 1,
+                height: '80%',
+                width: '70%',
+                borderRadius: 10
+                }}>
+                <Icon name={icon} size={25} color={fontColor}/>  
+                <Text style={{ color: fontColor}}>   {route.name}</Text>
+              </View>
+              
             )
           }
         })}
