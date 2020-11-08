@@ -172,8 +172,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                        <Text style={{textAlign: 'center', fontSize: 24, justifyContent: 'center',}}>{(notePack.getFocused() === null) ? '' : notePack.getFocused().points}</Text>
-                        <Text style={{textAlign: 'center', fontSize: 24, justifyContent: 'center', color: 'gray'}}> Points</Text>
+                        <Text style={{textAlign: 'center', fontSize: 24, justifyContent: 'center', fontWeight: 'bold'}}>{(notePack.getFocused() === null) ? '' : notePack.getFocused().points} Points</Text>
                     </View>
 
                     <View style={styles.stuckButton}>
@@ -238,7 +237,6 @@ const styles = StyleSheet.create({
         paddingRight: 20,
     },
     stuckButton: {
-        marginBottom: 10,
         flex: 1,
     },
     flexContainer: {
@@ -274,8 +272,6 @@ const styles = StyleSheet.create({
     pointContainer: {
         flex: 1,
         justifyContent: 'center',
-        
-        paddingBottom: 6, //for some reason this is needed to force the text to look centered with the stuck button
     },  
     bottomContainerHeader: {
         marginBottom: 5,
@@ -283,6 +279,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: 'center',
         justifyContent: 'space-around',
+        paddingBottom: 10,
     },
     gameButton: {
         marginBottom: 20,
