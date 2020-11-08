@@ -9,7 +9,7 @@ export default function CustomButton({ title, onPress, color }) {
 
   return (
 
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity activeOpacity={1} onPress={onPress}>
       <View style={globalStyles.buttonView}>
         <Text style={{
           ...globalStyles.buttonText,
@@ -21,5 +21,3 @@ export default function CustomButton({ title, onPress, color }) {
   );
 
 }
-
-const radius = 7;

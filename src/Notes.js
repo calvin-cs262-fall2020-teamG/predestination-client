@@ -14,7 +14,7 @@ export class NotePack {
             { clue: 'Not starbucks', archived: false, points: 2, key: '6' },
             { clue: 'Only arcade on campus', archived: true, points: 10, key: '7' },
             { clue: 'What is holey, made out of metal, and yellow at Calvin?', archived: true, points: 5, key: '8' },
-            { clue: 'The worst dining hall\'s entrance', archived: false, points: 5, key: '9' },
+            { clue: 'The worst dining hall\'s entrance. The worst dining hall\'s entrance. The worst dining hall\'s entrance. The worst dining hall\'s entrance. The worst dining hall\'s entrance. The worst dining hall\'s entrance. ', archived: false, points: 5, key: '9' },
             { clue: 'Not starbucks', archived: false, points: 3, key: '10' },
             { clue: 'Only arcade on campus', archived: true, points: 10, key: '11' },
         ];

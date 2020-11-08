@@ -167,9 +167,13 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                     
                     <View style={{
                         ...styles.pointContainer,
-                        display: (notePack.getFocused() === null) ? 'none' : 'flex'
+                        display: (notePack.getFocused() === null) ? 'none' : 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center'
                     }}>
-                        <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 24, justifyContent: 'center'}}>{(notePack.getFocused() === null) ? '' : notePack.getFocused().points} Points</Text>
+                        <Text style={{textAlign: 'center', fontSize: 24, justifyContent: 'center',}}>{(notePack.getFocused() === null) ? '' : notePack.getFocused().points}</Text>
+                        <Text style={{textAlign: 'center', fontSize: 24, justifyContent: 'center', color: 'gray'}}> Points</Text>
                     </View>
 
                     <View style={styles.stuckButton}>
@@ -190,9 +194,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
                 <ScrollView style={{
                     ...styles.noteContainer,
-                    display: (notePack.getFocused() === null) ? 'none' : 'flex',                    
+                    display: (notePack.getFocused() === null) ? 'none' : 'flex',              
                 }}>
-                    <Text>
+                    <Text style={{ fontSize: 24, marginBottom: 50}}>
                         {(notePack.getFocused() === null) ? "This should not be shown" : notePack.getFocused().clue}  
                     </Text>
                 </ScrollView>
@@ -270,6 +274,7 @@ const styles = StyleSheet.create({
     pointContainer: {
         flex: 1,
         justifyContent: 'center',
+        
         paddingBottom: 6, //for some reason this is needed to force the text to look centered with the stuck button
     },  
     bottomContainerHeader: {
