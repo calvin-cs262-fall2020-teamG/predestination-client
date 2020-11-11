@@ -25,16 +25,21 @@ export default function SeekerWaitingScreen({ route, navigation }) {
   }, [timeLeft])
 
   return (
-    <View style={{ alignItems: 'center',  }}>
+    <View style={{ alignItems: 'center',  backgroundColor: '#5CDB95', height: '100%', flexDirection: 'column-reverse', justifyContent: 'space-around' }}>
 
-        <FloatingView title="Game will begin shortly" style={{ width: '90%', marginTop: '10%'}}>
+        
+
+
+        <FloatingView title="Game will begin shortly" style={{ width: '90%', marginBottom: '10%'}}>
           <Text>While you wait, share the game code with a friend! As they say, the more the merrier!</Text>
           
           <CustomButton style={{ marginTop: 20 }} title={disabled ? `${timeLeft}` : "Join"} disabled={disabled} onPress={disabled ? () => {} : () => navigation.navigate('SeekerGameTabStack', {screen: 'SeekerGameScreen'})}/>
         </FloatingView>
 
-        <View>
-        </View>
+        <Text style={{ fontWeight: 'bold', fontSize: 64, color: 'white'}}>
+          {route.params.code}
+        </Text>
+
 
       {/* <Text style={globalStyles.seekerBodyText}>
         Waiting for game to start... {"\n"}The more the merrier!{"\n"}
