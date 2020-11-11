@@ -25,7 +25,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
 
     const [animation, setAnimation] = useState(new Animated.Value(0));
-    const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1));
+    const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1.0));
     const [successOpacityAnimation, setSuccessOpacityAnimation] = useState(new Animated.Value(0.0));
     
     const [textColorAnimated, setTextColorAnimated] = useState('rgb(0, 0, 0)');
@@ -122,7 +122,6 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         } else {
             // when proximity is initialized, set don't run an animation
             setIsBeginning(false);
-
         }
     }, [proximity]);
 
@@ -151,33 +150,50 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             ...styles.flexContainer
         }}>
 
-
             <TouchableOpacity activeOpacity={1} style={{ flex: 3, height: '100%', width: '100%', maxWidth: '100%', justifyContent: 'center', alignItems: 'center' }} onPress={nextProximity}>
                 <Circle color='#05386B' diameter={outerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#379683' diameter={middleTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
                 <Circle color='#5CDB95' diameter={innerTargetRadius.interpolate(targetInterpolation)} screenWidth={screenWidth}></Circle>
 
-                <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: 30, opacity: opacityAnimation, color: textColorAnimated, padding: 20 }}>"{proximitySillyMessage}"</Animated.Text>
-                <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: 30, opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated, padding: 20 }}>{proximityOfficialMessage}</Animated.Text>
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', bottom: '3%', opacity: opacityAnimation, color: textColorAnimated,  }}>"{proximitySillyMessage}"</Animated.Text>
+                <Animated.Text style={{ textAlign: 'center', position: 'absolute', top: '3%', opacity: opacityAnimation, fontWeight: 'bold', fontSize: 24, color: textColorAnimated }}>{proximityOfficialMessage}</Animated.Text>
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', alignSelf: 'center', opacity: successOpacityAnimation, fontWeight: 'bold', fontSize: 128, color: textColorAnimated, padding: 20 }}>+{(notePack.getFocused() === null) ? 0 : notePack.getFocused().points}</Animated.Text>
             </TouchableOpacity>
 
             
 
             <View style={styles.bottomContainer}>
-                <View style={styles.stuckContainer}>
-                    <View style={styles.stuckButton}>
-                        <CustomButton color='orange' title={(notePack.getFocused() === null) ? "Select Clue" : "Stuck"} onPress={() => { navigation.navigate("TrackerListScreen") }} />
+                <View style={styles.bottomContainerHeader}>
+                    
+                    <View style={{
+                        ...styles.pointContainer,
+                        display: (notePack.getFocused() === null) ? 'none' : 'flex'
+                    }}>
+                        <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 24, justifyContent: 'center'}}>{(notePack.getFocused() === null) ? '' : notePack.getFocused().points} Points</Text>
                     </View>
 
-                    <View style={globalStyles.stuckText}>
-                        <Text>Stuck and want to try another one?</Text>
+                    <View style={styles.stuckButton}>
+                        <CustomButton color='orange' title={(notePack.getFocused() === null) ? "Select Clue" : (proximity === 'SUCCESS') ? 'New' : "Stuck"} onPress={() => { navigation.navigate("TrackerListScreen") }} />
                     </View>
+
                 </View>
 
-                <ScrollView style={styles.noteContainer}>
+                <View
+                    style={{
+                        borderBottomColor: 'lightgray',
+                        borderBottomWidth: 1,
+                        width: '90%',
+                        alignSelf: 'center',
+                        display: (notePack.getFocused() === null) ? 'none' : 'flex',   
+                    }}
+                />
+
+                <ScrollView style={{
+                    ...styles.noteContainer,
+                    display: (notePack.getFocused() === null) ? 'none' : 'flex',                    
+                }}>
                     <Text>
-                        {(notePack.getFocused() === null) ? "No clue selected" : notePack.getFocused().clue}
+                        {(notePack.getFocused() === null) ? "This should not be shown" : notePack.getFocused().clue}  
                     </Text>
                 </ScrollView>
             </View>
@@ -219,43 +235,49 @@ const styles = StyleSheet.create({
     },
     stuckButton: {
         marginBottom: 10,
+        flex: 1,
     },
     flexContainer: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: 'white',
+        backgroundColor: '#f8f9fa',
         justifyContent: 'center',
         alignItems: 'center',
     },
     noteContainer: {
-        alignSelf: 'center',
-        minHeight: 50,
+        alignSelf: 'flex-start',
+        minHeight: 100,
+        padding: 20,
     },
     bottomContainer: {
-        flex: 2,
         flexDirection: 'column',
         justifyContent: 'space-around',
         width: '100%',
+        height: '30%',
         backgroundColor: 'white',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         shadowColor: "#000",
-    shadowOffset: {
-	    width: 0,
-	    height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
 
-    elevation: 5,
+        elevation: 5,
     },
-    stuckContainer: {
+    pointContainer: {
         flex: 1,
-        minHeight: 70,
-        marginBottom: 20,
-        marginTop: 20,
-        alignItems: 'center',
-        /*backgroundColor: 'black'*/
+        justifyContent: 'center',
+        paddingBottom: 6, //for some reason this is needed to force the text to look centered with the stuck button
+    },  
+    bottomContainerHeader: {
+        marginBottom: 5,
+        marginTop: 15,
+        flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'space-around',
     },
     gameButton: {
         marginBottom: 20,

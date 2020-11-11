@@ -78,7 +78,7 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 30,
     borderWidth: 0,
-    backgroundColor: 'white',
+    backgroundColor: '#5CDB95',
     alignSelf: 'center',
     padding: 30,
     paddingTop: 10,
