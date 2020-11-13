@@ -89,7 +89,19 @@ export const globalStyles = StyleSheet.create({
   accountNavigationHeader: {
     backgroundColor: '#05386B',
   },
-  accocountNavigationDrawer: {
+  accountNavigationDrawer: {
+    color: '#05386B',
+  },
+
+  //about screen navigation styles
+  aboutNavigationTitle: {
+    // fontFamily: 'constan-bold',
+    color: 'white',
+  },
+  aboutNavigationHeader: {
+    backgroundColor: '#05386B',
+  },
+  aboutNavigationDrawer: {
     color: '#05386B',
   },
   // =========================Button Styles====================================
@@ -228,6 +240,23 @@ export const globalStyles = StyleSheet.create({
     width: 150,
     height: 150,
     margin: 25,
+  },
+  //=================start style from AboutScreen.js======================
+  aboutTitleText:{
+    margin: 10,
+    marginLeft: 20,
+    textAlign: "left",
+    fontSize: 25,
+    color: "grey",
+  },
+  aboutBodyText: {
+    marginTop: 5,
+    marginBottom: 5,
+    marginLeft: 20,
+    marginRight: 15,
+    textAlign: "left",
+    fontSize: 15,
+    lineHeight: 25,
   },
   //=================start styles from SeekerWaitingScreen.js=============
   WaitingCode: {
