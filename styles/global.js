@@ -81,6 +81,17 @@ export const globalStyles = StyleSheet.create({
     color: 'white',
   },
 
+  // account screen navigation styles
+  accountNavigationTitle: {
+    // fontFamily: 'constan-bold',
+    color: 'white',
+  },
+  accountNavigationHeader: {
+    backgroundColor: '#05386B',
+  },
+  accocountNavigationDrawer: {
+    color: '#05386B',
+  },
   // =========================Button Styles====================================
   buttonView: {
     justifyContent: 'center',

@@ -12,8 +12,9 @@ export default function AccountStack( {navigation} ) {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerRight: () =>  <Header navigation={navigation} />,   
-                headerTitleStyle: globalStyles.titleText,             
+                headerRight: () =>  <Header navigation={navigation} customStyle={globalStyles.accountNavigationDrawer}/>,
+                headerTitleStyle: globalStyles.accountNavigationTitle,
+                headerStyle: globalStyles.accountNavigationHeader,
             }}
         >
             <Stack.Screen
