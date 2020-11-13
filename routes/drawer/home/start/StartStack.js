@@ -20,8 +20,7 @@ export default function StartStack({ navigation }) {
                 headerStyle: globalStyles.startNavigationHeader,
             }}
         >
-
-            <Stack.Screen name="StartScreen" component={StartScreen} options={{ title: 'Welcome' }} />
+            <Stack.Screen name="StartScreen" component={StartScreen} options={{ title: 'Choose Your Path' }} />
         </Stack.Navigator>
     );
 };

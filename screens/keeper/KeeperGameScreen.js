@@ -33,10 +33,9 @@ export default function KeeperGameScreen({ navigation }) {
       { userName: "HAnderson", clueStatus: 2 },
     ]
   );
-
   return (
     <View>
-      <Text style={globalStyles.headerText}>Leaderboard Goes Here</Text>
+      <Text style={globalStyles.leaderBoardHeader}>Leaderboard</Text>
       {/* display leaderboard */}
       <Leaderboard
         data={keeperLeaderboard}

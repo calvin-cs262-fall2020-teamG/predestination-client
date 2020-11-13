@@ -23,11 +23,10 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         return PROXIMITY_MESSAGES[proximity].silly[Math.floor(Math.random() * PROXIMITY_MESSAGES[proximity].silly.length)];
     }
 
-
     const [animation, setAnimation] = useState(new Animated.Value(0));
     const [opacityAnimation, setOpacityAnimation] = useState(new Animated.Value(1.0));
     const [successOpacityAnimation, setSuccessOpacityAnimation] = useState(new Animated.Value(0.0));
-    
+
     const [textColorAnimated, setTextColorAnimated] = useState('rgb(0, 0, 0)');
     const [isBeginning, setIsBeginning] = useState(true);
 
@@ -68,7 +67,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                     duration: 10,
                     useNativeDriver: true,
                 })
-            ]),            
+            ]),
             Animated.parallel([
                 Animated.timing(innerTargetRadius, {
                     toValue: tempCount,
@@ -85,7 +84,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                     duration: (proximity === 'SUCCESS') ? 200 : 500,
                     useNativeDriver: true,
                 })
-            ]),           
+            ]),
         ]).start(() => {
             setProximityOfficialMessage(getOfficialMessage(proximity));
 
@@ -100,7 +99,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             } else {
                 setTextColorAnimated('rgb(0,0,0)');
             }
-            
+
             Animated.timing(opacityAnimation, {
                 toValue: (proximity === 'AT') ? 0.0 : 1.0,
                 duration: 500,
@@ -111,7 +110,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                         nextProximity();
                     });
                 }
-            });            
+            });
         });
     }
 
@@ -129,7 +128,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const nextProximity = () => {
         if (notePack.getFocused() !== null) {
             setTempCount((tempCount + 1) % 4);
-        }        
+        }
     }
 
     useEffect(() => {
@@ -160,11 +159,11 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 <Animated.Text style={{ textAlign: 'center', position: 'absolute', alignSelf: 'center', opacity: successOpacityAnimation, fontWeight: 'bold', fontSize: 128, color: textColorAnimated, padding: 20 }}>+{(notePack.getFocused() === null) ? 0 : notePack.getFocused().points}</Animated.Text>
             </TouchableOpacity>
 
-            
+
 
             <View style={styles.bottomContainer}>
                 <View style={styles.bottomContainerHeader}>
-                    
+
                     <View style={{
                         ...styles.pointContainer,
                         display: (notePack.getFocused() === null) ? 'none' : 'flex',
@@ -187,16 +186,16 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                         borderBottomWidth: 1,
                         width: '90%',
                         alignSelf: 'center',
-                        display: (notePack.getFocused() === null) ? 'none' : 'flex',   
+                        display: (notePack.getFocused() === null) ? 'none' : 'flex',
                     }}
                 />
 
                 <ScrollView style={{
                     ...styles.noteContainer,
-                    display: (notePack.getFocused() === null) ? 'none' : 'flex',              
+                    display: (notePack.getFocused() === null) ? 'none' : 'flex',
                 }}>
                     <Text style={{ fontSize: 24, marginBottom: 50}}>
-                        {(notePack.getFocused() === null) ? "This should not be shown" : notePack.getFocused().clue}  
+                        {(notePack.getFocused() === null) ? "This should not be shown" : notePack.getFocused().clue}
                     </Text>
                 </ScrollView>
             </View>
@@ -272,7 +271,7 @@ const styles = StyleSheet.create({
     pointContainer: {
         flex: 1,
         justifyContent: 'center',
-    },  
+    },
     bottomContainerHeader: {
         marginBottom: 5,
         marginTop: 15,

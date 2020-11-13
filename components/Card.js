@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     shadowRadius: 1.00,
     elevation: 1,
     borderRadius: 7,
-    
     backgroundColor: 'white',
   },
   contentSection: {
@@ -63,5 +62,5 @@ const styles = StyleSheet.create({
   },
   contentText: {
     fontSize: 15,
-  }, 
+  },
 });

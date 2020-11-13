@@ -1,9 +1,11 @@
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
+import { color } from 'react-native-reanimated';
 import PointComponent from '../../components/PointComponent';
 
 import { NotesContext, NotePack } from '../../src/Notes';
+import { globalStyles } from '../../styles/global';
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
  * TODO: styling, connecting to server
@@ -23,7 +25,7 @@ export default function SeekerClueList({ route, navigation }) {
     }
 
     return (
-        <View style={styles.flexContainer}>
+        <View style={globalStyles.trackerListFlexContainer}>
 
             <FlatList
                 data={notePack.notes.map(item => item.points).filter(onlyUnique).sort((a, b) => {
@@ -40,9 +42,6 @@ export default function SeekerClueList({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-    flexContainer: {
-        flex: 1,
-        flexDirection: 'column'
-    },
+
 });
 

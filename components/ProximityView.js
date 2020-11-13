@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
-
+import { globalStyles } from '../../styles/global';
 /**
  * ProximityView gives a clean user interface for showing whether a user is far, close, or at a location
  * TODO: styling, connect to gps
@@ -63,11 +63,11 @@ export default function ProximityView() {
       backgroundColor: locationProximity === PROXIMITY.CLOSE ? 'lightpink' : (locationProximity === PROXIMITY.AT ? 'lightgreen' : null),
     }}>
       <TouchableOpacity activeOpacity={1} onPress={tempToggleProximity}>
-        
+
         <View style={styles.touchableOpacityStyle}>
 
-          <View style={styles.officalTextContainer}>
-            <Text style={styles.officialText}>{PROXIMITY_MESSAGES[locationProximity].official}</Text>
+          <View style={globalStyles.proximityOfficalTextContainer}>
+            <Text style={globalStyles.proximityOfficialText}>{PROXIMITY_MESSAGES[locationProximity].official}</Text>
           </View>
 
           <View style={styles.sillyTextContainer}>
@@ -85,10 +85,6 @@ export default function ProximityView() {
 const radius = 7;
 
 const styles = StyleSheet.create({
-  officalTextContainer: {
-    flex: 1,
-    justifyContent: 'center',
-  },
   sillyTextContainer: {
     flex: 1,
     justifyContent: 'center'
@@ -96,12 +92,7 @@ const styles = StyleSheet.create({
   sillyText: {
     fontSize: 16,
     textAlign: 'center',
-  },  
-  officialText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },  
+  },
   mainContainer: {
     width: '100%',
     height: '100%',
