@@ -43,8 +43,7 @@ export default function SeekerGameScreen({ route, navigation }) {
     return (
 
         <View style={styles.flexContainer}>
-            <ImageBackground source={require('../../assets/background_uno.png')} style={styles.image}>
-
+            <ImageBackground source={require('../../assets/background_tres.png')} blurRadius={5} style={styles.image}>
                 <View style={styles.header}>
                     <View style={styles.pointsSection}>
                         <Text style={styles.pointText}>{points}</Text>
@@ -65,7 +64,7 @@ export default function SeekerGameScreen({ route, navigation }) {
 
             <View style={styles.bottomSection}>
                 <View>
-                    <Text style={globalStyles.headerText}>Leaderboard</Text>
+                    <Text style={globalStyles.leaderBoardHeader}>Leaderboard</Text>
                     <Leaderboard
                         data={keeperLeaderboard}
                         sortBy="clueStatus" //sorts the leaderboard by clueStatus
@@ -134,7 +133,7 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         resizeMode: "cover",
-        justifyContent: "center"
+        justifyContent: "center",
     },
 });
 

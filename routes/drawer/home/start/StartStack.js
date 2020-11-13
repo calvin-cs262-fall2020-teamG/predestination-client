@@ -21,7 +21,7 @@ export default function StartStack({ navigation }) {
             }}
         >
 
-            <Stack.Screen name="StartScreen" component={StartScreen} options={{ title: 'Welcome' }} />
+            <Stack.Screen name="StartScreen" component={StartScreen} options={{ title: 'Choose Your Path' }} />
         </Stack.Navigator>
     );
 };
