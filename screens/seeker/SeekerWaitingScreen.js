@@ -10,7 +10,7 @@ import FloatingView from '../../components/FloatingView';
  */
 export default function SeekerWaitingScreen({ route, navigation }) {
 
-  const [timeLeft, setTimeLeft] = useState(13);
+  const [timeLeft, setTimeLeft] = useState(2);
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
@@ -27,12 +27,12 @@ export default function SeekerWaitingScreen({ route, navigation }) {
   return (
     <View style={{ alignItems: 'center',  backgroundColor: '#5CDB95', height: '100%', flexDirection: 'column-reverse', justifyContent: 'space-around' }}>
 
-        
+
 
 
         <FloatingView title="Game will begin shortly" style={{ width: '90%', marginBottom: '10%'}}>
           <Text>While you wait, share the game code with a friend! As they say, the more the merrier!</Text>
-          
+
           <CustomButton style={{ marginTop: 20 }} title={disabled ? `${timeLeft}` : "Join"} disabled={disabled} onPress={disabled ? () => {} : () => navigation.navigate('SeekerGameTabStack', {screen: 'SeekerGameScreen'})}/>
         </FloatingView>
 

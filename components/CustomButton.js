@@ -12,6 +12,7 @@ export default function CustomButton({ title, onPress, style, disabled }) {
     <TouchableOpacity activeOpacity={1} onPress={onPress}>
       <View style={{
         ...globalStyles.buttonView,
+        // backgroundColor: disabled === undefined ? '#A2D683' : (disabled === true ? 'lightgray' : '#5CDB95'),
         backgroundColor: disabled === undefined ? '#5CDB95' : (disabled === true ? 'lightgray' : '#5CDB95'),
         ...style,
       }}>

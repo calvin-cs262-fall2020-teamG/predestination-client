@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
   //==================navigation top bars========================
   navigationHeader: {
-    backgroundColor: "#A2D683",
+    backgroundColor: "#5CDB95",
   },
   titleText: {
     // fontFamily: "constan",
@@ -41,8 +41,8 @@ export const globalStyles = StyleSheet.create({
   },
   startNavigationHeader: {
     // fontFamily: "constan",
-    backgroundColor: '#A2D683',
-    opacity: 0.7,
+    backgroundColor: '#5CDB95',
+    // opacity: 0.7,
   },
   startNavigationDrawer: {
     constan: 'constan',
@@ -73,12 +73,14 @@ export const globalStyles = StyleSheet.create({
   keeperNavigationDrawer: {
     color: 'white',
   },
+
   // =========================Button Styles====================================
   buttonView: {
     justifyContent: 'center',
     borderRadius: 30,
     borderWidth: 0,
-    backgroundColor: '#5CDB95',
+    backgroundColor: '#A2D683',
+    // backgroundColor: '#5CDB95',
     alignSelf: 'center',
     padding: 30,
     paddingTop: 10,
@@ -97,7 +99,7 @@ export const globalStyles = StyleSheet.create({
     // fontFamily: 'constan-bold',
     textAlign: 'center',
     fontSize: 16,
-    // fontWeight: 'bold',
+    fontWeight: 'bold',
     letterSpacing: 7,
   },
   // ========================= Welcome Screen Styles ==========================
@@ -106,7 +108,7 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#fefef5",
+    backgroundColor: "white",
   },
   titleSection: {
     // flex: 1,
@@ -139,37 +141,6 @@ export const globalStyles = StyleSheet.create({
     // fontFamily: "constan",
     textAlign: "center",
   },
-  // joinButton: {
-  //   // flex: 1,
-  //   padding: 15,
-  //   margin: 25,
-
-  //   borderStyle: "solid",
-  //   borderWidth: 2,
-  //   borderRadius: 50,
-  //   borderColor: "maroon",
-
-  //   width: "50%",
-  //   alignItems: "center",
-  //   backgroundColor: "gold",
-  // },
-  // createButton: {
-  //   // flex: 1,
-  //   padding: 15,
-  //   margin: 20,
-  //   marginBottom: 25,
-
-  //   borderStyle: "solid",
-  //   borderWidth: 2,
-  //   borderRadius: 50,
-  //   borderColor: "gold",
-
-  //   height: 50,
-  //   width: 150,
-  //   alignItems: "center",
-  //   backgroundColor: "maroon",
-  // },
-
   seekerText: {
     margin: 5,
     marginBottom: 10,
@@ -184,7 +155,7 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     letterSpacing: 2,
-    fontFamily: "Roboto",
+    // fontFamily: "Roboto",
     color: "grey",
     textAlign: "center",
   },

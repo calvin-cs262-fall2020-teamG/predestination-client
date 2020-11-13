@@ -37,7 +37,7 @@ export default function StartScreen({ navigation, route }) {
     <View style={globalStyles.container}>
       <View style={globalStyles.titleSection}>
         {/* <Text>PreDestination</Text> */}
-        <Text style={globalStyles.welcomeText}>Welcome, Young Calvinist. </Text>
+  <Text style={globalStyles.welcomeText}>WELCOME,{"\n"}YOUNG CALVINIST. </Text>
       </View>
 
       {/*=======================Options for seekers==============================*/}
