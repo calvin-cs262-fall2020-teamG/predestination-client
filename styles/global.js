@@ -198,6 +198,26 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "gold",
   },
 
+  //=================start styles from AccountScreen.js==================
+  accountScreenContainer:{
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  accountNameText:{
+    margin: 15,
+    fontSize: 25,
+    color: "#05386B",
+    textAlign: "center",
+  },
+  accountImage:{
+    alignSelf: "center",
+    borderColor: "#05386B",
+    borderWidth: 5,
+    borderRadius: 75,
+    width: 150,
+    height: 150,
+    margin: 25,
+  },
   //=================start styles from SeekerWaitingScreen.js=============
   WaitingCode: {
     fontWeight: 'bold',

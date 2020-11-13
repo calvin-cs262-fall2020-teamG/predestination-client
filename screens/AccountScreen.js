@@ -5,6 +5,7 @@ import { SocialIcon } from 'react-native-elements';
 import { getUserData, signOutOfGoogle } from '../src/GoogleAuthentication';
 import { LOGIN_STATUS, AuthenticationContext } from '../src/GoogleAuthentication';
 
+import { globalStyles } from "../styles/global";
 /**
  * AccountScreen lets a user logout of Google.
  * Once logged out, the user will be directed to the login screen
@@ -50,11 +51,11 @@ export default function AccountScreen({ navigation }) {
     <View>
       {
         (status === STATUS.LOADING || status === STATUS.ERROR) ? <ActivityIndicator /> :
-          <View>
+          <View style={globalStyles.accountScreenContainer}>
             <View>
-              <Text>{name}</Text>
+              <Text style={globalStyles.accountNameText}>{name}</Text>
               <Image
-                style={{ width: 100, height: 100 }}
+                style={globalStyles.accountImage}
                 source={{
                   uri: photo,
                 }}
@@ -68,13 +69,10 @@ export default function AccountScreen({ navigation }) {
                 onPress={handleSignOut}
               />
             </View>
-
             <View>
-
             </View>
           </View>
       }
     </View>
   );
 }
-
