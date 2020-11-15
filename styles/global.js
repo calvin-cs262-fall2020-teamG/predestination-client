@@ -42,16 +42,16 @@ export const globalStyles = StyleSheet.create({
   // start screen
   startNavigationTitle: {
     // fontFamily: 'constan-bold',
-    color: 'white',
+    color: "white",
   },
   startNavigationHeader: {
     // fontFamily: "constan",
-    backgroundColor: '#5CDB95',
+    backgroundColor: "#5CDB95",
     // opacity: 0.7,
   },
   startNavigationDrawer: {
-    constan: 'constan',
-    color: 'white',
+    constan: "constan",
+    color: "white",
   },
 
   // seeker screen navigation styles
@@ -66,52 +66,52 @@ export const globalStyles = StyleSheet.create({
     //backgroundColor: 'gold',
   },
   startNavigationDrawer: {
-    color: 'white',
+    color: "white",
   },
 
   // keeper screen navigation styles
   keeperNavigationTitle: {
     // fontFamily: 'constan-bold',
-    color: 'white',
+    color: "white",
   },
   keeperNavigationHeader: {
-    backgroundColor: '#05386B',
+    backgroundColor: "#05386B",
   },
   keeperNavigationDrawer: {
-    color: 'white',
+    color: "white",
   },
 
   // account screen navigation styles
   accountNavigationTitle: {
     // fontFamily: 'constan-bold',
-    color: 'white',
+    color: "white",
   },
   accountNavigationHeader: {
-    backgroundColor: '#05386B',
+    backgroundColor: "#05386B",
   },
   accountNavigationDrawer: {
-    color: '#05386B',
+    color: "#05386B",
   },
 
   //about screen navigation styles
   aboutNavigationTitle: {
     // fontFamily: 'constan-bold',
-    color: 'white',
+    color: "white",
   },
   aboutNavigationHeader: {
-    backgroundColor: '#05386B',
+    backgroundColor: "#05386B",
   },
   aboutNavigationDrawer: {
-    color: '#05386B',
+    color: "#05386B",
   },
   // =========================Button Styles====================================
   buttonView: {
-    justifyContent: 'center',
-    textAlign: 'center',
+    justifyContent: "center",
+    textAlign: "center",
     borderRadius: 30,
     borderWidth: 0,
-    backgroundColor: '#5CDB95',
-    alignSelf: 'center',
+    backgroundColor: "#5CDB95",
+    alignSelf: "center",
     padding: 30,
     paddingTop: 10,
     paddingBottom: 12,
@@ -127,10 +127,10 @@ export const globalStyles = StyleSheet.create({
   },
   buttonText: {
     // fontFamily: 'constan-bold',
-    justifyContent: 'center',
-    textAlign: 'center',
+    justifyContent: "center",
+    textAlign: "center",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 7,
   },
 
@@ -153,10 +153,9 @@ export const globalStyles = StyleSheet.create({
   titleSection: {
     width: "100%",
     padding: 20,
-    alignItems: "center"
+    alignItems: "center",
   },
-  welcomeText:
-  {
+  welcomeText: {
     fontFamily: "constan",
     marginTop: 25,
     fontSize: 30,
@@ -203,7 +202,6 @@ export const globalStyles = StyleSheet.create({
     textAlign: "center",
     // fontFamily: "constan",
     fontSize: 20,
-
   },
   seekerStartButton: {
     // flex: 1,
@@ -222,17 +220,17 @@ export const globalStyles = StyleSheet.create({
   },
 
   //=================start styles from AccountScreen.js==================
-  accountScreenContainer:{
+  accountScreenContainer: {
     justifyContent: "center",
     alignContent: "center",
   },
-  accountNameText:{
+  accountNameText: {
     margin: 15,
     fontSize: 25,
     color: "#05386B",
     textAlign: "center",
   },
-  accountImage:{
+  accountImage: {
     alignSelf: "center",
     borderColor: "#05386B",
     borderWidth: 5,
@@ -242,7 +240,7 @@ export const globalStyles = StyleSheet.create({
     margin: 25,
   },
   //=================start style from AboutScreen.js======================
-  aboutTitleText:{
+  aboutTitleText: {
     margin: 10,
     marginLeft: 20,
     textAlign: "left",
@@ -260,16 +258,15 @@ export const globalStyles = StyleSheet.create({
   },
   //=================start styles from SeekerWaitingScreen.js=============
   WaitingCode: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 64,
-    color: 'white'
+    color: "white",
   },
-  SeekerWaitingScreenCard:{
-    width: '90%',
-    marginBottom: '10%'
+  SeekerWaitingScreenCard: {
+    width: "90%",
+    marginBottom: "10%",
   },
   //=================start styles from SeekerGameScreen.js================
-
 
   // flexContainer: {
   //   flexDirection: "column",
@@ -293,18 +290,18 @@ export const globalStyles = StyleSheet.create({
   },
   proximityOfficialText: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
   proximityOfficalTextContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   trackerListFlexContainer: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: "#5CDB95"
-},
+    flexDirection: "column",
+    backgroundColor: "#5CDB95",
+  },
   // end styles from SeekerGameScreen.js
 
   //========================KEEPER SCREENS================================
@@ -314,23 +311,22 @@ export const globalStyles = StyleSheet.create({
 
   // end styles from KeeperGameScreen.
 
-
   // start styles from AddNewRoute.js for KeeperListScreen
   clearButton: {
     margin: 10,
   },
   huntBox: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: "column",
     margin: 20,
     borderWidth: 1,
     padding: 10,
-    borderColor: 'lightgray',
+    borderColor: "lightgray",
 
-    justifyContent: 'center',
+    justifyContent: "center",
     borderRadius: 30,
     borderWidth: 0,
-    backgroundColor: '#05386B',
+    backgroundColor: "#05386B",
     padding: 30,
     paddingTop: 10,
     paddingBottom: 12,
@@ -362,7 +358,7 @@ export const globalStyles = StyleSheet.create({
   // start styles from KeeperEditorScreen.js
   list: {
     flex: 1,
-    marginTop: 20
+    marginTop: 20,
   },
   clueInput: {
     marginBottom: 10,
@@ -374,13 +370,12 @@ export const globalStyles = StyleSheet.create({
   item: {
     padding: 16,
     marginTop: 16,
-    borderColor: '#bbb',
+    borderColor: "#bbb",
     borderWidth: 1,
-    borderStyle: 'solid',
+    borderStyle: "solid",
     borderRadius: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 
   // end styles from KeeperEditorScreen.js
 });
-
