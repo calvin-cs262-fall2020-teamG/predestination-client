@@ -1,77 +1,62 @@
-import { StyleSheet } from "react-native";
-import { withSafeAreaInsets } from "react-native-safe-area-context";
+import { StyleSheet } from 'react-native';
 
 export const globalStyles = StyleSheet.create({
-  //==================navigation top bars========================
+  // ==================navigation top bars========================
   navigationHeader: {
-    backgroundColor: "#5CDB95",
+    backgroundColor: '#5CDB95',
   },
   titleText: {
-    // fontFamily: "constan",
-    color: "black",
+    color: 'black',
   },
   keeperNavHeader: {
-    // fontFamily: "constan",
-    backgroundColor: "maroon",
+    backgroundColor: 'maroon',
   },
   keeperTitleText: {
-    color: "white",
-    // fontFamily: "constan",
+    color: 'white',
   },
 
-  //commenting out Seeker things for now,
-  //will explore design later
+  // commenting out Seeker things for now,
+  // will explore design later
 
   // seekerNavHeader:{
-  //   fontFamily: "constan",
-  //   backgroundColor: "gold",
+  //   backgroundColor: "gold"
   // },
   // seekerTitleText:{
-  //   fontFamily: "constan",
   //   color: "black",
   // },
 
-  //shared:header.js
+  // shared:header.js
   topRightMenuIcon: {
-    margin: 10, //shifts the icon to the left
-    color: "white",
+    margin: 10, // shifts the icon to the left
+    color: 'white',
   },
   // start styles from StartScreen.js
 
   // ========================= navigation styles ==========================
   // start screen
   startNavigationTitle: {
-    // fontFamily: 'constan-bold',
     color: 'white',
   },
   startNavigationHeader: {
-    // fontFamily: "constan",
     backgroundColor: '#5CDB95',
     // opacity: 0.7,
   },
   startNavigationDrawer: {
-    constan: 'constan',
     color: 'white',
   },
 
   // seeker screen navigation styles
   seekerNavigationTitle: {
-    color: "white",
-    //fontFamily: 'constan-bold',
-    //color: 'maroon',
+    color: 'white',
+    // color: 'maroon',
   },
   seekerNavigationHeader: {
-    backgroundColor: "#05386B",
+    backgroundColor: '#05386B',
     // backgroundColor: '#71B1C8',
-    //backgroundColor: 'gold',
-  },
-  startNavigationDrawer: {
-    color: 'white',
   },
 
   // keeper screen navigation styles
   keeperNavigationTitle: {
-    // fontFamily: 'constan-bold',
     color: 'white',
   },
   keeperNavigationHeader: {
@@ -83,7 +68,6 @@ export const globalStyles = StyleSheet.create({
 
   // account screen navigation styles
   accountNavigationTitle: {
-    // fontFamily: 'constan-bold',
     color: 'white',
   },
   accountNavigationHeader: {
@@ -93,9 +77,8 @@ export const globalStyles = StyleSheet.create({
     color: '#05386B',
   },
 
-  //about screen navigation styles
+  // about screen navigation styles
   aboutNavigationTitle: {
-    // fontFamily: 'constan-bold',
     color: 'white',
   },
   aboutNavigationHeader: {
@@ -104,6 +87,7 @@ export const globalStyles = StyleSheet.create({
   aboutNavigationDrawer: {
     color: '#05386B',
   },
+
   // =========================Button Styles====================================
   buttonView: {
     justifyContent: 'center',
@@ -115,7 +99,7 @@ export const globalStyles = StyleSheet.create({
     padding: 30,
     paddingTop: 10,
     paddingBottom: 12,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -134,142 +118,141 @@ export const globalStyles = StyleSheet.create({
     letterSpacing: 7,
   },
 
-  //=========================Leaderboard Styles===============================
+  // =========================Leaderboard Styles===============================
   leaderBoardHeader: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 25,
-    fontWeight: "bold",
-    color: "white",
-    backgroundColor: "#5CDB95",
+    fontWeight: 'bold',
+    color: 'white',
+    backgroundColor: '#5CDB95',
   },
+
   // ========================= Welcome Screen Styles ==========================
   container: {
     flex: 1,
-    justifyContent: "space-around",
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "white",
+    justifyContent: 'space-around',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'white',
   },
   titleSection: {
-    width: "100%",
+    width: '100%',
     padding: 20,
-    alignItems: "center"
+    alignItems: 'center',
   },
-  welcomeText:
-  {
-    fontFamily: "constan",
+  welcomeText: {
+    fontFamily: 'constan',
     marginTop: 25,
     fontSize: 30,
-    textAlign: "center",
+    textAlign: 'center',
     // color: "#05386B"
-    color: "#71B1C8",
+    color: '#71B1C8',
   },
   horizontalBar: {
     padding: 0.5,
     borderEndWidth: 350,
-    borderBottomColor: "gray",
+    borderBottomColor: 'gray',
   },
   entrySection: {
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   input: {
     fontSize: 40,
-    textAlign: "center",
+    textAlign: 'center',
   },
   seekerText: {
     margin: 5,
     marginBottom: 10,
     fontSize: 20,
     letterSpacing: 2,
-    color: "grey",
-    textAlign: "center",
+    color: 'grey',
+    textAlign: 'center',
   },
   keeperText: {
     margin: 5,
     marginBottom: 10,
     fontSize: 20,
     letterSpacing: 2,
-    // fontFamily: "Roboto",
-    color: "grey",
-    textAlign: "center",
+    color: 'grey',
+    textAlign: 'center',
   },
   // end styles from StartScreen.js
 
-  //SEEKER SCREENS
-  //seeker general design
+  // ========================SEEKER SCREENS==========================
+  // seeker general design
   seekerBodyText: {
-    textAlign: "center",
+    textAlign: 'center',
     // fontFamily: "constan",
     fontSize: 20,
-
   },
   seekerStartButton: {
     // flex: 1,
     padding: 20,
     margin: 25,
 
-    borderStyle: "solid",
+    borderStyle: 'solid',
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: "maroon",
+    borderColor: 'maroon',
 
-    width: "75%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "gold",
+    width: '75%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'gold',
   },
 
-  //=================start styles from AccountScreen.js==================
-  accountScreenContainer:{
-    justifyContent: "center",
-    alignContent: "center",
+  // =================start styles from AccountScreen.js==================
+  accountScreenContainer: {
+    justifyContent: 'center',
+    alignContent: 'center',
   },
-  accountNameText:{
+  accountNameText: {
     margin: 15,
     fontSize: 25,
-    color: "#05386B",
-    textAlign: "center",
+    color: '#05386B',
+    textAlign: 'center',
   },
-  accountImage:{
-    alignSelf: "center",
-    borderColor: "#05386B",
+  accountImage: {
+    alignSelf: 'center',
+    borderColor: '#05386B',
     borderWidth: 5,
     borderRadius: 75,
     width: 150,
     height: 150,
     margin: 25,
   },
-  //=================start style from AboutScreen.js======================
-  aboutTitleText:{
+  // =================start style from AboutScreen.js======================
+  aboutTitleText: {
     margin: 10,
     marginLeft: 20,
-    textAlign: "left",
+    textAlign: 'left',
     fontSize: 25,
-    color: "grey",
+    color: 'grey',
   },
   aboutBodyText: {
     marginTop: 5,
     marginBottom: 5,
     marginLeft: 20,
     marginRight: 15,
-    textAlign: "left",
+    textAlign: 'left',
     fontSize: 15,
     lineHeight: 25,
   },
-  //=================start styles from SeekerWaitingScreen.js=============
+
+  // =================start styles from SeekerWaitingScreen.js=============
   WaitingCode: {
     fontWeight: 'bold',
     fontSize: 64,
-    color: 'white'
+    color: 'white',
   },
-  SeekerWaitingScreenCard:{
+  SeekerWaitingScreenCard: {
     width: '90%',
-    marginBottom: '10%'
+    marginBottom: '10%',
   },
-  //=================start styles from SeekerGameScreen.js================
 
+  // =================start styles from SeekerGameScreen.js================
 
   // flexContainer: {
   //   flexDirection: "column",
@@ -279,6 +262,7 @@ export const globalStyles = StyleSheet.create({
   //   flex: 5,
   //   backgroundColor: "skyblue",
   // },
+
   seekerCurrentStatus: {
     fontSize: 40,
   },
@@ -289,7 +273,7 @@ export const globalStyles = StyleSheet.create({
   progressSection: {
     flex: 1,
     borderTopWidth: 1,
-    borderColor: "lightgray",
+    borderColor: 'lightgray',
   },
   proximityOfficialText: {
     fontSize: 24,
@@ -303,17 +287,11 @@ export const globalStyles = StyleSheet.create({
   trackerListFlexContainer: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: "#5CDB95"
-},
+    backgroundColor: '#5CDB95',
+  },
   // end styles from SeekerGameScreen.js
 
-  //========================KEEPER SCREENS================================
-
-  //added by Nathan Wang on Oct 30
-  // start styles from KeeperGameScreen.js
-
-  // end styles from KeeperGameScreen.
-
+  // ========================KEEPER SCREENS================================
 
   // start styles from AddNewRoute.js for KeeperListScreen
   clearButton: {
@@ -323,18 +301,16 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     margin: 20,
-    borderWidth: 1,
-    padding: 10,
+    borderWidth: 1, // the other code said padding 0. so might need to switch back to 0 (Nov 14)
+    padding: 10, // the other code said padding of 30, so might need to switch to 30 (Nov 14)
     borderColor: 'lightgray',
 
     justifyContent: 'center',
     borderRadius: 30,
-    borderWidth: 0,
     backgroundColor: '#05386B',
-    padding: 30,
     paddingTop: 10,
     paddingBottom: 12,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -353,23 +329,24 @@ export const globalStyles = StyleSheet.create({
     fontSize: 20,
     letterSpacing: 2,
     // fontFamily: "constan-bold",
-    color: "white",
-    textAlign: "center",
-    textTransform: "uppercase",
+    color: 'white',
+    textAlign: 'center',
+    textTransform: 'uppercase',
   },
+
   // end styles from AddNewRoute.js for KeeperListSCreen
   // added by Advait Scaria on Oct 9
   // start styles from KeeperEditorScreen.js
   list: {
     flex: 1,
-    marginTop: 20
+    marginTop: 20,
   },
   clueInput: {
     marginBottom: 10,
     paddingHorizontal: 8,
     paddingVertical: 6,
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    borderBottomColor: '#ddd',
   },
   item: {
     padding: 16,
@@ -383,4 +360,3 @@ export const globalStyles = StyleSheet.create({
 
   // end styles from KeeperEditorScreen.js
 });
-
