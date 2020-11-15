@@ -1,31 +1,33 @@
 {
-  "expo": {
-    "name": "predestination",
-    "slug": "predestination",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "android": {
-      "permissions": []
-    },
-    "facebookAutoInitEnabled": true,
-    "facebookScheme": "fb746642132583396",
-    "facebookAppId": "746642132583396",
-    "facebookDisplayName": "PreDestination"
-  }
+	"expo": {
+		"name": "predestination",
+		"slug": "predestination",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/icon.png",
+		"splash": {
+			"image": "./assets/splash.png",
+			"resizeMode": "cover",
+			"backgroundColor": "#ffffff"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": [
+			"**/*"
+		],
+		"ios": {
+			"supportsTablet": true
+		},
+		"web": {
+			"favicon": "./assets/favicon.png"
+		},
+		"android": {
+			"permissions": []
+		},
+		"facebookAutoInitEnabled": true,
+		"facebookScheme": "fb746642132583396",
+		"facebookAppId": "746642132583396",
+		"facebookDisplayName": "PreDestination"
+	}
 }

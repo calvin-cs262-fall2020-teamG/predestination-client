@@ -1,42 +1,50 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 /**
  * FloatingView is a component that encourages uniform styling with some pizazz
  */
 export default function FloatingView(props) {
-    return ( <
-        View style = {
-            {
-                ...styles.mainView,
-                    ...props.style,
-            }
-        } >
-        <
-        View style = { styles.title } >
-        <
-        Text style = { styles.titleText } > { props.title } < /Text>{" "} <
-        /View>{" "} <
-        View style = { styles.content } > { props.children } < /View>{" "} <
-        /View>
+
+    return (
+
+        <View style={{
+            ...styles.mainView,
+            ...props.style,
+        }}>
+            <View style={styles.title}>
+                <Text style={styles.titleText}>{props.title}</Text>
+            </View>
+            <View style={styles.content}>
+                { props.children }
+            </View>
+        </View>
+
     );
+
 }
 
 const styles = StyleSheet.create({
-    content: {},
+    content: {
+    },
     title: {
-        paddingBottom: 20,
+        paddingBottom: 20
     },
     titleText: {
-        fontWeight: "bold",
+        fontWeight: 'bold',
         fontSize: 18,
     },
     mainView: {
-        justifyContent: "space-around",
+        
+        justifyContent: 'space-around',
         padding: 20,
         paddingBottom: 25,
         paddingTop: 15,
+
         borderRadius: 15,
-        backgroundColor: "white",
+        // borderBottomLeftRadius: 5,
+        // borderTopRightRadius: 5,
+
+        backgroundColor: 'white',
 
         shadowColor: "#000",
         shadowOffset: {
@@ -47,5 +55,5 @@ const styles = StyleSheet.create({
         shadowRadius: 6.68,
 
         elevation: 11,
-    },
+    }
 });

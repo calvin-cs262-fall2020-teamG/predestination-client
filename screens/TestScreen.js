@@ -1,13 +1,5 @@
-import React, { Component } from "react";
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Button,
-  geoLocation,
-} from "react-native";
+import React, { Component } from 'react';
+import { Alert, StyleSheet, Text, View, TouchableOpacity, Button, geoLocation } from 'react-native';
 import { globalStyles } from "../styles/global";
 
 export default class App extends Component {
@@ -16,8 +8,8 @@ export default class App extends Component {
 
     this.state = {
       latitude: 0,
-      longitude: 0,
-    };
+      longitude: 0
+    }
   }
 
   componentDidMount() {
@@ -25,22 +17,23 @@ export default class App extends Component {
       (position) => {
         this.setState({
           latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          longitude: position.coords.longitude
         });
       },
       (error) => {
-        this.setState({ error: error.message });
+        this.setState({ error: error.message })
       },
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-  }
+    )
+
+  };
 
   findCurrentLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
-    if (status !== "granted") {
+    if (status !== 'granted') {
       this.setState({
-        errorMessage: "permission denied",
+        errorMessage: 'permission denied'
       });
     }
 
@@ -61,25 +54,23 @@ export default class App extends Component {
 
       //</View>
       //Code below added after Oct 22 Meeting
-      <View style={styles.container}>
-        <Text>
-          Location: {this.state.latitude}, {this.state.longitude}{" "}
-        </Text>{" "}
-      </View>
+      < View style={styles.container} >
+        <Text>Location: {this.state.latitude}, {this.state.longitude}</Text>
+      </View >
     );
-  }
-}
+  };
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
-    textAlign: "center",
+    textAlign: 'center',
     margin: 10,
-  },
+  }
 });
