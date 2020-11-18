@@ -22,7 +22,7 @@ export default function AccountStack({ navigation }) {
         headerStyle: globalStyles.accountNavigationHeader,
       }}
     >
-      <Stack.Screen name="Your Account" component={AccountScreen} />{" "}
+      <Stack.Screen name="Your Account" component={AccountScreen} /> 
     </Stack.Navigator>
   );
 }

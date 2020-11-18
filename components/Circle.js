@@ -51,7 +51,7 @@ export default function Circle(props) {
         },
       ]}
     >
-      {props.children}{" "}
+      {props.children} 
     </Animated.View>
   );
 }

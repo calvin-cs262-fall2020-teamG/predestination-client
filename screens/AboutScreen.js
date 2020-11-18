@@ -20,38 +20,38 @@ import { globalStyles } from "../styles/global";
 export default function AboutScreen({ navigation }) {
   return (
     <View>
-      {" "}
+       
       {
         <View style={globalStyles.aboutScreenContainer}>
           <View>
-            <Text style={globalStyles.aboutTitleText}> Our Goal </Text>{" "}
+            <Text style={globalStyles.aboutTitleText}> Our Goal </Text> 
             <Text style={globalStyles.aboutBodyText}>
-              <Text style={{ fontStyle: "italic" }}> Predestination </Text>{" "}
+              <Text style={{ fontStyle: "italic" }}> Predestination </Text> 
               combines technological ingenuity with an age - old game to deliver
               a fun, modern spin in this time of need for environmental care and
               social bonding in a socially distanced world, leaving nothing
-              behind except ephemeral footprints.{" "}
-            </Text>{" "}
-            <Text style={globalStyles.aboutTitleText}> Our Developers </Text>{" "}
+              behind except ephemeral footprints. 
+            </Text> 
+            <Text style={globalStyles.aboutTitleText}> Our Developers </Text> 
             <Unorderedlist style={{ marginLeft: 30 }}>
-              <Text> Hayworth A. </Text>{" "}
-            </Unorderedlist>{" "}
+              <Text> Hayworth A. </Text> 
+            </Unorderedlist> 
             <Unorderedlist style={{ marginLeft: 30 }}>
-              <Text> Jacob B. </Text>{" "}
-            </Unorderedlist>{" "}
+              <Text> Jacob B. </Text> 
+            </Unorderedlist> 
             <Unorderedlist style={{ marginLeft: 30 }}>
-              <Text> Advait S. </Text>{" "}
-            </Unorderedlist>{" "}
+              <Text> Advait S. </Text> 
+            </Unorderedlist> 
             <Unorderedlist style={{ marginLeft: 30 }}>
-              <Text> Ethan W. </Text>{" "}
-            </Unorderedlist>{" "}
+              <Text> Ethan W. </Text> 
+            </Unorderedlist> 
             <Unorderedlist style={{ marginLeft: 30 }}>
-              <Text> Nathan W. </Text>{" "}
-            </Unorderedlist>{" "}
-            <Text style={globalStyles.aboutTitleText}> Resources </Text>{" "}
+              <Text> Nathan W. </Text> 
+            </Unorderedlist> 
+            <Text style={globalStyles.aboutTitleText}> Resources </Text> 
             <Text style={globalStyles.aboutBodyText}>
               If you 'd like to follow us along on our journey, please checkout
-              our{" "}
+              our 
               <Text
                 style={{ color: "darkblue", textDecorationLine: "underline" }}
                 onPress={() =>
@@ -60,17 +60,17 @@ export default function AboutScreen({ navigation }) {
                   )
                 }
               >
-                GitHub{" "}
+                GitHub 
               </Text>
-              .{" "}
-            </Text>{" "}
+              . 
+            </Text> 
             <Image
               source={require("../assets/cheese-icon.png")}
               style={styles.image}
-            ></Image>{" "}
-          </View>{" "}
+            ></Image> 
+          </View> 
         </View>
-      }{" "}
+      } 
     </View>
   );
 }

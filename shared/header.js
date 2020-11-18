@@ -15,7 +15,7 @@ export default function Header({ navigation, customStyle }) {
         name="menu"
         size={28}
         onPress={openMenu}
-      />{" "}
+      /> 
     </View>
   );
 }

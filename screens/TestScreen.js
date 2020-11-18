@@ -63,8 +63,8 @@ export default class App extends Component {
       //Code below added after Oct 22 Meeting
       <View style={styles.container}>
         <Text>
-          Location: {this.state.latitude}, {this.state.longitude}{" "}
-        </Text>{" "}
+          Location: {this.state.latitude}, {this.state.longitude} 
+        </Text> 
       </View>
     );
   }

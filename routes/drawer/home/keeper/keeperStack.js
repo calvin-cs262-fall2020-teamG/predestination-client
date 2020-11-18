@@ -36,23 +36,23 @@ export default function KeeperStack({ navigation }) {
         name="KeeperListScreen"
         component={KeeperListScreen}
         options={{ title: "KeeperListScreen" }}
-      />{" "}
+      /> 
       <Stack.Screen
         name="KeeperEditorScreen"
         component={KeeperEditorScreen}
         options={{ title: "KeeperEditorScreen" }}
-      />{" "}
+      /> 
       <Stack.Screen
         name="KeeperWaitingScreen"
         component={KeeperWaitingScreen}
         options={{ title: "KeeperWaitingScreen" }}
-      />{" "}
+      /> 
       <Stack.Screen
         name="KeeperGameScreen"
         component={KeeperGameScreen}
         options={{ title: "KeeperGameScreen" }}
-      />{" "}
-      <Stack.Screen name="TestScreen" component={TestScreen} />{" "}
+      /> 
+      <Stack.Screen name="TestScreen" component={TestScreen} /> 
     </Stack.Navigator>
   );
 }

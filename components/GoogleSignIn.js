@@ -20,7 +20,7 @@ export default function GoogleLoginButton({ onPress }) {
         button
         type="google"
         onPress={onPress}
-      />{" "}
+      /> 
     </View>
   );
 }

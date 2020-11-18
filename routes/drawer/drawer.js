@@ -18,9 +18,9 @@ export default function DrawerScreen({ setLoginStatus, route }) {
       drawerType="front"
       screenOptions={{ headerShown: false }}
     >
-      <Drawer.Screen name="Home" component={HomeStack} />{" "}
-      <Drawer.Screen name="Account" component={AccountStack} />{" "}
-      <Drawer.Screen name="About" component={AboutStack} />{" "}
+      <Drawer.Screen name="Home" component={HomeStack} /> 
+      <Drawer.Screen name="Account" component={AccountStack} /> 
+      <Drawer.Screen name="About" component={AboutStack} /> 
     </Drawer.Navigator>
   );
 }

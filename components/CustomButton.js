@@ -26,9 +26,9 @@ export default function CustomButton({ title, onPress, style, disabled }) {
             color: "white",
           }}
         >
-          {title.toUpperCase()}{" "}
-        </Text>{" "}
-      </View>{" "}
+          {title.toUpperCase()} 
+        </Text> 
+      </View> 
     </TouchableOpacity>
   );
 }

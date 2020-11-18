@@ -185,17 +185,17 @@ export default function SeekerFocusedScreen({ route, navigation }) {
           color="#05386B"
           diameter={outerTargetRadius.interpolate(targetInterpolation)}
           screenWidth={screenWidth}
-        ></Circle>{" "}
+        ></Circle> 
         <Circle
           color="#379683"
           diameter={middleTargetRadius.interpolate(targetInterpolation)}
           screenWidth={screenWidth}
-        ></Circle>{" "}
+        ></Circle> 
         <Circle
           color="#5CDB95"
           diameter={innerTargetRadius.interpolate(targetInterpolation)}
           screenWidth={screenWidth}
-        ></Circle>{" "}
+        ></Circle> 
         <Animated.Text
           style={{
             textAlign: "center",
@@ -205,8 +205,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             color: textColorAnimated,
           }}
         >
-          "{proximitySillyMessage}"{" "}
-        </Animated.Text>{" "}
+          "{proximitySillyMessage}" 
+        </Animated.Text> 
         <Animated.Text
           style={{
             textAlign: "center",
@@ -218,8 +218,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             color: textColorAnimated,
           }}
         >
-          {proximityOfficialMessage}{" "}
-        </Animated.Text>{" "}
+          {proximityOfficialMessage} 
+        </Animated.Text> 
         <Animated.Text
           style={{
             textAlign: "center",
@@ -232,9 +232,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             padding: 20,
           }}
         >
-          +{notePack.getFocused() === null ? 0 : notePack.getFocused().points}{" "}
-        </Animated.Text>{" "}
-      </TouchableOpacity>{" "}
+          +{notePack.getFocused() === null ? 0 : notePack.getFocused().points} 
+        </Animated.Text> 
+      </TouchableOpacity> 
       <View style={styles.bottomContainer}>
         <View style={styles.bottomContainerHeader}>
           <View
@@ -256,10 +256,10 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             >
               {notePack.getFocused() === null
                 ? ""
-                : notePack.getFocused().points}{" "}
-              Points{" "}
-            </Text>{" "}
-          </View>{" "}
+                : notePack.getFocused().points} 
+              Points 
+            </Text> 
+          </View> 
           <View style={styles.stuckButton}>
             <CustomButton
               color="orange"
@@ -273,9 +273,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
               onPress={() => {
                 navigation.navigate("TrackerListScreen");
               }}
-            />{" "}
-          </View>{" "}
-        </View>{" "}
+            /> 
+          </View> 
+        </View> 
         <View
           style={{
             borderBottomColor: "lightgray",
@@ -284,7 +284,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             alignSelf: "center",
             display: notePack.getFocused() === null ? "none" : "flex",
           }}
-        />{" "}
+        /> 
         <ScrollView
           style={{
             ...styles.noteContainer,
@@ -292,13 +292,13 @@ export default function SeekerFocusedScreen({ route, navigation }) {
           }}
         >
           <Text style={{ fontSize: 24, marginBottom: 50 }}>
-            {" "}
+             
             {notePack.getFocused() === null
               ? "This should not be shown"
-              : notePack.getFocused().clue}{" "}
-          </Text>{" "}
-        </ScrollView>{" "}
-      </View>{" "}
+              : notePack.getFocused().clue} 
+          </Text> 
+        </ScrollView> 
+      </View> 
     </Animated.View>
   );
 }

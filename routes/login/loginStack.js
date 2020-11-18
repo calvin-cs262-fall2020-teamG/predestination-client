@@ -20,7 +20,7 @@ export default function LoginStack({}) {
         name="LoginScreen"
         component={LoginScreen}
         options={{ title: "LoginScreen" }}
-      />{" "}
+      /> 
     </Stack.Navigator>
   );
 }

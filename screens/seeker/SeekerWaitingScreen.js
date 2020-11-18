@@ -47,7 +47,7 @@ export default function SeekerWaitingScreen({ route, navigation }) {
         <Text>
           While you wait, share the game code with a friend!As they say, the
           more the merrier!
-        </Text>{" "}
+        </Text> 
         <CustomButton
           style={{ marginTop: 20 }}
           title={disabled ? `${timeLeft}` : "Join"}
@@ -60,9 +60,9 @@ export default function SeekerWaitingScreen({ route, navigation }) {
                     screen: "SeekerGameScreen",
                   })
           }
-        />{" "}
-      </FloatingView>{" "}
-      <Text style={globalStyles.WaitingCode}> {route.params.code} </Text>{" "}
+        /> 
+      </FloatingView> 
+      <Text style={globalStyles.WaitingCode}> {route.params.code} </Text> 
     </View>
   );
 }
