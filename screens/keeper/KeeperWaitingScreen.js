@@ -27,17 +27,17 @@ export default function KeeperWaitingScreen({ navigation }) {
     <View>
       <View>
         <Text style={globalStyles.keeperText}>
-          Keeper Waiting Screen. {"\n"}
-          Code is {code}{" "}
-        </Text>{" "}
-      </View>{" "}
+          Keeper Waiting Screen. 
+          Code is {code}
+        </Text>
+      </View>
       <View>
-        <Text style={globalStyles.keeperText}> Launch game now! </Text>{" "}
+        <Text style={globalStyles.keeperText}> Launch game now! </Text>
         <CustomButton
           title="Launch"
           onPress={() => navigation.navigate("KeeperGameScreen")}
-        />{" "}
-      </View>{" "}
+        />
+      </View>
     </View>
   );
 }

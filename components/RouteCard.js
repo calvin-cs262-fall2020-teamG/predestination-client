@@ -11,28 +11,28 @@ export default function RouteCard({ data, pressPublish, pressEdit }) {
   return (
     // styles.box is for the box around the route name and buttons
     <View style={globalStyles.huntBox}>
-      {" "}
-      {/* <View style={styles.textView}> */}{" "}
+      
+      {/* <View style={styles.textView}> */}
       <View>
-        <Text style={globalStyles.keeperHuntName}> "{data.title}" </Text>{" "}
-      </View>{" "}
-      {/* seen in keeper list screen */}{" "}
+        <Text style={globalStyles.keeperHuntName}> "{data.title}" </Text>
+      </View>
+      {/* seen in keeper list screen */}
       <View style={globalStyles.publishEditButton}>
         <CustomButton
           title="Publish"
           onPress={() => {
             pressPublish(data);
           }}
-        />{" "}
-      </View>{" "}
+        />
+      </View>
       <View style={globalStyles.publishEditButton}>
         <CustomButton
           title="Edit"
           onPress={() => {
             pressEdit(data);
           }}
-        />{" "}
-      </View>{" "}
+        />
+      </View>
     </View>
   );
 }
