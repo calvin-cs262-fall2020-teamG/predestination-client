@@ -21,15 +21,15 @@ export default function ScavengerProgress({ total, current }) {
               style={
                 index <= current ? styles.finishedCircle : styles.todoCircle
               }
-            /> 
+            />{" "}
             {index < total ? (
               <View
                 style={index < current ? styles.finishedLine : styles.todoLine}
               />
-            ) : null} 
+            ) : null}{" "}
           </View>
         )}
-      /> 
+      />{" "}
     </View>
   );
 }

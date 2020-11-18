@@ -17,9 +17,9 @@ export default function HomeStack({ navigation }) {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="StartStack" component={StartStack} />
-      <Stack.Screen name="SeekerStack" component={SeekerStack} />
-      <Stack.Screen name="KeeperStack" component={KeeperStack} />
+      <Stack.Screen name="StartStack" component={StartStack} />{" "}
+      <Stack.Screen name="SeekerStack" component={SeekerStack} />{" "}
+      <Stack.Screen name="KeeperStack" component={KeeperStack} />{" "}
     </Stack.Navigator>
   );
 }

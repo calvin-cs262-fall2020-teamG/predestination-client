@@ -14,9 +14,9 @@ export default function FloatingView(props) {
         <
         View style = { styles.title } >
         <
-        Text style = { styles.titleText } > { props.title } < /Text>  <
-        /View>  <
-        View style = { styles.content } > { props.children } < /View>  <
+        Text style = { styles.titleText } > { props.title } < /Text>{" "} <
+        /View>{" "} <
+        View style = { styles.content } > { props.children } < /View>{" "} <
         /View>
     );
 }

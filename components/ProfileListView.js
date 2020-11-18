@@ -22,7 +22,7 @@ export default function ProfileListView({
 
   return (
     <View style={styles.mainContainer}>
-      <FlatList data={list} /> 
+      <FlatList data={list} />{" "}
     </View>
   );
 }

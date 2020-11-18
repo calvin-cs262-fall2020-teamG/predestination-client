@@ -22,7 +22,7 @@ export default function AccountStack({ navigation }) {
         headerStyle: globalStyles.aboutNavigationHeader,
       }}
     >
-      <Stack.Screen name="About Predestination" component={AboutScreen} /> 
+      <Stack.Screen name="About Predestination" component={AboutScreen} />{" "}
     </Stack.Navigator>
   );
 }

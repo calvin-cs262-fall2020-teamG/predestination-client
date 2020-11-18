@@ -62,19 +62,19 @@ export default function LoginScreen() {
         <Image
           style={styles.backgroundImage}
           source={require("../assets/calvin_login_screen.jpg")}
-        ></Image> 
-      </View> 
+        ></Image>{" "}
+      </View>{" "}
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}> PREDESTINATION </Text> 
-      </View> 
+        <Text style={styles.titleText}> PREDESTINATION </Text>{" "}
+      </View>{" "}
       <View style={styles.loginContainer}>
         <View style={styles.buttonContainer}>
-          <GoogleSignIn onPress={loginPress} /> 
-        </View> 
+          <GoogleSignIn onPress={loginPress} />{" "}
+        </View>{" "}
         <Text style={styles.loginText}>
           Click above to start your adventure!
-        </Text> 
-      </View> 
+        </Text>{" "}
+      </View>{" "}
     </View>
   );
 }

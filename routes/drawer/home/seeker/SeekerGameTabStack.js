@@ -36,15 +36,15 @@ export default function SeekerGameTabStack() {
                 borderRadius: 10,
               }}
             >
-              <Icon name={icon} size={25} color={fontColor} /> 
-              <Text style={{ color: fontColor }}> {route.name} </Text> 
+              <Icon name={icon} size={25} color={fontColor} />{" "}
+              <Text style={{ color: fontColor }}> {route.name} </Text>{" "}
             </View>
           );
         },
       })}
     >
-      <Tab.Screen name="Stats" component={SeekerGameScreen} /> 
-      <Tab.Screen name="Tracker" component={SeekerTrackerStack} /> 
+      <Tab.Screen name="Stats" component={SeekerGameScreen} />{" "}
+      <Tab.Screen name="Tracker" component={SeekerTrackerStack} />{" "}
     </Tab.Navigator>
   );
 }

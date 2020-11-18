@@ -40,16 +40,16 @@ export default function SeekerStack({ navigation }) {
           name="SeekerWaitingScreen"
           component={SeekerWaitingScreen}
           options={{ title: "SeekerWaitingScreen", headerShown: true }}
-        /> 
+        />{" "}
         <Stack.Screen
           name="SeekerGameTabStack"
           component={SeekerGameTabStack}
-        /> 
+        />{" "}
         {/* 
                                         <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen', headerShown: true }} />
                                         <Stack.Screen name="SeekerClueListScreen" component={SeekerClueListScreen} options={{ title: 'SeekerClueListScreen', headerShown: false }} />
-                                        <Stack.Screen name="SeekerFocusedScreen" component={SeekerFocusedScreen} options={{ title: 'SeekerFocusedScreen ', headerShown: false }} /> */} 
-      </Stack.Navigator> 
+                                        <Stack.Screen name="SeekerFocusedScreen" component={SeekerFocusedScreen} options={{ title: 'SeekerFocusedScreen ', headerShown: false }} /> */}{" "}
+      </Stack.Navigator>{" "}
     </NotesContext.Provider>
   );
 }

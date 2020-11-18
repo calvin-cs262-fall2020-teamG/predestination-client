@@ -35,8 +35,8 @@ export default function KeeperGameScreen({ navigation }) {
   );
   return (
     <View>
-      <Text style={globalStyles.leaderBoardHeader}> Leaderboard </Text> 
-      {/* display leaderboard */} 
+      <Text style={globalStyles.leaderBoardHeader}> Leaderboard </Text>{" "}
+      {/* display leaderboard */}{" "}
       <Leaderboard
         data={keeperLeaderboard}
         sortBy="clueStatus" //sorts the leaderboard by clueStatus

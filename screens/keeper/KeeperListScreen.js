@@ -91,10 +91,10 @@ export default function KeeperListScreen({ navigation }) {
   return (
     <View>
       <View>
-         
-        {/* Pass the submitHandler as prop to the addNewRouteComponent */} 
-        <AddNewRoute submitHandler={submitHandler} /> 
-        {/* This FlatList contains the list of routes created by the keeper */} 
+        {" "}
+        {/* Pass the submitHandler as prop to the addNewRouteComponent */}{" "}
+        <AddNewRoute submitHandler={submitHandler} />{" "}
+        {/* This FlatList contains the list of routes created by the keeper */}{" "}
         <View>
           <FlatList
             data={routes}
@@ -105,9 +105,9 @@ export default function KeeperListScreen({ navigation }) {
                 pressEdit={pressEdit}
               />
             )}
-          /> 
-        </View> 
-      </View> 
+          />{" "}
+        </View>{" "}
+      </View>{" "}
     </View>
   );
 }

@@ -386,7 +386,7 @@ export default function KeeperEditorScreen({ navigation }) {
         {markers.map((first, index) => (
           // <FontAwesome5 name="map-marker-alt" size={24} color="red" />
           <MapView.Marker key={index} coordinate={first.latlng} />
-        ))} 
+        ))}{" "}
         <Marker
           coordinate={{ latitude: 42.9331, longitude: -85.5877 }}
           title="Test Title"
@@ -395,16 +395,16 @@ export default function KeeperEditorScreen({ navigation }) {
           <Callout tooltip onPress={submitHandler}>
             <View>
               <View style={styles.bubble}>
-                 
-                {/* <Text style={styles.name}>First Location</Text> */} 
-                <TextInput placeholder="Enter a location" style={styles.name} /> 
-                {/* <TextInput placeholder="Enter a clue" style={styles.name}></TextInput> */} 
-              </View> 
-              <View style={styles.arrowBorder} /View style={styles.arrow} /> 
-            </View> 
-          </Callout> 
-        </Marker> 
-      </MapView> 
+                {" "}
+                {/* <Text style={styles.name}>First Location</Text> */}{" "}
+                <TextInput placeholder="Enter a location" style={styles.name} />{" "}
+                {/* <TextInput placeholder="Enter a clue" style={styles.name}></TextInput> */}{" "}
+              </View>{" "}
+              <View style={styles.arrowBorder} /> <View style={styles.arrow} />{" "}
+            </View>{" "}
+          </Callout>{" "}
+        </Marker>{" "}
+      </MapView>{" "}
       <ScrollView
         horizontal
         scrollEventThrottle={1}
@@ -417,10 +417,10 @@ export default function KeeperEditorScreen({ navigation }) {
       >
         {clues.map((first, index) => (
           <TouchableOpacity key={index} style={styles.card}>
-            <Text> {first.location} </TextText> {first.clue} </Text> 
+            <Text> {first.location} </Text> <Text> {first.clue} </Text>{" "}
           </TouchableOpacity>
-        ))} 
-      </ScrollView> 
+        ))}{" "}
+      </ScrollView>{" "}
     </React.Fragment>
   );
 }

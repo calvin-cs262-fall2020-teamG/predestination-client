@@ -36,10 +36,10 @@ export default function Card({ content, onPress, id }) {
       >
         <View style={styles.contentContainer}>
           <View style={styles.contentSection}>
-            <Text style={styles.contentText}> {content} </Text> 
-          </View> 
-        </View> 
-      </TouchableOpacity> 
+            <Text style={styles.contentText}> {content} </Text>{" "}
+          </View>{" "}
+        </View>{" "}
+      </TouchableOpacity>{" "}
     </View>
   );
 }

@@ -29,7 +29,7 @@ export default function StartStack({ navigation }) {
         name="StartScreen"
         component={StartScreen}
         options={{ title: "Choose Your Path" }}
-      />
+      />{" "}
     </Stack.Navigator>
   );
 }

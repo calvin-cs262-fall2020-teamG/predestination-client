@@ -59,19 +59,19 @@ export default function AccountScreen({ navigation }) {
   // https://stackoverflow.com/questions/46592833/how-to-use-switch-statement-inside-a-react-component
   return (
     <View>
-       
+      {" "}
       {status === STATUS.LOADING || status === STATUS.ERROR ? (
         <ActivityIndicator />
       ) : (
         <View style={globalStyles.accountScreenContainer}>
           <View>
-            <Text style={globalStyles.accountNameText}> {name} </Text> 
+            <Text style={globalStyles.accountNameText}> {name} </Text>{" "}
             <Image
               style={globalStyles.accountImage}
               source={{
                 uri: photo,
               }}
-            /> 
+            />{" "}
             <SocialIcon
               title="Sign Out of Google"
               light
@@ -79,11 +79,11 @@ export default function AccountScreen({ navigation }) {
               button
               type="google"
               onPress={handleSignOut}
-            /> 
-          </View> 
-          <View/View> 
+            />{" "}
+          </View>{" "}
+          <View> </View>{" "}
         </View>
-      )} 
+      )}{" "}
     </View>
   );
 }

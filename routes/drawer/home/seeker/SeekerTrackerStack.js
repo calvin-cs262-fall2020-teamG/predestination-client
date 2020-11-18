@@ -27,12 +27,12 @@ export default function TrackerStack({ navigation }) {
         name="TrackerScreen"
         component={TrackerScreen}
         options={{ title: "Tracker" }}
-      /> 
+      />{" "}
       <Stack.Screen
         name="TrackerListScreen"
         component={TrackerListScreen}
         options={{ title: "TrackerList" }}
-      /> 
+      />{" "}
     </Stack.Navigator>
   );
 }

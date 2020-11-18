@@ -9,15 +9,15 @@ export default function PointComponent({ points, notes, onPress }) {
   return (
     <View>
       <View style={styles.pointTextContainer}>
-        <Text style={styles.pointText}> -{points} - </Text> 
-      </View> 
+        <Text style={styles.pointText}> -{points} - </Text>{" "}
+      </View>{" "}
       <FlatList
         data={notes}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <Card content={item.clue} id={item.key} onPress={onPress} />
         )}
-      /> 
+      />{" "}
     </View>
   );
 }

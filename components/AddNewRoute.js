@@ -18,27 +18,27 @@ export default function AddNewRoute({ submitHandler }) {
   return (
     <View>
       <View>
-         
-        {/* New scavenger hunt label and text input field */} 
+        {" "}
+        {/* New scavenger hunt label and text input field */}{" "}
         <Text style={globalStyles.keeperText}>
           Enter a scavenger hunt name:
-        </Text> 
+        </Text>{" "}
         <TextInput
           style={globalStyles.input}
           placeholder="Enter name"
           value={name}
           // Fires changeNameHandler which in turn sets the name to whatever the user types in
           onChangeText={changeNameHandler}
-        /> 
-      </View> 
+        />{" "}
+      </View>{" "}
       <View>
-        <CustomButton title="Save Name" onPress={() => submitHandler(name)} /> 
-      </View> 
+        <CustomButton title="Save Name" onPress={() => submitHandler(name)} />{" "}
+      </View>{" "}
       <View style={globalStyles.clearButton}>
-        <CustomButton title="Clear Name" onPress={() => setName("")} /> 
-      </View> 
-      <View> {/* TODO: Add min players input */} </View> 
-      <View> {/* TODO: Add timer input */} </View> 
+        <CustomButton title="Clear Name" onPress={() => setName("")} />{" "}
+      </View>{" "}
+      <View> {/* TODO: Add min players input */} </View>{" "}
+      <View> {/* TODO: Add timer input */} </View>{" "}
     </View>
   );
 }

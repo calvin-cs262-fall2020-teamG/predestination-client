@@ -71,13 +71,13 @@ export default function ProximityView() {
         <View style={styles.touchableOpacityStyle}>
           <View style={globalStyles.proximityOfficalTextContainer}>
             <Text style={globalStyles.proximityOfficialText}>
-               
-              {PROXIMITY_MESSAGES[locationProximity].official} 
-            </Text> 
-          </View> 
+              {" "}
+              {PROXIMITY_MESSAGES[locationProximity].official}{" "}
+            </Text>{" "}
+          </View>{" "}
           <View style={styles.sillyTextContainer}>
             <Text style={styles.sillyText}>
-               
+              {" "}
               {
                 PROXIMITY_MESSAGES[locationProximity].silly[
                   Math.floor(
@@ -85,11 +85,11 @@ export default function ProximityView() {
                       PROXIMITY_MESSAGES[locationProximity].silly.length
                   )
                 ]
-              } 
-            </Text> 
-          </View> 
-        </View> 
-      </TouchableOpacity> 
+              }{" "}
+            </Text>{" "}
+          </View>{" "}
+        </View>{" "}
+      </TouchableOpacity>{" "}
     </View>
   );
 }

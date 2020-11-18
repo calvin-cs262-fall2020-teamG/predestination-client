@@ -57,30 +57,30 @@ export default function SeekerGameScreen({ route, navigation }) {
       >
         <View style={styles.header}>
           <View style={styles.pointsSection}>
-            <Text style={styles.pointText}> {points} </Text> 
-            <Text> Points </Text> 
-          </View> 
+            <Text style={styles.pointText}> {points} </Text>{" "}
+            <Text> Points </Text>{" "}
+          </View>{" "}
           <View style={styles.statusSection}>
             <View style={styles.timeSection}>
-              <Text style={styles.timeText}> {time} </Text> 
-              <Text> Time Left </Text> 
-            </View> 
+              <Text style={styles.timeText}> {time} </Text>{" "}
+              <Text> Time Left </Text>{" "}
+            </View>{" "}
             <View style={styles.rankSection}>
-              <Text style={styles.rankText}> {rank} </TextText> Rank </Text> 
-            </View> 
-          </View> 
-        </View> 
-      </ImageBackground> 
+              <Text style={styles.rankText}> {rank} </Text> <Text> Rank </Text>{" "}
+            </View>{" "}
+          </View>{" "}
+        </View>{" "}
+      </ImageBackground>{" "}
       <View style={styles.bottomSection}>
         <View>
-          <Text style={globalStyles.leaderBoardHeader}> Leaderboard </Text> 
+          <Text style={globalStyles.leaderBoardHeader}> Leaderboard </Text>{" "}
           <Leaderboard
             data={keeperLeaderboard}
             sortBy="clueStatus" //sorts the leaderboard by clueStatus
             labelBy="userName" //displays the userName for the rank
           />
-        </View> 
-      </View> 
+        </View>{" "}
+      </View>{" "}
     </View>
   );
 }
