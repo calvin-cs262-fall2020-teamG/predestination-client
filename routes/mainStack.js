@@ -48,8 +48,8 @@ export default function MainStack({ navigation }) {
               component={Drawer}
               options={{ title: "Drawer" }}
             />
-          ))}{" "}
-      </Stack.Navigator>{" "}
+          ))}
+      </Stack.Navigator>
     </AuthenticationContext.Provider>
   );
 }
