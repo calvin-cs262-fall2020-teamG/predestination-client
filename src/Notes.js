@@ -2,11 +2,18 @@ import React from "react";
 
 export class NotePack {
   constructor() {
-    // todo: add code to make list be fetched data from api
-    this.list = [
-    ]
+
+    this.list = [];
+      fetch('https://predestination-service.herokuapp.com/clues')
+      .then((response) => response.json())
+      .then((json) => {
+        this.list = json.clues;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     this.focused = null;
-  }
+  };
 
   getFocused() {
     if (this.focused === null) {
