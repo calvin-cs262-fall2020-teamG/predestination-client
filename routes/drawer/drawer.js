@@ -38,13 +38,14 @@ export default function DrawerScreen({ setLoginStatus, route }) {
       <Drawer.Screen
         options={{
           title: "About",
-          drawerIcon: () => (
-            <Icon name="information-outline" size={25} color="black" />
-          ),
+          drawerIcon: () => <Icon name="information-outline" size={25} color="black" />,
         }}
         name="About"
         component={AboutStack}
       />
+      {/* <Drawer.Screen name="Home" component={HomeStack} />
+      <Drawer.Screen name="Account" component={AccountStack} />
+      <Drawer.Screen name="About" component={AboutStack} /> */}
     </Drawer.Navigator>
   );
 }
