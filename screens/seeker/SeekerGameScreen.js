@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { ImageBackground, StyleSheet, View, Text, Button, TouchableOpacity, Alert, FlatList } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import Leaderboard from "react-native-leaderboard";
@@ -38,15 +38,13 @@ export default function SeekerGameScreen({ route, navigation }) {
         }
     }
 
-    // let imagePath = require("../../assets/list.png");
-
     return (
 
         <View style={styles.flexContainer}>
             <ImageBackground source={require('../../assets/background_tres.png')} blurRadius={5} style={styles.image}>
                 <View style={styles.header}>
                     <View style={styles.pointsSection}>
-                        <Text style={styles.pointText}>{points}</Text>
+                        <Text style={styles.pointText}>{notePack.getPoints()}</Text>
                         <Text>Points</Text>
                     </View>
                     <View style={styles.statusSection}>
