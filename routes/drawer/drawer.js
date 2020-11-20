@@ -1,6 +1,5 @@
 import * as React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import HomeStack from "../drawer/home/homeStack";
 import AccountStack from "../drawer/account/accountStack";
@@ -19,32 +18,9 @@ export default function DrawerScreen({ setLoginStatus, route }) {
       drawerType="front"
       screenOptions={{ headerShown: false }}
     >
-      <Drawer.Screen
-        options={{
-          title: "Home",
-          drawerIcon: () => <Icon name="home" size={25} color="black" />,
-        }}
-        name="Home"
-        component={HomeStack}
-      />
-      <Drawer.Screen
-        options={{
-          title: "Account",
-          drawerIcon: () => <Icon name="account" size={25} color="black" />,
-        }}
-        name="Account"
-        component={AccountStack}
-      />
-      <Drawer.Screen
-        options={{
-          title: "About",
-          drawerIcon: () => (
-            <Icon name="information-outline" size={25} color="black" />
-          ),
-        }}
-        name="About"
-        component={AboutStack}
-      />
+      <Drawer.Screen name="Home" component={HomeStack} />
+      <Drawer.Screen name="Account" component={AccountStack} />
+      <Drawer.Screen name="About" component={AboutStack} />
     </Drawer.Navigator>
   );
 }

@@ -142,11 +142,6 @@ export default function SeekerFocusedScreen({ route, navigation }) {
       // when proximity is initialized, set don't run an animation
       setIsBeginning(false);
     }
-
-    if (proximity === PROXIMITY.SUCCESS) {
-      notePack.foundClue();
-    }
-
   }, [proximity]);
 
   // todo: for debugging purposes only to show all the levels of proximity to given location
