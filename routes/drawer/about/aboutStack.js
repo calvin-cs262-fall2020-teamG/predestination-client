@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import AccountScreen from "../../../screens/AccountScreen";
+import AboutScreen from "../../../screens/AboutScreen";
 import Header from "../../../shared/header";
 
 import { globalStyles } from "../../../styles/global";
@@ -15,14 +15,14 @@ export default function AccountStack({ navigation }) {
         headerRight: () => (
           <Header
             navigation={navigation}
-            customStyle={globalStyles.accountNavigationDrawer}
+            customStyle={globalStyles.aboutNavigationDrawer}
           />
         ),
-        headerTitleStyle: globalStyles.accountNavigationTitle,
-        headerStyle: globalStyles.accountNavigationHeader,
+        headerTitleStyle: globalStyles.aboutNavigationTitle,
+        headerStyle: globalStyles.aboutNavigationHeader,
       }}
     >
-      <Stack.Screen name="Your Account" component={AccountScreen} />
+      <Stack.Screen name="About Predestination" component={AboutScreen} />
     </Stack.Navigator>
   );
 }
