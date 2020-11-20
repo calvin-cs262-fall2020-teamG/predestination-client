@@ -21,38 +21,38 @@ export class NotePack {
       });
     this.focused = null;
   };     
-}
 
-getFocused() {
-    if (this.focused === null) {
-        return null;
-    } else {
-        return this.list.filter(note => note.key === this.focused)[0];
+
+  getFocused() {
+      if (this.focused === null) {
+          return null;
+      } else {
+          return this.list.filter(note => note.key === this.focused)[0];
+      }
     }
-}
 
-get notes() {
-    return this.list;
-}
+  get notes() {
+      return this.list;
+  }
 
-setFocused(key) {
-    this.focused = key;
-}
+  setFocused(key) {
+      this.focused = key;
+  }
 
-foundClue() {
-    if (this.focused !== null) {
-        this.list.filter(note => note.key === this.focused)[0].archived = true;
-        //UPDATE database with this.focused as key
-    }
-}
+  foundClue() {
+      if (this.focused !== null) {
+          this.list.filter(note => note.key === this.focused)[0].archived = true;
+          //UPDATE database with this.focused as key
+      }
+  }
 
-getPoints() {
-    return this.list
-    .filter(note => note.archived === true)
-    .reduce((acc, curr) => {
-        return acc + curr.points;
-    }, 0);
-}
+  getPoints() {
+      return this.list
+      .filter(note => note.archived === true)
+      .reduce((acc, curr) => {
+          return acc + curr.points;
+      }, 0);
+  }
 }
 
 export const NotesContext = React.createContext({
