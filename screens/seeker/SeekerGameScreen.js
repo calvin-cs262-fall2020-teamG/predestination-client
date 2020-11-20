@@ -57,7 +57,7 @@ export default function SeekerGameScreen({ route, navigation }) {
       >
         <View style={styles.header}>
           <View style={styles.pointsSection}>
-            <Text style={styles.pointText}> {points} </Text>
+            <Text style={styles.pointText}> {notePack.getPoints()} </Text>
             <Text> Points </Text>
           </View>
           <View style={styles.statusSection}>
