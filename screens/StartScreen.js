@@ -35,23 +35,24 @@ export default function StartScreen({ navigation, route }) {
 
   const loadData = () => {
     getUserData()
-      .then(({ name, photo }) => {
-        setName(name);
-        setPhoto(photo);
-      })
-      .then(() => {
-        setStatus(STATUS.LOADED);
-      })
-      .catch((e) => {
-        setStatus(STATUS.ERROR);
-      });
+    .then(({ name, photo }) => {
+      setName(name)
+      setPhoto(photo);
+    })
+    .then(() => {
+      setStatus(STATUS.LOADED);
+    })
+    .catch((e) => {
+      setStatus(STATUS.ERROR);
+    });
   };
 
   useEffect(() => {
     loadData();
   }, []);
 
-  const { loginStatus, setLoginStatus } = useContext(AuthenticationContext);
+
+  const { loginStatus, setLoginStatus } = useContext(AuthenticationContext)
 
   const handleError = () => {
     Alert.alert("Please enter 6 numerical digits for the game code.");
@@ -80,18 +81,14 @@ export default function StartScreen({ navigation, route }) {
             <View>
               <Text style={globalStyles.welcomeText}>{name}</Text>
             </View>
-          </View>
+          </View>  
         )}
-        {/* <Text style={globalStyles.welcomeText}>
-          WELCOME,
-          YOUNG CALVINIST.
-        </Text> */}
       </View>
       {/*=======================Options for seekers==============================*/}
       <View style={globalStyles.horizontalBar}></View>
-      <Text style={globalStyles.seekerText}>
-        FOLLOW YOUR DESTINY AS A SEEKER
-      </Text>
+      
+      <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY AS A SEEKER</Text>
+      
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={globalStyles.inputContainer}>
           <TextInput
@@ -110,6 +107,7 @@ export default function StartScreen({ navigation, route }) {
       <View style={globalStyles.horizontalBar}></View>
       {/*========================Options for Keepers================================*/}
       <Text style={globalStyles.keeperText}>CREATE DESTINIES AS A KEEPER</Text>
+      
       <View>
         <CustomButton
           title="CREATE"
