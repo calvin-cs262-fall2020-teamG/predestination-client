@@ -4,10 +4,18 @@ export class NotePack {
   constructor() {
 
     this.list = [];
+    let f = this;
       fetch('https://predestination-service.herokuapp.com/clues')
       .then((response) => response.json())
       .then((json) => {
-        this.list = json.clues;
+        this.list = json.map(note => {
+          return {
+            ...note,
+            clue: note.description,
+            key: note.id,
+            archived: true,
+          }
+        });
       })
       .catch((error) => {
         console.error(error);
