@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   Alert,
@@ -9,17 +9,49 @@ import {
   Keyboard,
   Button,
   StatusBar,
+  ActivityIndicator,
 } from "react-native";
+import { getUserData } from "../src/GoogleAuthentication";
+import {
+  LOGIN_STATUS,
+  AuthenticationContext,
+} from "../src/GoogleAuthentication";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 import CustomButton from "../components/CustomButton";
 
-const handleError = () => {
-  Alert.alert("Oops!", "Code must be 6 digits", [{ text: "Understood" }]);
-};
-
 export default function StartScreen({ navigation, route }) {
   const [code, setCode] = useState("");
+
+  const STATUS = {
+    LOADING: "loading",
+    LOADED: "loaded",
+    ERROR: "error",
+  };
+
+  const [name, setName] = useState(null);
+  const [photo, setPhoto] = useState(null);
+  const [status, setStatus] = useState(STATUS.LOADING);
+
+  const loadData = () => {
+    getUserData()
+      .then(({ name, photo }) => {
+        setName(name);
+        setPhoto(photo);
+      })
+      .then(() => {
+        setStatus(STATUS.LOADED);
+      })
+      .catch((e) => {
+        setStatus(STATUS.ERROR);
+      });
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const { loginStatus, setLoginStatus } = useContext(AuthenticationContext);
 
   const handleError = () => {
     Alert.alert("Please enter 6 numerical digits for the game code.");
@@ -39,18 +71,26 @@ export default function StartScreen({ navigation, route }) {
     // <View style={globalStyles.container}>
     <View style={globalStyles.container}>
       <View style={globalStyles.titleSection}>
-        
         {/* <Text>PreDestination</Text> */}
-        <Text style={globalStyles.welcomeText}>
-          WELCOME, 
+        <Text style={globalStyles.welcomeText}>Welcome, </Text>
+        {status === STATUS.LOADING || status === STATUS.ERROR ? (
+          <ActivityIndicator />
+        ) : (
+          <View>
+            <View>
+              <Text style={globalStyles.welcomeText}>{name}</Text>
+            </View>
+          </View>
+        )}
+        {/* <Text style={globalStyles.welcomeText}>
+          WELCOME,
           YOUNG CALVINIST.
-        </Text>
+        </Text> */}
       </View>
       {/*=======================Options for seekers==============================*/}
       <View style={globalStyles.horizontalBar}></View>
       <Text style={globalStyles.seekerText}>
-        FOLLOW YOUR DESTINY 
-        AS A SEEKER
+        FOLLOW YOUR DESTINY AS A SEEKER
       </Text>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={globalStyles.inputContainer}>
@@ -69,10 +109,7 @@ export default function StartScreen({ navigation, route }) {
       </View>
       <View style={globalStyles.horizontalBar}></View>
       {/*========================Options for Keepers================================*/}
-      <Text style={globalStyles.keeperText}>
-        CREATE DESTINIES 
-        AS A KEEPER
-      </Text>
+      <Text style={globalStyles.keeperText}>CREATE DESTINIES AS A KEEPER</Text>
       <View>
         <CustomButton
           title="CREATE"
