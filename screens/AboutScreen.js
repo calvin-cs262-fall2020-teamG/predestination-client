@@ -20,19 +20,19 @@ import { globalStyles } from "../styles/global";
 export default function AboutScreen({ navigation }) {
   return (
     <View>
-      
+
       {
         <View style={globalStyles.aboutScreenContainer}>
           <View>
-            <Text style={globalStyles.aboutTitleText}> Our Goal </Text>
+            <Text style={globalStyles.aboutTitleText}>Our Goal</Text>
             <Text style={globalStyles.aboutBodyText}>
-              <Text style={{ fontStyle: "italic" }}> Predestination </Text>
+              <Text style={{ fontStyle: "italic" }}>Predestination </Text>
               combines technological ingenuity with an age - old game to deliver
               a fun, modern spin in this time of need for environmental care and
               social bonding in a socially distanced world, leaving nothing
               behind except ephemeral footprints.
             </Text>
-            <Text style={globalStyles.aboutTitleText}> Our Developers </Text>
+            <Text style={globalStyles.aboutTitleText}>Our Developers</Text>
             <Unorderedlist style={{ marginLeft: 30 }}>
               <Text> Hayworth A. </Text>
             </Unorderedlist>
@@ -48,19 +48,17 @@ export default function AboutScreen({ navigation }) {
             <Unorderedlist style={{ marginLeft: 30 }}>
               <Text> Nathan W. </Text>
             </Unorderedlist>
-            <Text style={globalStyles.aboutTitleText}> Resources </Text>
+            <Text style={globalStyles.aboutTitleText}>Resources</Text>
             <Text style={globalStyles.aboutBodyText}>
-              If you 'd like to follow us along on our journey, please checkout
-              our
-              <Text
+              If you'd like to follow us along on our journey, please checkout
+              our <Text
                 style={{ color: "darkblue", textDecorationLine: "underline" }}
                 onPress={() =>
                   Linking.openURL(
                     "https://github.com/calvin-cs262-fall2020-teamG"
                   )
                 }
-              >
-                GitHub
+              >GitHub
               </Text>
               .
             </Text>
