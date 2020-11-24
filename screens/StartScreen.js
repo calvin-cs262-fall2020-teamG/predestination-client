@@ -51,6 +51,7 @@ export default function StartScreen({ navigation, route }) {
     loadData();
   }, []);
 
+
   const { loginStatus, setLoginStatus } = useContext(AuthenticationContext)
 
   const handleError = () => {
@@ -71,7 +72,6 @@ export default function StartScreen({ navigation, route }) {
     // <View style={globalStyles.container}>
     <View style={globalStyles.container}>
       <View style={globalStyles.titleSection}>
-        
         {/* <Text>PreDestination</Text> */}
         <Text style={globalStyles.welcomeText}>Welcome, </Text>
         {status === STATUS.LOADING || status === STATUS.ERROR ? (
