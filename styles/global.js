@@ -265,6 +265,7 @@ export const globalStyles = StyleSheet.create({
   SeekerWaitingScreenCard: {
     width: '90%',
     marginBottom: '10%',
+    alignItems: 'center'
   },
   //=================start styles from SeekerGameScreen.js================
 
