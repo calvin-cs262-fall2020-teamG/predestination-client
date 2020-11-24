@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -8,12 +8,19 @@ import {
   TouchableOpacity,
   Alert,
   FlatList,
-} from "react-native";
-import CustomButton from "../../components/CustomButton";
-import Leaderboard from "react-native-leaderboard";
+} from 'react-native';
 
-import { NotesContext, NotePack } from "../../src/Notes";
-import { globalStyles } from "../../styles/global";
+import { getUserData } from '../../src/GoogleAuthentication';
+import {
+  LOGIN_STATUS,
+  AuthenticationContext,
+} from '../../src/GoogleAuthentication';
+
+import CustomButton from '../../components/CustomButton';
+import Leaderboard from 'react-native-leaderboard';
+
+import { NotesContext, NotePack } from '../../src/Notes';
+import { globalStyles } from '../../styles/global';
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
@@ -25,24 +32,54 @@ export default function SeekerGameScreen({ route, navigation }) {
   const [rank, setRank] = useState(1);
   const [time, setTime] = useState(3600);
 
+  const STATUS = {
+    LOADING: 'loading',
+    LOADED: 'loaded',
+    ERROR: 'error',
+  };
+
+  const [googleUserName, setUserName] = useState(null);
+  const [googleUserPhoto, setUserPhoto] = useState(null);
+  const [status, setStatus] = useState(STATUS.LOADING);
+
+  const loadData = () => {
+    getUserData()
+      .then(({ googleUserName, googleUserPhoto }) => {
+        setUserName(googleUserName);
+        setUserPhoto(googleUserPhoto);
+      })
+      .then(() => {
+        setStatus(STATUS.LOADED);
+      })
+      .catch((e) => {
+        setStatus(STATUS.ERROR);
+      });
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const { loginStatus, setLoginStatus } = useContext(AuthenticationContext);
   //leaderboard added by NW on Oct 30 at 2AM. Will need to match with KeeperGameScreen.js in the future (connect to database)
   const [keeperLeaderboard, setKeeperLeaderboard] = useState(
     //   data for the leaderboard
     [
-      { userName: "JBrink", clueStatus: 2 },
-      { userName: "NWang", clueStatus: 2 },
-      { userName: "AScaria", clueStatus: 3 },
-      { userName: "EWalters", clueStatus: 3 },
-      { userName: "HAnderson", clueStatus: 2 },
+      { userName: 'JBrink', clueStatus: 2 },
+      { userName: 'NWang', clueStatus: 2 },
+      { userName: 'AScaria', clueStatus: 3 },
+      { userName: 'EWalters', clueStatus: 3 },
+      { userName: 'HAnderson', clueStatus: 2 },
+      { userName: 'googleUserName', clueStatus: notePack.getPoints() },
     ]
   );
 
   // When seekers click the "hunt" button, they will be redirected to the last clue selected if they selected a clue, else they will go to a clue list screen
   const pressHunt = () => {
     if (notePack.getFocused() === null) {
-      navigation.navigate("SeekerClueListScreen");
+      navigation.navigate('SeekerClueListScreen');
     } else {
-      navigation.navigate("SeekerFocusedScreen");
+      navigation.navigate('SeekerFocusedScreen');
     }
   };
 
@@ -51,7 +88,7 @@ export default function SeekerGameScreen({ route, navigation }) {
   return (
     <View style={styles.flexContainer}>
       <ImageBackground
-        source={require("../../assets/background_tres.png")}
+        source={require('../../assets/background_tres.png')}
         blurRadius={5}
         style={styles.image}
       >
@@ -66,7 +103,8 @@ export default function SeekerGameScreen({ route, navigation }) {
               <Text> Time Left </Text>
             </View>
             <View style={styles.rankSection}>
-              <Text style={styles.rankText}> {rank} </Text><Text> Rank </Text>
+              <Text style={styles.rankText}> {rank} </Text>
+              <Text> Rank </Text>
             </View>
           </View>
         </View>
@@ -76,8 +114,8 @@ export default function SeekerGameScreen({ route, navigation }) {
           <Text style={globalStyles.leaderBoardHeader}> Leaderboard </Text>
           <Leaderboard
             data={keeperLeaderboard}
-            sortBy="clueStatus" //sorts the leaderboard by clueStatus
-            labelBy="userName" //displays the userName for the rank
+            sortBy='clueStatus' //sorts the leaderboard by clueStatus
+            labelBy='userName' //displays the userName for the rank
           />
         </View>
       </View>
@@ -87,51 +125,51 @@ export default function SeekerGameScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   pointText: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 64,
   },
   timeText: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 24,
   },
   rankText: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 24,
   },
   flexContainer: {
     flex: 1,
-    flexDirection: "column",
-    backgroundColor: "white",
+    flexDirection: 'column',
+    backgroundColor: 'white',
   },
   header: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     paddingBottom: 5,
   },
   pointsSection: {
     flex: 2,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   timeSection: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   rankSection: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   statusSection: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   bottomSection: {
     flex: 2,
-    flexDirection: "column",
-    justifyContent: "center",
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   buttonContainer: {
     flex: 1,
@@ -140,7 +178,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
