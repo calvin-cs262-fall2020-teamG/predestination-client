@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -6,25 +6,25 @@ import {
   Text,
   Image,
   Button,
-} from "react-native";
-import { SocialIcon } from "react-native-elements";
+} from 'react-native';
+import { SocialIcon } from 'react-native-elements';
 
-import { getUserData, signOutOfGoogle } from "../src/GoogleAuthentication";
+import { getUserData, signOutOfGoogle } from '../src/GoogleAuthentication';
 import {
   LOGIN_STATUS,
   AuthenticationContext,
-} from "../src/GoogleAuthentication";
+} from '../src/GoogleAuthentication';
 
-import { globalStyles } from "../styles/global";
+import { globalStyles } from '../styles/global';
 /**
  * AccountScreen lets a user logout of Google.
  * Once logged out, the user will be directed to the login screen
  */
 export default function AccountScreen({ navigation }) {
   const STATUS = {
-    LOADING: "loading",
-    LOADED: "loaded",
-    ERROR: "error",
+    LOADING: 'loading',
+    LOADED: 'loaded',
+    ERROR: 'error',
   };
 
   const [name, setName] = useState(null);
@@ -49,17 +49,9 @@ export default function AccountScreen({ navigation }) {
     loadData();
   }, []);
 
-  const { loginStatus, setLoginStatus } = useContext(AuthenticationContext);
-
-  const handleSignOut = async () => {
-    await signOutOfGoogle();
-    setLoginStatus(LOGIN_STATUS.NEW_USER);
-  };
-
   // https://stackoverflow.com/questions/46592833/how-to-use-switch-statement-inside-a-react-component
   return (
     <View>
-      
       {status === STATUS.LOADING || status === STATUS.ERROR ? (
         <ActivityIndicator />
       ) : (
@@ -73,11 +65,11 @@ export default function AccountScreen({ navigation }) {
               }}
             />
             <SocialIcon
-              title="Sign Out of Google"
+              title='Sign Out of Google'
               light
               raised
               button
-              type="google"
+              type='google'
               onPress={handleSignOut}
             />
           </View>
