@@ -45,7 +45,7 @@ export default function SeekerWaitingScreen({ route, navigation }) {
         style={globalStyles.SeekerWaitingScreenCard}
       >
         <Text>
-          While you wait, share the game code with a friend!As they say, the
+          While you wait, share the game code with a friend! The
           more the merrier!
         </Text>
         <CustomButton
@@ -54,11 +54,11 @@ export default function SeekerWaitingScreen({ route, navigation }) {
           disabled={disabled}
           onPress={
             disabled
-              ? () => {}
+              ? () => { }
               : () =>
-                  navigation.navigate("SeekerGameTabStack", {
-                    screen: "SeekerGameScreen",
-                  })
+                navigation.navigate("SeekerGameTabStack", {
+                  screen: "SeekerGameScreen",
+                })
           }
         />
       </FloatingView>
