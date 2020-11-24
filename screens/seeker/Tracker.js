@@ -146,7 +146,6 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     if (proximity === PROXIMITY.SUCCESS) {
       notePack.foundClue();
     }
-
   }, [proximity]);
 
   // todo: for debugging purposes only to show all the levels of proximity to given location
