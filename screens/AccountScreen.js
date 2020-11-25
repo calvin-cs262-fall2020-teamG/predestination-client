@@ -49,6 +49,13 @@ export default function AccountScreen({ navigation }) {
     loadData();
   }, []);
 
+  const { loginStatus, setLoginStatus } = useContext(AuthenticationContext);
+
+  const handleSignOut = async () => {
+    await signOutOfGoogle();
+    setLoginStatus(LOGIN_STATUS.NEW_USER);
+  };
+
   // https://stackoverflow.com/questions/46592833/how-to-use-switch-statement-inside-a-react-component
   return (
     <View>
