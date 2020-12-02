@@ -23,23 +23,12 @@ import * as Location from 'expo-location';
 import { LocationGeofencingEventType, Accuracy } from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
 
-const GEOFENCE_TASK_NAME = 'GEOFENCE_HOP';
+//const GEOFENCE_TASK_NAME = 'GEOFENCE_HOP';
 
-TaskManager.defineTask(GEOFENCE_TASK_NAME, ({ data: { eventType, region }, error }) => {
-    console.log('help');
-    if (error) {
-	// check `error.message` for more details.
-	console.log("hello");
-	return;
-    }
-    if (eventType === LocationGeofencingEventType.Enter) {
-	console.log("You've entered region:", region);
-	Alert('You entered a region');
-    } else if (eventType === LocationGeofencingEventType.Exit) {
-	console.log("You've left region:", region);
-	Alert('You left a region');
-    }
-});
+const unlockRadius = 15;
+const nearRadius = 25;
+
+const ACCEPTABLE_ACCURACY = 6; // radius in meters of accuracy (i.e. the actual location of the user is within 5 meters of the given location)
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
@@ -48,11 +37,68 @@ TaskManager.defineTask(GEOFENCE_TASK_NAME, ({ data: { eventType, region }, error
 export default function SeekerFocusedScreen({ route, navigation }) {
 
     const { notePack } = useContext(NotesContext);
-    const [location, setLocation] = useState('waiting');
+    const [location, setLocation] = useState(null);
+    const [currentAccuracy, setCurrentAccuracy] = useState(true); // true if acceptable, false if not
+    const [proximity, setProximity] = useState(PROXIMITY.FAR);
+    const [target, setTarget] = useState({ latitude: 42.2942481, longitude: -83.2518054});
+    const [message, setMessage] = useState("wait for message");
+    
+    useEffect(() => {
+        // whenever the current accuracy of the GPS changes, this code will run
+        if (currentAccuracy) {
+
+        } else {
+            setMessage("accuracy is bad");
+            Alert.alert("Poor GPS Signal!", "This is usually caused by being inside a building or having the signal be obstructed.\nThis game will not proceed until this is fixed.");
+        }
+    }, [currentAccuracy]);
+
+    // https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
+    function degreesToRadians(degrees) {
+        return degrees * Math.PI / 180;
+    }
+
+    function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
+        var earthRadiusKm = 6378.137;
+
+        var dLat = degreesToRadians(lat2-lat1);
+        var dLon = degreesToRadians(lon2-lon1);
+
+        lat1 = degreesToRadians(lat1);
+        lat2 = degreesToRadians(lat2);
+
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return earthRadiusKm * c;
+    }
+
+    // when a new accurate location is polled
+    useEffect(() => {
+        if (location != null && proximity !== PROXIMITY.AT) {
+            const dist = distanceInKmBetweenEarthCoordinates(location.latitude, location.longitude, target.latitude, target.longitude) * 1000;
+            setMessage(dist);
+            
+            if (dist < unlockRadius) {
+                setProximity(PROXIMITY.AT);
+            } else if (dist < nearRadius) {
+                setProximity(PROXIMITY.CLOSE);
+            } else {
+                setProximity(PROXIMITY.FAR);
+            }            
+        }
+        
+    }, [location]);
     
     const watcher = (location) => {
 	if (location !== null) {
-	    setLocation(`latitude: ${location.coords.latitude}, longitude: ${location.coords.longitude}`);
+	    if (location.coords.accuracy <= ACCEPTABLE_ACCURACY) {
+                setCurrentAccuracy(true);
+                setLocation(location.coords);
+	    } else {
+                setCurrentAccuracy(false);
+            }
+	    
 	} else {
 	    setLocation('an error occurred');
 	}
@@ -62,16 +108,17 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 	try {
 	    const { status } = await Location.requestPermissionsAsync();
 	    if (status === 'granted') {
-		await Location.startGeofencingAsync(GEOFENCE_TASK_NAME, [
-		    {
-			latitude: 42.2943209,
-			longitude: -83.2517007,
-			radius: 8,
-		    }
-		]);
+		
+		// for some reason this never works, so I guess we gotta do stuff ourselves :(
+		// await Location.startGeofencingAsync(GEOFENCE_TASK_NAME, [
+		//     exampleLocation
+		// ]);
+
+		const taskList = await TaskManager.getRegisteredTasksAsync();
+		console.log(taskList);
 		await Location.watchPositionAsync({
-		    accuracy: Accuracy.BestForNavigation,
-		    timeInterval: 500,
+		    accuracy: Accuracy.High,
+		    timeInterval: 100,
 		    distanceInterval: 1,
 		    mayShowUserSettingsDialog: true,
 		}, watcher);
@@ -88,79 +135,97 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     
     return (
 	<Animated.View
-	    style={{
-		...styles.flexContainer,
-	    }}
+	  style={{
+	      ...styles.flexContainer,
+	  }}
 	>
-	    <Tracker proximity={PROXIMITY.AT} points={21}></Tracker>
-	    <Text>{location}</Text>
-	    <View style={styles.bottomContainer}>
-		<View style={styles.bottomContainerHeader}>
-		    <View
-			style={{
-			    ...styles.pointContainer,
-			    display: notePack.getFocused() === null ? "none" : "flex",
-			    flexDirection: "row",
-			    justifyContent: "center",
-			    alignItems: "center",
-			}}
-		    >
-			<Text
-			    style={{
-				textAlign: "center",
-				fontSize: 24,
-				justifyContent: "center",
-				fontWeight: "bold",
-			    }}
-			>
-			    {notePack.getFocused() === null
-			     ? ""
-			     : notePack.getFocused().points}
-			    Points
-			</Text>
-		    </View>
-		    <View style={styles.stuckButton}>
-			<CustomButton
-			    color="orange"
-			    title={
-				notePack.getFocused() === null
-				    ? "Select Clue"
-				    : proximity === "SUCCESS"
-				    ? "New"
-				    : "Stuck"
-			    }
-			    onPress={() => {
-				navigation.navigate("TrackerListScreen");
-			    }}
-			/>
-		    </View>
-		</View>
-		<View
-		    style={{
-			borderBottomColor: "lightgray",
-			borderBottomWidth: 1,
-			width: "90%",
-			alignSelf: "center",
-			display: notePack.getFocused() === null ? "none" : "flex",
-		    }}
-		/>
-		<ScrollView
-		    style={{
-			...styles.noteContainer,
-			display: notePack.getFocused() === null ? "none" : "flex",
-		    }}
+	  <Tracker proximity={proximity} points={21}></Tracker>
+          <Text>{message}</Text>
+	  <View style={styles.bottomContainer}>
+	    <View style={styles.bottomContainerHeader}>
+	      <View
+		style={{
+		    ...styles.pointContainer,
+		    display: notePack.getFocused() === null ? "none" : "flex",
+		    flexDirection: "row",
+		    justifyContent: "center",
+		    alignItems: "center",
+		}}
+	      >
+		<Text
+		  style={{
+		      textAlign: "center",
+		      fontSize: 24,
+		      justifyContent: "center",
+		      fontWeight: "bold",
+		  }}
 		>
-		    <Text style={{ fontSize: 24, marginBottom: 50 }}>
-			
-			{notePack.getFocused() === null
-			 ? "This should not be shown"
-			 : notePack.getFocused().clue}
-		    </Text>
-		</ScrollView>
+		  {notePack.getFocused() === null
+		   ? ""
+		   : notePack.getFocused().points}
+		  Points
+		</Text>
+	      </View>
+	      <View style={styles.stuckButton}>
+		<CustomButton
+		  color="orange"
+		  title={
+		      notePack.getFocused() === null
+			  ? "Select Clue"
+			  : proximity === "SUCCESS"
+			  ? "New"
+			  : "Stuck"
+		  }
+		  onPress={() => {
+		      navigation.navigate("TrackerListScreen");
+		  }}
+		/>
+	      </View>
 	    </View>
+	    <View
+	      style={{
+		  borderBottomColor: "lightgray",
+		  borderBottomWidth: 1,
+		  width: "90%",
+		  alignSelf: "center",
+		  display: notePack.getFocused() === null ? "none" : "flex",
+	      }}
+	    />
+	    <ScrollView
+	      style={{
+		  ...styles.noteContainer,
+		  display: notePack.getFocused() === null ? "none" : "flex",
+	      }}
+	    >
+	      <Text style={{ fontSize: 24, marginBottom: 50 }}>
+		
+		{notePack.getFocused() === null
+		 ? "This should not be shown"
+		 : notePack.getFocused().clue}
+	      </Text>
+	    </ScrollView>
+	  </View>
 	</Animated.View>
     );
 }
+
+// TaskManager.defineTask(GEOFENCE_TASK_NAME, ({ data: { eventType, region }, error }) => {
+//     Alert('Help!');
+//     console.log('help');
+//     if (error) {
+// 	// check `error.message` for more details.
+// 	console.log("hello");
+// 	return;
+//     }
+//     if (eventType === LocationGeofencingEventType.Enter) {
+// 	console.log("You've entered region:", region);
+// 	Alert('You entered a region');
+//     } else if (eventType === LocationGeofencingEventType.Exit) {
+// 	console.log("You've left region:", region);
+// 	Alert('You left a region');
+//     }
+// });
+
 
 const styles = StyleSheet.create({
     farCircle: {
