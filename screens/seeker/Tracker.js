@@ -17,6 +17,22 @@ import { NotesContext } from "../../src/Notes";
 import { PROXIMITY_MESSAGES, PROXIMITY } from "../../src/Proximity";
 import Tracker from "../../components/TrackerTargetVisualizer";
 
+// allows us to easilly set a location and a radius and let expo trigger an event if the user walks into that region
+import { LocationGeofencingEventType } from 'expo-location';
+import * as TaskManager from 'expo-task-manager';
+
+TaskManager.defineTask('GEOFENCE_HOP', ({ data: { eventType, region }, error }) => {
+    if (error) {
+	// check `error.message` for more details.
+	return;
+    }
+    if (eventType === LocationGeofencingEventType.Enter) {
+	console.log("You've entered region:", region);
+    } else if (eventType === LocationGeofencingEventType.Exit) {
+	console.log("You've left region:", region);
+    }
+});
+
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
  * TODO: connecting tempCount and proximity to gps
