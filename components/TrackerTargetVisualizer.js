@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     StyleSheet,
     View,
     Text,
     TouchableOpacity,
     FlatList,
-    Image,
+    Animated,
+    Dimensions
 } from "react-native";
 
 import { PROXIMITY_MESSAGES, PROXIMITY } from '../src/Proximity';
+import Circle from './Circle';
 
 /**
  * TrackerTargetVisualizer visualizes location of user relative to given region with an animated target status
@@ -17,6 +19,7 @@ import { PROXIMITY_MESSAGES, PROXIMITY } from '../src/Proximity';
 export default function TrackerTargetVisualizer({ proximity, points }) {
     const getOfficialMessage = () => {
 	return PROXIMITY_MESSAGES[proximity].official;
+
     };
 
     const getSillyMessage = (proximity) => {
@@ -32,15 +35,36 @@ export default function TrackerTargetVisualizer({ proximity, points }) {
     const [textColorAnimated, setTextColorAnimated] = useState("rgb(0, 0, 0)");
     const [isBeginning, setIsBeginning] = useState(true);
 
-    const [proximity, setProximity] = useState(PROXIMITY.FAR);
-    const [proximityOfficialMessage, setProximityOfficialMessage] = useState(setOfficialMessage(proximity)
-    );
+    const [proximityOfficialMessage, setProximityOfficialMessage] = useState(getOfficialMessage(proximity)
+									    );
     const [proximitySillyMessage, setProximitySillyMessage] = useState(getSillyMessage(proximity));
 
     const [innerTargetRadius, setInnerTargetRadius] = useState(	new Animated.Value(0));
     const [middleTargetRadius, setMiddleTargetRadius] = useState(new Animated.Value(1));
     const [outerTargetRadius, setOuterTargetRadius] = useState(new Animated.Value(2));
 
+    const animationPosition = {
+	FAR: {
+	    name: 'FAR',
+	    value: 0,
+	},
+	CLOSE: {
+	    name: 'CLOSE',
+	    value: 1,
+	},
+	AT: {
+	    name: 'SUCCESS_START',
+	    value: 2,
+	},
+	SUCCESS_FINISH: {
+	    name: 'SUCCESS_FINISH',
+	    value: 3,
+	}	
+    }
+
+    const [animationStep, setAnimationStep] = useState(animationPosition.FAR);
+
+    
     const partyTime = () => {
 	// show success text by gradually increasing opacity
 	Animated.sequence([
@@ -108,35 +132,15 @@ export default function TrackerTargetVisualizer({ proximity, points }) {
 	    }).start(() => {
 		if (animationStep.name === "SUCCESS_START") {
 		    Animated.delay(20).start(() => {
-			setAnimationStep(animationStep.SUCCESS_FINISH);
+			setAnimationStep(animationPosition.SUCCESS_FINISH);
 		    });
 		}
 	    });
 	});
     };
-
-    const animationPosition = {
-	FAR: {
-	    name: 'FAR',
-	    value: 0,
-	},
-	CLOSE: {
-	    name: 'CLOSE',
-	    value: 1,
-	},
-	AT: {
-	    name: 'SUCCESS_START'
-	    value: 2,
-	},
-	SUCCESS_FINISH: {
-	    name: 'SUCCESS_FINISH',
-	    value: 3,
-	}	
-    }
-
-    const [animationStep, setAnimationStep] = useState(animationPosition.FAR);
     
     useEffect(() => {
+	console.log(animationStep);
 	if (!isBeginning) {
 	    animateSize();
 	} else {
@@ -146,7 +150,7 @@ export default function TrackerTargetVisualizer({ proximity, points }) {
     
     useEffect(() => {
 	// sets position of target circles according to given proximity
-	setAnimatonStep(animationPosition[proximity]);
+	setAnimationStep(animationPosition[proximity]);
 	
     }, [proximity]);
 
@@ -222,7 +226,7 @@ export default function TrackerTargetVisualizer({ proximity, points }) {
 		    padding: 20,
 		}}
             >
-		{points === undefined ? 'An error occurred' : points}
+		{points === undefined ? 'An error occurred' : `+${points}`}
             </Animated.Text>
 	</TouchableOpacity>
 
