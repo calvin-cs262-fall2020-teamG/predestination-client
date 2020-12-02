@@ -140,7 +140,6 @@ export default function TrackerTargetVisualizer({ proximity, points }) {
     };
     
     useEffect(() => {
-	console.log(animationStep);
 	if (!isBeginning) {
 	    animateSize();
 	} else {
