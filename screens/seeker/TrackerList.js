@@ -5,8 +5,9 @@ import {
   View,
   Text,
   Button,
-    TouchableOpacity,
-    Animated
+  TouchableOpacity,
+  Alert,
+  FlatList,
 } from "react-native";
 import { color } from "react-native-reanimated";
 import PointComponent from "../../components/PointComponent";
