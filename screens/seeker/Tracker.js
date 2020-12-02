@@ -40,9 +40,10 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [location, setLocation] = useState(null);
     const [currentAccuracy, setCurrentAccuracy] = useState(true); // true if acceptable, false if not
     const [proximity, setProximity] = useState(PROXIMITY.FAR);
-    const [target, setTarget] = useState({ latitude: 42.2942481, longitude: -83.2518054});
-    const [message, setMessage] = useState("wait for message");
-    
+    const [target, setTarget] = useState({ latitude: 42.2942481, longitude: -83.2518054}); // my house
+    const [message, setMessage] = useState("wait for message"); // debugging purposes only
+
+    // todo: have a status indicator indicating quality of GPS
     useEffect(() => {
         // whenever the current accuracy of the GPS changes, this code will run
         if (currentAccuracy) {
@@ -75,6 +76,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 
     // when a new accurate location is polled
     useEffect(() => {
+        // only change proximity if the clue has not been unlocked yet
         if (location != null && proximity !== PROXIMITY.AT) {
             const dist = distanceInKmBetweenEarthCoordinates(location.latitude, location.longitude, target.latitude, target.longitude) * 1000;
             setMessage(dist);
@@ -89,7 +91,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         }
         
     }, [location]);
-    
+
+    // on every new location poll
     const watcher = (location) => {
 	if (location !== null) {
 	    if (location.coords.accuracy <= ACCEPTABLE_ACCURACY) {
@@ -104,6 +107,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 	}
     };
     
+    // https://docs.expo.io/versions/latest/sdk/location/#usage
     const initialize = async () => {
 	try {
 	    const { status } = await Location.requestPermissionsAsync();
