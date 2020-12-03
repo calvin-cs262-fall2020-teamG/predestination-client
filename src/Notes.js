@@ -51,7 +51,6 @@ export class NotePack {
       return this.list
       .filter(note => note.archived === true)
       .reduce((acc, curr) => {
-          console.log(typeof curr.points);
           return acc + parseInt(curr.points);
       }, 0);
   };
