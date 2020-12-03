@@ -60,8 +60,9 @@ export const globalStyles = StyleSheet.create({
     //fontFamily: 'constan-bold',
     //color: 'maroon',
   },
-  seekerNavigationHeader: {
-    backgroundColor: '#05386B',
+    seekerNavigationHeader: {
+	    backgroundColor: '#5CDB95',
+    //backgroundColor: '#05386B',
     // backgroundColor: '#71B1C8',
     //backgroundColor: 'gold',
   },
@@ -260,7 +261,7 @@ export const globalStyles = StyleSheet.create({
   WaitingCode: {
     fontWeight: 'bold',
     fontSize: 64,
-    color: 'white',
+    color: 'black',
   },
   SeekerWaitingScreenCard: {
     width: '90%',

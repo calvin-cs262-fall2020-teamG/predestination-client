@@ -34,7 +34,7 @@ export default function SeekerWaitingScreen({ route, navigation }) {
     <View
       style={{
         alignItems: "center",
-        backgroundColor: "#5CDB95",
+        backgroundColor: "white",
         height: "100%",
         flexDirection: "column-reverse",
         justifyContent: "space-around",
