@@ -41,7 +41,6 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     const [currentAccuracy, setCurrentAccuracy] = useState(true); // true if acceptable, false if not
     const [proximity, setProximity] = useState(PROXIMITY.FAR);
     const [target, setTarget] = useState({ latitude: 42.2942481, longitude: -83.2518054}); // my house
-    const [message, setMessage] = useState("wait for message"); // debugging purposes only
 
     useEffect(() => {
         
@@ -53,7 +52,6 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         if (currentAccuracy) {
 
         } else {
-            setMessage("accuracy is bad");
             Alert.alert("Poor GPS Signal!", "This is usually caused by being inside a building or having the signal be obstructed.\nThis game will not proceed until this is fixed.");
         }
     }, [currentAccuracy]);
@@ -83,7 +81,6 @@ export default function SeekerFocusedScreen({ route, navigation }) {
         // only change proximity if the clue has not been unlocked yet
         if (location != null && proximity !== PROXIMITY.AT) {
             const dist = distanceInKmBetweenEarthCoordinates(location.latitude, location.longitude, target.latitude, target.longitude) * 1000;
-            setMessage(dist);
             
             if (dist < unlockRadius) {
                 setProximity(PROXIMITY.AT);
@@ -147,16 +144,13 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 	      ...styles.flexContainer,
 	  }}
 	>
-          /* used for visualizing how close one is to a clue */
-          <Tracker proximity={proximity} points={GamePack.getFocusedClue() === null ? GamePack.getFocusedClue().points : 'Oops'}></Tracker>
-          
-          <Text>{message}</Text>
+	  <Tracker proximity={proximity} points={GamePack.getFocusedClue() !== null ? GamePack.getFocusedClue().points : 'Oops'}></Tracker>
 	  <View style={styles.bottomContainer}>
 	    <View style={styles.bottomContainerHeader}>
 	      <View
 		style={{
 		    ...styles.pointContainer,
-		    display: GamePack.getFocusedClueClue() === null ? "none" : "flex",
+		    display: GamePack.getFocusedClue() === null ? "none" : "flex",
 		    flexDirection: "row",
 		    justifyContent: "center",
 		    alignItems: "center",
@@ -207,8 +201,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 		  display: GamePack.getFocusedClue() === null ? "none" : "flex",
 	      }}
 	    >
-	      <Text style={{ fontSize: 24, marginBottom: 50 }}>
-		
+		<Text style={{ fontSize: 24, marginBottom: 50 }}>
 		{GamePack.getFocusedClue() === null
 		 ? "This should not be shown"
 		 : GamePack.getFocusedClue().description}

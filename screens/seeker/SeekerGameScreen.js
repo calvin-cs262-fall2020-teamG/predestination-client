@@ -19,7 +19,7 @@ import {
 import CustomButton from '../../components/CustomButton';
 import Leaderboard from 'react-native-leaderboard';
 
-import { NotesContext, NotePack } from '../../src/Notes';
+import { GameContext } from '../../src/GameLogic';
 import { globalStyles } from '../../styles/global';
 
 /**
@@ -27,7 +27,7 @@ import { globalStyles } from '../../styles/global';
  * TODO: styling, connecting to server
  */
 export default function SeekerGameScreen({ route, navigation }) {
-  const { notePack } = useContext(NotesContext);
+  const { GamePack } = useContext(GameContext);
   const [points, setPoints] = useState(0);
   const [rank, setRank] = useState(1);
   const [time, setTime] = useState(3600);
@@ -70,7 +70,7 @@ export default function SeekerGameScreen({ route, navigation }) {
       { userName: 'AScaria', clueStatus: 3 },
       { userName: 'EWalters', clueStatus: 3 },
       { userName: 'HAnderson', clueStatus: 2 },
-      { userName: 'googleUserName', clueStatus: notePack.getPoints() },
+      { userName: 'googleUserName', clueStatus: GamePack.getPoints() },
     ]
   );
 
@@ -94,7 +94,7 @@ export default function SeekerGameScreen({ route, navigation }) {
       >
         <View style={styles.header}>
           <View style={styles.pointsSection}>
-            <Text style={styles.pointText}> {notePack.getPoints()} </Text>
+            <Text style={styles.pointText}> {GamePack.getPoints()} </Text>
             <Text> Points </Text>
           </View>
           <View style={styles.statusSection}>

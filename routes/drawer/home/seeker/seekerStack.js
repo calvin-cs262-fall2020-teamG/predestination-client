@@ -8,7 +8,7 @@ import { globalStyles } from "../../../../styles/global";
 import SeekerWaitingScreen from "../../../../screens/seeker/SeekerWaitingScreen";
 import SeekerGameTabStack from "./SeekerGameTabStack";
 
-//import { NotesContext, NotePack } from "../../../../src/Notes";
+//import { GameContext, NotePack } from "../../../../src/Notes";
 import { GameAPI, GameContext } from "../../../../src/GameLogic";
 
 const Stack = createStackNavigator();
@@ -51,6 +51,6 @@ export default function SeekerStack({ navigation }) {
                                         <Stack.Screen name="SeekerClueListScreen" component={SeekerClueListScreen} options={{ title: 'SeekerClueListScreen', headerShown: false }} />
                                         <Stack.Screen name="SeekerFocusedScreen" component={SeekerFocusedScreen} options={{ title: 'SeekerFocusedScreen ', headerShown: false }} /> */}
       </Stack.Navigator>
-    </NotesContext.Provider>
+    </GameContext.Provider>
   );
 }

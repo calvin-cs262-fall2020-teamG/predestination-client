@@ -6,11 +6,11 @@ import io from 'socket.io-client';
 // 2. get game snapshot which will be clues with people who got each clue
 //
 // getters
-// 1. getPoints
-// 2. unlockClue
-// 3. getPlayerListSortedByPoints
+// 1. getPoints(): returns points for this user
+// 2. unlockClue(): handles updating other people's game log to record this user unlocking a clue
+// 3. getPlayerListSortedByPoints(): nice sorted list for leaderboard
 
-const SOCKET_SERVER_ADDR = 'http://localhost:3000';
+const SOCKET_SERVER_ADDR = 'http://localhost:3000'; //todo
 
 export class GameAPI {
 
@@ -46,7 +46,7 @@ export class GameAPI {
     }     
 
     getPoints() {
-        return this.data
+        return (this.data === null) ? null : this.data
             .filter((elem) => { // get entries only pertaining to this user
                 return elem.playerID === this.playerID;
             })
@@ -60,7 +60,7 @@ export class GameAPI {
     }
 
     getFocusedClue() {
-        return this.clues[this.focusedClueID];
+        return (this.data === null) ? null : this.clues[this.focusedClueID];
     }
     
     foundClue(clueID) {
