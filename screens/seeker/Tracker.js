@@ -14,7 +14,7 @@ import {
 import CustomButton from "../../components/CustomButton";
 import { globalStyles } from "../../styles/global";
 
-import { NotesContext } from "../../src/Notes";
+import { GameContext } from "../../src/GameLogic";
 import { PROXIMITY_MESSAGES, PROXIMITY } from "../../src/Proximity";
 import Tracker from "../../components/TrackerTargetVisualizer";
 
@@ -36,13 +36,17 @@ const ACCEPTABLE_ACCURACY = 6; // radius in meters of accuracy (i.e. the actual 
  */
 export default function SeekerFocusedScreen({ route, navigation }) {
 
-    const { notePack } = useContext(NotesContext);
+    const { GamePack } = useContext(GameContext);
     const [location, setLocation] = useState(null);
     const [currentAccuracy, setCurrentAccuracy] = useState(true); // true if acceptable, false if not
     const [proximity, setProximity] = useState(PROXIMITY.FAR);
     const [target, setTarget] = useState({ latitude: 42.2942481, longitude: -83.2518054}); // my house
     const [message, setMessage] = useState("wait for message"); // debugging purposes only
 
+    useEffect(() => {
+        
+    }, []);
+    
     // todo: have a status indicator indicating quality of GPS
     useEffect(() => {
         // whenever the current accuracy of the GPS changes, this code will run
@@ -143,14 +147,16 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 	      ...styles.flexContainer,
 	  }}
 	>
-	  <Tracker proximity={proximity} points={21}></Tracker>
+          /* used for visualizing how close one is to a clue */
+          <Tracker proximity={proximity} points={GamePack.getFocusedClue() === null ? GamePack.getFocusedClue().points : 'Oops'}></Tracker>
+          
           <Text>{message}</Text>
 	  <View style={styles.bottomContainer}>
 	    <View style={styles.bottomContainerHeader}>
 	      <View
 		style={{
 		    ...styles.pointContainer,
-		    display: notePack.getFocused() === null ? "none" : "flex",
+		    display: GamePack.getFocusedClueClue() === null ? "none" : "flex",
 		    flexDirection: "row",
 		    justifyContent: "center",
 		    alignItems: "center",
@@ -164,9 +170,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 		      fontWeight: "bold",
 		  }}
 		>
-		  {notePack.getFocused() === null
+		  {GamePack.getFocusedClue() === null
 		   ? ""
-		   : notePack.getFocused().points}
+		   : GamePack.getFocusedClue().points}
 		  Points
 		</Text>
 	      </View>
@@ -174,7 +180,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 		<CustomButton
 		  color="orange"
 		  title={
-		      notePack.getFocused() === null
+		      GamePack.getFocusedClue() === null
 			  ? "Select Clue"
 			  : proximity === "SUCCESS"
 			  ? "New"
@@ -192,44 +198,26 @@ export default function SeekerFocusedScreen({ route, navigation }) {
 		  borderBottomWidth: 1,
 		  width: "90%",
 		  alignSelf: "center",
-		  display: notePack.getFocused() === null ? "none" : "flex",
+		  display: GamePack.getFocusedClue() === null ? "none" : "flex",
 	      }}
 	    />
 	    <ScrollView
 	      style={{
 		  ...styles.noteContainer,
-		  display: notePack.getFocused() === null ? "none" : "flex",
+		  display: GamePack.getFocusedClue() === null ? "none" : "flex",
 	      }}
 	    >
 	      <Text style={{ fontSize: 24, marginBottom: 50 }}>
 		
-		{notePack.getFocused() === null
+		{GamePack.getFocusedClue() === null
 		 ? "This should not be shown"
-		 : notePack.getFocused().clue}
+		 : GamePack.getFocusedClue().description}
 	      </Text>
 	    </ScrollView>
 	  </View>
 	</Animated.View>
     );
 }
-
-// TaskManager.defineTask(GEOFENCE_TASK_NAME, ({ data: { eventType, region }, error }) => {
-//     Alert('Help!');
-//     console.log('help');
-//     if (error) {
-// 	// check `error.message` for more details.
-// 	console.log("hello");
-// 	return;
-//     }
-//     if (eventType === LocationGeofencingEventType.Enter) {
-// 	console.log("You've entered region:", region);
-// 	Alert('You entered a region');
-//     } else if (eventType === LocationGeofencingEventType.Exit) {
-// 	console.log("You've left region:", region);
-// 	Alert('You left a region');
-//     }
-// });
-
 
 const styles = StyleSheet.create({
     farCircle: {

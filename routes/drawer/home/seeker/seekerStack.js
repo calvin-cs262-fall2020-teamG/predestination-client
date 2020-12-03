@@ -8,7 +8,8 @@ import { globalStyles } from "../../../../styles/global";
 import SeekerWaitingScreen from "../../../../screens/seeker/SeekerWaitingScreen";
 import SeekerGameTabStack from "./SeekerGameTabStack";
 
-import { NotesContext, NotePack } from "../../../../src/Notes";
+//import { NotesContext, NotePack } from "../../../../src/Notes";
+import { GameAPI, GameContext } from "../../../../src/GameLogic";
 
 const Stack = createStackNavigator();
 
@@ -16,12 +17,12 @@ const Stack = createStackNavigator();
  * HomeStack is displayed only when a user is logged in
  */
 export default function SeekerStack({ navigation }) {
-  const [notes, setNotes] = useState(new NotePack());
+    const [game, setGame] = useState(new GameAPI());
 
   return (
-    <NotesContext.Provider
+    <GameContext.Provider
       value={{
-        notePack: notes,
+        GamePack: game,
       }}
     >
       <Stack.Navigator
