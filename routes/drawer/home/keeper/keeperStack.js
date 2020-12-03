@@ -29,6 +29,7 @@ export default function KeeperStack({ navigation }) {
           />
         ),
         headerTitleStyle: globalStyles.keeperNavigationTitle,
+        headerTintColor: 'white',
         headerStyle: globalStyles.keeperNavigationHeader,
       }}
     >
