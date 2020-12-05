@@ -57,34 +57,19 @@ export default function SeekerGameScreen({ route, navigation }) {
 
     // When seekers click the "hunt" button, they will be redirected to the last clue selected if they selected a clue, else they will go to a clue list screen
     const pressHunt = () => {
-	if (notePack.getFocused() === null) {
+	if (GamePack.getFocused() === null) {
 	    navigation.navigate('SeekerClueListScreen');
 	} else {
 	    navigation.navigate('SeekerFocusedScreen');
 	}
     };
 
-<<<<<<< HEAD
-  const { loginStatus, setLoginStatus } = useContext(AuthenticationContext);
-  //leaderboard added by NW on Oct 30 at 2AM. Will need to match with KeeperGameScreen.js in the future (connect to database)
-  const [keeperLeaderboard, setKeeperLeaderboard] = useState(
-    //   data for the leaderboard
-    [
-      { userName: 'JBrink', clueStatus: 2 },
-      { userName: 'NWang', clueStatus: 2 },
-      { userName: 'AScaria', clueStatus: 3 },
-      { userName: 'EWalters', clueStatus: 3 },
-      { userName: 'HAnderson', clueStatus: 2 },
-      { userName: 'googleUserName', clueStatus: GamePack.getPoints() },
-    ]
-  );
-=======
         const loadData = async () => {
 	    try {
 		const { name, photo } = await getUserData();
 		setUserName(name);
 		setUserPhoto(googleUserPhoto);
-		setKeeperLeaderboard([...keeperLeaderboard, { userName: name, clueStatus: notePack.getPoints() }]);
+		setKeeperLeaderboard([...keeperLeaderboard, { userName: name, clueStatus: GamePack.getPoints() }]);
 		setStatus(STATUS.LOADED);
 	    } catch (err) {
 		console.log(err);
@@ -102,7 +87,6 @@ export default function SeekerGameScreen({ route, navigation }) {
 	//     .catch((e) => {
 	// 	setStatus(STATUS.ERROR);
 	//     });
->>>>>>> master
 
 	};
     
@@ -111,47 +95,9 @@ export default function SeekerGameScreen({ route, navigation }) {
     }, []);
 
 
-<<<<<<< HEAD
-  return (
-    <View style={styles.flexContainer}>
-      <ImageBackground
-        source={require('../../assets/background_tres.png')}
-        blurRadius={5}
-        style={styles.image}
-      >
-        <View style={styles.header}>
-          <View style={styles.pointsSection}>
-            <Text style={styles.pointText}> {GamePack.getPoints()} </Text>
-            <Text> Points </Text>
-          </View>
-          <View style={styles.statusSection}>
-            <View style={styles.timeSection}>
-              <Text style={styles.timeText}> {time} </Text>
-              <Text> Time Left </Text>
-            </View>
-            <View style={styles.rankSection}>
-              <Text style={styles.rankText}> {rank} </Text>
-              <Text> Rank </Text>
-            </View>
-          </View>
-        </View>
-      </ImageBackground>
-      <View style={styles.bottomSection}>
-        <View>
-          <Text style={globalStyles.leaderBoardHeader}> Leaderboard </Text>
-          <Leaderboard
-            data={keeperLeaderboard}
-            sortBy='clueStatus' //sorts the leaderboard by clueStatus
-            labelBy='userName' //displays the userName for the rank
-          />
-        </View>
-      </View>
-    </View>
-  );
-=======
     useEffect(() => {
-	setKeeperLeaderboard([...(keeperLeaderboard.filter((elem) => { return elem.userName !== googleUserName; })), { userName: googleUserName, clueStatus: notePack.getPoints() }]);
-    }, [notePack.getPoints()]);
+	setKeeperLeaderboard([...(keeperLeaderboard.filter((elem) => { return elem.userName !== googleUserName; })), { userName: googleUserName, clueStatus: GamePack.getPoints() }]);
+    }, [GamePack.getPoints()]);
     
     // let imagePath = require("../../assets/list.png");
 
@@ -164,7 +110,7 @@ export default function SeekerGameScreen({ route, navigation }) {
 	    >
 		<View style={styles.header}>
 		    <View style={styles.pointsSection}>
-			<Text style={styles.pointText}> {notePack.getPoints()} </Text>
+			<Text style={styles.pointText}> {GamePack.getPoints()} </Text>
 			<Text> Points </Text>
 		    </View>
 		    <View style={styles.statusSection}>
@@ -191,7 +137,6 @@ export default function SeekerGameScreen({ route, navigation }) {
 	    </View>
 	</View>
     );
->>>>>>> master
 }
 
 const styles = StyleSheet.create({
