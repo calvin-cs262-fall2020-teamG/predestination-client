@@ -29,7 +29,7 @@ export default function SeekerClueList({ route, navigation }) {
   const { GamePack } = useContext(GameContext);
 
   const onPress = (key) => {
-    GamePack.setFocused(key);
+    GamePack.setFocusedClue(key);
     navigation.navigate("TrackerScreen");
   };
 
@@ -44,7 +44,8 @@ export default function SeekerClueList({ route, navigation }) {
           })}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <PointComponent
+
+        <PointComponent
             points={item}
             onPress={onPress}
             notes={GamePack.clues.filter((clue) => {

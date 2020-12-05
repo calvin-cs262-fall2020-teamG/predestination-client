@@ -14,9 +14,9 @@ const SOCKET_SERVER_ADDR = 'http://localhost:3000'; //todo
 
 export class GameAPI {
 
-    data = null;
-    clues = null;
-    playerData = null;
+    data = [];
+    clues = [];
+    playerData = [];
     focusedClueID = null;
 
     constructor(gameCode, playerID) {
@@ -60,11 +60,11 @@ export class GameAPI {
     }
 
     getFocusedClue() {
-        return (this.data === null) ? null : this.clues[this.focusedClueID];
+        return (this.focusedClueID === null) ? null : this.clues.filter((clue) => { this.focusedClueID === clue.id })[0];
     }
     
-    foundClue(clueID) {
-        this.io.emit('found-clue', this.gameCode, this.playerID, clueID, 100); //todo: figure out datetime
+    foundClue() {
+        this.io.emit('found-clue', this.gameCode, this.playerID, this.focusedClueID, 100); //todo: figure out datetime
     }
     
     /* getPlayersRanked()
