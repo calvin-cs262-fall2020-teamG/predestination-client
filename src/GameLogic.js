@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import io from 'socket.io-client';
 
 // constructor todo:
@@ -10,7 +10,7 @@ import io from 'socket.io-client';
 // 2. unlockClue(): handles updating other people's game log to record this user unlocking a clue
 // 3. getPlayerListSortedByPoints(): nice sorted list for leaderboard
 
-const SOCKET_SERVER_ADDR = 'http://localhost:3000'; //todo
+const SOCKET_SERVER_ADDR = 'https://predestination-service.herokuapp.com'; //todo
 
 export class GameAPI {
 
@@ -27,6 +27,7 @@ export class GameAPI {
         
         // once connected to the server, start sending stuff
         this.io.on('connection', (socket) => {
+            console.log(this.io.id);
 
             socket.emit('join-session', this.gameCode, this.playerID);
 
@@ -34,14 +35,14 @@ export class GameAPI {
                 this.data = gameLog;
                 this.clues = clueData;
                 this.playerData = playerData;
-                
+
                 // when another player unlocks a clue, update our local game to show that
                 socket.on('update', (otherPlayerID, clueID, timeStamp) => {
                     this.data.push({ playerID: otherPlayerID, timeStamp, clueID });
                 });
-                
+
             });
-            
+
         });
     }     
 
