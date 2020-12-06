@@ -19,18 +19,18 @@ const Stack = createStackNavigator();
 export default function TrackerStack({ navigation }) {
   return (
     <Stack.Navigator
-      screenOptions={{
+	screenOptions={{
       }}
     >
       <Stack.Screen
         name="TrackerScreen"
         component={TrackerScreen}
-        options={{ title: "Tracker" }}
+          options={{ title: "Tracker", headerShown: false }}
       />
       <Stack.Screen
         name="TrackerListScreen"
         component={TrackerListScreen}
-        options={{ title: "TrackerList" }}
+          options={{ title: "TrackerList", headerShown: true }}
       />
     </Stack.Navigator>
   );

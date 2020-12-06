@@ -61,7 +61,7 @@ export default function StartScreen({ navigation, route }) {
   // ensure given code is valid
   const handleJoinPress = () => {
     code.length === 6
-      ? navigation.navigate("SeekerStack", {
+      ? navigation.navigate("Game", {
           screen: "SeekerWaitingScreen",
           params: { code },
         })
@@ -105,7 +105,8 @@ export default function StartScreen({ navigation, route }) {
         <CustomButton title="join" onPress={handleJoinPress} color="gold" />
       </View>
       <View style={globalStyles.horizontalBar}></View>
-      {/*========================Options for Keepers================================*/}
+
+	{/*========================Options for Keepers================================*/}
       <Text style={globalStyles.keeperText}>CREATE DESTINIES AS A KEEPER</Text>
       
       <View>

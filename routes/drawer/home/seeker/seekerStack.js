@@ -44,7 +44,8 @@ export default function SeekerStack({ navigation }) {
         />
         <Stack.Screen
           name="SeekerGameTabStack"
-          component={SeekerGameTabStack}
+            component={SeekerGameTabStack}
+	    options={{ title: "Predestination Hunt", headerShown: true, headerLeft: null }}
         />
         {/* 
                                         <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen', headerShown: true }} />
