@@ -72,6 +72,9 @@ const requestData = async (accessToken) => {
   );
 
   const jsonResponse = await fetchResponse.json();
+  // console.log(jsonResponse.names[0].metadata.source.id)
+  // console.log(jsonResponse.names[0].displayName)
+  // console.log(jsonResponse.photos[0].url)
 
   if (
     jsonResponse.error !== undefined &&
@@ -80,13 +83,30 @@ const requestData = async (accessToken) => {
     throw "invalid_token";
   } else {
     return {
+
+      id: jsonResponse.names[0].metadata.source.id,
       name: jsonResponse.names[0].displayName,
       photo: jsonResponse.photos[0].url,
+
     };
   }
 };
 
-// store authentication stuff like access tokens and refresh tokens so we can remember user's logging in
+// fetch('predestination-service.herokuapp.com/login', {
+//   method: 'POST',
+//   headers: {
+//     Accept: 'application/json',
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({
+//     firstParam: getUserData().,
+//     secondParam: 'yourOtherValue'
+//   })
+// }).catch((error) => {
+//   console.error(error);
+// })
+
+ // store authentication stuff like access tokens and refresh tokens so we can remember user's logging in
 const storeAuthenticationTokens = async (accessToken, refreshToken) => {
   try {
     const jsonValue = JSON.stringify({ accessToken, refreshToken });
@@ -112,13 +132,21 @@ const getAuthenticationTokens = async () => {
  * getUserData on success will return a user object
  * If accessToken is expired, the refreshToken will be tried once. If neither works, an error is thrown.
  *
- * @returns { name, photo }
+ * @returns { id, name, photo }
  */
 export async function getUserData() {
   const { accessToken, refreshToken } = await getAuthenticationTokens();
   try {
     // try with original access token
     let data = await requestData(accessToken);
+    // JSON.stringify(data);
+    // fetch('https://predestination-service.herokuapp.com/login', {
+    //   method: 'POST',
+    //   body: data
+    // }).catch((error) => {
+    //   console.log("An error sending login data occurred", error);
+    // });
+    console.log(data);
     return data;
   } catch (e) {
     // try getting a new access token with refreshToken (invalid_token means token is expired)
