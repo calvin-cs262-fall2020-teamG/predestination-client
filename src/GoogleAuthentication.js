@@ -88,7 +88,7 @@ const requestData = async (accessToken) => {
       profilePictureURL: accountInfo.photo,
     }),
   };
-  await fetch(
+  fetch(
       "https://predestination-service.herokuapp.com/login",
       postData
   )
