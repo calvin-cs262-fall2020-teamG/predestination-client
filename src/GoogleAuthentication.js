@@ -73,18 +73,41 @@ const requestData = async (accessToken) => {
 
   const jsonResponse = await fetchResponse.json();
 
-  let data = {
+  let accountInfo = {
     id: jsonResponse.names[0].metadata.source.id,
     name: jsonResponse.names[0].displayName,
     photo: jsonResponse.photos[0].url
   }
 
-  fetch("https://predestination-service.herokuapp.com/userdata", {
+  let postData = {
     method: "POST",
-    body: JSON.stringify(data)
-  }).then(res => {
-    console.log("Request complete! Response:", res);
-  });
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      googleid: accountInfo.id,
+      name: accountInfo.name,
+      profilePictureURL: accountInfo.photo,
+    }),
+  };
+  await fetch(
+      "https://predestination-service.herokuapp.com/auth/login",
+      postData
+  )
+      .then((request) => request.json())
+      .then((data => {
+        console.log(data);
+      }));
+
+
+
+
+  //console.log(data)
+
+  // fetch("https://predestination-service.herokuapp.com/userdata", {
+  //   method: "POST",
+  //   body: JSON.stringify(data)
+  // }).then(res => {
+  //   console.log("Request complete! Response:", res);
+  // });
 
 
 
