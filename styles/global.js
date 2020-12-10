@@ -33,7 +33,13 @@ export const globalStyles = StyleSheet.create({
   topRightMenuIcon: {
     margin: 10, //shifts the icon to the left
     color: 'white',
+    flexDirection: 'row',
   },
+  // modalHelpIcon: {
+  //   margin: 10,
+  //   color: 'white',
+  //   flexDirection: 'row',
+  // },
   // start styles from StartScreen.js
 
   // ========================= navigation styles ==========================
@@ -146,11 +152,11 @@ export const globalStyles = StyleSheet.create({
   },
   welcomeText: {
     fontFamily: 'constan',
-    marginTop: 25,
-    fontSize: 30,
+    marginTop: 0,
+    fontSize: 32,
     textAlign: 'center',
     // color: "#05386B"
-    color: '#71B1C8',
+    color: 'grey',
   },
   horizontalBar: {
     padding: 0.5,
@@ -163,12 +169,14 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    fontSize: 40,
+    fontSize: 32,
     textAlign: 'center',
+    marginTop: 5,
+    margin: 10,
   },
   seekerText: {
     margin: 5,
-    marginBottom: 10,
+    marginBottom: 20,
     fontSize: 20,
     letterSpacing: 2,
     color: 'grey',
@@ -255,7 +263,7 @@ export const globalStyles = StyleSheet.create({
   SeekerWaitingScreenCard: {
     width: '90%',
     marginBottom: '10%',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   //=================start styles from SeekerGameScreen.js================
 

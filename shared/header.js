@@ -10,6 +10,12 @@ export default function Header({ navigation, customStyle }) {
 
   return (
     <View>
+      {/* <MaterialIcons
+        name='help-outline'
+        size={24}
+        onPress={() => setModalOpen(true)}
+        style={globalStyles.modalHelpIcon}
+      /> */}
       <MaterialIcons
         style={globalStyles.topRightMenuIcon}
         name="menu"
