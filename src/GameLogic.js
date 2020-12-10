@@ -10,7 +10,7 @@ import io from 'socket.io-client';
 // 2. unlockClue(): handles updating other people's game log to record this user unlocking a clue
 // 3. getPlayerListSortedByPoints(): nice sorted list for leaderboard
 
-const SOCKET_SERVER_ADDR = 'https://predestination-service.herokuapp.com'; //todo
+const SOCKET_SERVER_ADDR = 'https://predestination-service.herokuapp.com';
 
 export class GameAPI {
 
@@ -26,24 +26,39 @@ export class GameAPI {
         this.io = io(SOCKET_SERVER_ADDR); // connect to socket server
         
         // once connected to the server, start sending stuff
-        this.io.on('connection', (socket) => {
-            console.log(this.io.id);
+	this.io.emit('join-session', this.gameCode, this.playerID);
 
-            socket.emit('join-session', this.gameCode, this.playerID);
+	this.io.on('players-snapshot', (gameLog, playerData, clueData) => {
+	    console.log('Received game snapshot...');
+	    this.data = gameLog;
+	    this.clues = clueData;
+	    this.playerData = playerData;
+	    console.log(this.data);
+	    console.log(this.clues);
+	    console.log(this.playerData);
+	});
 
-            socket.on('players-snapshot', (gameLog, playerData, clueData) => {
-                this.data = gameLog;
-                this.clues = clueData;
-                this.playerData = playerData;
+	this.io.on('update', (playerID, clueID, timeStamp) => {
+	    this.data.push({ playerID: otherPlayerID, timeStamp, clueID });
+	});
+        // this.io.on('connect', (socket) => {
+        //     console.log(this.io.id);
 
-                // when another player unlocks a clue, update our local game to show that
-                socket.on('update', (otherPlayerID, clueID, timeStamp) => {
-                    this.data.push({ playerID: otherPlayerID, timeStamp, clueID });
-                });
+        //     socket.emit('join-session', this.gameCode, this.playerID);
 
-            });
+        //     socket.on('players-snapshot', (gameLog, playerData, clueData) => {
+        //         this.data = gameLog;
+        //         this.clues = clueData;
+        //         this.playerData = playerData;
 
-        });
+        //         // when another player unlocks a clue, update our local game to show that
+        //         socket.on('update', (otherPlayerID, clueID, timeStamp) => {
+        //             this.data.push({ playerID: otherPlayerID, timeStamp, clueID });
+        //         });
+
+        //     });
+
+        // });
     }     
 
     getPoints() {
