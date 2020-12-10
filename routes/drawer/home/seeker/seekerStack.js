@@ -33,6 +33,7 @@ export default function SeekerStack({ navigation }) {
             />
           ),
           headerTitleStyle: globalStyles.seekerNavigationTitle,
+          headerTintColor: 'white',
           headerStyle: globalStyles.seekerNavigationHeader,
         }}
       >
@@ -45,7 +46,7 @@ export default function SeekerStack({ navigation }) {
           name="SeekerGameTabStack"
           component={SeekerGameTabStack}
         />
-        {/* 
+        {/*
                                         <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen', headerShown: true }} />
                                         <Stack.Screen name="SeekerClueListScreen" component={SeekerClueListScreen} options={{ title: 'SeekerClueListScreen', headerShown: false }} />
                                         <Stack.Screen name="SeekerFocusedScreen" component={SeekerFocusedScreen} options={{ title: 'SeekerFocusedScreen ', headerShown: false }} /> */}

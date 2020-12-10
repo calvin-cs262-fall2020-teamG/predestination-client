@@ -14,6 +14,7 @@ export default function HomeStack({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerTintColor: 'white',
         headerShown: false,
       }}
     >
