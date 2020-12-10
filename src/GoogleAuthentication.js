@@ -72,6 +72,22 @@ const requestData = async (accessToken) => {
   );
 
   const jsonResponse = await fetchResponse.json();
+
+  let data = {
+    id: jsonResponse.names[0].metadata.source.id,
+    name: jsonResponse.names[0].displayName,
+    photo: jsonResponse.photos[0].url
+  }
+
+  fetch("https://predestination-service.herokuapp.com/userdata", {
+    method: "POST",
+    body: JSON.stringify(data)
+  }).then(res => {
+    console.log("Request complete! Response:", res);
+  });
+
+
+
   // console.log(jsonResponse.names[0].metadata.source.id)
   // console.log(jsonResponse.names[0].displayName)
   // console.log(jsonResponse.photos[0].url)
