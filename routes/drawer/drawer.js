@@ -1,10 +1,11 @@
-import * as React from "react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import * as React from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import HomeStack from "../drawer/home/homeStack";
-import AccountStack from "../drawer/account/accountStack";
-import AboutStack from "../drawer/about/aboutStack";
+import HomeStack from '../drawer/home/homeStack';
+import AccountStack from '../drawer/account/accountStack';
+import AboutStack from '../drawer/about/aboutStack';
+import KeeperStack from './home/keeper/keeperStack';
 
 const Drawer = createDrawerNavigator();
 
@@ -14,33 +15,43 @@ const Drawer = createDrawerNavigator();
 export default function DrawerScreen({ setLoginStatus, route }) {
   return (
     <Drawer.Navigator
-      initialRouteName="Home"
-      drawerPosition="right"
-      drawerType="front"
+      initialRouteName='Home'
+      drawerPosition='right'
+      drawerType='front'
       screenOptions={{ headerShown: false }}
     >
       <Drawer.Screen
         options={{
-          title: "Home",
-          drawerIcon: () => <Icon name="home" size={25} color="black" />,
+          title: 'Home',
+          drawerIcon: () => <Icon name='home' size={25} color='black' />,
         }}
-        name="Home"
+        name='Home'
         component={HomeStack}
       />
       <Drawer.Screen
         options={{
-          title: "Account",
-          drawerIcon: () => <Icon name="account" size={25} color="black" />,
+          title: 'Account',
+          drawerIcon: () => <Icon name='account' size={25} color='black' />,
         }}
-        name="Account"
+        name='Account'
         component={AccountStack}
       />
       <Drawer.Screen
         options={{
-          title: "About",
-          drawerIcon: () => <Icon name="information-outline" size={25} color="black" />,
+          title: 'Keeper',
+          drawerIcon: () => <Icon name='key' size={25} color='black' />,
         }}
-        name="About"
+        name='Keeper'
+        component={KeeperStack}
+      />
+      <Drawer.Screen
+        options={{
+          title: 'About',
+          drawerIcon: () => (
+            <Icon name='information-outline' size={25} color='black' />
+          ),
+        }}
+        name='About'
         component={AboutStack}
       />
       {/* <Drawer.Screen name="Home" component={HomeStack} />
