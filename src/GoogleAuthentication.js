@@ -89,7 +89,7 @@ const requestData = async (accessToken) => {
     }),
   };
   await fetch(
-      "https://predestination-service.herokuapp.com/auth/login",
+      "https://predestination-service.herokuapp.com/login",
       postData
   )
       .then((request) => request.json())
