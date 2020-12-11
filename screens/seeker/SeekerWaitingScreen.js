@@ -41,10 +41,10 @@ export default function SeekerWaitingScreen({ route, navigation }) {
       }}
     >
       <FloatingView
-        title="Game will begin shortly..."
+        title="Game will begin shortly"
         style={globalStyles.SeekerWaitingScreenCard}
       >
-        <Text style={{ textAlign: "center" }}>
+        <Text>
           While you wait, share the game code with a friend! The
           more the merrier!
         </Text>
