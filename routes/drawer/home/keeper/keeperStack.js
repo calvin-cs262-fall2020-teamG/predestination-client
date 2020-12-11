@@ -36,22 +36,22 @@ export default function KeeperStack({ navigation }) {
       <Stack.Screen
         name="KeeperListScreen"
         component={KeeperListScreen}
-        options={{ title: "Hunts" }}
+        options={{ title: "KeeperListScreen" }}
       />
       <Stack.Screen
         name="KeeperEditorScreen"
         component={KeeperEditorScreen}
-        options={{ title: "Edit Your Hunt", headerTitleStyle: { alignSelf: 'center' } }}
+        options={{ title: "KeeperEditorScreen" }}
       />
       <Stack.Screen
         name="KeeperWaitingScreen"
         component={KeeperWaitingScreen}
-        options={{ title: "Start The Game", headerTitleStyle: { alignSelf: 'center' } }}
+        options={{ title: "KeeperWaitingScreen" }}
       />
       <Stack.Screen
         name="KeeperGameScreen"
         component={KeeperGameScreen}
-        options={{ title: "Game Progress", headerTitleStyle: { alignSelf: 'center' } }}
+        options={{ title: "KeeperGameScreen" }}
       />
       <Stack.Screen name="TestScreen" component={TestScreen} />
     </Stack.Navigator>
