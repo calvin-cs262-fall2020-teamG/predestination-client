@@ -31,17 +31,18 @@ export default function MainStack({ navigation }) {
     >
       <Stack.Navigator
         screenOptions={{
+          headerTintColor: 'white',
           headerShown: false,
         }}
       >
         {((loginStatus === LOGIN_STATUS.NEW_USER ||
           loginStatus === LOGIN_STATUS.LOADING) && (
-          <Stack.Screen
-            name="Login"
-            component={LoginStack}
-            options={{ title: "Login" }}
-          />
-        )) ||
+            <Stack.Screen
+              name="Login"
+              component={LoginStack}
+              options={{ title: "Login" }}
+            />
+          )) ||
           (loginStatus === LOGIN_STATUS.GOOGLE_USER && (
             <Stack.Screen
               name="Drawer"

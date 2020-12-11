@@ -7,15 +7,13 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: '#5CDB95',
   },
   titleText: {
-    // fontFamily: "constan",
     color: 'black',
   },
   keeperNavHeader: {
-    // fontFamily: "constan",
-    backgroundColor: 'maroon',
+    // backgroundColor: 'maroon',
   },
   keeperTitleText: {
-    color: 'white',
+    // color: 'white',
     // fontFamily: "constan",
   },
 
@@ -41,13 +39,10 @@ export const globalStyles = StyleSheet.create({
   // ========================= navigation styles ==========================
   // start screen
   startNavigationTitle: {
-    // fontFamily: 'constan-bold',
     color: 'white',
   },
   startNavigationHeader: {
-    // fontFamily: "constan",
     backgroundColor: '#5CDB95',
-    // opacity: 0.7,
   },
   startNavigationDrawer: {
     constan: 'constan',
@@ -57,21 +52,15 @@ export const globalStyles = StyleSheet.create({
   // seeker screen navigation styles
   seekerNavigationTitle: {
     color: 'white',
-    //fontFamily: 'constan-bold',
-    //color: 'maroon',
   },
-    seekerNavigationHeader: {
-	    backgroundColor: '#5CDB95',
-    //backgroundColor: '#05386B',
-    // backgroundColor: '#71B1C8',
-    //backgroundColor: 'gold',
+  seekerNavigationHeader: {
+    backgroundColor: '#5CDB95',
   },
   startNavigationDrawer: {
     color: 'white',
   },
   // keeper screen navigation styles
   keeperNavigationTitle: {
-    // fontFamily: 'constan-bold',
     color: 'white',
   },
   keeperNavigationHeader: {

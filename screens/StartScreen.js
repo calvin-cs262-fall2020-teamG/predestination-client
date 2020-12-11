@@ -16,7 +16,7 @@ import {
   LOGIN_STATUS,
   AuthenticationContext,
 } from "../src/GoogleAuthentication";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { TouchableWithoutFeedback } from "react-native";
 import { globalStyles } from "../styles/global";
 import CustomButton from "../components/CustomButton";
 
@@ -35,16 +35,16 @@ export default function StartScreen({ navigation, route }) {
 
   const loadData = () => {
     getUserData()
-    .then(({ name, photo }) => {
-      setName(name)
-      setPhoto(photo);
-    })
-    .then(() => {
-      setStatus(STATUS.LOADED);
-    })
-    .catch((e) => {
-      setStatus(STATUS.ERROR);
-    });
+      .then(({ name, photo }) => {
+        setName(name)
+        setPhoto(photo);
+      })
+      .then(() => {
+        setStatus(STATUS.LOADED);
+      })
+      .catch((e) => {
+        setStatus(STATUS.ERROR);
+      });
   };
 
   useEffect(() => {
@@ -62,34 +62,34 @@ export default function StartScreen({ navigation, route }) {
   const handleJoinPress = () => {
     code.length === 6
       ? navigation.navigate("SeekerStack", {
-          screen: "SeekerWaitingScreen",
-          params: { code },
-        })
+        screen: "SeekerWaitingScreen",
+        params: { code },
+      })
       : handleError();
   };
 
   return (
     // <View style={globalStyles.container}>
-    <View style={globalStyles.container}>
-      <View style={globalStyles.titleSection}>
-        {/* <Text>PreDestination</Text> */}
-        <Text style={globalStyles.welcomeText}>Welcome, </Text>
-        {status === STATUS.LOADING || status === STATUS.ERROR ? (
-          <ActivityIndicator />
-        ) : (
-          <View>
-            <View>
-              <Text style={globalStyles.welcomeText}>{name}</Text>
-            </View>
-          </View>  
-        )}
-      </View>
-      {/*=======================Options for seekers==============================*/}
-      <View style={globalStyles.horizontalBar}></View>
-      
-      <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY AS A SEEKER</Text>
-      
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={globalStyles.container}>
+        <View style={globalStyles.titleSection}>
+          {/* <Text>PreDestination</Text> */}
+          <Text style={globalStyles.welcomeText}>Welcome, </Text>
+          {status === STATUS.LOADING || status === STATUS.ERROR ? (
+            <ActivityIndicator />
+          ) : (
+              <View>
+                <View>
+                  <Text style={globalStyles.welcomeText}>{name}</Text>
+                </View>
+              </View>
+            )}
+        </View>
+        {/*=======================Options for seekers==============================*/}
+        <View style={globalStyles.horizontalBar}></View>
+
+        <Text style={globalStyles.seekerText}>FOLLOW YOUR DESTINY AS A SEEKER</Text>
+
         <View style={globalStyles.inputContainer}>
           <TextInput
             style={globalStyles.input}
@@ -100,30 +100,31 @@ export default function StartScreen({ navigation, route }) {
             onChangeText={(val) => setCode(val)}
           />
         </View>
-      </TouchableWithoutFeedback>
-      <View>
-        <CustomButton title="join" onPress={handleJoinPress} color="gold" />
+
+        <View>
+          <CustomButton title="join" onPress={handleJoinPress} color="gold" />
+        </View>
+        <View style={globalStyles.horizontalBar}></View>
+        {/*========================Options for Keepers================================*/}
+        <Text style={globalStyles.keeperText}>CREATE DESTINIES AS A KEEPER</Text>
+
+        <View>
+          <CustomButton
+            title="CREATE"
+            onPress={() =>
+              navigation.navigate("KeeperStack", { screen: "keeperListScreen" })
+            }
+          />
+        </View>
+        <View>
+          <CustomButton
+            title="Test GPS"
+            onPress={() =>
+              navigation.navigate("KeeperStack", { screen: "TestScreen" })
+            }
+          />
+        </View>
       </View>
-      <View style={globalStyles.horizontalBar}></View>
-      {/*========================Options for Keepers================================*/}
-      <Text style={globalStyles.keeperText}>CREATE DESTINIES AS A KEEPER</Text>
-      
-      <View>
-        <CustomButton
-          title="CREATE"
-          onPress={() =>
-            navigation.navigate("KeeperStack", { screen: "keeperListScreen" })
-          }
-        />
-      </View>
-      <View>
-        <CustomButton
-          title="Test GPS"
-          onPress={() =>
-            navigation.navigate("KeeperStack", { screen: "TestScreen" })
-          }
-        />
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
