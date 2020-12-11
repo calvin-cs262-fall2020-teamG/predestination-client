@@ -129,6 +129,22 @@ export const globalStyles = StyleSheet.create({
     letterSpacing: 7,
   },
 
+  // =========================Modal Styles====================================
+  modalHelpIcon: {
+    color: 'grey',
+    position: 'absolute',
+    zIndex: 1,
+    right: 10,
+    top: 10,
+  },
+  modalCloseIcon: {
+    margin: 15,
+  },
+  modalContent: {
+    padding: 30,
+    fontSize: 16,
+  },
+
   //=========================Leaderboard Styles===============================
   leaderBoardHeader: {
     flex: 1,

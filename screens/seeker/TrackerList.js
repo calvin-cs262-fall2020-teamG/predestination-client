@@ -10,6 +10,7 @@ import {
   FlatList,
   Modal,
 } from 'react-native';
+import CustomButton from '../../components/CustomButton';
 import { color } from 'react-native-reanimated';
 import PointComponent from '../../components/PointComponent';
 
@@ -39,12 +40,12 @@ export default function SeekerClueList({ route, navigation }) {
     <View style={globalStyles.trackerListFlexContainer}>
       <Modal visible={modalOpen} animationType='slide'>
         <View>
-          <MaterialIcons
+          {/* <MaterialIcons
             name='close'
             size={24}
             onPress={() => setModalOpen(false)}
             style={styles.modalCloseIcon}
-          />
+          /> */}
           <Text style={styles.modalContent}>
             On this page, simply scroll through the selection of clues to find
             one that looks appealing to you.
@@ -54,6 +55,9 @@ export default function SeekerClueList({ route, navigation }) {
             continue your hunt.
             {'\n\n'}
           </Text>
+          <View>
+            <CustomButton title='close' onPress={() => setModalOpen(false)} color='gold' />
+          </View>
         </View>
       </Modal>
 
