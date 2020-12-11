@@ -260,8 +260,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             >
               {notePack.getFocused() === null
                 ? ""
-                : notePack.getFocused().points}
-              Points
+                : notePack.getFocused().points} Points
             </Text>
           </View>
           <View style={styles.stuckButton}>
@@ -271,8 +270,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 notePack.getFocused() === null
                   ? "Select Clue"
                   : proximity === "SUCCESS"
-                  ? "New"
-                  : "Stuck"
+                    ? "New"
+                    : "Stuck"
               }
               onPress={() => {
                 navigation.navigate("TrackerListScreen");
@@ -296,7 +295,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
           }}
         >
           <Text style={{ fontSize: 24, marginBottom: 50 }}>
-            
+
             {notePack.getFocused() === null
               ? "This should not be shown"
               : notePack.getFocused().clue}
