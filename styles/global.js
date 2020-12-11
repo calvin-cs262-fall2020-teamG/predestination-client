@@ -33,7 +33,13 @@ export const globalStyles = StyleSheet.create({
   topRightMenuIcon: {
     margin: 10, //shifts the icon to the left
     color: 'white',
+    flexDirection: 'row',
   },
+  // modalHelpIcon: {
+  //   margin: 10,
+  //   color: 'white',
+  //   flexDirection: 'row',
+  // },
   // start styles from StartScreen.js
 
   // ========================= navigation styles ==========================
@@ -125,12 +131,15 @@ export const globalStyles = StyleSheet.create({
 
   //=========================Leaderboard Styles===============================
   leaderBoardHeader: {
+    flex: 1,
+    // marginTop: 10,
     textAlign: 'center',
     fontSize: 25,
     fontWeight: 'bold',
     color: 'white',
     backgroundColor: '#5CDB95',
   },
+
   // ========================= Welcome Screen Styles ==========================
   container: {
     flex: 1,
@@ -146,11 +155,12 @@ export const globalStyles = StyleSheet.create({
   },
   welcomeText: {
     fontFamily: 'constan',
-    marginTop: 25,
-    fontSize: 30,
+    marginTop: 0,
+    marginBottom: 20,
+    fontSize: 32,
     textAlign: 'center',
     // color: "#05386B"
-    color: '#71B1C8',
+    color: 'grey',
   },
   horizontalBar: {
     padding: 0.5,
@@ -163,12 +173,14 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    fontSize: 40,
+    fontSize: 32,
     textAlign: 'center',
+    marginTop: 5,
+    margin: 10,
   },
   seekerText: {
     margin: 5,
-    marginBottom: 10,
+    marginBottom: 20,
     fontSize: 20,
     letterSpacing: 2,
     color: 'grey',
@@ -255,7 +267,7 @@ export const globalStyles = StyleSheet.create({
   SeekerWaitingScreenCard: {
     width: '90%',
     marginBottom: '10%',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   //=================start styles from SeekerGameScreen.js================
 
@@ -291,7 +303,7 @@ export const globalStyles = StyleSheet.create({
   trackerListFlexContainer: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#5CDB95',
+    backgroundColor: '#ccf5cc',
   },
   // end styles from SeekerGameScreen.js
 

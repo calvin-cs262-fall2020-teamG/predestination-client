@@ -1,5 +1,5 @@
-import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
-import React, { useState, useContext } from "react";
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   View,
@@ -8,17 +8,21 @@ import {
   TouchableOpacity,
   Alert,
   FlatList,
-} from "react-native";
-import { color } from "react-native-reanimated";
-import PointComponent from "../../components/PointComponent";
+  Modal,
+} from 'react-native';
+import { color } from 'react-native-reanimated';
+import PointComponent from '../../components/PointComponent';
 
-import { NotesContext, NotePack } from "../../src/Notes";
-import { globalStyles } from "../../styles/global";
+import { NotesContext, NotePack } from '../../src/Notes';
+import { MaterialIcons } from '@expo/vector-icons';
+import { globalStyles } from '../../styles/global';
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
  * TODO: styling, connecting to server
  */
 export default function SeekerClueList({ route, navigation }) {
+  const [modalOpen, setModalOpen] = useState(false); // for help icon
+
   // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -28,11 +32,37 @@ export default function SeekerClueList({ route, navigation }) {
 
   const onPress = (key) => {
     notePack.setFocused(key);
-    navigation.navigate("TrackerScreen");
+    navigation.navigate('TrackerScreen');
   };
 
   return (
     <View style={globalStyles.trackerListFlexContainer}>
+      <Modal visible={modalOpen} animationType='slide'>
+        <View>
+          <MaterialIcons
+            name='close'
+            size={24}
+            onPress={() => setModalOpen(false)}
+            style={styles.modalCloseIcon}
+          />
+          <Text style={styles.modalContent}>
+            On this page, simply scroll through the selection of clues to find
+            one that looks appealing to you.
+            {'\n\n'}
+            Each clue is worth a certain amount of points. When you find a clue
+            that you want, tap it and you will return to the tracker orb to
+            continue your hunt.
+            {'\n\n'}
+          </Text>
+        </View>
+      </Modal>
+
+      <MaterialIcons
+        name='help-outline'
+        size={24}
+        onPress={() => setModalOpen(true)}
+        style={styles.modalHelpIcon}
+      />
       <FlatList
         data={notePack.notes
           .map((item) => item.points)
@@ -55,4 +85,20 @@ export default function SeekerClueList({ route, navigation }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  // modal styles
+  modalHelpIcon: {
+    color: 'grey',
+    zIndex: 1,
+    position: 'absolute',
+    right: 10,
+    top: 10,
+  },
+  modalCloseIcon: {
+    margin: 15,
+  },
+  modalContent: {
+    padding: 30,
+    fontSize: 16,
+  },
+});

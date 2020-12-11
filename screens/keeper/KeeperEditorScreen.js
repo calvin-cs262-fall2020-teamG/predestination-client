@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Animated,
@@ -13,12 +13,13 @@ import {
   StatusBar,
   TouchableOpacity,
   FlatList,
-} from "react-native";
-import MapView, { Marker, Callout } from "react-native-maps";
-import { globalStyles } from "../../styles/global";
-import { ScrollView } from "react-native-gesture-handler";
-import { FontAwesome5 } from "@expo/vector-icons";
-
+  Modal,
+} from 'react-native';
+import MapView, { Marker, Callout } from 'react-native-maps';
+import { globalStyles } from '../../styles/global';
+import { ScrollView } from 'react-native-gesture-handler';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 /**
  * KeeperEditorScreen will show running list of clues, give the ability to set down a new clue,
  * --------------------------  Updates   --------------------------
@@ -36,225 +37,226 @@ import { FontAwesome5 } from "@expo/vector-icons";
  */
 
 export default function KeeperEditorScreen({ navigation }) {
+  const [modalOpen, setModalOpen] = useState(false); // for help icon
   const mapStyle = [
     {
-      elementType: "geometry",
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#ebe3cd",
+          color: '#ebe3cd',
         },
       ],
     },
     {
-      elementType: "labels",
+      elementType: 'labels',
       stylers: [
         {
-          visibility: "off",
+          visibility: 'off',
         },
       ],
     },
     {
-      elementType: "labels.text.fill",
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#523735",
+          color: '#523735',
         },
       ],
     },
     {
-      elementType: "labels.text.stroke",
+      elementType: 'labels.text.stroke',
       stylers: [
         {
-          color: "#f5f1e6",
+          color: '#f5f1e6',
         },
       ],
     },
     {
-      featureType: "administrative",
-      elementType: "geometry.stroke",
+      featureType: 'administrative',
+      elementType: 'geometry.stroke',
       stylers: [
         {
-          color: "#c9b2a6",
+          color: '#c9b2a6',
         },
       ],
     },
     {
-      featureType: "administrative.land_parcel",
-      elementType: "geometry.stroke",
+      featureType: 'administrative.land_parcel',
+      elementType: 'geometry.stroke',
       stylers: [
         {
-          color: "#dcd2be",
+          color: '#dcd2be',
         },
       ],
     },
     {
-      featureType: "administrative.land_parcel",
-      elementType: "labels.text.fill",
+      featureType: 'administrative.land_parcel',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#ae9e90",
+          color: '#ae9e90',
         },
       ],
     },
     {
-      featureType: "landscape.natural",
-      elementType: "geometry",
+      featureType: 'landscape.natural',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#dfd2ae",
+          color: '#dfd2ae',
         },
       ],
     },
     {
-      featureType: "poi",
-      elementType: "geometry",
+      featureType: 'poi',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#dfd2ae",
+          color: '#dfd2ae',
         },
       ],
     },
     {
-      featureType: "poi",
-      elementType: "labels.text.fill",
+      featureType: 'poi',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#93817c",
+          color: '#93817c',
         },
       ],
     },
     {
-      featureType: "poi.park",
-      elementType: "geometry.fill",
+      featureType: 'poi.park',
+      elementType: 'geometry.fill',
       stylers: [
         {
-          color: "#a5b076",
+          color: '#a5b076',
         },
       ],
     },
     {
-      featureType: "poi.park",
-      elementType: "labels.text.fill",
+      featureType: 'poi.park',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#447530",
+          color: '#447530',
         },
       ],
     },
     {
-      featureType: "road",
-      elementType: "geometry",
+      featureType: 'road',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#f5f1e6",
+          color: '#f5f1e6',
         },
       ],
     },
     {
-      featureType: "road.arterial",
-      elementType: "geometry",
+      featureType: 'road.arterial',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#fdfcf8",
+          color: '#fdfcf8',
         },
       ],
     },
     {
-      featureType: "road.highway",
-      elementType: "geometry",
+      featureType: 'road.highway',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#f8c967",
+          color: '#f8c967',
         },
       ],
     },
     {
-      featureType: "road.highway",
-      elementType: "geometry.stroke",
+      featureType: 'road.highway',
+      elementType: 'geometry.stroke',
       stylers: [
         {
-          color: "#e9bc62",
+          color: '#e9bc62',
         },
       ],
     },
     {
-      featureType: "road.highway.controlled_access",
-      elementType: "geometry",
+      featureType: 'road.highway.controlled_access',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#e98d58",
+          color: '#e98d58',
         },
       ],
     },
     {
-      featureType: "road.highway.controlled_access",
-      elementType: "geometry.stroke",
+      featureType: 'road.highway.controlled_access',
+      elementType: 'geometry.stroke',
       stylers: [
         {
-          color: "#db8555",
+          color: '#db8555',
         },
       ],
     },
     {
-      featureType: "road.local",
-      elementType: "labels.text.fill",
+      featureType: 'road.local',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#806b63",
+          color: '#806b63',
         },
       ],
     },
     {
-      featureType: "transit.line",
-      elementType: "geometry",
+      featureType: 'transit.line',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#dfd2ae",
+          color: '#dfd2ae',
         },
       ],
     },
     {
-      featureType: "transit.line",
-      elementType: "labels.text.fill",
+      featureType: 'transit.line',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#8f7d77",
+          color: '#8f7d77',
         },
       ],
     },
     {
-      featureType: "transit.line",
-      elementType: "labels.text.stroke",
+      featureType: 'transit.line',
+      elementType: 'labels.text.stroke',
       stylers: [
         {
-          color: "#ebe3cd",
+          color: '#ebe3cd',
         },
       ],
     },
     {
-      featureType: "transit.station",
-      elementType: "geometry",
+      featureType: 'transit.station',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#dfd2ae",
+          color: '#dfd2ae',
         },
       ],
     },
     {
-      featureType: "water",
-      elementType: "geometry.fill",
+      featureType: 'water',
+      elementType: 'geometry.fill',
       stylers: [
         {
-          color: "#b9d3c2",
+          color: '#b9d3c2',
         },
       ],
     },
     {
-      featureType: "water",
-      elementType: "labels.text.fill",
+      featureType: 'water',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#92998d",
+          color: '#92998d',
         },
       ],
     },
@@ -272,10 +274,10 @@ export default function KeeperEditorScreen({ navigation }) {
         return [{ text: text, key: Math.random().toString() }, ...prevClues];
       });
     } else {
-      Alert.alert("OOPS", "Please enter a clue", [
+      Alert.alert('OOPS', 'Please enter a clue', [
         {
-          text: "Ok",
-          onPress: () => console.log("alert closed"),
+          text: 'Ok',
+          onPress: () => console.log('alert closed'),
         },
       ]);
     }
@@ -329,7 +331,7 @@ export default function KeeperEditorScreen({ navigation }) {
   //     </View>
   // );
 
-  [text, setText] = useState("");
+  const [text, setText] = useState('');
 
   const changeHandler = (val) => {
     setText(val);
@@ -337,16 +339,16 @@ export default function KeeperEditorScreen({ navigation }) {
 
   const [clues, setClues] = useState([
     {
-      location: "First Location",
-      clue: "Some huge clue description over here",
+      location: 'First Location',
+      clue: 'Some huge clue description over here',
     },
     {
-      location: "Second Location",
-      clue: "Some other huge clue description over here",
+      location: 'Second Location',
+      clue: 'Some other huge clue description over here',
     },
-    { location: "Third Location", clue: "Some clue description over here" },
-    { location: "Fourth Location", clue: "Some clue description over here" },
-    { location: "Fifth Location", clue: "Some clue description over here" },
+    { location: 'Third Location', clue: 'Some clue description over here' },
+    { location: 'Fourth Location', clue: 'Some clue description over here' },
+    { location: 'Fifth Location', clue: 'Some clue description over here' },
   ]);
 
   const [region, setRegion] = useState({
@@ -367,11 +369,39 @@ export default function KeeperEditorScreen({ navigation }) {
 
   return (
     <React.Fragment>
+      <Modal visible={modalOpen} animationType='slide'>
+        <View>
+          <MaterialIcons
+            name='close'
+            size={24}
+            onPress={() => setModalOpen(false)}
+            style={styles.modalCloseIcon}
+          />
+          <Text style={styles.modalContent}>
+            Note that the Keeper’s side in the current version of our
+            application is under development.
+            {'\n\n'}
+            Once we are able to fully complete development for this side,
+            Keepers will be able to pin clue locations on the map by tapping on
+            the location of interest on the given map and attach a clue
+            description to the pin by long pressing it and providing the clue’s
+            corresponding description and point value.
+            {'\n\n'}
+          </Text>
+        </View>
+      </Modal>
+
+      <MaterialIcons
+        name='help-outline'
+        size={24}
+        onPress={() => setModalOpen(true)}
+        style={styles.modalHelpIcon}
+      />
       <MapView
         style={{ flex: 1 }}
         customMapStyle={mapStyle}
         region={region}
-        mapType={"satellite"}
+        mapType={'satellite'}
         pitchEnabled={false}
         rotateEnabled={false}
         onRegionChangeComplete={(region) => setRegion(region)}
@@ -389,18 +419,18 @@ export default function KeeperEditorScreen({ navigation }) {
         ))}
         <Marker
           coordinate={{ latitude: 42.9331, longitude: -85.5877 }}
-          title="Test Title"
-          description="Test description"
+          title='Test Title'
+          description='Test description'
         >
           <Callout tooltip onPress={submitHandler}>
             <View>
               <View style={styles.bubble}>
-                
                 {/* <Text style={styles.name}>First Location</Text> */}
-                <TextInput placeholder="Enter a location" style={styles.name} />
+                <TextInput placeholder='Enter a location' style={styles.name} />
                 {/* <TextInput placeholder="Enter a clue" style={styles.name}></TextInput> */}
               </View>
-              <View style={styles.arrowBorder} /><View style={styles.arrow} />
+              <View style={styles.arrowBorder} />
+              <View style={styles.arrow} />
             </View>
           </Callout>
         </Marker>
@@ -417,7 +447,8 @@ export default function KeeperEditorScreen({ navigation }) {
       >
         {clues.map((first, index) => (
           <TouchableOpacity key={index} style={styles.card}>
-            <Text> {first.location} </Text><Text> {first.clue} </Text>
+            <Text> {first.location} </Text>
+            <Text> {first.clue} </Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -428,30 +459,30 @@ export default function KeeperEditorScreen({ navigation }) {
 const styles = StyleSheet.create({
   // Callout bubble
   bubble: {
-    flexDirection: "column",
-    alignSelf: "flex-start",
-    backgroundColor: "#fff",
+    flexDirection: 'column',
+    alignSelf: 'flex-start',
+    backgroundColor: '#fff',
     borderRadius: 6,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     borderWidth: 0.5,
     padding: 15,
     width: 150,
   },
   // Triangle shape below callout bubble
   arrow: {
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    borderTopColor: "#fff",
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderTopColor: '#fff',
     borderWidth: 16,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: -32,
   },
   arrowBorder: {
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    borderTopColor: "#007a87",
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderTopColor: '#007a87',
     borderWidth: 16,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: -0.5,
   },
   name: {
@@ -459,19 +490,35 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   scrollView: {
-    position: "absolute",
+    position: 'absolute',
     top: 80,
     paddingHorizontal: 10,
   },
   card: {
     // elevation: 2,
     // flexDirection: 'row',
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: 7,
     padding: 8,
     marginHorizontal: 10,
     width: 200,
     height: 48,
-    overflow: "hidden",
+    overflow: 'hidden',
+  },
+
+  // modal style below
+  modalHelpIcon: {
+    color: 'yellow',
+    zIndex: 1,
+    position: 'absolute',
+    right: 10,
+    top: 10,
+  },
+  modalCloseIcon: {
+    margin: 15,
+  },
+  modalContent: {
+    padding: 30,
+    fontSize: 16,
   },
 });
