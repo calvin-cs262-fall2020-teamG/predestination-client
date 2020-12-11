@@ -131,12 +131,15 @@ export const globalStyles = StyleSheet.create({
 
   //=========================Leaderboard Styles===============================
   leaderBoardHeader: {
+    flex: 1,
+    // marginTop: 10,
     textAlign: 'center',
     fontSize: 25,
     fontWeight: 'bold',
     color: 'white',
     backgroundColor: '#5CDB95',
   },
+
   // ========================= Welcome Screen Styles ==========================
   container: {
     flex: 1,
@@ -153,6 +156,7 @@ export const globalStyles = StyleSheet.create({
   welcomeText: {
     fontFamily: 'constan',
     marginTop: 0,
+    marginBottom: 20,
     fontSize: 32,
     textAlign: 'center',
     // color: "#05386B"
@@ -299,7 +303,7 @@ export const globalStyles = StyleSheet.create({
   trackerListFlexContainer: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#5CDB95',
+    backgroundColor: '#ccf5cc',
   },
   // end styles from SeekerGameScreen.js
 

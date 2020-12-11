@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   Text,
+  Modal,
   Button,
   TouchableOpacity,
   Alert,
@@ -21,6 +22,7 @@ import Leaderboard from 'react-native-leaderboard';
 
 import { NotesContext, NotePack } from '../../src/Notes';
 import { globalStyles } from '../../styles/global';
+import { MaterialIcons } from '@expo/vector-icons';
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
@@ -29,8 +31,9 @@ import { globalStyles } from '../../styles/global';
 export default function SeekerGameScreen({ route, navigation }) {
   const { notePack } = useContext(NotesContext);
   const [points, setPoints] = useState(0);
-  const [rank, setRank] = useState(1);
-  const [time, setTime] = useState(3600);
+  const [rank, setRank] = useState('Calculating...'); // need to get live rank
+  const [time, setTime] = useState('-');
+  const [modalOpen, setModalOpen] = useState(false);
 
   const STATUS = {
     LOADING: 'loading',
@@ -69,7 +72,10 @@ export default function SeekerGameScreen({ route, navigation }) {
       const { name, photo } = await getUserData();
       setUserName(name);
       setUserPhoto(googleUserPhoto);
-      setKeeperLeaderboard([...keeperLeaderboard, { userName: name, clueStatus: notePack.getPoints() }]);
+      setKeeperLeaderboard([
+        ...keeperLeaderboard,
+        { userName: name, clueStatus: notePack.getPoints() },
+      ]);
       setStatus(STATUS.LOADED);
     } catch (err) {
       console.log(err);
@@ -87,22 +93,53 @@ export default function SeekerGameScreen({ route, navigation }) {
     //     .catch((e) => {
     // 	setStatus(STATUS.ERROR);
     //     });
-
   };
 
   useEffect(() => {
     loadData();
   }, []);
 
-
   useEffect(() => {
-    setKeeperLeaderboard([...(keeperLeaderboard.filter((elem) => { return elem.userName !== googleUserName; })), { userName: googleUserName, clueStatus: notePack.getPoints() }]);
+    setKeeperLeaderboard([
+      ...keeperLeaderboard.filter((elem) => {
+        return elem.userName !== googleUserName;
+      }),
+      { userName: googleUserName, clueStatus: notePack.getPoints() },
+    ]);
   }, [notePack.getPoints()]);
 
   // let imagePath = require("../../assets/list.png");
 
   return (
     <View style={styles.flexContainer}>
+      <Modal visible={modalOpen} animationType='slide'>
+        <View>
+          <MaterialIcons
+            name='close'
+            size={24}
+            onPress={() => setModalOpen(false)}
+            style={styles.modalCloseIcon}
+          />
+          <Text style={styles.modalContent}>
+            This page shows the current stats for the game.
+            {'\n\n'}
+            It shows the seekers’ number of points, the time remaining, and
+            their rank.
+            {'\n\n'}
+            It also has a dynamically updating leaderboard that shows the seeker
+            by order of rank.
+            {'\n\n'}
+          </Text>
+        </View>
+      </Modal>
+
+      <MaterialIcons
+        name='help-outline'
+        size={24}
+        onPress={() => setModalOpen(true)}
+        style={styles.modalHelpIcon}
+      />
+
       <ImageBackground
         source={require('../../assets/background_tres.png')}
         blurRadius={5}
@@ -196,5 +233,21 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
+  },
+
+  // for modal styling
+  modalHelpIcon: {
+    color: 'grey',
+    position: 'absolute',
+    zIndex: 1,
+    right: 10,
+    top: 10,
+  },
+  modalCloseIcon: {
+    margin: 15,
+  },
+  modalContent: {
+    padding: 30,
+    fontSize: 16,
   },
 });

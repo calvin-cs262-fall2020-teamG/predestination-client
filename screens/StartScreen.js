@@ -75,7 +75,11 @@ export default function StartScreen({ navigation, route }) {
     // <View style={globalStyles.container}>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={globalStyles.container}>
-        <Modal visible={modalOpen} animationType='slide'>
+        <Modal
+          style={styles.modalView}
+          visible={modalOpen}
+          animationType='slide'
+        >
           <View>
             <MaterialIcons
               name='close'
@@ -85,11 +89,14 @@ export default function StartScreen({ navigation, route }) {
             />
             <Text style={styles.modalContent}>
               To enter a Hunt in Predestination, a Keeper must give you a
-              six-number code. You may tap on “Enter Code” to input the code.
-              Hit “Join” when you are ready to begin your adventure. To view
-              your profile or sign-out, please tap the horizontal lines (≡) on
-              the top right corner. After that, you should select the “Account”
-              option.
+              six-number code.
+              {'\n\n'}
+              You may tap on “Enter Code” to input the code. Hit “Join” when you
+              are ready to begin your adventure.
+              {'\n\n'}
+              To view your profile or sign-out, please tap the horizontal lines
+              (≡) on the top right corner. After that, you should select the
+              “Account” option.
             </Text>
           </View>
         </Modal>
@@ -225,5 +232,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
+  },
+  modalView: {
+    height: 500,
+    width: 500,
   },
 });
