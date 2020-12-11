@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -10,6 +10,7 @@ import {
 import { globalStyles } from "../../styles/global";
 import CustomButton from "../../components/CustomButton";
 import FloatingView from "../../components/FloatingView";
+import { getUserData } from "../../src/GoogleAuthentication";
 
 /**
  * SeekerWaitingScreen is shown to all seekers who joined a game that has not yet begun
@@ -19,6 +20,18 @@ export default function SeekerWaitingScreen({ route, navigation }) {
   const [timeLeft, setTimeLeft] = useState(2);
   const [disabled, setDisabled] = useState(true);
 
+    const setupGame = async () => {
+	try {
+	    const { name, photo, id } = await getUserData();
+	    game.setup(route.params.code, id);
+	} catch (e) {
+	}
+    }
+    
+    useEffect(() => {
+	setupGame();
+    },[]);
+    
   useEffect(() => {
     const timerId = setInterval(() => {
       if (timeLeft <= 0) {

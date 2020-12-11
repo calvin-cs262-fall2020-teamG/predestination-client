@@ -19,20 +19,23 @@ export class GameAPI {
     playerData = [];
     focusedClueID = null;
 
-    constructor(gameCode, playerID) {
+    setup(gameCode, playerID) {
+	console.log("heeee");
         this.playerID = playerID;
         this.gameCode = gameCode;
 
+	console.log(`Player ${playerID} joined a game with game code ${gameCode}!`);
+	
         this.io = io(SOCKET_SERVER_ADDR); // connect to socket server
         
         // once connected to the server, start sending stuff
-	this.io.emit('join-session', this.gameCode, this.playerID);
+	this.io.emit('join-session', this.gameCode, this.playerID);//this.playerID);
 
 	this.io.on('players-snapshot', (gameLog, playerData, clueData) => {
 	    console.log('Received game snapshot...');
-	    this.data = gameLog;
-	    this.clues = clueData;
-	    this.playerData = playerData;
+	    // this.data = gameLog;
+	    // this.clues = clueData;
+	    // this.playerData = playerData;
 	    console.log(this.data);
 	    console.log(this.clues);
 	    console.log(this.playerData);

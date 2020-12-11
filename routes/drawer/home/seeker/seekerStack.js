@@ -18,7 +18,7 @@ const Stack = createStackNavigator();
  */
 export default function SeekerStack({ navigation }) {
     const [game, setGame] = useState(new GameAPI());
-
+    
   return (
     <GameContext.Provider
       value={{
