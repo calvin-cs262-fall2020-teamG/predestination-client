@@ -41,226 +41,163 @@ export default function KeeperEditorScreen({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false); // for help icon
   const mapStyle = [
     {
-      elementType: 'geometry',
-      stylers: [
+      "elementType": "geometry",
+      "stylers": [
         {
-          color: '#ebe3cd',
-        },
-      ],
+          "color": "#f5f5f5"
+        }
+      ]
     },
     {
-      elementType: 'labels',
-      stylers: [
+      "elementType": "labels.icon",
+      "stylers": [
         {
-          visibility: 'off',
-        },
-      ],
+          "visibility": "off"
+        }
+      ]
     },
     {
-      elementType: 'labels.text.fill',
-      stylers: [
+      "elementType": "labels.text.fill",
+      "stylers": [
         {
-          color: '#523735',
-        },
-      ],
+          "color": "#616161"
+        }
+      ]
     },
     {
-      elementType: 'labels.text.stroke',
-      stylers: [
+      "elementType": "labels.text.stroke",
+      "stylers": [
         {
-          color: '#f5f1e6',
-        },
-      ],
+          "color": "#f5f5f5"
+        }
+      ]
     },
     {
-      featureType: 'administrative',
-      elementType: 'geometry.stroke',
-      stylers: [
+      "featureType": "administrative.land_parcel",
+      "elementType": "labels.text.fill",
+      "stylers": [
         {
-          color: '#c9b2a6',
-        },
-      ],
+          "color": "#bdbdbd"
+        }
+      ]
     },
     {
-      featureType: 'administrative.land_parcel',
-      elementType: 'geometry.stroke',
-      stylers: [
+      "featureType": "poi",
+      "elementType": "geometry",
+      "stylers": [
         {
-          color: '#dcd2be',
-        },
-      ],
+          "color": "#eeeeee"
+        }
+      ]
     },
     {
-      featureType: 'administrative.land_parcel',
-      elementType: 'labels.text.fill',
-      stylers: [
+      "featureType": "poi",
+      "elementType": "labels.text.fill",
+      "stylers": [
         {
-          color: '#ae9e90',
-        },
-      ],
+          "color": "#757575"
+        }
+      ]
     },
     {
-      featureType: 'landscape.natural',
-      elementType: 'geometry',
-      stylers: [
+      "featureType": "poi.park",
+      "elementType": "geometry",
+      "stylers": [
         {
-          color: '#dfd2ae',
-        },
-      ],
+          "color": "#e5e5e5"
+        }
+      ]
     },
     {
-      featureType: 'poi',
-      elementType: 'geometry',
-      stylers: [
+      "featureType": "poi.park",
+      "elementType": "labels.text.fill",
+      "stylers": [
         {
-          color: '#dfd2ae',
-        },
-      ],
+          "color": "#9e9e9e"
+        }
+      ]
     },
     {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
-      stylers: [
+      "featureType": "road",
+      "elementType": "geometry",
+      "stylers": [
         {
-          color: '#93817c',
-        },
-      ],
+          "color": "#ffffff"
+        }
+      ]
     },
     {
-      featureType: 'poi.park',
-      elementType: 'geometry.fill',
-      stylers: [
+      "featureType": "road.arterial",
+      "elementType": "labels.text.fill",
+      "stylers": [
         {
-          color: '#a5b076',
-        },
-      ],
+          "color": "#757575"
+        }
+      ]
     },
     {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
-      stylers: [
+      "featureType": "road.highway",
+      "elementType": "geometry",
+      "stylers": [
         {
-          color: '#447530',
-        },
-      ],
+          "color": "#dadada"
+        }
+      ]
     },
     {
-      featureType: 'road',
-      elementType: 'geometry',
-      stylers: [
+      "featureType": "road.highway",
+      "elementType": "labels.text.fill",
+      "stylers": [
         {
-          color: '#f5f1e6',
-        },
-      ],
+          "color": "#616161"
+        }
+      ]
     },
     {
-      featureType: 'road.arterial',
-      elementType: 'geometry',
-      stylers: [
+      "featureType": "road.local",
+      "elementType": "labels.text.fill",
+      "stylers": [
         {
-          color: '#fdfcf8',
-        },
-      ],
+          "color": "#9e9e9e"
+        }
+      ]
     },
     {
-      featureType: 'road.highway',
-      elementType: 'geometry',
-      stylers: [
+      "featureType": "transit.line",
+      "elementType": "geometry",
+      "stylers": [
         {
-          color: '#f8c967',
-        },
-      ],
+          "color": "#e5e5e5"
+        }
+      ]
     },
     {
-      featureType: 'road.highway',
-      elementType: 'geometry.stroke',
-      stylers: [
+      "featureType": "transit.station",
+      "elementType": "geometry",
+      "stylers": [
         {
-          color: '#e9bc62',
-        },
-      ],
+          "color": "#eeeeee"
+        }
+      ]
     },
     {
-      featureType: 'road.highway.controlled_access',
-      elementType: 'geometry',
-      stylers: [
+      "featureType": "water",
+      "elementType": "geometry",
+      "stylers": [
         {
-          color: '#e98d58',
-        },
-      ],
+          "color": "#c9c9c9"
+        }
+      ]
     },
     {
-      featureType: 'road.highway.controlled_access',
-      elementType: 'geometry.stroke',
-      stylers: [
+      "featureType": "water",
+      "elementType": "labels.text.fill",
+      "stylers": [
         {
-          color: '#db8555',
-        },
-      ],
-    },
-    {
-      featureType: 'road.local',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#806b63',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#dfd2ae',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#8f7d77',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'labels.text.stroke',
-      stylers: [
-        {
-          color: '#ebe3cd',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#dfd2ae',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#b9d3c2',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#92998d',
-        },
-      ],
-    },
+          "color": "#9e9e9e"
+        }
+      ]
+    }
   ];
 
   const pressHandler = (key) => {
@@ -406,7 +343,7 @@ export default function KeeperEditorScreen({ navigation }) {
         style={{ flex: 1 }}
         customMapStyle={mapStyle}
         region={region}
-        mapType={'satellite'}
+        // mapType={'satellite'}
         pitchEnabled={false}
         rotateEnabled={false}
         onRegionChangeComplete={(region) => setRegion(region)}
@@ -513,7 +450,7 @@ const styles = StyleSheet.create({
 
   // modal style below
   modalHelpIcon: {
-    color: 'yellow',
+    color: '#',
     zIndex: 1,
     position: 'absolute',
     right: 10,
