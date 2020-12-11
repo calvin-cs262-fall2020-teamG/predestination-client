@@ -190,12 +190,12 @@ export default function SeekerFocusedScreen({ route, navigation }) {
       >
         <Modal visible={modalOpen} animationType='slide'>
           <View>
-            <MaterialIcons
+            {/* <MaterialIcons
               name='close'
               size={24}
               onPress={() => setModalOpen(false)}
               style={styles.modalCloseIcon}
-            />
+            /> */}
             <Text style={styles.modalContent}>
               This page will show how close you are to the clue you are trying
               to find.{'\n\n'}
@@ -212,6 +212,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
               the list provided before you can progress through the game.
               {'\n\n'}
             </Text>
+            <View>
+              <CustomButton title='close' onPress={() => setModalOpen(false)} color='gold' />
+            </View>
           </View>
         </Modal>
 
@@ -307,8 +310,8 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 notePack.getFocused() === null
                   ? 'Select Clue'
                   : proximity === 'SUCCESS'
-                  ? 'New'
-                  : 'Stuck'
+                    ? 'New'
+                    : 'Stuck'
               }
               onPress={() => {
                 navigation.navigate('TrackerListScreen');

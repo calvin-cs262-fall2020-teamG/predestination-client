@@ -65,9 +65,9 @@ export default function StartScreen({ navigation, route }) {
   const handleJoinPress = () => {
     code.length === 6
       ? navigation.navigate('SeekerStack', {
-          screen: 'SeekerWaitingScreen',
-          params: { code },
-        })
+        screen: 'SeekerWaitingScreen',
+        params: { code },
+      })
       : handleError();
   };
 
@@ -81,12 +81,12 @@ export default function StartScreen({ navigation, route }) {
           animationType='slide'
         >
           <View>
-            <MaterialIcons
+            {/* <MaterialIcons
               name='close'
               size={24}
               onPress={() => setModalOpen(false)}
               style={styles.modalCloseIcon}
-            />
+            /> */}
             <Text style={styles.modalContent}>
               To enter a Hunt in Predestination, a Keeper must give you a
               six-number code.
@@ -98,6 +98,9 @@ export default function StartScreen({ navigation, route }) {
               (≡) on the top right corner. After that, you should select the
               “Account” option.
             </Text>
+            <View>
+              <CustomButton title='close' onPress={() => setModalOpen(false)} color='gold' />
+            </View>
           </View>
         </Modal>
 
@@ -114,12 +117,12 @@ export default function StartScreen({ navigation, route }) {
           {status === STATUS.LOADING || status === STATUS.ERROR ? (
             <ActivityIndicator />
           ) : (
-            <View>
               <View>
-                <Text style={globalStyles.welcomeText}>{name}</Text>
+                <View>
+                  <Text style={globalStyles.welcomeText}>{name}</Text>
+                </View>
               </View>
-            </View>
-          )}
+            )}
         </View>
         {/*=======================Options for seekers==============================*/}
         {/* <View style={globalStyles.horizontalBar}></View> */}

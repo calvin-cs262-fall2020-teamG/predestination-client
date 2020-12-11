@@ -20,6 +20,7 @@ import { globalStyles } from '../../styles/global';
 import { ScrollView } from 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import CustomButton from '../../components/CustomButton';
 /**
  * KeeperEditorScreen will show running list of clues, give the ability to set down a new clue,
  * --------------------------  Updates   --------------------------
@@ -371,23 +372,27 @@ export default function KeeperEditorScreen({ navigation }) {
     <React.Fragment>
       <Modal visible={modalOpen} animationType='slide'>
         <View>
-          <MaterialIcons
+          {/* <MaterialIcons
             name='close'
             size={24}
             onPress={() => setModalOpen(false)}
             style={styles.modalCloseIcon}
-          />
+          /> */}
           <Text style={styles.modalContent}>
             Note that the Keeper’s side in the current version of our
             application is under development.
             {'\n\n'}
             Once we are able to fully complete development for this side,
-            Keepers will be able to pin clue locations on the map by tapping on
-            the location of interest on the given map and attach a clue
+            Keepers will be able to pin clue locations on the map.
+            {'\n\n'}
+            Tap on the location of interest on the given map and attach a clue
             description to the pin by long pressing it and providing the clue’s
             corresponding description and point value.
             {'\n\n'}
           </Text>
+          <View>
+            <CustomButton title='close' onPress={() => setModalOpen(false)} color='gold' />
+          </View>
         </View>
       </Modal>
 

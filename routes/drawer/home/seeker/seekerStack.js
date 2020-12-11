@@ -40,11 +40,12 @@ export default function SeekerStack({ navigation }) {
         <Stack.Screen
           name="SeekerWaitingScreen"
           component={SeekerWaitingScreen}
-          options={{ title: "SeekerWaitingScreen", headerShown: true }}
+          options={{ title: "", headerShown: true }}
         />
         <Stack.Screen
           name="SeekerGameTabStack"
           component={SeekerGameTabStack}
+          options={{ title: "Dashboard", headerTitleStyle: { alignSelf: 'center' }, headerShown: true }}
         />
         {/*
                                         <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen', headerShown: true }} />

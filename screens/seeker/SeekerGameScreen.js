@@ -114,13 +114,13 @@ export default function SeekerGameScreen({ route, navigation }) {
     <View style={styles.flexContainer}>
       <Modal visible={modalOpen} animationType='slide'>
         <View>
-          <MaterialIcons
+          {/* <MaterialIcons
             name='close'
             size={24}
             onPress={() => setModalOpen(false)}
-            style={styles.modalCloseIcon}
-          />
-          <Text style={styles.modalContent}>
+            style={globalStyles.modalCloseIcon}
+          /> */}
+          <Text style={globalStyles.modalContent}>
             This page shows the current stats for the game.
             {'\n\n'}
             It shows the seekers’ number of points, the time remaining, and
@@ -130,6 +130,9 @@ export default function SeekerGameScreen({ route, navigation }) {
             by order of rank.
             {'\n\n'}
           </Text>
+          <View>
+            <CustomButton title='close' onPress={() => setModalOpen(false)} color='gold' />
+          </View>
         </View>
       </Modal>
 
