@@ -33,11 +33,10 @@ export class GameAPI {
 
 	this.io.on('players-snapshot', (gameLog, playerData, clueData) => {
 	    console.log('Received game snapshot...');
-	    // this.data = gameLog;
-	    // this.clues = clueData;
-	    // this.playerData = playerData;
-	    console.log(this.data);
-	    console.log(this.clues);
+	    this.data = gameLog ? gameLog : [];
+	    this.clues = clueData ? clueData: [];
+	    this.playerData = playerData ? playerData : [];
+	    console.log(clueData);
 	    console.log(this.playerData);
 	});
 
@@ -133,4 +132,3 @@ export class GameAPI {
 export const GameContext = React.createContext({
   GamePack: null,
 });
-
