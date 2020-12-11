@@ -11,6 +11,7 @@ import { globalStyles } from "../../styles/global";
 import CustomButton from "../../components/CustomButton";
 import FloatingView from "../../components/FloatingView";
 import { getUserData } from "../../src/GoogleAuthentication";
+import { GameContext } from '../../src/GameLogic';
 
 /**
  * SeekerWaitingScreen is shown to all seekers who joined a game that has not yet begun
@@ -19,12 +20,14 @@ import { getUserData } from "../../src/GoogleAuthentication";
 export default function SeekerWaitingScreen({ route, navigation }) {
   const [timeLeft, setTimeLeft] = useState(2);
   const [disabled, setDisabled] = useState(true);
-
+  const { GamePack } = useContext(GameContext);
+    
     const setupGame = async () => {
 	try {
 	    const { name, photo, id } = await getUserData();
-	    game.setup(route.params.code, id);
+	    GamePack.setup(route.params.code, id);
 	} catch (e) {
+	    console.log(e);
 	}
     }
     

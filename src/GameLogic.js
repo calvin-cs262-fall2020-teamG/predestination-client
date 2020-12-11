@@ -20,7 +20,7 @@ export class GameAPI {
     focusedClueID = null;
 
     setup(gameCode, playerID) {
-	console.log("heeee");
+
         this.playerID = playerID;
         this.gameCode = gameCode;
 
