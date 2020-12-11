@@ -20,6 +20,7 @@ export default function AddNewRoute({ submitHandler }) {
       <View>
         {/* New scavenger hunt label and text input field */}
         <Text style={globalStyles.keeperText}>
+          {'\n'}
           Enter a scavenger hunt name:
         </Text>
         <TextInput
