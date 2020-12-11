@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, Modal, StyleSheet } from "react-native";
 import Leaderboard from "react-native-leaderboard";
 import { globalStyles } from "../../styles/global";
-import { MaterialIcons } from '@expo/vector-icons';
-import CustomButton from '../../components/CustomButton';
 
+import {
+  StyleSheet,
+  Alert,
+  KeyboardAvoidingView,
+  TextInput,
+  View,
+  Text,
+  Button,
+  StatusBar,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 
 /**
  * KeeperGameScreen will show the current status of players similar to SeekerGameScreen, with the addition of a few features
@@ -23,47 +32,11 @@ export default function KeeperGameScreen({ navigation }) {
       { userName: "EWalters", clueStatus: 3 },
       { userName: "HAnderson", clueStatus: 2 },
     ]
-
-
   );
-
-  const [modalOpen, setModalOpen] = useState(false); // for help icon
-
   return (
     <View>
-      <Modal visible={modalOpen} animationType='slide'>
-        <View>
-          {/* <MaterialIcons
-            name='close'
-            size={24}
-            onPress={() => setModalOpen(false)}
-            style={styles.modalCloseIcon}
-          /> */}
-          <Text style={styles.modalContent}>
-            Note that the Keeper’s side in the current version of our
-            application is under development.
-            {'\n\n'}
-            Once we are able to fully complete development for this side,
-            Keepers will be able to view live leaderboard updates here from the ongoing scavenger hunt.
-            {'\n\n'}
-          </Text>
-          <View>
-            <CustomButton title='close' onPress={() => setModalOpen(false)} color='gold' />
-          </View>
-        </View>
-      </Modal>
-
-      <MaterialIcons
-        name='help-outline'
-        size={24}
-        onPress={() => setModalOpen(true)}
-        style={styles.modalHelpIcon}
-      />
       <Text style={globalStyles.leaderBoardHeader}> Leaderboard </Text>
       {/* display leaderboard */}
-      <View>
-        <Text>{'\n'}</Text>
-      </View>
       <Leaderboard
         data={keeperLeaderboard}
         sortBy="clueStatus" //sorts the leaderboard by clueStatus
@@ -72,21 +45,3 @@ export default function KeeperGameScreen({ navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  // modal style below
-  modalHelpIcon: {
-    color: '#5CDB95',
-    zIndex: 1,
-    position: 'absolute',
-    right: 10,
-    top: 10,
-  },
-  modalCloseIcon: {
-    margin: 15,
-  },
-  modalContent: {
-    padding: 30,
-    fontSize: 16,
-  },
-})
