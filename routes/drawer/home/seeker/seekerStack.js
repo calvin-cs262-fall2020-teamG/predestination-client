@@ -8,7 +8,8 @@ import { globalStyles } from "../../../../styles/global";
 import SeekerWaitingScreen from "../../../../screens/seeker/SeekerWaitingScreen";
 import SeekerGameTabStack from "./SeekerGameTabStack";
 
-import { NotesContext, NotePack } from "../../../../src/Notes";
+//import { GameContext, NotePack } from "../../../../src/Notes";
+import { GameAPI, GameContext } from "../../../../src/GameLogic";
 
 const Stack = createStackNavigator();
 
@@ -16,12 +17,12 @@ const Stack = createStackNavigator();
  * HomeStack is displayed only when a user is logged in
  */
 export default function SeekerStack({ navigation }) {
-  const [notes, setNotes] = useState(new NotePack());
+    const [game, setGame] = useState(new GameAPI());
 
   return (
-    <NotesContext.Provider
+    <GameContext.Provider
       value={{
-        notePack: notes,
+        GamePack: game,
       }}
     >
       <Stack.Navigator
@@ -43,13 +44,14 @@ export default function SeekerStack({ navigation }) {
         />
         <Stack.Screen
           name="SeekerGameTabStack"
-          component={SeekerGameTabStack}
+            component={SeekerGameTabStack}
+	    options={{ title: "Predestination Hunt", headerShown: true, headerLeft: null }}
         />
         {/* 
                                         <Stack.Screen name="SeekerGameScreen" component={SeekerGameScreen} options={{ title: 'SeekerGameScreen', headerShown: true }} />
                                         <Stack.Screen name="SeekerClueListScreen" component={SeekerClueListScreen} options={{ title: 'SeekerClueListScreen', headerShown: false }} />
                                         <Stack.Screen name="SeekerFocusedScreen" component={SeekerFocusedScreen} options={{ title: 'SeekerFocusedScreen ', headerShown: false }} /> */}
       </Stack.Navigator>
-    </NotesContext.Provider>
+    </GameContext.Provider>
   );
 }

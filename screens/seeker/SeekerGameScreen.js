@@ -19,7 +19,7 @@ import {
 import CustomButton from '../../components/CustomButton';
 import Leaderboard from 'react-native-leaderboard';
 
-import { NotesContext, NotePack } from '../../src/Notes';
+import { GameContext } from '../../src/GameLogic';
 import { globalStyles } from '../../styles/global';
 
 /**
@@ -27,10 +27,10 @@ import { globalStyles } from '../../styles/global';
  * TODO: styling, connecting to server
  */
 export default function SeekerGameScreen({ route, navigation }) {
-    const { notePack } = useContext(NotesContext);
-    const [points, setPoints] = useState(0);
-    const [rank, setRank] = useState(1);
-    const [time, setTime] = useState(3600);
+  const { GamePack } = useContext(GameContext);
+  const [points, setPoints] = useState(0);
+  const [rank, setRank] = useState(1);
+  const [time, setTime] = useState(3600);
 
     const STATUS = {
 	LOADING: 'loading',
@@ -57,7 +57,7 @@ export default function SeekerGameScreen({ route, navigation }) {
 
     // When seekers click the "hunt" button, they will be redirected to the last clue selected if they selected a clue, else they will go to a clue list screen
     const pressHunt = () => {
-	if (notePack.getFocused() === null) {
+	if (GamePack.getFocused() === null) {
 	    navigation.navigate('SeekerClueListScreen');
 	} else {
 	    navigation.navigate('SeekerFocusedScreen');
@@ -69,7 +69,7 @@ export default function SeekerGameScreen({ route, navigation }) {
 		const { name, photo } = await getUserData();
 		setUserName(name);
 		setUserPhoto(googleUserPhoto);
-		setKeeperLeaderboard([...keeperLeaderboard, { userName: name, clueStatus: notePack.getPoints() }]);
+		setKeeperLeaderboard([...keeperLeaderboard, { userName: name, clueStatus: GamePack.getPoints() }]);
 		setStatus(STATUS.LOADED);
 	    } catch (err) {
 		console.log(err);
@@ -96,8 +96,8 @@ export default function SeekerGameScreen({ route, navigation }) {
 
 
     useEffect(() => {
-	setKeeperLeaderboard([...(keeperLeaderboard.filter((elem) => { return elem.userName !== googleUserName; })), { userName: googleUserName, clueStatus: notePack.getPoints() }]);
-    }, [notePack.getPoints()]);
+	setKeeperLeaderboard([...(keeperLeaderboard.filter((elem) => { return elem.userName !== googleUserName; })), { userName: googleUserName, clueStatus: GamePack.getPoints() }]);
+    }, [GamePack.getPoints()]);
     
     // let imagePath = require("../../assets/list.png");
 
@@ -110,7 +110,7 @@ export default function SeekerGameScreen({ route, navigation }) {
 	    >
 		<View style={styles.header}>
 		    <View style={styles.pointsSection}>
-			<Text style={styles.pointText}> {notePack.getPoints()} </Text>
+			<Text style={styles.pointText}> {GamePack.getPoints()} </Text>
 			<Text> Points </Text>
 		    </View>
 		    <View style={styles.statusSection}>

@@ -12,10 +12,12 @@ import {
 import { color } from "react-native-reanimated";
 import PointComponent from "../../components/PointComponent";
 
-import { NotesContext, NotePack } from "../../src/Notes";
+//import { NotesContext, NotePack } from "../../src/Notes";
+import { GameContext } from "../../src/GameLogic";
 import { globalStyles } from "../../styles/global";
+
 /**
- * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
+ * SeekerClueList shows all clues available
  * TODO: styling, connecting to server
  */
 export default function SeekerClueList({ route, navigation }) {
@@ -24,17 +26,17 @@ export default function SeekerClueList({ route, navigation }) {
     return self.indexOf(value) === index;
   }
 
-  const { notePack } = useContext(NotesContext);
+  const { GamePack } = useContext(GameContext);
 
   const onPress = (key) => {
-    notePack.setFocused(key);
+    GamePack.setFocusedClue(key);
     navigation.navigate("TrackerScreen");
   };
 
   return (
     <View style={globalStyles.trackerListFlexContainer}>
       <FlatList
-        data={notePack.notes
+        data={GamePack.clues
           .map((item) => item.points)
           .filter(onlyUnique)
           .sort((a, b) => {
@@ -42,11 +44,12 @@ export default function SeekerClueList({ route, navigation }) {
           })}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <PointComponent
+
+        <PointComponent
             points={item}
             onPress={onPress}
-            notes={notePack.notes.filter((note) => {
-              return note.points === item;
+            notes={GamePack.clues.filter((clue) => {
+              return clue.points === item;
             })}
           />
         )}
