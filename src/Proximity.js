@@ -30,7 +30,16 @@ export const PROXIMITY_MESSAGES = {
       "And you thought I wasn't helpful. lol",
     ],
   },
-  SUCCESS: {
+  SUCCESS_START: {
+    official: "You found it!",
+    silly: [
+      "Finally",
+      "If you would've listened to me, we would have gotten here a loooong time ago",
+      "Nice one!",
+      "And you thought I wasn't helpful. lol",
+    ],
+  },
+  SUCCESS_FINISH: {
     official: "You found it!",
     silly: [
       "Finally",
