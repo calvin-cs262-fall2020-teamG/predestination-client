@@ -107,7 +107,7 @@ export default function SeekerStack({ navigation }) {
       
   }, [gameLog, clueData]);
 
-  useEffect(() => {
+useEffect(() => {
       setGameLog([...gameLog, newGameLog]);      
   }, [newGameLog]);
 
@@ -143,6 +143,7 @@ export default function SeekerStack({ navigation }) {
         setSelectedClue: (key) => { setSelectedClue(clueData.filter(clue => { return clue.id === key})[0]); },
         findClue,
         setGameCode,
+        playerID,
       }}
     >
       <Stack.Navigator

@@ -65,4 +65,5 @@ export const GameContext = React.createContext({
   setSelectedClue: () => {},
   findClue: () => {},
   setupGame: () => {},
+  playerID: null,
 });
