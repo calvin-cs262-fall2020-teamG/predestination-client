@@ -58,12 +58,12 @@ export default function StartScreen({ navigation, route }) {
   const { loginStatus, setLoginStatus } = useContext(AuthenticationContext);
 
   const handleError = () => {
-    Alert.alert('Please enter 6 numerical digits for the game code.');
+    Alert.alert('Please enter 123456 as the gamecode');
   };
 
   // ensure given code is valid
   const handleJoinPress = () => {
-    code.length === 6
+    code.valueOf() === '123456'
       ? navigation.navigate('SeekerStack', {
         screen: 'SeekerWaitingScreen',
         params: { code },
