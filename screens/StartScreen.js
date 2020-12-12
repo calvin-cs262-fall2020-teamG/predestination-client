@@ -58,7 +58,7 @@ export default function StartScreen({ navigation, route }) {
   const { loginStatus, setLoginStatus } = useContext(AuthenticationContext);
 
   const handleError = () => {
-    Alert.alert('Please enter 123456 as the gamecode');
+    Alert.alert('Alert!', 'No gamecode exists for that code, please use 123456 for a demo game');
   };
 
   // ensure given code is valid
