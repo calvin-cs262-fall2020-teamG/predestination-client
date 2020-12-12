@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -10,7 +10,7 @@ import {
 import { globalStyles } from "../../styles/global";
 import CustomButton from "../../components/CustomButton";
 import FloatingView from "../../components/FloatingView";
-
+import { GameContext } from '../../src/Notes';
 /**
  * SeekerWaitingScreen is shown to all seekers who joined a game that has not yet begun
  * TODO: styling, connecting to server, implement a countdown
@@ -18,6 +18,13 @@ import FloatingView from "../../components/FloatingView";
 export default function SeekerWaitingScreen({ route, navigation }) {
   const [timeLeft, setTimeLeft] = useState(2);
   const [disabled, setDisabled] = useState(true);
+
+  
+  const { setGameCode } = useContext(GameContext);
+
+  useEffect(() => {
+    setGameCode(route.params.code);
+  }, []);
 
   useEffect(() => {
     const timerId = setInterval(() => {

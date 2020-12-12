@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Header from "../../../../shared/header";
@@ -8,7 +8,11 @@ import { globalStyles } from "../../../../styles/global";
 import SeekerWaitingScreen from "../../../../screens/seeker/SeekerWaitingScreen";
 import SeekerGameTabStack from "./SeekerGameTabStack";
 
-import { NotesContext, NotePack } from "../../../../src/Notes";
+import { getUserData } from '../../../../src/GoogleAuthentication';
+import { GameContext, NotePack } from "../../../../src/Notes";
+import io from 'socket.io-client';
+
+const SOCKET_SERVER_ADDR = 'https://predestination-service.herokuapp.com/';
 
 const Stack = createStackNavigator();
 
@@ -17,11 +21,92 @@ const Stack = createStackNavigator();
  */
 export default function SeekerStack({ navigation }) {
   const [notes, setNotes] = useState(new NotePack());
+  const [points, setPoints] = useState(0);
+  const [clueData, setClueData] = useState([]);
+  const [playerData, setPlayerData] = useState([]);
+  const [gameLog, setGameLog] = useState([]);
+  const [ioClient, setIoClient] = useState(null);
+  const [selectedClue, setSelectedClue] = useState(null);
+  const [gameCode, setGameCode] = useState(null);
+
+  useEffect(() => {
+    setIoClient(io(SOCKET_SERVER_ADDR));
+  }, []);
+
+  useEffect(() => {
+    if (ioClient !== null && gameCode !== null) {
+      initialize();
+    }
+  }, [ioClient, gameCode]);
+
+  /* initialize()
+   * @params: none
+   * @precondition: io has been established
+   * @postcondition: 
+   * - joins game session 
+   * - creates listener for receiving player snapshot
+   * - creates listener for receiving updates
+   */
+  const initialize = async () => {
+    
+    const { id } = await getUserData();
+    let playerID = id;
+
+    ioClient.emit('join-session', gameCode, playerID);
+
+    ioClient.on('players-snapshot', (gameLog, playerData, clueData) => {
+        console.log('Received game snapshot...');
+        setGameLog(gameLog ? gameLog : []);
+        setClueData(clueData ? clueData.map(clue => { return { ...clue, points: parseInt(clue.points) }; }) : []);
+        setPlayerData(playerData ? playerData : []);
+    });
+
+    ioClient.on('update', (playerid, clueid, time) => {
+        console.log('Someone else found a clue!');
+        setGameLog([...gameLog, { playerid, time, clueid }]);
+    });
+
+    fetch('https://predestination-service.herokuapp.com/clues')
+    .then((response) => response.json())
+    .then((json) => {
+      setClueData(json.map(note => {
+        return {
+          ...note,
+          clue: note.description,
+          key: note.id,
+          archived: false,
+        }
+      }));
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  };
+
+  /* findClue()
+     * @params: none
+     * @precondition: assumes io is not null
+     * @postcondition: if selectedClue is non null, send update to other clients
+     */
+    const findClue = () => {
+      if (selectedClue !== null) {
+        console.log("yay!");
+        ioClient.emit('update', selectedClue.id, 100);
+      }
+  }
 
   return (
-    <NotesContext.Provider
+    <GameContext.Provider
       value={{
-        notePack: notes,
+        points,
+        clueData,
+        playerData,
+        gameLog,
+        selectedClue,
+        setSelectedClue: (key) => { setSelectedClue(clueData.filter(clue => { return clue.id === key})[0]); },
+        findClue,
+        setGameCode,
       }}
     >
       <Stack.Navigator
@@ -52,6 +137,6 @@ export default function SeekerStack({ navigation }) {
                                         <Stack.Screen name="SeekerClueListScreen" component={SeekerClueListScreen} options={{ title: 'SeekerClueListScreen', headerShown: false }} />
                                         <Stack.Screen name="SeekerFocusedScreen" component={SeekerFocusedScreen} options={{ title: 'SeekerFocusedScreen ', headerShown: false }} /> */}
       </Stack.Navigator>
-    </NotesContext.Provider>
+    </GameContext.Provider>
   );
 }

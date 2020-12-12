@@ -72,7 +72,6 @@ const requestData = async (accessToken) => {
   );
 
   const jsonResponse = await fetchResponse.json();
-
   if (
     jsonResponse.error !== undefined &&
     jsonResponse.error == "invalid_token"
@@ -82,6 +81,7 @@ const requestData = async (accessToken) => {
     return {
       name: jsonResponse.names[0].displayName,
       photo: jsonResponse.photos[0].url,
+      id: jsonResponse.names[0].metadata.source.id,
     };
   }
 };

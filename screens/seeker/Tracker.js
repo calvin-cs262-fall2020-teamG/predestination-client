@@ -15,7 +15,7 @@ import CustomButton from '../../components/CustomButton';
 import { MaterialIcons } from '@expo/vector-icons';
 import { globalStyles } from '../../styles/global';
 
-import { NotesContext } from '../../src/Notes';
+import {GameContext } from '../../src/Notes';
 import { PROXIMITY_MESSAGES, PROXIMITY } from '../../src/Proximity';
 import Circle from '../../components/Circle';
 import TrackerTargetVisualizer from '../../components/TrackerVisualizer';
@@ -33,20 +33,30 @@ const PROXIMITY_ARRAY = [
 export default function SeekerFocusedScreen({ route, navigation }) {
   const [modalOpen, setModalOpen] = useState(false); // for help icon
   
-  const { notePack } = useContext(NotesContext);
+  const { 
+    points,
+    clueData,
+    playerData,
+    gameLog,
+    selectedClue,
+    setSelectedClue,
+    findClue,
+    setupGame,
+   } = useContext(GameContext);
+
   const [proximity, setProximity] = useState(PROXIMITY.FAR);
   const [tempCount, setTempCount] = useState(0);
 
   useEffect(() => {
     setProximity(PROXIMITY_ARRAY[tempCount]);
     if (proximity === "SUCCESS_START") {
-        notePack.foundClue();
+        findClue();
     }
   }, [tempCount]);
 
   // todo: for debugging purposes only to show all the levels of proximity to given location
   const nextProximity = () => {
-    if (notePack.getFocused() !== null) {
+    if (selectedClue !== null) {
       setTempCount((tempCount + 1) % 3);
     }
   };
@@ -105,7 +115,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 justifyContent: "center",
                 alignItems: "center",
             }}>
-          <TrackerTargetVisualizer proximity={proximity} points={notePack.getFocused() === null ? 0 : notePack.getFocused().points} />  
+          <TrackerTargetVisualizer proximity={proximity} points={selectedClue === null ? 0 : selectedClue.points} />  
         </TouchableOpacity>
       
 
@@ -114,7 +124,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
           <View
             style={{
               ...styles.pointContainer,
-              display: notePack.getFocused() === null ? 'none' : 'flex',
+              display: selectedClue === null ? 'none' : 'flex',
               flexDirection: 'row',
               justifyContent: 'center',
               alignItems: 'center',
@@ -128,9 +138,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 fontWeight: 'bold',
               }}
             >
-              {notePack.getFocused() === null
+              {selectedClue === null
                 ? ''
-                : notePack.getFocused().points}{' '}
+                : selectedClue.points}{' '}
               Points
             </Text>
           </View>
@@ -138,7 +148,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             <CustomButton
               color='orange'
               title={
-                notePack.getFocused() === null
+                selectedClue === null
                   ? 'Select Clue'
                   : proximity === 'SUCCESS'
                     ? 'New'
@@ -156,19 +166,19 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             borderBottomWidth: 1,
             width: '90%',
             alignSelf: 'center',
-            display: notePack.getFocused() === null ? 'none' : 'flex',
+            display: selectedClue === null ? 'none' : 'flex',
           }}
         />
         <ScrollView
           style={{
             ...styles.noteContainer,
-            display: notePack.getFocused() === null ? 'none' : 'flex',
+            display: selectedClue === null ? 'none' : 'flex',
           }}
         >
           <Text style={{ fontSize: 24, marginBottom: 50 }}>
-            {notePack.getFocused() === null
+            {selectedClue === null
               ? 'This should not be shown'
-              : notePack.getFocused().clue}
+              : selectedClue.description}
           </Text>
         </ScrollView>
       </View>

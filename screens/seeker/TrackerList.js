@@ -14,7 +14,7 @@ import CustomButton from '../../components/CustomButton';
 import { color } from 'react-native-reanimated';
 import PointComponent from '../../components/PointComponent';
 
-import { NotesContext, NotePack } from '../../src/Notes';
+import { GameContext } from '../../src/Notes';
 import { MaterialIcons } from '@expo/vector-icons';
 import { globalStyles } from '../../styles/global';
 /**
@@ -28,11 +28,19 @@ export default function SeekerClueList({ route, navigation }) {
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
-
-  const { notePack } = useContext(NotesContext);
+  const { 
+    points,
+    clueData,
+    playerData,
+    gameLog,
+    selectedClue,
+    setSelectedClue,
+    findClue,
+    setupGame,
+   } = useContext(GameContext);
 
   const onPress = (key) => {
-    notePack.setFocused(key);
+    setSelectedClue(key);
     navigation.navigate('TrackerScreen');
   };
 
@@ -68,7 +76,7 @@ export default function SeekerClueList({ route, navigation }) {
         style={styles.modalHelpIcon}
       />
       <FlatList
-        data={notePack.notes
+        data={clueData
           .map((item) => item.points)
           .filter(onlyUnique)
           .sort((a, b) => {
@@ -79,7 +87,7 @@ export default function SeekerClueList({ route, navigation }) {
           <PointComponent
             points={item}
             onPress={onPress}
-            notes={notePack.notes.filter((note) => {
+            notes={clueData.filter((note) => {
               return note.points === item;
             })}
           />

@@ -15,7 +15,7 @@ export default function PointComponent({ points, notes, onPress }) {
         data={notes}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
-          <Card content={item.clue} id={item.key} onPress={onPress} />
+          <Card content={item.description} id={item.id} onPress={onPress} />
         )}
       />
     </View>

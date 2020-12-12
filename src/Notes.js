@@ -56,6 +56,13 @@ export class NotePack {
   };
 }
 
-export const NotesContext = React.createContext({
-  notePack: null,
+export const GameContext = React.createContext({
+  points: 0,
+  clueData: [],
+  playerData: [],
+  gameLog: [],
+  selectedClue: null,
+  setSelectedClue: () => {},
+  findClue: () => {},
+  setupGame: () => {},
 });
