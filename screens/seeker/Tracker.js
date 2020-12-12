@@ -47,11 +47,15 @@ export default function SeekerFocusedScreen({ route, navigation }) {
   const [proximity, setProximity] = useState(PROXIMITY.FAR);
   const [tempCount, setTempCount] = useState(0);
 
+   useEffect(() => {
+    if (proximity === "SUCCESS_START") {
+      findClue();
+    }
+   }, [proximity]);
+
   useEffect(() => {
     setProximity(PROXIMITY_ARRAY[tempCount]);
-    if (proximity === "SUCCESS_START") {
-        findClue();
-    }
+    
   }, [tempCount]);
 
   // todo: for debugging purposes only to show all the levels of proximity to given location

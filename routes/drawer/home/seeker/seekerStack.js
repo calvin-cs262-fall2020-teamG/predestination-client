@@ -28,6 +28,8 @@ export default function SeekerStack({ navigation }) {
   const [ioClient, setIoClient] = useState(null);
   const [selectedClue, setSelectedClue] = useState(null);
   const [gameCode, setGameCode] = useState(null);
+  const [newGameLog, setNewGameLog] = useState(null);
+  const [newPlayer, setNewPlayer] = useState(null);
 
   useEffect(() => {
     setIoClient(io(SOCKET_SERVER_ADDR));
@@ -56,33 +58,39 @@ export default function SeekerStack({ navigation }) {
 
     ioClient.on('players-snapshot', (gameLog, playerData, clueData) => {
         console.log('Received game snapshot...');
-        setGameLog(gameLog ? gameLog : []);
+        setGameLog(gameLog);
         setClueData(clueData ? clueData.map(clue => { return { ...clue, points: parseInt(clue.points) }; }) : []);
         setPlayerData(playerData ? playerData : []);
     });
 
     ioClient.on('update', (playerid, clueid, time) => {
         console.log('Someone else found a clue!');
-        setGameLog([...gameLog, { playerid, time, clueid }]);
+        setNewGameLog({playerid, time, clueid});
     });
 
-    fetch('https://predestination-service.herokuapp.com/clues')
-    .then((response) => response.json())
-    .then((json) => {
-      setClueData(json.map(note => {
-        return {
-          ...note,
-          clue: note.description,
-          key: note.id,
-          archived: false,
-        }
-      }));
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    ioClient.on('new-player', (newPlayerID, profilePictureURL, displayName) => {
+        console.log("new-player");
+        console.log(newPlayerID);
+        setNewPlayer({
+          id: newPlayerID,
+          name: displayName,
+          image: profilePictureURL,
+        });
+    });    
+
+    return function cleanup() {
+      io.Socket.removeAllListeners();
+    }
 
   };
+
+  useEffect(() => {
+      setGameLog([...gameLog, newGameLog]);
+  }, [newGameLog]);
+
+  useEffect(() => {
+    setPlayerData([...playerData, newPlayer]);
+  }, [newPlayer]);
 
   /* findClue()
      * @params: none
@@ -91,7 +99,6 @@ export default function SeekerStack({ navigation }) {
      */
     const findClue = () => {
       if (selectedClue !== null) {
-        console.log("yay!");
         ioClient.emit('update', selectedClue.id, 100);
       }
   }

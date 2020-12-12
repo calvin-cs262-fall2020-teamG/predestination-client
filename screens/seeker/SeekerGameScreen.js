@@ -178,9 +178,32 @@ export default function SeekerGameScreen({ route, navigation }) {
         <View>
           <Text style={globalStyles.leaderBoardHeader}> Leaderboard </Text>
           <Leaderboard
-            data={keeperLeaderboard}
-            sortBy='clueStatus' //sorts the leaderboard by clueStatus
-            labelBy='userName' //displays the userName for the rank
+            data={gameLog.reduce((acc, log) => {
+              const index = acc.findIndex((p) => {
+                return p.playerid === log.playerid;
+              });
+
+              const clueIndex = clueData.findIndex((c) => {
+                return c.id === log.clueid;
+              });
+              
+              acc[index].points += clueData[clueIndex].points;
+              acc[index].lastUpdated = acc[index].lastUpdated > log.time ? acc[index].lastUpdated : log.time;
+
+              return acc;
+
+            },
+              playerData.map((p) => {
+                return {
+                  points: 0,
+                  lastUpdated: 0,
+                  playerid: p.id,
+                  name: p.name,
+                }
+              })
+            )}
+            sortBy='points' //sorts the leaderboard by clueStatus
+            labelBy='name' //displays the userName for the rank
           />
         </View>
       </View>
