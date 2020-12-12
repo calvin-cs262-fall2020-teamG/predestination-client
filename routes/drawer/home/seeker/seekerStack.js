@@ -81,8 +81,6 @@ export default function SeekerStack({ navigation }) {
     });    
 
     return function cleanup() {
-      ioClient.removeAllListeners('update');
-      ioClient.removeAllListeners('new-player');
     }
 
   };
