@@ -5,21 +5,21 @@ export class NotePack {
 
     this.list = [];
     let f = this;
-      fetch('https://predestination-service.herokuapp.com/clues')
-      .then((response) => response.json())
-      .then((json) => {
-        this.list = json.map(note => {
-          return {
-            ...note,
-            clue: note.description,
-            key: note.id,
-            archived: false,
-          }
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      // fetch('https://predestination-service.herokuapp.com/clues')
+      // .then((response) => response.json())
+      // .then((json) => {
+      //   this.list = json.map(note => {
+      //     return {
+      //       ...note,
+      //       clue: note.description,
+      //       key: note.id,
+      //       archived: false,
+      //     }
+      //   });
+      // })
+      // .catch((error) => {
+      //   console.error(error);
+      // });
     this.focused = null;
   };     
 
@@ -56,6 +56,14 @@ export class NotePack {
   };
 }
 
-export const NotesContext = React.createContext({
-  notePack: null,
+export const GameContext = React.createContext({
+  points: 0,
+  clueData: [],
+  playerData: [],
+  gameLog: [],
+  selectedClue: null,
+  setSelectedClue: () => {},
+  findClue: () => {},
+  setupGame: () => {},
+  playerID: null,
 });

@@ -15,9 +15,16 @@ import CustomButton from '../../components/CustomButton';
 import { MaterialIcons } from '@expo/vector-icons';
 import { globalStyles } from '../../styles/global';
 
-import { NotesContext } from '../../src/Notes';
+import {GameContext } from '../../src/Notes';
 import { PROXIMITY_MESSAGES, PROXIMITY } from '../../src/Proximity';
 import Circle from '../../components/Circle';
+import TrackerTargetVisualizer from '../../components/TrackerVisualizer';
+
+const PROXIMITY_ARRAY = [
+  "FAR",
+  "CLOSE",
+  "SUCCESS_START",
+];
 
 /**
  * SeekerGameScreen shows all past clues and current clue to all seekers. The screen is personalized for each seeker, showing their placement and relative rank to other players.
@@ -25,170 +32,71 @@ import Circle from '../../components/Circle';
  */
 export default function SeekerFocusedScreen({ route, navigation }) {
   const [modalOpen, setModalOpen] = useState(false); // for help icon
-  const getOfficialMessage = () => {
-    return PROXIMITY_MESSAGES[proximity].official;
-  };
+  
+  const { 
+    points,
+    clueData,
+    playerData,
+    gameLog,
+    selectedClue,
+    setSelectedClue,
+    findClue,
+    setupGame,
+    playerID,
+   } = useContext(GameContext);
 
-  const getSillyMessage = (proximity) => {
-    return PROXIMITY_MESSAGES[proximity].silly[
-      Math.floor(Math.random() * PROXIMITY_MESSAGES[proximity].silly.length)
-    ];
-  };
-
-  const [animation, setAnimation] = useState(new Animated.Value(0));
-  const [opacityAnimation, setOpacityAnimation] = useState(
-    new Animated.Value(1.0)
-  );
-  const [successOpacityAnimation, setSuccessOpacityAnimation] = useState(
-    new Animated.Value(0.0)
-  );
-
-  const [textColorAnimated, setTextColorAnimated] = useState('rgb(0, 0, 0)');
-  const [isBeginning, setIsBeginning] = useState(true);
-
-  const { notePack } = useContext(NotesContext);
   const [proximity, setProximity] = useState(PROXIMITY.FAR);
-  const [proximityOfficialMessage, setProximityOfficialMessage] = useState(
-    getOfficialMessage(proximity)
-  );
-  const [proximitySillyMessage, setProximitySillyMessage] = useState(
-    getSillyMessage(proximity)
-  );
-  const [tempCount, setTempCount] = useState(0); // todo: for debugging purposes only
+  const [tempCount, setTempCount] = useState(0);
+  const [success, setSuccess] = useState(false);
 
-  const [innerTargetRadius, setInnerTargetRadius] = useState(
-    new Animated.Value(0)
-  );
-  const [middleTargetRadius, setMiddleTargetRadius] = useState(
-    new Animated.Value(1)
-  );
-  const [outerTargetRadius, setOuterTargetRadius] = useState(
-    new Animated.Value(2)
-  );
-
-  const partyTime = () => {
-    Animated.sequence([
-      Animated.delay(800),
-      Animated.timing(successOpacityAnimation, {
-        toValue: 1,
-        duration: 400,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
-
-  const animateSize = () => {
-    Animated.sequence([
-      Animated.parallel([
-        Animated.timing(opacityAnimation, {
-          toValue: 0,
-          duration: proximity === 'SUCCESS' ? 0 : 500,
-          useNativeDriver: true,
-        }),
-        Animated.timing(successOpacityAnimation, {
-          toValue: 0.0,
-          duration: 10,
-          useNativeDriver: true,
-        }),
-      ]),
-      Animated.parallel([
-        Animated.timing(innerTargetRadius, {
-          toValue: tempCount,
-          duration: proximity === 'SUCCESS' ? 300 : 500,
-          useNativeDriver: true,
-        }),
-        Animated.timing(middleTargetRadius, {
-          toValue: tempCount + 1,
-          duration: proximity === 'SUCCESS' ? 200 : 500,
-          useNativeDriver: true,
-        }),
-        Animated.timing(outerTargetRadius, {
-          toValue: tempCount + 2,
-          duration: proximity === 'SUCCESS' ? 200 : 500,
-          useNativeDriver: true,
-        }),
-      ]),
-    ]).start(() => {
-      setProximityOfficialMessage(getOfficialMessage(proximity));
-
-      if (proximity !== 'SUCCESS') {
-        setProximitySillyMessage(getSillyMessage(proximity));
-      } else {
-        partyTime();
-      }
-
-      if (proximity !== 'FAR') {
-        setTextColorAnimated('rgb(255,255,255)');
-      } else {
-        setTextColorAnimated('rgb(0,0,0)');
-      }
-
-      Animated.timing(opacityAnimation, {
-        toValue: proximity === 'AT' ? 0.0 : 1.0,
-        duration: 500,
-        useNativeDriver: true,
-      }).start(() => {
-        if (tempCount === 2) {
-          Animated.delay(20).start(() => {
-            nextProximity();
-          });
-        }
-      });
-    });
-  };
 
   useEffect(() => {
-    // Only after the first change can animation begin
-    if (!isBeginning) {
-      animateSize();
-    } else {
-      // when proximity is initialized, set don't run an animation
-      setIsBeginning(false);
+    // if clue is completed
+    if (selectedClue !== null) {
+      // if completed, setSuccess to true
+      if (gameLog.filter(log => { return log.clueid === selectedClue.id && playerID === log.playerid}).length !== 0) {
+        setSuccess(true);
+      }  
     }
+  }, [selectedClue, gameLog]);
 
-    if (proximity === PROXIMITY.SUCCESS) {
-      notePack.foundClue();
+
+  useEffect(() => {
+      setTempCount(0);
+      setProximity(PROXIMITY.FAR);
+      setSuccess(false);
+  }, [selectedClue]);
+
+   useEffect(() => {
+    if (proximity === "SUCCESS_START") {
+      findClue();
     }
-  }, [proximity]);
+   }, [proximity]);
+
+  useEffect(() => {
+    console.log(selectedClue);
+      if (selectedClue !== null) {
+        if (!success) {
+          setProximity(PROXIMITY_ARRAY[tempCount]);
+        } 
+      }
+  }, [tempCount]);
 
   // todo: for debugging purposes only to show all the levels of proximity to given location
   const nextProximity = () => {
-    if (notePack.getFocused() !== null) {
-      setTempCount((tempCount + 1) % 4);
-    }
+    if (selectedClue !== null) {
+      setTempCount((tempCount + 1) % 3);  
+    }    
   };
 
-  useEffect(() => {
-    setProximity(PROXIMITY[Object.entries(PROXIMITY)[tempCount][0]]);
-  }, [tempCount]);
-
-  const screenWidth = Dimensions.get('window').width;
-  const screenHeight = Dimensions.get('window').height;
-
-  const targetInterpolation = {
-    inputRange: [0, 1, 2, 3],
-    outputRange: [0.1, 0.2, 0.3, 5],
-  };
-
+  
   return (
     <Animated.View
       style={{
         ...styles.flexContainer,
       }}
     >
-      <TouchableOpacity
-        activeOpacity={1}
-        style={{
-          flex: 3,
-          height: '100%',
-          width: '100%',
-          maxWidth: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        onPress={nextProximity}
-      >
-        <Modal visible={modalOpen} animationType='slide'>
+      <Modal visible={modalOpen} animationType='slide'>
           <View>
             {/* <MaterialIcons
               name='close'
@@ -224,66 +132,27 @@ export default function SeekerFocusedScreen({ route, navigation }) {
           onPress={() => setModalOpen(true)}
           style={styles.modalHelpIcon}
         />
-        <Circle
-          color='#05386B'
-          diameter={outerTargetRadius.interpolate(targetInterpolation)}
-          screenWidth={screenWidth}
-        ></Circle>
-        <Circle
-          color='#379683'
-          diameter={middleTargetRadius.interpolate(targetInterpolation)}
-          screenWidth={screenWidth}
-        ></Circle>
-        <Circle
-          color='#5CDB95'
-          diameter={innerTargetRadius.interpolate(targetInterpolation)}
-          screenWidth={screenWidth}
-        ></Circle>
-        <Animated.Text
+        <TouchableOpacity 
+          onPress={() => { nextProximity(); }}
+          activeOpacity={0.5}
           style={{
-            textAlign: 'center',
-            position: 'absolute',
-            bottom: '3%',
-            opacity: opacityAnimation,
-            color: textColorAnimated,
-          }}
-        >
-          "{proximitySillyMessage}"
-        </Animated.Text>
-        <Animated.Text
-          style={{
-            textAlign: 'center',
-            position: 'absolute',
-            top: '3%',
-            opacity: opacityAnimation,
-            fontWeight: 'bold',
-            fontSize: 24,
-            color: textColorAnimated,
-          }}
-        >
-          {proximityOfficialMessage}
-        </Animated.Text>
-        <Animated.Text
-          style={{
-            textAlign: 'center',
-            position: 'absolute',
-            alignSelf: 'center',
-            opacity: successOpacityAnimation,
-            fontWeight: 'bold',
-            fontSize: 128,
-            color: textColorAnimated,
-            padding: 20,
-          }}
-        >
-          +{notePack.getFocused() === null ? 0 : notePack.getFocused().points}
-        </Animated.Text>
-      </TouchableOpacity>
+                flex: 3,
+                height: "100%",
+                width: "100%",
+                maxWidth: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+            }}>
+          <TrackerTargetVisualizer proximity={proximity} points={selectedClue === null ? 0 : selectedClue.points} />  
+        </TouchableOpacity>
+      
+
       <View style={styles.bottomContainer}>
         <View style={styles.bottomContainerHeader}>
           <View
             style={{
               ...styles.pointContainer,
-              display: notePack.getFocused() === null ? 'none' : 'flex',
+              display: selectedClue === null ? 'none' : 'flex',
               flexDirection: 'row',
               justifyContent: 'center',
               alignItems: 'center',
@@ -297,9 +166,9 @@ export default function SeekerFocusedScreen({ route, navigation }) {
                 fontWeight: 'bold',
               }}
             >
-              {notePack.getFocused() === null
+              {selectedClue === null
                 ? ''
-                : notePack.getFocused().points}{' '}
+                : selectedClue.points}{' '}
               Points
             </Text>
           </View>
@@ -307,7 +176,7 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             <CustomButton
               color='orange'
               title={
-                notePack.getFocused() === null
+                selectedClue === null
                   ? 'Select Clue'
                   : proximity === 'SUCCESS'
                     ? 'New'
@@ -325,19 +194,19 @@ export default function SeekerFocusedScreen({ route, navigation }) {
             borderBottomWidth: 1,
             width: '90%',
             alignSelf: 'center',
-            display: notePack.getFocused() === null ? 'none' : 'flex',
+            display: selectedClue === null ? 'none' : 'flex',
           }}
         />
         <ScrollView
           style={{
             ...styles.noteContainer,
-            display: notePack.getFocused() === null ? 'none' : 'flex',
+            display: selectedClue === null ? 'none' : 'flex',
           }}
         >
           <Text style={{ fontSize: 24, marginBottom: 50 }}>
-            {notePack.getFocused() === null
+            {selectedClue === null
               ? 'This should not be shown'
-              : notePack.getFocused().clue}
+              : selectedClue.description}
           </Text>
         </ScrollView>
       </View>

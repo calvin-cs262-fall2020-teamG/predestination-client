@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
+  Alert,
 } from 'react-native';
 
 /**
@@ -25,13 +26,20 @@ const profilePictureListExample = [
   'https://lh3.googleusercontent.com/-Nj31lomoF8c/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucknJjEhOP4abqDxBYePvQ5GpkDbQw/photo.jpg',
 ];
 
-export default function Card({ content, onPress, id }) {
+export default function Card({ content, onPress, id, completed }) {
   return (
-    <View style={styles.mainContainer}>
+    <View style={{
+      ...styles.mainContainer,
+      backgroundColor: completed ? 'lightgray' : 'white',
+      }}>
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => {
-          onPress(id);
+          if (completed) {
+            Alert.alert('This clue has already been completed!');
+          } else {
+            onPress(id);
+          }
         }}
       >
         <View style={styles.contentContainer}>
