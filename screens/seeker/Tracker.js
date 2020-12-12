@@ -42,10 +42,30 @@ export default function SeekerFocusedScreen({ route, navigation }) {
     setSelectedClue,
     findClue,
     setupGame,
+    playerID,
    } = useContext(GameContext);
 
   const [proximity, setProximity] = useState(PROXIMITY.FAR);
   const [tempCount, setTempCount] = useState(0);
+  const [success, setSuccess] = useState(false);
+
+
+  useEffect(() => {
+    // if clue is completed
+    if (selectedClue !== null) {
+      // if completed, setSuccess to true
+      if (gameLog.filter(log => { return log.clueid === selectedClue.id && playerID === log.playerid}).length !== 0) {
+        setSuccess(true);
+      }  
+    }
+  }, [selectedClue, gameLog]);
+
+
+  useEffect(() => {
+      setTempCount(0);
+      setProximity(PROXIMITY.FAR);
+      setSuccess(false);
+  }, [selectedClue]);
 
    useEffect(() => {
     if (proximity === "SUCCESS_START") {
@@ -54,15 +74,19 @@ export default function SeekerFocusedScreen({ route, navigation }) {
    }, [proximity]);
 
   useEffect(() => {
-    setProximity(PROXIMITY_ARRAY[tempCount]);
-    
+    console.log(selectedClue);
+      if (selectedClue !== null) {
+        if (!success) {
+          setProximity(PROXIMITY_ARRAY[tempCount]);
+        } 
+      }
   }, [tempCount]);
 
   // todo: for debugging purposes only to show all the levels of proximity to given location
   const nextProximity = () => {
     if (selectedClue !== null) {
-      setTempCount((tempCount + 1) % 3);
-    }
+      setTempCount((tempCount + 1) % 3);  
+    }    
   };
 
   
