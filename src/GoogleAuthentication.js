@@ -72,6 +72,24 @@ const requestData = async (accessToken) => {
   );
 
   const jsonResponse = await fetchResponse.json();
+
+  let accountInfo = {
+    id: jsonResponse.names[0].metadata.source.id,
+    name: jsonResponse.names[0].displayName,
+    photo: jsonResponse.photos[0].url
+  }
+
+  let postData = {
+    method: "POST",
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      googleid: accountInfo.id,
+      name: accountInfo.name,
+      profilePictureURL: accountInfo.photo,
+    }),
+  };
+
+  await fetch("https://predestination-service.herokuapp.com/login", postData);
   if (
     jsonResponse.error !== undefined &&
     jsonResponse.error == "invalid_token"
