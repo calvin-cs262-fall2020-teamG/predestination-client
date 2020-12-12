@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
  * HomeStack is displayed only when a user is logged in
  */
 export default function SeekerStack({ navigation }) {
-  const [notes, setNotes] = useState(new NotePack());
+  const [playerID, setPlayerID] = useState(null);
   const [points, setPoints] = useState(0);
   const [clueData, setClueData] = useState([]);
   const [playerData, setPlayerData] = useState([]);
@@ -28,18 +28,25 @@ export default function SeekerStack({ navigation }) {
   const [ioClient, setIoClient] = useState(null);
   const [selectedClue, setSelectedClue] = useState(null);
   const [gameCode, setGameCode] = useState(null);
-  const [newGameLog, setNewGameLog] = useState(null);
+  const [newGameLog, setNewGameLog] = useState([]);
   const [newPlayer, setNewPlayer] = useState(null);
 
-  useEffect(() => {
+  const setup = async () => {
     setIoClient(io(SOCKET_SERVER_ADDR));
+    
+    const { id } = await getUserData();
+    setPlayerID(id);
+  }
+
+  useEffect(() => {
+    setup();
   }, []);
 
   useEffect(() => {
-    if (ioClient !== null && gameCode !== null) {
+    if (ioClient !== null && gameCode !== null && playerID !== null) {
       initialize();
     }
-  }, [ioClient, gameCode]);
+  }, [ioClient, gameCode, playerID]);
 
   /* initialize()
    * @params: none
@@ -50,9 +57,6 @@ export default function SeekerStack({ navigation }) {
    * - creates listener for receiving updates
    */
   const initialize = async () => {
-    
-    const { id } = await getUserData();
-    let playerID = id;
 
     ioClient.emit('join-session', gameCode, playerID);
 
@@ -69,8 +73,6 @@ export default function SeekerStack({ navigation }) {
     });
 
     ioClient.on('new-player', (newPlayerID, profilePictureURL, displayName) => {
-        console.log("new-player");
-        console.log(newPlayerID);
         setNewPlayer({
           id: newPlayerID,
           name: displayName,
@@ -79,17 +81,43 @@ export default function SeekerStack({ navigation }) {
     });    
 
     return function cleanup() {
-      io.Socket.removeAllListeners();
+      ioClient.removeAllListeners('update');
+      ioClient.removeAllListeners('new-player');
     }
 
   };
 
   useEffect(() => {
-      setGameLog([...gameLog, newGameLog]);
+    if (gameLog !== null && clueData.length !== 0) {
+      setPoints(gameLog.filter((log) => {
+        return log.playerid === playerID;
+      }).reduce((acc, log) => {
+
+        const clueIndex = clueData.findIndex((c) => {
+          //console.log(c.id);
+          return c.id === log.clueid;
+        });
+        
+        acc += clueData[clueIndex].points;
+  
+        return acc;
+  
+      }, 0));
+    }
+      
+  }, [gameLog, clueData]);
+
+  useEffect(() => {
+      setGameLog([...gameLog, newGameLog]);      
   }, [newGameLog]);
 
   useEffect(() => {
-    setPlayerData([...playerData, newPlayer]);
+    if (playerData.filter(player => {
+      return player.id === newPlayer.id;
+    }).length === 0) {
+      setPlayerData([...playerData, newPlayer]);
+    }
+    
   }, [newPlayer]);
 
   /* findClue()
@@ -99,6 +127,7 @@ export default function SeekerStack({ navigation }) {
      */
     const findClue = () => {
       if (selectedClue !== null) {
+        console.log("UPDATE");
         ioClient.emit('update', selectedClue.id, 100);
       }
   }
